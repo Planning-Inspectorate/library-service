@@ -1,0 +1,67 @@
+uuid: fb4cef60-73b5-408a-a83c-897431273bac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_note
+    - node.type.issued_hard_copy
+    - paragraphs.paragraphs_type.note
+  module:
+    - entity_reference_revisions
+id: node.issued_hard_copy.field_note
+field_name: field_note
+entity_type: node
+bundle: issued_hard_copy
+label: Note
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      note: note
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 10
+        enabled: false
+      archive_paragraphs_type:
+        weight: 11
+        enabled: false
+      author_paragraphs_type:
+        weight: 12
+        enabled: false
+      category_paragraphs_type:
+        weight: 13
+        enabled: false
+      hard_copy:
+        weight: 18
+        enabled: false
+      individual_hardcopy:
+        weight: 19
+        enabled: false
+      links:
+        weight: 20
+        enabled: false
+      note:
+        weight: 14
+        enabled: true
+      pdf:
+        weight: 22
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 15
+        enabled: false
+      series_paragraphs_type:
+        weight: 16
+        enabled: false
+      tags_paragraphs_type:
+        weight: 17
+        enabled: false
+      topic_paragraphs_type:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

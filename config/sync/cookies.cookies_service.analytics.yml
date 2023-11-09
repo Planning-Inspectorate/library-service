@@ -1,0 +1,24 @@
+uuid: 3911b437-ad50-4e9f-a7c9-4b16d0bf5fbd
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cookies_ga
+_core:
+  default_config_hash: 0FSyPPXfJvmZxEpwsiSH6nipWjFfo6qZ9pP6rP9tFT0
+id: analytics
+label: 'Google Analytics'
+group: tracking
+info:
+  format: full_html
+  value: ''
+consentRequired: true
+purpose: ''
+processor: ''
+processorContact: ''
+processorUrl: 'https://analytics.google.com/'
+processorPrivacyPolicyUrl: ''
+processorCookiePolicyUrl: 'https://support.google.com/analytics/answer/6004245'
+placeholderMainText: 'This content is blocked because Google Analytics cookies have not been accepted.'
+placeholderAcceptText: 'Only accept Google Analytics cookies.'

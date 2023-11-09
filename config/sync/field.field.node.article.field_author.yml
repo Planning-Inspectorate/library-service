@@ -1,0 +1,46 @@
+uuid: 1ca6cf59-6fab-4731-befd-8574e6017dd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_author
+    - node.type.article
+    - paragraphs.paragraphs_type.author_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.article.field_author
+field_name: field_author
+entity_type: node
+bundle: article
+label: Author
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      author_paragraphs_type: author_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      author_paragraphs_type:
+        weight: 7
+        enabled: true
+      category_paragraphs_type:
+        weight: 8
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 9
+        enabled: false
+      series_paragraphs_type:
+        weight: 10
+        enabled: false
+      tags_paragraphs_type:
+        weight: 11
+        enabled: false
+      topic_paragraphs_type:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

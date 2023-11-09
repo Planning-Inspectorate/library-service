@@ -1,0 +1,33 @@
+uuid: 3f75ee05-4432-483a-89d1-9a2aecce82e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.issued_hard_copy
+    - taxonomy.vocabulary.locations
+  content:
+    - 'taxonomy_term:locations:083ce796-0a97-409f-885c-944684a40b85'
+id: node.issued_hard_copy.field_location
+field_name: field_location
+entity_type: node
+bundle: issued_hard_copy
+label: 'Current Location'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 083ce796-0a97-409f-885c-944684a40b85
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      locations: locations
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

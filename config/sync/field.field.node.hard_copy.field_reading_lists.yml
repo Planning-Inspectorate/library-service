@@ -1,0 +1,52 @@
+uuid: 60b18bd3-7cac-4c83-b0ce-c31b0e3793ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reading_lists
+    - node.type.hard_copy
+    - paragraphs.paragraphs_type.reading_list_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.hard_copy.field_reading_lists
+field_name: field_reading_lists
+entity_type: node
+bundle: hard_copy
+label: 'Reading lists'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      reading_list_paragraphs_type: reading_list_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 9
+        enabled: false
+      archive_paragraphs_type:
+        weight: 10
+        enabled: false
+      author_paragraphs_type:
+        weight: 11
+        enabled: false
+      category_paragraphs_type:
+        weight: 12
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 13
+        enabled: true
+      series_paragraphs_type:
+        weight: 14
+        enabled: false
+      tags_paragraphs_type:
+        weight: 15
+        enabled: false
+      topic_paragraphs_type:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

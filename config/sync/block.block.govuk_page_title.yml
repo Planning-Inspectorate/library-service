@@ -1,0 +1,26 @@
+uuid: a4da173b-5a40-42b7-a35b-9cfbfe4267ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk
+_core:
+  default_config_hash: EZEhhzHGp4H-Uq04TN3bCzeBIn1fR1QpJG208DAiaFU
+id: govuk_page_title
+theme: govuk
+region: page_title
+weight: -12
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "<front>\r\n/lib-search/*\r\n"

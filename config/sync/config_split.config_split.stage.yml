@@ -1,0 +1,23 @@
+uuid: 4994d976-cb5f-4e84-ba64-8258d3ef0452
+langcode: en
+status: false
+dependencies: {  }
+id: stage
+label: stage
+description: ''
+weight: 1
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/stage
+module:
+  admin_toolbar_tools: 0
+  devel: 0
+  devel_generate: 0
+  devel_kint_extras: 0
+  diff: 0
+  views_ui: 0
+  webform_ui: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

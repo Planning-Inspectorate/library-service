@@ -1,0 +1,8 @@
+uuid: 8fc11389-8531-4f57-a2dd-34b231d9f64d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Book on loan Acknowledgements'
+vid: book_on_loan_acknowledgements
+description: ''
+weight: 0

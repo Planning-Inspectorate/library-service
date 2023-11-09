@@ -1,0 +1,64 @@
+uuid: bd14cd2c-d70a-4f15-b689-d7e820e45e91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_links
+    - node.type.pdf
+    - paragraphs.paragraphs_type.links
+  module:
+    - entity_reference_revisions
+id: node.pdf.field_links
+field_name: field_links
+entity_type: node
+bundle: pdf
+label: 'External links'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      links: links
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 13
+        enabled: false
+      archive_paragraphs_type:
+        weight: 14
+        enabled: false
+      author_paragraphs_type:
+        weight: 15
+        enabled: false
+      category_paragraphs_type:
+        weight: 16
+        enabled: false
+      hard_copy:
+        weight: 17
+        enabled: false
+      links:
+        weight: 18
+        enabled: true
+      note:
+        weight: 19
+        enabled: false
+      pdf:
+        weight: 20
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 21
+        enabled: false
+      series_paragraphs_type:
+        weight: 22
+        enabled: false
+      tags_paragraphs_type:
+        weight: 23
+        enabled: false
+      topic_paragraphs_type:
+        weight: 24
+        enabled: false
+field_type: entity_reference_revisions

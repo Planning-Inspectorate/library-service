@@ -1,0 +1,45 @@
+<?php declare(strict_types = 1);
+
+namespace Drupal\pins_kl_import\Form;
+
+use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+
+/**
+ * @todo Add a description for the form.
+ */
+final class ExampleConfirmForm extends ConfirmFormBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId(): string {
+    return 'pins_kl_import_example_confirm';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getQuestion(): TranslatableMarkup {
+    return $this->t('Are you sure you want to do this?');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCancelUrl(): Url {
+    return new Url('system.admin_config');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
+    // @todo Place your code here.
+    $this->messenger()->addStatus($this->t('Done!'));
+    $form_state->setRedirectUrl(new Url('system.admin_config'));
+  }
+
+}

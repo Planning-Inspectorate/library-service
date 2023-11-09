@@ -1,0 +1,18 @@
+uuid: 6c327e3b-34b2-450f-8647-8860a9b989ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Hard copy loan'
+type: issued_hard_copy
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

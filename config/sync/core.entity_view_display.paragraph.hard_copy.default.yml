@@ -1,0 +1,28 @@
+uuid: 9386a320-8eb2-4687-ae58-5e9586f40098
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.hard_copy.field_stock_level
+    - paragraphs.paragraphs_type.hard_copy
+id: paragraph.hard_copy.default
+targetEntityType: paragraph
+bundle: hard_copy
+mode: default
+content:
+  field_stock_level:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

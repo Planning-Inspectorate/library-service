@@ -1,0 +1,31 @@
+pins_kl_import.example:
+  path: '/pins-kl-import/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\pins_kl_import\Controller\PinsKlImportController'
+  requirements:
+    _permission: 'access content'
+
+pins_kl_import.example_confirm:
+  path: '/pins-kl-import/example-confirm'
+  defaults:
+    _title: 'Example Confirm'
+    _form: 'Drupal\pins_kl_import\Form\ExampleConfirmForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+pins_kl_import.example:
+  path: '/pins-kl-import/example'
+  defaults:
+    _title: 'Example'
+    _form: 'Drupal\pins_kl_import\Form\ExampleForm'
+  requirements:
+    _permission: 'access content'
+
+pins_kl_import.settings:
+  path: '/admin/config/system/settings'
+  defaults:
+    _title: 'Settings'
+    _form: 'Drupal\pins_kl_import\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

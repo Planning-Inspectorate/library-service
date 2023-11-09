@@ -1,0 +1,29 @@
+uuid: 567d4e9b-50d4-4a84-a8eb-d8e7cb2a9e98
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.whats_new
+  module:
+    - system
+    - views
+  theme:
+    - govuk
+id: govuk_views_block__whats_new_block_1
+theme: govuk
+region: sidebar_first
+weight: -9
+provider: null
+plugin: 'views_block:whats_new-block_1'
+settings:
+  id: 'views_block:whats_new-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

@@ -1,0 +1,10 @@
+uuid: 20106cda-8dec-4dfd-ac9e-5ac77324e73f
+langcode: en
+status: true
+dependencies: {  }
+id: archive_paragraphs_type
+label: 'Archive and date'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

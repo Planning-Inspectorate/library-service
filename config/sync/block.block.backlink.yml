@@ -1,0 +1,34 @@
+uuid: 6f0d17e1-2e76-4506-9acc-13ec2e2c09a4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3173ea0a-9ac8-41f4-a781-8bba6825c0f3'
+  module:
+    - block_content
+    - node
+  theme:
+    - b5
+id: backlink
+theme: b5
+region: content_above
+weight: -13
+provider: null
+plugin: 'block_content:3173ea0a-9ac8-41f4-a781-8bba6825c0f3'
+settings:
+  id: 'block_content:3173ea0a-9ac8-41f4-a781-8bba6825c0f3'
+  label: 'Back link'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      pdf: pdf

@@ -1,0 +1,152 @@
+uuid: 79678b4a-8edd-4273-be6c-daf35024e480
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.individual_hardcopy.field_barcode
+    - field.field.paragraph.individual_hardcopy.field_category
+    - field.field.paragraph.individual_hardcopy.field_content_reference
+    - field.field.paragraph.individual_hardcopy.field_long_text
+    - paragraphs.paragraphs_type.individual_hardcopy
+  module:
+    - ds
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+        disable_css: false
+        entity_classes: all_classes
+    regions:
+      content:
+        - field_barcode
+        - field_category
+        - field_content_reference
+id: paragraph.individual_hardcopy.default
+targetEntityType: paragraph
+bundle: individual_hardcopy
+mode: default
+content:
+  field_barcode:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ' field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: 'barcode field-value'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: 'location-wrapper field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: 'location field-value '
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
+    region: content
+  field_content_reference:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: 'reference field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: 'content-reference-number field-value'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_long_text: true
+  search_api_excerpt: true

@@ -1,0 +1,23 @@
+uuid: 55fa573c-9a05-4313-8e21-50b13fefe569
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.hard_copy
+  module:
+    - text
+id: node.hard_copy.body
+field_name: body
+entity_type: node
+bundle: hard_copy
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

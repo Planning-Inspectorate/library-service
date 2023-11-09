@@ -1,0 +1,7 @@
+type: module
+name: 'PINS Library'
+description: 'Used for site customisation'
+package: PINS
+core_version_requirement: ^9 || ^10
+tags:
+ - system

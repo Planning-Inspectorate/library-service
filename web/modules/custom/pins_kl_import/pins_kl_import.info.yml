@@ -1,0 +1,9 @@
+name: 'PINS KL Import'
+type: module
+description: 'Imports metadata from the Horizon Knowledge Library.'
+package: Custom
+core_version_requirement: ^10
+dependencies:
+  - feeds:feeds
+  - feeds_tamper:feeds_tamper
+  - tamper:tamper

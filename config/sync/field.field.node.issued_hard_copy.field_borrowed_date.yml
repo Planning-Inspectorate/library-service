@@ -1,0 +1,24 @@
+uuid: e158e16a-8b45-47d8-9d33-a5e564b67652
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_borrowed_date
+    - node.type.issued_hard_copy
+  module:
+    - datetime
+id: node.issued_hard_copy.field_borrowed_date
+field_name: field_borrowed_date
+entity_type: node
+bundle: issued_hard_copy
+label: 'Borrowed Date'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

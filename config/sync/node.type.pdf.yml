@@ -1,0 +1,17 @@
+uuid: a45db63a-668a-4f55-97c5-890ca62e0aff
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: PDF
+type: pdf
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: true

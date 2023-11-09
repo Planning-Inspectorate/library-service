@@ -1,0 +1,104 @@
+uuid: 31f8c9b5-2315-4181-ae01-389ae6ed14e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.pdf.body
+    - field.field.node.pdf.comment
+    - field.field.node.pdf.field_alternative_title
+    - field.field.node.pdf.field_archive
+    - field.field.node.pdf.field_author
+    - field.field.node.pdf.field_category
+    - field.field.node.pdf.field_content_reference
+    - field.field.node.pdf.field_isbn
+    - field.field.node.pdf.field_links
+    - field.field.node.pdf.field_note
+    - field.field.node.pdf.field_pdf
+    - field.field.node.pdf.field_pdf_media
+    - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_reading_lists
+    - field.field.node.pdf.field_series
+    - field.field.node.pdf.field_tags
+    - field.field.node.pdf.field_topics
+    - field.field.node.pdf.field_volume
+    - node.type.pdf
+  module:
+    - datetime
+    - ds
+    - entity_reference_revisions
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+        disable_css: false
+        entity_classes: all_classes
+    regions:
+      content:
+        - node_title
+        - field_author
+        - field_publication_date
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+id: node.pdf.search_result
+targetEntityType: node
+bundle: pdf
+mode: search_result
+content:
+  field_author:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  body: true
+  comment: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_alternative_title: true
+  field_archive: true
+  field_category: true
+  field_content_reference: true
+  field_isbn: true
+  field_links: true
+  field_note: true
+  field_pdf: true
+  field_pdf_media: true
+  field_reading_lists: true
+  field_series: true
+  field_tags: true
+  field_topics: true
+  field_volume: true
+  flag_bookmark: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

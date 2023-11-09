@@ -1,0 +1,92 @@
+uuid: 0baf4401-c02b-475b-822f-6302af20650e
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - media.type.pdf
+    - node.type.hard_copy
+    - node.type.issued_hard_copy
+    - node.type.pdf
+    - taxonomy.vocabulary.authors
+    - taxonomy.vocabulary.locations
+    - taxonomy.vocabulary.reading_lists
+    - taxonomy.vocabulary.series
+    - taxonomy.vocabulary.tags
+  module:
+    - contextual
+    - file
+    - filter
+    - flag
+    - media
+    - node
+    - quick_node_clone
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - tour
+_core:
+  default_config_hash: Wur9kcEOwY1Jal81NssKnz3RhVJxAvBwyWQBGcA_1Go
+id: content_editor
+label: 'Content editor'
+weight: 2
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access shortcuts'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access tour'
+  - 'access user profiles'
+  - 'clone hard_copy content'
+  - 'clone issued_hard_copy content'
+  - 'clone pdf content'
+  - 'create hard_copy content'
+  - 'create issued_hard_copy content'
+  - 'create pdf content'
+  - 'create pdf media'
+  - 'create terms in authors'
+  - 'create terms in reading_lists'
+  - 'create terms in series'
+  - 'create terms in tags'
+  - 'delete own files'
+  - 'delete own hard_copy content'
+  - 'delete own issued_hard_copy content'
+  - 'delete own pdf content'
+  - 'delete own pdf media'
+  - 'delete terms in authors'
+  - 'delete terms in locations'
+  - 'delete terms in reading_lists'
+  - 'delete terms in series'
+  - 'delete terms in tags'
+  - 'edit any hard_copy content'
+  - 'edit any issued_hard_copy content'
+  - 'edit any pdf content'
+  - 'edit any pdf media'
+  - 'edit own hard_copy content'
+  - 'edit own issued_hard_copy content'
+  - 'edit own pdf content'
+  - 'edit own pdf media'
+  - 'edit terms in authors'
+  - 'edit terms in locations'
+  - 'edit terms in reading_lists'
+  - 'edit terms in series'
+  - 'edit terms in tags'
+  - 'flag bookmark'
+  - 'revert all revisions'
+  - 'revert hard_copy revisions'
+  - 'revert issued_hard_copy revisions'
+  - 'revert pdf revisions'
+  - 'unflag bookmark'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view hard_copy revisions'
+  - 'view issued_hard_copy revisions'
+  - 'view own unpublished content'
+  - 'view pdf revisions'

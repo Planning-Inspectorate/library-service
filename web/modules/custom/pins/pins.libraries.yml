@@ -1,0 +1,4 @@
+pins_js:
+  js:
+    js/pins.js: {}
+

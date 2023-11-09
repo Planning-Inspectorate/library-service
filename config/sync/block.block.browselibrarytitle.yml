@@ -1,0 +1,30 @@
+uuid: 1fa478e2-c7e4-4bdc-b30b-2a170514eb29
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0c3b171e-40c8-42a5-83d4-18d51e5d8bef'
+  module:
+    - block_content
+    - system
+  theme:
+    - b5
+id: browselibrarytitle
+theme: b5
+region: content_above
+weight: -8
+provider: null
+plugin: 'block_content:0c3b171e-40c8-42a5-83d4-18d51e5d8bef'
+settings:
+  id: 'block_content:0c3b171e-40c8-42a5-83d4-18d51e5d8bef'
+  label: 'Browse library title'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /browse-library

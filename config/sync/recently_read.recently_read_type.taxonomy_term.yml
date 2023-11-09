@@ -1,0 +1,7 @@
+uuid: e8138e23-6e79-469e-806a-7595513fc002
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term
+label: 'Taxonomy term'
+types: {  }

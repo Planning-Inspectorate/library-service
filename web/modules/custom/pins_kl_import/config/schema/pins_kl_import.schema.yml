@@ -1,0 +1,8 @@
+# Schema for the configuration files of the PINS KL Import module.
+pins_kl_import.settings:
+  type: config_object
+  label: 'PINS KL Import settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'

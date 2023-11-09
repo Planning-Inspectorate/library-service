@@ -1,0 +1,25 @@
+uuid: e7940665-f030-4a0b-a6fd-ed53abd99ab1
+langcode: en
+status: false
+dependencies: {  }
+id: prod
+label: prod
+description: ''
+weight: 2
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/prod
+module:
+  captcha: 0
+  google_analytics: 0
+  honeypot: 0
+  metatag_google_cse: 0
+  rabbit_hole: 0
+  recaptcha: 0
+  recaptcha_v3: 0
+  cookies_ga: 11
+  cookies_recaptcha: 11
+theme: {  }
+complete_list: {  }
+partial_list: {  }

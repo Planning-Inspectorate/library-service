@@ -1,0 +1,22 @@
+contexts:
+  -
+    context: ''
+    translations:
+      -
+        source: 'Ajouter aux favoris'
+        translation: 'Add to bookmark'
+      -
+        source: 'Home username'
+        translation: 'email address'
+      -
+        source: 'Log in'
+        translation: 'Sign in'
+      -
+        source: 'Log out'
+        translation: 'Sign out'
+      -
+        source: 'Retirer des favoris'
+        translation: 'Remove from bookmark'
+      -
+        source: 'Username or email address'
+        translation: 'Email address'

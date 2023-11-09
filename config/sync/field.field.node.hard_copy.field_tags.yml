@@ -1,0 +1,52 @@
+uuid: 41e41444-7a18-4563-8e4f-bcaf27f2c1bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.hard_copy
+    - paragraphs.paragraphs_type.tags_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.hard_copy.field_tags
+field_name: field_tags
+entity_type: node
+bundle: hard_copy
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      tags_paragraphs_type: tags_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 9
+        enabled: false
+      archive_paragraphs_type:
+        weight: 10
+        enabled: false
+      author_paragraphs_type:
+        weight: 11
+        enabled: false
+      category_paragraphs_type:
+        weight: 12
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 13
+        enabled: false
+      series_paragraphs_type:
+        weight: 14
+        enabled: false
+      tags_paragraphs_type:
+        weight: 15
+        enabled: true
+      topic_paragraphs_type:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

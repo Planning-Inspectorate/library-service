@@ -1,0 +1,20 @@
+uuid: 230ea9bd-dd05-4cba-a4d4-c479b4bd3a3a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk
+id: govuk_breadcrumbs
+theme: govuk
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

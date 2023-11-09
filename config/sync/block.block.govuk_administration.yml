@@ -1,0 +1,41 @@
+uuid: 9f768980-d8cf-4033-941c-ff48ae4d41a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.admin
+  module:
+    - menu_block
+    - user
+  theme:
+    - govuk
+id: govuk_administration
+theme: govuk
+region: nav_branding
+weight: 0
+provider: null
+plugin: 'menu_block:admin'
+settings:
+  id: 'menu_block:admin'
+  label: 'Editor menu'
+  label_display: '0'
+  provider: menu_block
+  follow: false
+  follow_parent: child
+  label_link: false
+  label_type: block
+  level: 1
+  depth: 1
+  expand_all_items: true
+  parent: 'admin:system.admin_content'
+  suggestion: admin
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      content_editor: content_editor
+      administrator: administrator
+      library_admin: library_admin

@@ -1,0 +1,23 @@
+uuid: 6b53b1f3-4cc2-487f-a307-32f33835597d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pdf
+  module:
+    - text
+id: node.pdf.body
+field_name: body
+entity_type: node
+bundle: pdf
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

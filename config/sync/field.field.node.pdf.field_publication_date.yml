@@ -1,0 +1,21 @@
+uuid: 33efef29-5b2a-4410-8d1a-e9401291e594
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_date
+    - node.type.pdf
+  module:
+    - datetime
+id: node.pdf.field_publication_date
+field_name: field_publication_date
+entity_type: node
+bundle: pdf
+label: 'Publication Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

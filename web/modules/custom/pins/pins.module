@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * PINS module used for extending site functionalities.
+ *
+*/
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+
+
+
+/**
+  * Implements hook_form_BASE_FORM_ID_alter().  
+*/
+ 
+ function pins_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'node_issued_hard_copy_edit_form':
+      $form['#attached']['library'][] = 'pins/pins_js';
+      break;
+ 
+    case 'node_issued_hard_copy_form':    
+      $form['#attached']['library'][] = 'pins/pins_js';
+      $form['title']['widget'][0]['#required'] = false;
+      $form['title']['widget']['#required'] = false;
+    break;
+  }
+}
+
+
+/**
+  *  
+  *function hook_ENTITY_TYPE_insert
+  *
+*/
+
+function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) { 
+  switch ( $entity->getEntityTypeId()) {
+    case 'node':
+      switch ($entity->bundle()) {
+        case 'article':
+        case 'hard_copy':
+        case 'pdf':
+          //use nid as a unique value
+          pins_entity_insert_unique_reference_id($entity);
+          break;
+      }
+      break;
+  }
+}
+
+/**
+  *  
+  *function pins_entity_insert_unique_reference_id
+  * Used for get Entity_id as a reference id
+  *
+*/
+
+function pins_entity_insert_unique_reference_id($entity){
+  if($entity->hasField('field_content_reference')){
+    $reference_id = $entity->get('field_content_reference')->value;
+    $entity_id = $entity->id();
+
+    if(empty($reference_id) && $nid){
+      $db_table =    $entity->getEntityTypeId().'__field_content_reference';                           
+      $result = \Drupal::database()->insert($db_table)
+      ->fields(['bundle', 'deleted', 'entity_id', 'revision_id', 'langcode', 'delta', 'field_content_reference_value'])
+      ->values([
+        'bundle' => $entity->bundle(),
+        'deleted' => 0,
+        'entity_id' => $entity_id,
+        'revision_id' => $entity_id,
+        'langcode' => $entity->get('langcode')->value,
+        'delta' => 0,
+        'field_content_reference_value' => $entity->id() ,
+      ])
+      ->execute();
+    }
+  }
+}
+
+/** 
+  *  
+  *function hook_ENTITY_presave
+  *
+*/
+function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) { 
+  switch ( $entity->getEntityTypeId()) {
+    case 'node':
+      switch ($entity->bundle()) {
+        case 'article':
+        case 'hard_copy':
+        // case 'issued_hard_copy':
+        case 'pdf':
+          //use nid as a unique reference id
+          pins_entity_insert_unique_reference_id($entity);
+          break;
+      }
+      break;
+  }
+}
+
+

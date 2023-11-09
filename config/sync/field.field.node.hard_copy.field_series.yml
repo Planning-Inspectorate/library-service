@@ -1,0 +1,52 @@
+uuid: f8df9b84-f09c-4253-bad0-586f3a1b0107
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_series
+    - node.type.hard_copy
+    - paragraphs.paragraphs_type.series_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.hard_copy.field_series
+field_name: field_series
+entity_type: node
+bundle: hard_copy
+label: Series
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      series_paragraphs_type: series_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 9
+        enabled: false
+      archive_paragraphs_type:
+        weight: 10
+        enabled: false
+      author_paragraphs_type:
+        weight: 11
+        enabled: false
+      category_paragraphs_type:
+        weight: 12
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 13
+        enabled: false
+      series_paragraphs_type:
+        weight: 14
+        enabled: true
+      tags_paragraphs_type:
+        weight: 15
+        enabled: false
+      topic_paragraphs_type:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,25 @@
+uuid: 2aa2b24d-6b95-4094-977c-36ac9e6f27f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.note.field_long_text
+    - paragraphs.paragraphs_type.note
+  module:
+    - text
+id: paragraph.note.default
+targetEntityType: paragraph
+bundle: note
+mode: default
+content:
+  field_long_text:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,9 @@
+services:
+  pins_kl_import.example:
+    class: Drupal\pins_kl_import\Example
+    arguments: ['@entity_type.manager']
+
+  pins_kl_import.event_subscriber:
+    class: Drupal\pins_kl_import\EventSubscriber\PinsKlImportSubscriber
+    tags:
+      - { name: event_subscriber }

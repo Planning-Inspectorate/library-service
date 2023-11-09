@@ -1,0 +1,31 @@
+uuid: 7189f4be-1be7-44a4-892f-9fbc0fe66888
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.links.field_link
+    - paragraphs.paragraphs_type.links
+  module:
+    - link
+id: paragraph.links.default
+targetEntityType: paragraph
+bundle: links
+mode: default
+content:
+  field_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

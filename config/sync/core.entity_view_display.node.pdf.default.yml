@@ -1,0 +1,266 @@
+uuid: 440cd51b-3f1a-4d70-9cc5-c16b67c7242a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.comment.comment.default
+    - field.field.node.pdf.body
+    - field.field.node.pdf.comment
+    - field.field.node.pdf.field_alternative_title
+    - field.field.node.pdf.field_archive
+    - field.field.node.pdf.field_author
+    - field.field.node.pdf.field_category
+    - field.field.node.pdf.field_content_reference
+    - field.field.node.pdf.field_isbn
+    - field.field.node.pdf.field_links
+    - field.field.node.pdf.field_note
+    - field.field.node.pdf.field_pdf
+    - field.field.node.pdf.field_pdf_media
+    - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_reading_lists
+    - field.field.node.pdf.field_series
+    - field.field.node.pdf.field_tags
+    - field.field.node.pdf.field_topics
+    - field.field.node.pdf.field_volume
+    - node.type.pdf
+  module:
+    - barcodes
+    - comment
+    - datetime
+    - ds
+    - entity_reference_revisions
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+        disable_css: false
+        entity_classes: all_classes
+    regions:
+      content:
+        - node_title
+        - body
+        - comment
+        - flag_bookmark
+        - field_alternative_title
+        - links
+        - field_pdf
+        - field_pdf_media
+        - field_links
+        - field_isbn
+        - field_volume
+        - field_author
+        - field_series
+        - field_category
+        - field_reading_lists
+        - field_topics
+        - field_tags
+        - field_content_reference
+        - field_archive
+        - field_note
+        - field_publication_date
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+id: node.pdf.default
+targetEntityType: node
+bundle: pdf
+mode: default
+content:
+  body:
+    type: barcode
+    label: above
+    settings:
+      type: QRCODE
+      color: '#000000'
+      height: 100
+      width: 100
+      padding_top: 0
+      padding_right: 0
+      padding_bottom: 0
+      padding_left: 0
+      show_value: false
+      format: SVG
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  comment:
+    type: comment_default
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_alternative_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_archive:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_author:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_category:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_content_reference:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  field_isbn:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_links:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_note:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  field_pdf:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_pdf_media:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+    weight: 7
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  field_reading_lists:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_series:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_tags:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_topics:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_volume:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  flag_bookmark:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

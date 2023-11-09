@@ -1,0 +1,11 @@
+uuid: 38e359a6-f4df-4895-ad4f-e063eb6a95f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - vbo_export
+id: generate_xlsx_from_selected_view_results
+label: 'Generate xlsx from selected view results'
+type: ''
+plugin: vbo_export_generate_xlsx_action
+configuration: {  }
