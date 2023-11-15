@@ -1,7 +1,7 @@
 name: 'PINS KL Import'
 type: module
 description: 'Imports metadata from the Horizon Knowledge Library.'
-package: Custom
+package: PINS
 core_version_requirement: ^10
 dependencies:
   - feeds:feeds

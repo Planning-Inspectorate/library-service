@@ -11,13 +11,15 @@ no_patching: false
 storage: folder
 folder: ../config/stage
 module:
-  admin_toolbar_tools: 0
-  devel: 0
-  devel_generate: 0
-  devel_kint_extras: 0
-  diff: 0
-  views_ui: 0
-  webform_ui: 0
+  cookies: 0
+  google_analytics: 0
+  honeypot: 0
+  metatag_google_cse: 0
+  rabbit_hole: 0
+  recaptcha: 0
+  recaptcha_v3: 0
+  cookies_ga: 11
+  cookies_recaptcha: 11
 theme: {  }
 complete_list: {  }
 partial_list: {  }

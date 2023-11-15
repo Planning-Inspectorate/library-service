@@ -1,20 +1,11 @@
-pins_kl_import.foo:
-  title: Foo
-  route_name: pins_kl_import.foo_1
-  base_route: pins_kl_import.foo_1
-pins_kl_import.foo_1:
-  title: Foo 1
-  route_name: pins_kl_import.foo_1
-  parent_id: pins_kl_import.foo
-pins_kl_import.foo_2:
-  title: Foo 2
-  route_name: pins_kl_import.foo_2
-  parent_id: pins_kl_import.foo
-pins_kl_import.foo_3:
-  title: Foo 3
-  route_name: pins_kl_import.foo_3
-  parent_id: pins_kl_import.foo
-pins_kl_import.bar:
-  title: Bar
-  route_name: pins_kl_import.bar
-  base_route: pins_kl_import.foo_1
+pins_kl_import.kl_upload_vocabs:
+  title: Upload KL Vocabs
+  route_name: pins_kl_import.kl_upload_vocabs
+  base_route: pins_kl_import.kl_upload_vocabs
+  weight: 0
+
+pins_kl_import.kl_upload_metadata:
+  title: Upload KL Metadata
+  route_name: pins_kl_import.kl_upload_metadata
+  base_route: pins_kl_import.kl_upload_vocabs
+  weight: 10

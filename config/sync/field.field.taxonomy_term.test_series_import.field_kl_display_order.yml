@@ -1,0 +1,25 @@
+uuid: 4d29bb22-4f1b-42c0-883d-6063f64015e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_kl_display_order
+    - taxonomy.vocabulary.test_series_import
+id: taxonomy_term.test_series_import.field_kl_display_order
+field_name: field_kl_display_order
+entity_type: taxonomy_term
+bundle: test_series_import
+label: 'KL Display Order'
+description: 'Original data brought over in migration from Knowledge Library based on Horizon.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

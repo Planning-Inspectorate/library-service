@@ -1,0 +1,11 @@
+uuid: ac8200dc-c584-419a-850a-a373225ad82e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.test_authors_import
+id: taxonomy_term.test_authors_import
+target_entity_type_id: taxonomy_term
+target_bundle: test_authors_import
+default_langcode: site_default
+language_alterable: false

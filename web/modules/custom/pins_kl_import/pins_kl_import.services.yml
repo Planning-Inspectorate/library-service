@@ -1,9 +1,12 @@
 services:
-  pins_kl_import.example:
-    class: Drupal\pins_kl_import\Example
-    arguments: ['@entity_type.manager']
-
-  pins_kl_import.event_subscriber:
+  pins_kl_import.pins_kl_subscriber:
     class: Drupal\pins_kl_import\EventSubscriber\PinsKlImportSubscriber
     tags:
-      - { name: event_subscriber }
+    - { name: event_subscriber }
+  plugin.manager.viewsaccess:
+    class: Drupal\pins_kl_import\Plugin\views\access\PinsKlImportViewsAccess
+    parent: default_plugin_manager
+  pins_kl_import.access_checker:
+    class: Drupal\pins_kl_import\Access\PinsKlImportAccessCheck
+    tags:
+    - { name: access_check, applies_to: _pins_kl_import_custom_access }

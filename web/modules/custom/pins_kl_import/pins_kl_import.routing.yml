@@ -1,31 +1,17 @@
-pins_kl_import.example:
-  path: '/pins-kl-import/example'
+pins_kl_import.kl_upload_vocabs:
+  path: '/admin/pins-kl-import/kl-upload-vocabs'
   defaults:
-    _title: 'Example'
-    _controller: '\Drupal\pins_kl_import\Controller\PinsKlImportController'
+    _form: '\Drupal\pins_kl_import\Form\UploadVocabsForm'
+    _title: 'Upload KL Vocabs'
   requirements:
-    _permission: 'access content'
+    _permissions: 'access kl upload form'
+    _access: 'TRUE'
 
-pins_kl_import.example_confirm:
-  path: '/pins-kl-import/example-confirm'
+pins_kl_import.kl_upload_metadata:
+  path: '/admin/pins-kl-import/kl-upload-metadata'
   defaults:
-    _title: 'Example Confirm'
-    _form: 'Drupal\pins_kl_import\Form\ExampleConfirmForm'
+    _form: '\Drupal\pins_kl_import\Form\UploadMetaDataForm'
+    _title: 'Upload KL Metadata'
   requirements:
-    _permission: 'administer site configuration'
-
-pins_kl_import.example:
-  path: '/pins-kl-import/example'
-  defaults:
-    _title: 'Example'
-    _form: 'Drupal\pins_kl_import\Form\ExampleForm'
-  requirements:
-    _permission: 'access content'
-
-pins_kl_import.settings:
-  path: '/admin/config/system/settings'
-  defaults:
-    _title: 'Settings'
-    _form: 'Drupal\pins_kl_import\Form\SettingsForm'
-  requirements:
-    _permission: 'administer site configuration'
+    _permissions: 'access kl upload form'
+    _access: 'TRUE'

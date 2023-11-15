@@ -1,0 +1,8 @@
+pins_kl_import_libs:
+  version: 1.x
+  css:
+    theme:
+      css/pins_kl_import.css: {}
+  js:
+    js/pins_kl_import.js: {}
+    

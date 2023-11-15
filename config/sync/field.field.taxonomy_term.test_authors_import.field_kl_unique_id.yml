@@ -1,0 +1,19 @@
+uuid: 37e0ff57-59f2-417f-ada7-85cc886b5bbf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_kl_unique_id
+    - taxonomy.vocabulary.test_authors_import
+id: taxonomy_term.test_authors_import.field_kl_unique_id
+field_name: field_kl_unique_id
+entity_type: taxonomy_term
+bundle: test_authors_import
+label: 'KL Unique ID'
+description: 'Original data brought over in migration from Knowledge Library based on Horizon.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

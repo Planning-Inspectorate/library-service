@@ -4,3 +4,10 @@
  * @file
  * Primary module hooks for PINS KL Import module.
  */
+
+/**
+ * Implements hook_theme().
+ */
+function pins_kl_import_theme($existing, $type, $theme, $path) {
+ return [];
+}

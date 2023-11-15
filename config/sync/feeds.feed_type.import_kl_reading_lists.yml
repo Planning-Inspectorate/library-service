@@ -1,0 +1,108 @@
+uuid: 3f10d426-8350-4671-a289-108d856edacc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.test_reading_lists_import.field_kl_display_order
+    - field.field.taxonomy_term.test_reading_lists_import.field_kl_filter
+    - field.field.taxonomy_term.test_reading_lists_import.field_kl_unique_id
+    - taxonomy.vocabulary.test_reading_lists_import
+  module:
+    - feeds_log
+    - taxonomy
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+label: 'Import KL Reading Lists'
+id: import_kl_reading_lists
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: csv
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:taxonomy_term'
+processor_configuration:
+  values:
+    vid: test_reading_lists_import
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: false
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  name:
+    value: Name
+    label: Name
+    machine_name: name
+    type: csv
+  uniqueid:
+    value: UniqueId
+    label: UniqueId
+    machine_name: uniqueid
+    type: csv
+  displayorder:
+    value: DisplayOrder
+    label: DisplayOrder
+    machine_name: displayorder
+    type: csv
+  filter:
+    value: Filter
+    label: Filter
+    machine_name: filter
+    type: csv
+mappings:
+  -
+    target: name
+    map:
+      value: name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_unique_id
+    map:
+      value: uniqueid
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_kl_display_order
+    map:
+      value: displayorder
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_filter
+    map:
+      value: filter
+    settings:
+      language: null
+    unique: {  }

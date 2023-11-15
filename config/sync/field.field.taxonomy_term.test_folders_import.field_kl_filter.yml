@@ -1,0 +1,19 @@
+uuid: 9780d1bf-d3ae-42d0-af44-8fda9e34ad17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_kl_filter
+    - taxonomy.vocabulary.test_folders_import
+id: taxonomy_term.test_folders_import.field_kl_filter
+field_name: field_kl_filter
+entity_type: taxonomy_term
+bundle: test_folders_import
+label: 'KL Filter'
+description: 'Original data brought over in migration from Knowledge Library based on Horizon.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

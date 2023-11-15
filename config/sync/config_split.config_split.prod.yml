@@ -12,6 +12,7 @@ storage: folder
 folder: ../config/prod
 module:
   captcha: 0
+  cookies: 0
   google_analytics: 0
   honeypot: 0
   metatag_google_cse: 0

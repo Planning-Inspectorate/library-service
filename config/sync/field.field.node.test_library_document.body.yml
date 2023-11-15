@@ -1,0 +1,24 @@
+uuid: f653a4fb-27f7-4669-9e63-22cdbf50ae2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.test_library_document
+  module:
+    - text
+id: node.test_library_document.body
+field_name: body
+entity_type: node
+bundle: test_library_document
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

@@ -1,0 +1,19 @@
+uuid: 52ae69b6-cf69-431e-9307-bd44e025437f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_filename
+    - node.type.test_library_document
+id: node.test_library_document.field_kl_filename
+field_name: field_kl_filename
+entity_type: node
+bundle: test_library_document
+label: 'KL Filename'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

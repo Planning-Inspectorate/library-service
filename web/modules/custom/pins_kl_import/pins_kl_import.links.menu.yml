@@ -1,5 +1,6 @@
-pins_kl_import.settings:
-  title: Settings
-  parent: system.admin_config_system
-  route_name: pins_kl_import.settings
-  weight: 10
+pins_kl_import.admin:
+  title: PINS KL Import
+  route_name: 'pins_kl_import.kl_upload_vocabs'
+  parent: 'system.admin'
+  description: 'PINS Knowledge Library (Horizon) Import functions'
+  weight: 8

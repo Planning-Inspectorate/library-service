@@ -11,7 +11,6 @@ module:
   block_class: 0
   block_content: 0
   breakpoint: 0
-  captcha: 0
   ckeditor5: 0
   clientside_validation: 0
   clientside_validation_jquery: 0
@@ -23,7 +22,6 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
-  cookies: 0
   csv_importer: 0
   datetime: 0
   dblog: 0
@@ -44,6 +42,9 @@ module:
   event_log_track_ui: 0
   event_log_track_user: 0
   facets: 0
+  feeds: 0
+  feeds_log: 0
+  feeds_tamper: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -51,10 +52,8 @@ module:
   filter: 0
   flag: 0
   flag_bookmark: 0
-  google_analytics: 0
   help: 0
   history: 0
-  honeypot: 0
   image: 0
   jquery_ui: 0
   jquery_ui_datepicker: 0
@@ -71,7 +70,6 @@ module:
   menu_link_content: 0
   menu_ui: 0
   metatag: 0
-  metatag_google_cse: 0
   miniorange_saml: 0
   miniorange_saml_idp: 0
   mysql: 0
@@ -82,10 +80,9 @@ module:
   path_alias: 0
   phpass: 0
   pins: 0
+  pins_kl_import: 0
+  pins_tamper_term_hierarchy: 0
   quick_node_clone: 0
-  rabbit_hole: 0
-  recaptcha: 0
-  recaptcha_v3: 0
   recently_read: 0
   scan_code: 0
   search_api: 0
@@ -96,12 +93,13 @@ module:
   stringoverrides: 0
   syslog: 0
   system: 0
+  tamper: 0
   taxonomy: 0
+  taxonomy_manager: 0
   text: 0
   token: 0
   toolbar: 0
   tour: 0
-  tracker: 0
   twig_tweak: 0
   update: 0
   user: 0
@@ -124,16 +122,11 @@ module:
   ds_extras: 2
   externalauth: 10
   views: 10
-  cookies_ga: 11
-  cookies_recaptcha: 11
   paragraphs: 11
   login_redirect_per_role: 1000
   standard: 1000
 theme:
-  olivero: 0
   claro: 0
   stable9: 0
-  bootstrap5: 0
-  b5: 0
   govuk: 0
 profile: standard

@@ -1,0 +1,19 @@
+uuid: 66d1e6e9-e163-48bb-84bd-f6a842adbf1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_document_unique_id
+    - node.type.test_library_document
+id: node.test_library_document.field_kl_document_unique_id
+field_name: field_kl_document_unique_id
+entity_type: node
+bundle: test_library_document
+label: 'KL Document Unique Id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

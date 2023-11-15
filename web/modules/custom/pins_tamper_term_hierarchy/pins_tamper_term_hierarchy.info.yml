@@ -1,0 +1,9 @@
+name: PINS Tamper Term Hierarchy
+type: module
+description: Feeds Tamper plugin to import taxonomy terms with hierarchy support.
+core: 8.x
+core_version_requirement: ^10
+package: PINS
+dependencies:
+  - feeds:feeds
+  - tamper:tamper

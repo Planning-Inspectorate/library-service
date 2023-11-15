@@ -1,2 +1,3 @@
-administer pins_kl_import configuration:
-  title: 'Administer pins_kl_import configuration'
+'access kl upload form':
+  title: 'Access KL upload form'
+  description: 'Allow access to the KL upload form'
