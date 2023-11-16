@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "composer/installers": "^2.1",
         "cweagans/composer-patches": "1.7.3",
         "drupal/admin_toolbar": "3.4.2",
@@ -152,7 +152,7 @@
         },
         "patches": {
             "drupal/core": {
-                "Issue #2868384: Can't login due to stale cookies": "https://www.drupal.org/files/issues/2023-02-15/2868384-62.patch"
+                "Issue #791004: Can't login": "https://www.https://www.drupal.org/files/issues/2023-01-31/791004-47.patch"
             }
         }
     }

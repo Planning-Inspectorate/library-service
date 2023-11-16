@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.test_library_document.field_folder
+    - field.field.node.test_library_document.field_kl_document_file
     - field.field.node.test_library_document.field_kl_document_id
     - field.field.node.test_library_document.field_kl_document_unique_id
     - field.field.node.test_library_document.field_kl_document_uri
@@ -153,6 +154,16 @@ custom_sources:
     label: Computed4
     machine_name: computed4
     type: blank
+  computed_5:
+    value: 'Computed 5'
+    label: 'Computed 5'
+    machine_name: computed_5
+    type: blank
+  computed_6:
+    value: 'Computed 6'
+    label: 'Computed 6'
+    machine_name: computed_6
+    type: blank
 mappings:
   -
     target: title
@@ -221,3 +232,15 @@ mappings:
       feeds_item: guid
       autocreate: 0
       autocreate_bundle: test_folders_import
+  -
+    target: field_kl_document_file
+    map:
+      target_id: computed_5
+      description: computed_6
+    settings:
+      language: ''
+      reference_by: fid
+      feeds_item: guid
+      autocreate: 0
+      existing: '2'
+      autocreate_bundle: false

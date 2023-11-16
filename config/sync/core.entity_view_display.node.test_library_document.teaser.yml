@@ -6,8 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.test_library_document.body
     - field.field.node.test_library_document.feeds_item
-    - field.field.node.test_library_document.field_document
     - field.field.node.test_library_document.field_folder
+    - field.field.node.test_library_document.field_kl_document_file
     - field.field.node.test_library_document.field_kl_document_id
     - field.field.node.test_library_document.field_kl_document_unique_id
     - field.field.node.test_library_document.field_kl_document_uri
@@ -42,8 +42,8 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
-  field_document: true
   field_folder: true
+  field_kl_document_file: true
   field_kl_document_id: true
   field_kl_document_unique_id: true
   field_kl_document_uri: true
