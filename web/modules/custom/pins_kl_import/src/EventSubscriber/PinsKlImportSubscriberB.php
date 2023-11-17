@@ -39,7 +39,7 @@ class PinsKlImportSubscriberB implements EventSubscriberInterface {
 
     /** @var \Drupal\feeds\Feeds\Item\ItemInterface */
     foreach ($parser_result as $item) {
-      
+
       $filename = $item->get('filename');
 
       $filepath = 'public://lib-mig/' . $filename;
@@ -52,7 +52,7 @@ class PinsKlImportSubscriberB implements EventSubscriberInterface {
       ]);
 
       $file->save();
-  
+
       $fid = $file->id();
 
       // Mark the file as used so it is not removed by cron.
@@ -61,7 +61,7 @@ class PinsKlImportSubscriberB implements EventSubscriberInterface {
       $file_usage->add($file, 'pins_kl_import', 'node', 1);
 
       $item->set('computed_5', $fid);
-  
+
     }
   }
 

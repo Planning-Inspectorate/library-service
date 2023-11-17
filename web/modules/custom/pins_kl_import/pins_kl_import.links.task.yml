@@ -4,6 +4,12 @@ pins_kl_import.kl_upload_vocabs:
   base_route: pins_kl_import.kl_upload_vocabs
   weight: 0
 
+pins_kl_import.kl_upload_files:
+  title: Upload KL Files
+  route_name: pins_kl_import.kl_upload_files
+  base_route: pins_kl_import.kl_upload_vocabs
+  weight: 0
+
 pins_kl_import.kl_upload_metadata:
   title: Upload KL Metadata
   route_name: pins_kl_import.kl_upload_metadata

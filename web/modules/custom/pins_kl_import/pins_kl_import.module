@@ -11,3 +11,4 @@
 function pins_kl_import_theme($existing, $type, $theme, $path) {
  return [];
 }
+

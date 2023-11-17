@@ -7,15 +7,15 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\feeds\Entity\Feed;
 
 /**
- * Provides an Upload Vocabs form.
+ * Provides an Upload Files form.
  */
-class UploadMetaDataForm extends FormBase {
+class UploadFilesForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId(): string {
-    return 'upload_metadata_form';
+    return 'upload_files_form';
   }
 
   /**
@@ -23,16 +23,15 @@ class UploadMetaDataForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-    $form['help'] = [
-      '#type' => 'item',
-      '#markup' => t('Process the metadata file extracted from Horizon.'),
+    $form['intro_text'] = [
+      '#markup' => '<p>This function processes the extracted Horizon files, creates Document pages and creates/updates the Folder terms at the same time .</p>'
     ];
 
     $form['feed_type_id'] = [
       '#type' => 'select',
       '#title' => t('Import process to perform'),
       '#options' => [
-        'import_kl_metadata' => t('Import KL Metadata'),
+        'import_kl_document_files' => t('Import KL Document Files'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -82,7 +81,7 @@ class UploadMetaDataForm extends FormBase {
     $vals = $form_state->getValues();
 
     // Items per feeds batch
-    variable_set('feeds_process_limit', 250);
+    //variable_set('feeds_process_limit', 250);
 
     // The CSV file.
     $fid = $vals['file'][0];

@@ -24,7 +24,7 @@ class UploadVocabsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['intro_text'] = [
-      '#markup' => '<p>This is the intro help text for the form.</p>'
+      '#markup' => '<p>Creates/updates the taxonomy vocabularies from downloaded CSV files from the Horizon Data Maintenance facility..</p>'
     ];
 
     $form['feed_type_id'] = [
@@ -34,7 +34,6 @@ class UploadVocabsForm extends FormBase {
         'import_kl_authors' => t('Import KL Authors'),
         'import_kl_reading_lists' => t('Import KL Reading Lists'),
         'import_kl_series' => t('Import KL Series'),
-        'import_kl_folders' => t('Import KL Folders heirarchy.')
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
