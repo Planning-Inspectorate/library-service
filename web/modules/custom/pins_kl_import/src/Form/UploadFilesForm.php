@@ -80,10 +80,10 @@ class UploadFilesForm extends FormBase {
     $vals = $form_state->getValues();
 
     // Items per feeds batch.
-    $config = \Drupal::service('config.factory')->getEditable('variable_get_set.api');
-    $config->set('feeds_process_limit', 250);
-    $config->save();
-#    variable_set('feeds_process_limit', 250);
+//    $config = \Drupal::service('config.factory')->getEditable('variable_get_set.api');
+//    $config->set('feeds_process_limit', 250);
+//    $config->save();
+//    variable_set('feeds_process_limit', 250);
 
     $del_files = FALSE;
     if (array_key_exists('del_files', $vals)) {
