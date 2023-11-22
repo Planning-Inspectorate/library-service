@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_virtual_folder.body
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
     - node.type.kl_virtual_folder
   module:
     - text
@@ -19,6 +21,22 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_kl_doc_folder:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_kl_doc_folder_reference:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 110
     region: content
   links:
     settings: {  }

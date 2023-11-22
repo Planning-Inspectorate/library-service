@@ -1,18 +1,17 @@
-uuid: 22736000-6064-4a9a-a4a1-21d1d98e2897
+uuid: 57b26dd7-9f78-42c5-9ada-224d424892e0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_shortcut.body
-    - field.field.node.kl_shortcut.field_kl_doc_folder
-    - field.field.node.kl_shortcut.field_kl_document_reference
-    - node.type.kl_shortcut
+    - field.field.node.kl_compound_document.body
+    - field.field.node.kl_compound_document.field_kl_doc_folder
+    - node.type.kl_compound_document
   module:
     - text
     - user
-id: node.kl_shortcut.default
+id: node.kl_compound_document.default
 targetEntityType: node
-bundle: kl_shortcut
+bundle: kl_compound_document
 mode: default
 content:
   body:
@@ -29,14 +28,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 109
-    region: content
-  field_kl_document_reference:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 102
     region: content
   links:
     settings: {  }

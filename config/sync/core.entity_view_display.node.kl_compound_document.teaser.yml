@@ -1,19 +1,18 @@
-uuid: fee8f647-9056-47ad-b7f0-5c92dd9ab718
+uuid: 1089184a-4150-4886-b626-f935dffa7b16
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.kl_shortcut.body
-    - field.field.node.kl_shortcut.field_kl_doc_folder
-    - field.field.node.kl_shortcut.field_kl_document_reference
-    - node.type.kl_shortcut
+    - field.field.node.kl_compound_document.body
+    - field.field.node.kl_compound_document.field_kl_doc_folder
+    - node.type.kl_compound_document
   module:
     - text
     - user
-id: node.kl_shortcut.teaser
+id: node.kl_compound_document.teaser
 targetEntityType: node
-bundle: kl_shortcut
+bundle: kl_compound_document
 mode: teaser
 content:
   body:
@@ -34,6 +33,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_kl_doc_folder: true
-  field_kl_document_reference: true
   langcode: true
   search_api_excerpt: true

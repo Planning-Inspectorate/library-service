@@ -91,7 +91,8 @@
         "drupal/views_bulk_operations": "4.2.5",
         "drupal/views_contextual_filters_or": "^1.4",
         "drupal/views_send": "^2.0@RC",
-        "drupal/webform": "6.2.x-dev",
+        "drupal/webform": "6.2.0",
+        "drupal/weight": "3.4",
         "drush/drush": "12.4.3",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2"

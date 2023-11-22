@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.kl_virtual_folder.body
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
     - node.type.kl_virtual_folder
   module:
     - text
@@ -31,5 +33,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_kl_doc_folder: true
+  field_kl_doc_folder_reference: true
   langcode: true
   search_api_excerpt: true

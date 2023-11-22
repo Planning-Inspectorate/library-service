@@ -34,7 +34,7 @@ class UploadMetaDataForm extends FormBase {
       '#type' => 'select',
       '#title' => t('Import process to perform'),
       '#options' => [
-        'import_kl_metadata' => t('Import KL Metadata'),
+        'kl_import_metadata' => t('Import KL Metadata'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -88,7 +88,7 @@ class UploadMetaDataForm extends FormBase {
     $uri = $file->getFileUri();
 
     $feed = Feed::create([
-      'title' => 'Upload KL data - ' . $feed_type_id,
+      'title' => 'Upload KL Metadata - ' . $feed_type_id,
       'type' => $feed_type_id,
       'source' => $uri,
     ]);

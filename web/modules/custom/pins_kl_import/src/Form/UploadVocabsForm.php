@@ -33,9 +33,10 @@ class UploadVocabsForm extends FormBase {
       '#type' => 'select',
       '#title' => t('Import process to perform'),
       '#options' => [
-        'import_kl_authors' => t('Import KL Authors'),
-        'import_kl_reading_lists' => t('Import KL Reading Lists'),
-        'import_kl_series' => t('Import KL Series'),
+        'kl_import_authors' => t('Import KL Authors'),
+        'kl_import_folders' => t('Import KL Folders'),
+        'kl_import_reading_lists' => t('Import KL Reading Lists'),
+        'kl_import_series' => t('Import KL Series'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -89,7 +90,7 @@ class UploadVocabsForm extends FormBase {
     $uri = $file->getFileUri();
 
     $feed = Feed::create([
-      'title' => 'Upload KL data - ' . $feed_type_id,
+      'title' => 'Upload KL Vocabs - ' . $feed_type_id,
       'type' => $feed_type_id,
       'source' => $uri,
     ]);

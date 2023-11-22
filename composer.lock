@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9488431f299a5a516deae3e77b0f8b8f",
+    "content-hash": "1318b1cbcb5ce98c1d07867c4dfb7e80",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7075,11 +7075,17 @@
         },
         {
             "name": "drupal/webform",
-            "version": "dev-6.2.x",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "545a9792bd65576d50abdeb7dbec2ab6395b93f0"
+                "reference": "6.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/webform-6.2.0.zip",
+                "reference": "6.2.0",
+                "shasum": "7a8292fb86fa60c88377279769fd6f1b1fad05c2"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10",
@@ -7127,15 +7133,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-6.2.x": "6.2.x-dev"
-                },
                 "drupal": {
-                    "version": "6.2.0+3-dev",
-                    "datestamp": "1700578292",
+                    "version": "6.2.0",
+                    "datestamp": "1698674300",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -7179,6 +7182,70 @@
                 "issues": "https://www.drupal.org/project/issues/webform?version=8.x",
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
+            }
+        },
+        {
+            "name": "drupal/weight",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/weight.git",
+                "reference": "8.x-3.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/weight-8.x-3.4.zip",
+                "reference": "8.x-3.4",
+                "shasum": "d53f3df1643993e87e2265953d8aea43b7cc041a"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-3.4",
+                    "datestamp": "1676997696",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "heddn",
+                    "homepage": "https://www.drupal.org/user/1463982"
+                },
+                {
+                    "name": "kevinquillen",
+                    "homepage": "https://www.drupal.org/user/317279"
+                },
+                {
+                    "name": "NancyDru",
+                    "homepage": "https://www.drupal.org/user/101412"
+                },
+                {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
+                    "name": "VladimirAus",
+                    "homepage": "https://www.drupal.org/user/673120"
+                }
+            ],
+            "description": "Allows arbitrary ordering of entities.",
+            "homepage": "https://www.drupal.org/project/weight",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/weight",
+                "issues": "https://www.drupal.org/project/issues/weight"
             }
         },
         {
@@ -14210,8 +14277,7 @@
     "stability-flags": {
         "drupal/recently_read": 20,
         "drupal/schema_metatag": 20,
-        "drupal/views_send": 5,
-        "drupal/webform": 20
+        "drupal/views_send": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,

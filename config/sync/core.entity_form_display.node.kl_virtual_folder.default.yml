@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_virtual_folder.body
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
     - node.type.kl_virtual_folder
   module:
     - path
@@ -28,6 +30,26 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_kl_doc_folder:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_folder_reference:
+    type: entity_reference_autocomplete
+    weight: 122
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

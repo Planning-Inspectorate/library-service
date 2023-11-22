@@ -39,7 +39,7 @@ class UploadFilesForm extends FormBase {
       '#type' => 'select',
       '#title' => t('Import process to perform'),
       '#options' => [
-        'import_kl_document_files' => t('Import KL Document Files'),
+        'kl_import_files' => t('Import KL Files'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -108,7 +108,7 @@ class UploadFilesForm extends FormBase {
     $uri = $file->getFileUri();
 
     $feed = Feed::create([
-      'title' => 'Upload KL data - ' . $feed_type_id,
+      'title' => 'Upload KL Files - ' . $feed_type_id,
       'type' => $feed_type_id,
       'source' => $uri,
     ]);

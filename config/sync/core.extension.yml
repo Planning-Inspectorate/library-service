@@ -115,6 +115,7 @@ module:
   webform_node: 0
   webform_scheduled_email: 0
   webform_submission_log: 0
+  weight: 0
   extlink: 1
   pathauto: 1
   ds_extras: 2
