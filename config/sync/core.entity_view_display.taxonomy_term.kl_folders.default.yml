@@ -1,0 +1,30 @@
+uuid: 6617d643-310e-477c-8ea4-1ab98f49440b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_folders.feeds_item
+    - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - text
+id: taxonomy_term.kl_folders.default
+targetEntityType: taxonomy_term
+bundle: kl_folders
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  field_kl_term_unique_id: true
+  langcode: true
+  search_api_excerpt: true

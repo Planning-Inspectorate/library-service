@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\pins_kl_import\Form;
 
@@ -24,8 +26,14 @@ class UploadFilesForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['intro_text'] = [
-      '#markup' => '<p>This function processes the extracted Horizon files, creates Document pages and creates/updates the Folder terms at the same time .</p>'
+      '#markup' => '<p>This function processes the extracted Horizon files, creates Document pages and creates/updates the Folder terms at the same time .</p>',
     ];
+
+    $form['del_files'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Delete all existing file entities first?'),
+      '#description' => t('WARNING! This is a dev-only option.  Do not use this when imports from lve system are being performed.'),
+    );
 
     $form['feed_type_id'] = [
       '#type' => 'select',
@@ -41,19 +49,19 @@ class UploadFilesForm extends FormBase {
       '#type' => 'managed_file',
       '#required' => TRUE,
       '#title' => $this->t('Upload your CSV File'),
-      '#upload_validators' => array(
-        'file_validate_extensions' => array('csv'),
-        // Pass the maximum file size in bytes
-        'file_validate_size' => array(1*1024*1024),
-      ),
+      '#upload_validators' => [
+        'file_validate_extensions' => ['csv'],
+        // Pass the maximum file size in bytes.
+        'file_validate_size' => [1 * 1024 * 1024],
+      ],
     ];
 
     $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = array(
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Upload'),
       '#button_type' => 'primary',
-    );
+    ];
     return $form;
   }
 
@@ -61,16 +69,7 @@ class UploadFilesForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
-    // @todo Validate the form here.
-    // Example:
-    // @code
-    //   if (mb_strlen($form_state->getValue('message')) < 10) {
-    //     $form_state->setErrorByName(
-    //       'message',
-    //       $this->t('Message should be at least 10 characters.'),
-    //     );
-    //   }
-    // @endcode
+
   }
 
   /**
@@ -80,8 +79,23 @@ class UploadFilesForm extends FormBase {
 
     $vals = $form_state->getValues();
 
-    // Items per feeds batch
-    //variable_set('feeds_process_limit', 250);
+    // Items per feeds batch.
+    $config = \Drupal::service('config.factory')->getEditable('variable_get_set.api');
+    $config->set('feeds_process_limit', 250);
+    $config->save();
+#    variable_set('feeds_process_limit', 250);
+
+    $del_files = FALSE;
+    if (array_key_exists('del_files', $vals)) {
+      $del_files = ($vals['del_files'] == 1) ? TRUE : FALSE;
+    }
+
+    // Delete all existing file entities owned by this module.
+    if ($del_files) {
+      // Search for all file entities...
+      // $file = \Drupal::entityTypeManager()->getStorage('file')->load(1007);
+      $file_storage = \Drupal::entityTypeManager()->getStorage('file');
+    }
 
     // The CSV file.
     $fid = $vals['file'][0];
@@ -98,27 +112,12 @@ class UploadFilesForm extends FormBase {
       'type' => $feed_type_id,
       'source' => $uri,
     ]);
+
     $feed->save();
-    //      $feed->import();
     $feed->startBatchImport();
-    //      $feed->startCronImport();
-
-    // Delete the temporary uploaded file..?
-    $file_storage = \Drupal::entityTypeManager()->getStorage('file');
-    $file = $file_storage->load($fid);
-    $references = \Drupal::service('file.usage')->listUsage($file);
-    if (empty($references) && file_exists($file->getFileUri())) {
-//      $file->delete();
-//      \Drupal::logger('pins_kl_import')->notice('Deleted temp file ' . $fid);
-    }
-    else {
-//      \Drupal::logger('pins_kl_import')->warning('Could not delete temp file ' . $fid);
-    }
-
-    //$form_state->setRedirect('entity.node.canonical', ['node' => $curr_event]);
 
     $this->messenger()->addStatus($this->t('Import complete.'));
-    $form_state->setRedirect('<front>');
+    $form_state->setRedirect('pins_kl_import.kl_upload_files');
   }
 
 }

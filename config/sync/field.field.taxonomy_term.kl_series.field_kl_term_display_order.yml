@@ -1,0 +1,19 @@
+uuid: 683c182a-3d5d-4960-b385-5ff46faf084b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_kl_term_display_order
+    - taxonomy.vocabulary.kl_series
+id: taxonomy_term.kl_series.field_kl_term_display_order
+field_name: field_kl_term_display_order
+entity_type: taxonomy_term
+bundle: kl_series
+label: 'KL Term Display Order'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

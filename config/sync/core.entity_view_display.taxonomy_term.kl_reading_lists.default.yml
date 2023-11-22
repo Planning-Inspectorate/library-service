@@ -1,0 +1,34 @@
+uuid: b2f7a996-f16f-4b66-8d3b-2a07a8c484ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_reading_lists.feeds_item
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_display_order
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_filter
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_unique_id
+    - taxonomy.vocabulary.kl_reading_lists
+  module:
+    - text
+id: taxonomy_term.kl_reading_lists.default
+targetEntityType: taxonomy_term
+bundle: kl_reading_lists
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  field_kl_term_display_order: true
+  field_kl_term_filter: true
+  field_kl_term_unique_id: true
+  langcode: true
+  search_api_excerpt: true

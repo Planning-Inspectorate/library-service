@@ -1,6 +1,6 @@
 services:
   pins_kl_import.feed_subscriber:
-    class: Drupal\pins_kl_import\EventSubscriber\PinsKlImportSubscriberB
+    class: Drupal\pins_kl_import\EventSubscriber\PinsKlImportSubscriber
     tags:
     - { name: event_subscriber }
   plugin.manager.viewsaccess:
