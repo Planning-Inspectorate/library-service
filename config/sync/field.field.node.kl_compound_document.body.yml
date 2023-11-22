@@ -1,0 +1,24 @@
+uuid: 79973208-1ecc-4d14-b19c-1bd7a475e63b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.kl_compound_document
+  module:
+    - text
+id: node.kl_compound_document.body
+field_name: body
+entity_type: node
+bundle: kl_compound_document
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

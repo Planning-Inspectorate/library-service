@@ -1,8 +1,0 @@
-uuid: d2ac39b9-cc45-49b9-b6fc-c8bdeacac1c0
-langcode: en
-status: true
-dependencies: {  }
-name: 'Test Series Import'
-vid: test_series_import
-description: ''
-weight: 0

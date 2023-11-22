@@ -1,0 +1,31 @@
+uuid: e6eb9c66-09ad-4330-8995-aba92069ba6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.kl_import_folders
+    - field.storage.taxonomy_term.feeds_item
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - feeds
+id: taxonomy_term.kl_folders.feeds_item
+field_name: feeds_item
+entity_type: taxonomy_term
+bundle: kl_folders
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings:
+    target_bundles:
+      kl_import_folders: kl_import_folders
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: feeds_item

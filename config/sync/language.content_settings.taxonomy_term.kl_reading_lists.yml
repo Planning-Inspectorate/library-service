@@ -1,0 +1,11 @@
+uuid: 1e775d1a-7a12-4b64-bd46-13499bef8a45
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.kl_reading_lists
+id: taxonomy_term.kl_reading_lists
+target_entity_type_id: taxonomy_term
+target_bundle: kl_reading_lists
+default_langcode: site_default
+language_alterable: false

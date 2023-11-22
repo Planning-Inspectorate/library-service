@@ -1,6 +1,6 @@
 uuid: 2e0f834c-ace8-4ea3-8db3-6fe587ad2a40
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.body
@@ -21,7 +21,6 @@ dependencies:
     - field.storage.paragraph.field_tags
     - field.storage.node.field_topics
     - field.storage.paragraph.field_topic
-    - search_api.server.pins_elasticsearch_server
   module:
     - node
     - paragraphs
@@ -250,6 +249,7 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  custom_value: {  }
   entity_type: {  }
   file_attachments:
     excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
@@ -278,4 +278,4 @@ options:
   cron_limit: 50
   index_directly: true
   track_changes_in_references: true
-server: pins_elasticsearch_server
+server: null

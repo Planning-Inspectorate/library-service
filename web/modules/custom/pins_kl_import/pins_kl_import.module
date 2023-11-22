@@ -11,3 +11,10 @@
 function pins_kl_import_theme($existing, $type, $theme, $path) {
  return [];
 }
+
+/**
+ * Implements hook_entity_access().
+ */
+function pins_kl_import_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+
+}

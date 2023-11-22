@@ -1,0 +1,24 @@
+uuid: 530af665-5089-4ffa-9335-882d4dafe25e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.kl_document
+  module:
+    - text
+id: node.kl_document.body
+field_name: body
+entity_type: node
+bundle: kl_document
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

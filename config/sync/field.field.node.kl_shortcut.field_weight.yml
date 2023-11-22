@@ -1,0 +1,24 @@
+uuid: beb1454e-d20e-487f-9c35-be9a7159d0a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.kl_shortcut
+  module:
+    - weight
+id: node.kl_shortcut.field_weight
+field_name: field_weight
+entity_type: node
+bundle: kl_shortcut
+label: Weight
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings:
+  range: '50'
+field_type: weight

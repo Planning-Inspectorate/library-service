@@ -1,0 +1,52 @@
+uuid: 57b26dd7-9f78-42c5-9ada-224d424892e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.kl_compound_document.body
+    - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_weight
+    - node.type.kl_compound_document
+  module:
+    - text
+    - user
+id: node.kl_compound_document.default
+targetEntityType: node
+bundle: kl_compound_document
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_kl_doc_folder:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_weight:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

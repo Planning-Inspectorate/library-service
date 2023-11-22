@@ -1,0 +1,19 @@
+uuid: 188adc1e-ecb3-4f7f-a964-c1b8842f1de6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_file_path
+    - node.type.kl_document
+id: node.kl_document.field_kl_doc_file_path
+field_name: field_kl_doc_file_path
+entity_type: node
+bundle: kl_document
+label: 'KL Doc File Path'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

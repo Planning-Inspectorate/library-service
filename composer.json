@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "composer/installers": "^2.1",
         "cweagans/composer-patches": "1.7.3",
         "drupal/admin_toolbar": "3.4.2",
@@ -32,7 +32,7 @@
         "drupal/config_filter": "2.6",
         "drupal/config_ignore": "3.1",
         "drupal/config_split": "2.0.0",
-        "drupal/cookies": "1.2.7",
+        "drupal/cookies": "1.2.8",
         "drupal/core": "10.1.6",
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/csv_importer": "1.16",
@@ -91,8 +91,9 @@
         "drupal/views_bulk_operations": "4.2.5",
         "drupal/views_contextual_filters_or": "^1.4",
         "drupal/views_send": "^2.0@RC",
-        "drupal/webform": "6.2.x-dev",
-        "drush/drush": "12.4.2",
+        "drupal/webform": "6.2.0",
+        "drupal/weight": "3.4",
+        "drush/drush": "12.4.3",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2"
     },
@@ -151,8 +152,8 @@
             "drupal/core": "-p2"
         },
         "patches": {
-            "drupal/core": {
-                "Issue #2868384: Can't login due to stale cookies": "https://www.drupal.org/files/issues/2023-02-15/2868384-62.patch"
+            "drupal/xcore": {
+                "Issue #791004: Can't login": "https://www.https://www.drupal.org/files/issues/2023-01-31/791004-47.patch"
             }
         }
     }
