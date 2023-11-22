@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.kl_shortcut.body
     - field.field.node.kl_shortcut.field_kl_doc_folder
     - field.field.node.kl_shortcut.field_kl_document_reference
+    - field.field.node.kl_shortcut.field_weight
     - node.type.kl_shortcut
   module:
     - text
@@ -35,5 +36,6 @@ hidden:
   entity_print_view_word_docx: true
   field_kl_doc_folder: true
   field_kl_document_reference: true
+  field_weight: true
   langcode: true
   search_api_excerpt: true

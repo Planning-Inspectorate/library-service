@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.kl_virtual_folder.body
     - field.field.node.kl_virtual_folder.field_kl_doc_folder
     - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
+    - field.field.node.kl_virtual_folder.field_weight
     - node.type.kl_virtual_folder
   module:
     - path
     - text
+    - weight
 id: node.kl_virtual_folder.default
 targetEntityType: node
 bundle: kl_virtual_folder
@@ -50,6 +52,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_weight:
+    type: weight_selector
+    weight: 26
+    region: content
+    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select

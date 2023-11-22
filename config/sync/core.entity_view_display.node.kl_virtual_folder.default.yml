@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.kl_virtual_folder.body
     - field.field.node.kl_virtual_folder.field_kl_doc_folder
     - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
+    - field.field.node.kl_virtual_folder.field_weight
     - node.type.kl_virtual_folder
   module:
     - text
@@ -35,6 +36,15 @@ content:
     label: above
     settings:
       link: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_weight:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
     weight: 110
     region: content

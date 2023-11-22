@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
     - path
     - text
+    - weight
 id: node.kl_compound_document.default
 targetEntityType: node
 bundle: kl_compound_document
@@ -39,6 +41,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_weight:
+    type: weight_selector
+    weight: 26
+    region: content
+    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select

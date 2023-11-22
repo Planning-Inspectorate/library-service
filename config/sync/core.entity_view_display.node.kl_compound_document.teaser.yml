@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
     - text
@@ -33,5 +34,6 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_kl_doc_folder: true
+  field_weight: true
   langcode: true
   search_api_excerpt: true
