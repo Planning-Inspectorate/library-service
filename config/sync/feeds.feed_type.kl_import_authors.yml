@@ -31,7 +31,7 @@ label: 'KL Import Authors'
 id: kl_import_authors
 description: ''
 help: ''
-import_period: -1
+import_period: 86400
 fetcher: upload
 fetcher_configuration:
   allowed_extensions: csv
