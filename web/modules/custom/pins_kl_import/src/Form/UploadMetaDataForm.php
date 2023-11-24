@@ -75,7 +75,7 @@ class UploadMetaDataForm extends FormBase {
     $vals = $form_state->getValues();
 
     // Items per feeds batch.
-    variable_set('feeds_process_limit', 250);
+//    variable_set('feeds_process_limit', 250);
 
     // The CSV file.
     $fid = $vals['file'][0];
@@ -96,7 +96,7 @@ class UploadMetaDataForm extends FormBase {
     $feed->startBatchImport();
 
     $this->messenger()->addStatus($this->t('Import complete.'));
-    $form_state->setRedirect('<front>');
+    $form_state->setRedirect('pins_kl_import.kl_upload_metadata');
   }
 
 }
