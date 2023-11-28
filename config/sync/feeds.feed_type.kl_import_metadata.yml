@@ -3,9 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.kl_document.field_kl_doc_folder
+    - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_unique_id
+    - field.field.node.kl_document.field_kl_doc_version
     - node.type.kl_document
   module:
     - feeds_log
+    - feeds_tamper
     - node
 third_party_settings:
   feeds_log:
@@ -24,6 +29,32 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
+  feeds_tamper:
+    tampers:
+      cd205b2d-085c-4d5a-a3a6-27c4f403a073:
+        uuid: cd205b2d-085c-4d5a-a3a6-27c4f403a073
+        plugin: import_term_hierarchy
+        source: folders
+        weight: 0
+        label: 'Import Taxonomy Terms Hierarchy'
+        delimiter: '|'
+        vocabulary: kl_folders
+      202a50e9-f00d-40e5-ab90-0f28e44c4e08:
+        pad_length: 5
+        pad_string: ' 0'
+        pad_type: 0
+        uuid: 202a50e9-f00d-40e5-ab90-0f28e44c4e08
+        plugin: str_pad
+        source: versionnum
+        weight: 0
+        label: 'Pad a string'
+      1cd496a6-fb87-47f6-96ea-746324474f07:
+        text: '[dataid]-[versionnum]'
+        uuid: 1cd496a6-fb87-47f6-96ea-746324474f07
+        plugin: rewrite
+        source: computed1
+        weight: 0
+        label: Rewrite
 label: 'KL Import Metadata'
 id: kl_import_metadata
 description: ''
@@ -52,5 +83,69 @@ processor_configuration:
   expire: -1
   owner_feed_author: false
   owner_id: 0
-custom_sources: {  }
-mappings: {  }
+custom_sources:
+  name:
+    value: Name
+    label: Name
+    machine_name: name
+    type: csv
+  folders:
+    value: Folders
+    label: Folders
+    machine_name: folders
+    type: csv
+  dataid:
+    value: DataID
+    label: DataID
+    machine_name: dataid
+    type: csv
+  versionnum:
+    value: VersionNum
+    label: VersionNum
+    machine_name: versionnum
+    type: csv
+  computed1:
+    value: Computed1
+    label: Computed1
+    machine_name: computed1
+    type: blank
+mappings:
+  -
+    target: title
+    map:
+      value: name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_folder
+    map:
+      target_id: folders
+    settings:
+      language: ''
+      reference_by: tid
+      feeds_item: guid
+      autocreate: 0
+      autocreate_bundle: kl_folders
+  -
+    target: field_kl_doc_id
+    map:
+      value: dataid
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_version
+    map:
+      value: versionnum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_unique_id
+    map:
+      value: computed1
+    settings:
+      language: null
+    unique:
+      value: 1
