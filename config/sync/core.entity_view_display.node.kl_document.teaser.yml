@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_doc_file
     - field.field.node.kl_document.field_kl_doc_file_path
     - field.field.node.kl_document.field_kl_doc_filename
@@ -14,6 +15,8 @@ dependencies:
     - field.field.node.kl_document.field_kl_doc_mime_type
     - field.field.node.kl_document.field_kl_doc_unique_id
     - field.field.node.kl_document.field_kl_doc_version
+    - field.field.node.kl_document.field_kl_reading_lists
+    - field.field.node.kl_document.field_kl_series
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
@@ -42,6 +45,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_kl_authors: true
   field_kl_doc_file: true
   field_kl_doc_file_path: true
   field_kl_doc_filename: true
@@ -50,6 +54,8 @@ hidden:
   field_kl_doc_mime_type: true
   field_kl_doc_unique_id: true
   field_kl_doc_version: true
+  field_kl_reading_lists: true
+  field_kl_series: true
   field_weight: true
   langcode: true
   search_api_excerpt: true

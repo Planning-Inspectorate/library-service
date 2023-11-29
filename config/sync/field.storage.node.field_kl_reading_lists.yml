@@ -1,0 +1,20 @@
+uuid: ee01e83a-59e5-4d58-8fcb-da0c3b06e9c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_kl_reading_lists
+field_name: field_kl_reading_lists
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

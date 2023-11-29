@@ -45,7 +45,7 @@
         "drupal/easy_breadcrumb": "2.0.5",
         "drupal/elasticsearch_connector": "7.0-alpha4",
         "drupal/entity_print": "2.13",
-        "drupal/events_log_track": "3.1.8",
+        "drupal/events_log_track": "3.1.9",
         "drupal/extlink": "1.7",
         "drupal/facets": "3.0.0-beta1",
         "drupal/feeds": "3.0-beta4",
