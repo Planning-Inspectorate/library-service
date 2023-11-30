@@ -80,7 +80,7 @@ third_party_settings:
         uuid: 2c94c039-d819-4a99-9566-c4d5661743bf
         plugin: default_value
         source: versionnum
-        weight: 0
+        weight: -9
         label: 'Set value or default value'
       a589b81e-aa72-4b08-a2b6-5cf12bc3e248:
         character: ''
@@ -88,7 +88,7 @@ third_party_settings:
         uuid: a589b81e-aa72-4b08-a2b6-5cf12bc3e248
         plugin: trim
         source: versionnum
-        weight: 1
+        weight: -10
         label: 'Characters to trim'
       edd8c5de-e350-419b-8703-3c5b6191b79b:
         character: ''

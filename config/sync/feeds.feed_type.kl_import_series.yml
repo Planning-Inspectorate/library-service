@@ -9,6 +9,7 @@ dependencies:
     - taxonomy.vocabulary.kl_series
   module:
     - feeds_log
+    - feeds_tamper
     - taxonomy
 third_party_settings:
   feeds_log:
@@ -27,6 +28,40 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
+  feeds_tamper:
+    tampers:
+      010a4c8e-a985-4704-b53c-f9ef0cfa937a:
+        character: ''
+        side: trim
+        uuid: 010a4c8e-a985-4704-b53c-f9ef0cfa937a
+        plugin: trim
+        source: name
+        weight: 0
+        label: 'Characters to trim'
+      90cb474d-3717-461c-a81e-d9d633c6dff4:
+        character: ''
+        side: trim
+        uuid: 90cb474d-3717-461c-a81e-d9d633c6dff4
+        plugin: trim
+        source: filter
+        weight: 0
+        label: 'Characters to trim'
+      297b9e47-553e-4089-a244-d218e1c4e4cd:
+        character: ''
+        side: trim
+        uuid: 297b9e47-553e-4089-a244-d218e1c4e4cd
+        plugin: trim
+        source: displayorder
+        weight: 0
+        label: 'Characters to trim'
+      f13a1ffc-d5ba-48c1-825d-d126701e0086:
+        default_value: '0'
+        only_if_empty: true
+        uuid: f13a1ffc-d5ba-48c1-825d-d126701e0086
+        plugin: default_value
+        source: displayorder
+        weight: 1
+        label: 'Set value or default value'
 label: 'KL Import Series'
 id: kl_import_series
 description: ''

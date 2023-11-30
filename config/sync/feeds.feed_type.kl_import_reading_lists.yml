@@ -9,6 +9,7 @@ dependencies:
     - taxonomy.vocabulary.kl_reading_lists
   module:
     - feeds_log
+    - feeds_tamper
     - taxonomy
 third_party_settings:
   feeds_log:
@@ -27,6 +28,40 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
+  feeds_tamper:
+    tampers:
+      853dec29-8322-4816-8b6a-76b6a6822d45:
+        character: ''
+        side: trim
+        uuid: 853dec29-8322-4816-8b6a-76b6a6822d45
+        plugin: trim
+        source: name
+        weight: 0
+        label: 'Characters to trim'
+      e3c57414-6c4f-40b8-ba3b-da4f17e3daf2:
+        character: ''
+        side: trim
+        uuid: e3c57414-6c4f-40b8-ba3b-da4f17e3daf2
+        plugin: trim
+        source: filter
+        weight: 0
+        label: 'Characters to trim'
+      216eb412-f201-4698-92ba-7537eb1c8576:
+        character: ''
+        side: trim
+        uuid: 216eb412-f201-4698-92ba-7537eb1c8576
+        plugin: trim
+        source: displayorder
+        weight: 0
+        label: 'Characters to trim'
+      4dc8bfd4-e555-4da6-9952-61357dd33683:
+        default_value: '0'
+        only_if_empty: true
+        uuid: 4dc8bfd4-e555-4da6-9952-61357dd33683
+        plugin: default_value
+        source: displayorder
+        weight: 1
+        label: 'Set value or default value'
 label: 'KL Import Reading Lists'
 id: kl_import_reading_lists
 description: ''
