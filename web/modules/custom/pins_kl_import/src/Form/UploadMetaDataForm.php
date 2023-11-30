@@ -30,6 +30,12 @@ class UploadMetaDataForm extends FormBase {
       '#markup' => t('Process the metadata file extracted from Horizon.'),
     ];
 
+    $form['del_all_terms'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Delete all terms first?'),
+      '#description' => t('WARNING! This deletes all terms from kl_folders, kl_authors, kl_series, kl_classification and kl_reading_lists.'),
+    );
+
     $form['feed_type_id'] = [
       '#type' => 'select',
       '#title' => t('Import process to perform'),
@@ -77,6 +83,21 @@ class UploadMetaDataForm extends FormBase {
     // Items per feeds batch.
 //    variable_set('feeds_process_limit', 250);
 
+
+    $del_all_terms = FALSE;
+    if (array_key_exists('del_all_terms', $vals)) {
+      $del_all_terms = ($vals['del_all_terms'] == 1) ? TRUE : FALSE;
+    }
+
+    // Delete all existing file entities owned by this module.
+    if ($del_all_terms) {
+      //$this->delete_terms_from_vocab('kl_authors');
+      //$this->delete_terms_from_vocab('kl_series');
+      $this->delete_terms_from_vocab('kl_folders');
+      $this->delete_terms_from_vocab('kl_classification');
+      //$this->delete_terms_from_vocab('kl_reading_lists');
+    }
+
     // The CSV file.
     $fid = $vals['file'][0];
 
@@ -97,6 +118,28 @@ class UploadMetaDataForm extends FormBase {
 
     $this->messenger()->addStatus($this->t('Import complete.'));
     $form_state->setRedirect('pins_kl_import.kl_upload_metadata');
+  }
+
+  /**
+   * Delete all taxonomy terms from a vocabulary
+   * @param $vid
+   */
+  public function delete_terms_from_vocab($vid) {
+
+    $tids = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', $vid)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (empty($tids)) {
+      return;
+    }
+
+    $term_storage = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term');
+    $entities = $term_storage->loadMultiple($tids);
+
+    $term_storage->delete($entities);
   }
 
 }

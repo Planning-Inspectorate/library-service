@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_document.field_kl_authors
+    - field.field.node.kl_document.field_kl_classification
     - field.field.node.kl_document.field_kl_doc_folder
     - field.field.node.kl_document.field_kl_doc_id
     - field.field.node.kl_document.field_kl_doc_unique_id
@@ -105,6 +106,22 @@ third_party_settings:
         source: dataid
         weight: 0
         label: 'Characters to trim'
+      de375624-170e-47ce-9729-9b9ab5a1a413:
+        separator: ^
+        limit: null
+        uuid: de375624-170e-47ce-9729-9b9ab5a1a413
+        plugin: explode
+        source: classifications
+        weight: 0
+        label: Explode
+      e7ff2233-2e44-4513-8d87-52b926b35163:
+        uuid: e7ff2233-2e44-4513-8d87-52b926b35163
+        plugin: import_term_hierarchy
+        source: classifications
+        weight: 1
+        label: 'Import Taxonomy Terms Hierarchy'
+        delimiter: '|'
+        vocabulary: kl_classification
 label: 'KL Import Metadata'
 id: kl_import_metadata
 description: ''
@@ -173,6 +190,11 @@ custom_sources:
     value: Series
     label: Series
     machine_name: series
+    type: csv
+  classifications:
+    value: Classifications
+    label: Classifications
+    machine_name: classifications
     type: csv
 mappings:
   -
@@ -244,3 +266,13 @@ mappings:
       feeds_item: guid
       autocreate: 1
       autocreate_bundle: kl_series
+  -
+    target: field_kl_classification
+    map:
+      target_id: classifications
+    settings:
+      language: ''
+      reference_by: tid
+      feeds_item: guid
+      autocreate: 0
+      autocreate_bundle: kl_classification

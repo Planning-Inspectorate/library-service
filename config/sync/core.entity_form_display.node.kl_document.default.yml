@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
     - field.field.node.kl_document.field_kl_authors
+    - field.field.node.kl_document.field_kl_classification
     - field.field.node.kl_document.field_kl_doc_file
     - field.field.node.kl_document.field_kl_doc_file_path
     - field.field.node.kl_document.field_kl_doc_filename
@@ -28,11 +29,12 @@ third_party_settings:
   field_group:
     group_tabs:
       children:
+        - group_categories
         - group_legacy_migration_data
       label: Tabs
       region: content
       parent_name: ''
-      weight: 9
+      weight: 10
       format_type: tabs
       format_settings:
         classes: ''
@@ -49,11 +51,29 @@ third_party_settings:
         - field_kl_doc_file_path
         - field_kl_doc_mime_type
         - field_kl_doc_version
-        - field_kl_doc_folder
       label: 'Legacy Migration Data'
       region: content
       parent_name: group_tabs
-      weight: 20
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_categories:
+      children:
+        - field_kl_doc_folder
+        - field_kl_classification
+        - field_kl_authors
+        - field_kl_reading_lists
+        - field_kl_series
+      label: Categories
+      region: hidden
+      parent_name: group_tabs
+      weight: 12
       format_type: tab
       format_settings:
         classes: ''
@@ -85,7 +105,17 @@ content:
     third_party_settings: {  }
   field_kl_authors:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_classification:
+    type: entity_reference_autocomplete
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -102,7 +132,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -110,7 +140,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -118,7 +148,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_folder:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
@@ -136,7 +166,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 15
+    weight: 16
     region: content
     settings:
       size: 60
@@ -144,7 +174,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -152,7 +182,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 16
+    weight: 17
     region: content
     settings:
       size: 60
@@ -160,7 +190,7 @@ content:
     third_party_settings: {  }
   field_kl_reading_lists:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -170,7 +200,7 @@ content:
     third_party_settings: {  }
   field_kl_series:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 23
     region: content
     settings:
       match_operator: CONTAINS
@@ -180,7 +210,7 @@ content:
     third_party_settings: {  }
   field_weight:
     type: weight_selector
-    weight: 26
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

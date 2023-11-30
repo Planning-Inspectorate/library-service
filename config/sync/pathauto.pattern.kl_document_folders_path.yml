@@ -1,0 +1,22 @@
+uuid: 1ac0403a-febd-4a40-b057-10a1a3395c25
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: kl_document_folders_path
+label: 'KL Document - folders path'
+type: 'canonical_entities:node'
+pattern: '/library/[node:field_kl_doc_folder:0:entity:parents:join-path]/[node:field_kl_doc_folder:0:entity]/[node:title]'
+selection_criteria:
+  2088309d-0f9b-4be0-8ed3-00626cf5680a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 2088309d-0f9b-4be0-8ed3-00626cf5680a
+    context_mapping:
+      node: node
+    bundles:
+      kl_document: kl_document
+selection_logic: and
+weight: -5
+relationships: {  }
