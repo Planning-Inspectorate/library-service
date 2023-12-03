@@ -1,0 +1,60 @@
+uuid: 8037a02f-e24b-4ae7-8f8d-c43c11d36890
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.kl_classification_shortcut.body
+    - field.field.node.kl_classification_shortcut.field_kl_classification
+    - field.field.node.kl_classification_shortcut.field_kl_classification_shortcut
+    - field.field.node.kl_classification_shortcut.field_weight
+    - node.type.kl_classification_shortcut
+  module:
+    - text
+    - user
+id: node.kl_classification_shortcut.default
+targetEntityType: node
+bundle: kl_classification_shortcut
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_kl_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_kl_classification_shortcut:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_weight:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
