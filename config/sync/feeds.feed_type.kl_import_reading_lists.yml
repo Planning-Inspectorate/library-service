@@ -8,26 +8,9 @@ dependencies:
     - field.field.taxonomy_term.kl_reading_lists.field_kl_term_unique_id
     - taxonomy.vocabulary.kl_reading_lists
   module:
-    - feeds_log
     - feeds_tamper
     - taxonomy
 third_party_settings:
-  feeds_log:
-    status: true
-    operations:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-    source: true
   feeds_tamper:
     tampers:
       853dec29-8322-4816-8b6a-76b6a6822d45:

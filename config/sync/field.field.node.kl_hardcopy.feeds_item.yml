@@ -1,0 +1,23 @@
+uuid: 4127181b-1a98-41e3-a044-f2a35b7e8804
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.feeds_item
+    - node.type.kl_hardcopy
+  module:
+    - feeds
+id: node.kl_hardcopy.feeds_item
+field_name: feeds_item
+entity_type: node
+bundle: kl_hardcopy
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item

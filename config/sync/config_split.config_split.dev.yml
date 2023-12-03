@@ -12,6 +12,7 @@ storage: folder
 folder: ../config/dev
 module:
   admin_toolbar_tools: 0
+  config_entity_cloner: 0
   devel: 0
   devel_generate: 0
   devel_kint_extras: 0

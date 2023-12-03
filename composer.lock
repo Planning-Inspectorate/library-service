@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c006b4b041bdc1f52068bdfd322f9f6f",
+    "content-hash": "25e119460138a256da3f253b8ddfea62",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2341,6 +2341,60 @@
                 "source": "https://www.drupal.org/project/coder"
             },
             "time": "2023-10-15T09:55:50+00:00"
+        },
+        {
+            "name": "drupal/config_entity_cloner",
+            "version": "1.1.0-rc1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/config_entity_cloner.git",
+                "reference": "1.1.0-rc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/config_entity_cloner-1.1.0-rc1.zip",
+                "reference": "1.1.0-rc1",
+                "shasum": "dbaa2fc22387aa309ddaa370085bb42796e6a5b0"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10",
+                "php": ">=7.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.1.0-rc1",
+                    "datestamp": "1687877690",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^10"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "tsecher",
+                    "homepage": "https://www.drupal.org/user/3543500"
+                }
+            ],
+            "description": "Config Entity Cloner",
+            "homepage": "https://www.drupal.org/project/config_entity_cloner",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/test",
+                "issues": "https://www.drupal.org/project/issues/config_entity_cloner"
+            }
         },
         {
             "name": "drupal/config_filter",
@@ -14290,6 +14344,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/config_entity_cloner": 5,
         "drupal/recently_read": 20,
         "drupal/schema_metatag": 20,
         "drupal/views_send": 5

@@ -7,6 +7,8 @@ namespace Drupal\pins_kl_import\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\feeds\Entity\Feed;
+use Drupal\Component\Utility\Bytes;
+use Drupal\Component\Utility\Environment;
 
 /**
  * Provides an Upload Vocabs form.
@@ -25,15 +27,16 @@ class UploadMetaDataForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-    $form['help'] = [
+  $max_filesize = Bytes::toNumber(Environment::getUploadMaxSize());
+  $form['help'] = [
       '#type' => 'item',
-      '#markup' => t('Process the metadata file extracted from Horizon.'),
+      '#markup' => t('Process the metadata file extracted from Horizon. Max file size = ') . $max_filesize,
     ];
 
     $form['del_all_terms'] = array(
       '#type' => 'checkbox',
       '#title' => t('Delete all terms first?'),
-      '#description' => t('WARNING! This deletes all terms from kl_folders, kl_authors, kl_series, kl_classification and kl_reading_lists.'),
+      '#description' => t('WARNING! This deletes all terms from kl_folders and kl_classification.'),
     );
 
     $form['feed_type_id'] = [
@@ -41,6 +44,8 @@ class UploadMetaDataForm extends FormBase {
       '#title' => t('Import process to perform'),
       '#options' => [
         'kl_import_metadata' => t('Import KL Metadata'),
+        'kl_import_metadata_b' => t('Import KL Metadata B'),
+        'kl_import_hardcopy' => t('Import KL Hardcopy'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -53,7 +58,7 @@ class UploadMetaDataForm extends FormBase {
       '#upload_validators' => [
         'file_validate_extensions' => ['csv'],
         // Pass the maximum file size in bytes.
-        'file_validate_size' => [1 * 1024 * 1024],
+        'file_validate_size' => [20 * 1024 * 1024],
       ],
     ];
 
@@ -82,7 +87,6 @@ class UploadMetaDataForm extends FormBase {
 
     // Items per feeds batch.
 //    variable_set('feeds_process_limit', 250);
-
 
     $del_all_terms = FALSE;
     if (array_key_exists('del_all_terms', $vals)) {

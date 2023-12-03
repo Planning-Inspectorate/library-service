@@ -23,7 +23,6 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
-  csv_importer: 0
   datetime: 0
   dblog: 0
   ds: 0
@@ -33,14 +32,6 @@ module:
   entity_print: 0
   entity_print_views: 0
   entity_reference_revisions: 0
-  event_log_track: 0
-  event_log_track_file: 0
-  event_log_track_node: 0
-  event_log_track_syslog: 0
-  event_log_track_taxonomy: 0
-  event_log_track_ui: 0
-  event_log_track_user: 0
-  facets: 0
   feeds: 0
   feeds_log: 0
   feeds_tamper: 0
@@ -50,8 +41,6 @@ module:
   file: 0
   filter: 0
   flag: 0
-  flag_bookmark: 0
-  help: 0
   history: 0
   image: 0
   jquery_ui: 0
@@ -77,20 +66,14 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
-  phpass: 0
   pins: 0
   pins_kl_import: 0
   pins_tamper_term_hierarchy: 0
   quick_node_clone: 0
   recently_read: 0
   scan_code: 0
-  search_api: 0
-  search_api_attachments: 0
-  search_api_db: 0
   shortcut: 0
-  statistics: 0
   stringoverrides: 0
-  syslog: 0
   system: 0
   tamper: 0
   taxonomy: 0
@@ -102,7 +85,6 @@ module:
   twig_tweak: 0
   update: 0
   user: 0
-  vbo_export: 0
   views_bulk_edit: 0
   views_bulk_operations: 0
   views_contextual_filters_or: 0

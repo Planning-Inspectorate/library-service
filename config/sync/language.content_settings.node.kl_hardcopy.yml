@@ -1,0 +1,11 @@
+uuid: 19ef9403-840b-4164-82b7-72f3728de9d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.kl_hardcopy
+id: node.kl_hardcopy
+target_entity_type_id: node
+target_bundle: kl_hardcopy
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,23 @@
+uuid: 956ccb32-1dc6-4bd0-a4ad-bd76d2fca01f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_kl_folder_type
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - options
+id: taxonomy_term.kl_folders.field_kl_folder_type
+field_name: field_kl_folder_type
+entity_type: taxonomy_term
+bundle: kl_folders
+label: 'KL Folder Type'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

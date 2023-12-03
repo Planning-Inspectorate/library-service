@@ -1,4 +1,0 @@
-timespan_limit: '30'
-batch_size: '50'
-enable_log_deletion: 0
-disable_db_logs: 0

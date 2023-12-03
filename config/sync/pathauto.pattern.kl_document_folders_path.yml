@@ -9,14 +9,16 @@ label: 'KL Document - folders path'
 type: 'canonical_entities:node'
 pattern: '/library/[node:field_kl_doc_folder:0:entity:parents:join-path]/[node:field_kl_doc_folder:0:entity]/[node:title]'
 selection_criteria:
-  2088309d-0f9b-4be0-8ed3-00626cf5680a:
+  bbd3002c-0da3-4113-bc72-3a3778ef1d94:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 2088309d-0f9b-4be0-8ed3-00626cf5680a
+    uuid: bbd3002c-0da3-4113-bc72-3a3778ef1d94
     context_mapping:
       node: node
     bundles:
       kl_document: kl_document
+      kl_hardcopy: kl_hardcopy
+      kl_shortcut: kl_shortcut
 selection_logic: and
 weight: -5
 relationships: {  }

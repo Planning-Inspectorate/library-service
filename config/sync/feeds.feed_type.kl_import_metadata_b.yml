@@ -1,4 +1,4 @@
-uuid: 7b6e2da2-2b69-4c5f-af05-bb7c27d2740b
+uuid: 5bb78b73-9d67-4d14-8840-6558912b4c35
 langcode: en
 status: true
 dependencies:
@@ -187,8 +187,8 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
-label: 'KL Import Metadata'
-id: kl_import_metadata
+label: 'KL Import Metadata B'
+id: kl_import_metadata_b
 description: ''
 help: ''
 import_period: -1
