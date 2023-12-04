@@ -5,25 +5,7 @@ dependencies:
   config:
     - taxonomy.vocabulary.kl_folders
   module:
-    - feeds_log
     - taxonomy
-third_party_settings:
-  feeds_log:
-    status: true
-    operations:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-    source: true
 label: 'KL Import Folders'
 id: kl_import_folders
 description: ''

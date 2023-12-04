@@ -1,0 +1,29 @@
+uuid: 7668689a-a055-46ad-9369-dc8b01ce4136
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_folder
+    - node.type.kl_hardcopy
+    - taxonomy.vocabulary.kl_folders
+id: node.kl_hardcopy.field_kl_doc_folder
+field_name: field_kl_doc_folder
+entity_type: node
+bundle: kl_hardcopy
+label: 'KL Doc Folder'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_folders: kl_folders
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

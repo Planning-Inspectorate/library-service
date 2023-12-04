@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.kl_folders.feeds_item
+    - field.field.taxonomy_term.kl_folders.field_kl_folder_type
     - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
     - taxonomy.vocabulary.kl_folders
   module:
@@ -53,6 +54,12 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_kl_folder_type:
+    type: options_select
+    weight: 21
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_kl_term_unique_id:
     type: string_textfield
