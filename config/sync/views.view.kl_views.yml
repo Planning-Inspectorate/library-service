@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_kl_classification
     - field.storage.node.field_kl_doc_folder
     - field.storage.node.field_kl_doc_mime_type
+    - node.type.kl_classification_shortcut
     - node.type.kl_compound_document
     - node.type.kl_document
     - node.type.kl_hardcopy
@@ -617,7 +618,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'Published status'
+            label: Published
             description: ''
             use_operator: false
             operator: status_op
@@ -658,6 +659,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
+            kl_classification_shortcut: kl_classification_shortcut
             kl_compound_document: kl_compound_document
             kl_document: kl_document
             kl_hardcopy: kl_hardcopy
@@ -667,7 +669,7 @@ display:
           exposed: true
           expose:
             operator_id: type_op
-            label: 'Content type'
+            label: Type
             description: ''
             use_operator: false
             operator: type_op
@@ -684,7 +686,7 @@ display:
               administrator: '0'
               pads: '0'
               library_admin: '0'
-            reduce: false
+            reduce: true
           is_grouped: false
           group_info:
             label: ''

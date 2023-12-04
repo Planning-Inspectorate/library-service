@@ -13,6 +13,9 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_folder
     - field.field.node.kl_hardcopy.field_kl_doc_id
     - field.field.node.kl_hardcopy.field_kl_doc_mime_type
+    - field.field.node.kl_hardcopy.field_kl_doc_origindataid
+    - field.field.node.kl_hardcopy.field_kl_doc_parent_subtype
+    - field.field.node.kl_hardcopy.field_kl_doc_parentid
     - field.field.node.kl_hardcopy.field_kl_doc_unique_id
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
@@ -167,6 +170,30 @@ content:
   field_kl_doc_mime_type:
     type: string_textfield
     weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_origindataid:
+    type: string_textfield
+    weight: 19
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parent_subtype:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parentid:
+    type: string_textfield
+    weight: 17
     region: content
     settings:
       size: 60

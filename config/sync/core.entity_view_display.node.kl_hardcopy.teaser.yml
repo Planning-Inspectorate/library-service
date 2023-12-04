@@ -14,6 +14,9 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_folder
     - field.field.node.kl_hardcopy.field_kl_doc_id
     - field.field.node.kl_hardcopy.field_kl_doc_mime_type
+    - field.field.node.kl_hardcopy.field_kl_doc_origindataid
+    - field.field.node.kl_hardcopy.field_kl_doc_parent_subtype
+    - field.field.node.kl_hardcopy.field_kl_doc_parentid
     - field.field.node.kl_hardcopy.field_kl_doc_unique_id
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
@@ -54,6 +57,9 @@ hidden:
   field_kl_doc_folder: true
   field_kl_doc_id: true
   field_kl_doc_mime_type: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
   field_kl_doc_unique_id: true
   field_kl_doc_version: true
   field_kl_reading_lists: true
