@@ -1,11 +1,11 @@
-uuid: 3891d8ce-8a7b-41e4-88b2-35e35fc880e2
+uuid: 8915f589-0e73-4d47-8709-41446bb912f5
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_kl_document_reference
-field_name: field_kl_document_reference
+id: node.field_kl_shortcut_target_content
+field_name: field_kl_shortcut_target_content
 entity_type: node
 type: entity_reference
 settings:

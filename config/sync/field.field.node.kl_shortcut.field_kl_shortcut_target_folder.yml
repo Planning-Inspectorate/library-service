@@ -1,0 +1,29 @@
+uuid: 7d022583-3402-43fb-89d4-b75f925c44f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_shortcut_target_folder
+    - node.type.kl_shortcut
+    - taxonomy.vocabulary.kl_folders
+id: node.kl_shortcut.field_kl_shortcut_target_folder
+field_name: field_kl_shortcut_target_folder
+entity_type: node
+bundle: kl_shortcut
+label: 'KL Shortcut Target Folder'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_folders: kl_folders
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

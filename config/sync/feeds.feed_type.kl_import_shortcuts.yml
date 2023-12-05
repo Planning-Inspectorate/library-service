@@ -1,20 +1,21 @@
-uuid: 7b6e2da2-2b69-4c5f-af05-bb7c27d2740b
+uuid: 82e2233a-dc9b-439a-85af-4f56772cffb9
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_document.field_kl_authors
-    - field.field.node.kl_document.field_kl_classification
-    - field.field.node.kl_document.field_kl_doc_folder
-    - field.field.node.kl_document.field_kl_doc_id
-    - field.field.node.kl_document.field_kl_doc_origindataid
-    - field.field.node.kl_document.field_kl_doc_parent_subtype
-    - field.field.node.kl_document.field_kl_doc_parentid
-    - field.field.node.kl_document.field_kl_doc_unique_id
-    - field.field.node.kl_document.field_kl_doc_version
-    - field.field.node.kl_document.field_kl_reading_lists
-    - field.field.node.kl_document.field_kl_series
-    - node.type.kl_document
+    - field.field.node.kl_shortcut.field_kl_authors
+    - field.field.node.kl_shortcut.field_kl_classification
+    - field.field.node.kl_shortcut.field_kl_doc_folder
+    - field.field.node.kl_shortcut.field_kl_doc_id
+    - field.field.node.kl_shortcut.field_kl_doc_origindataid
+    - field.field.node.kl_shortcut.field_kl_doc_parent_subtype
+    - field.field.node.kl_shortcut.field_kl_doc_parentid
+    - field.field.node.kl_shortcut.field_kl_doc_unique_id
+    - field.field.node.kl_shortcut.field_kl_doc_version
+    - field.field.node.kl_shortcut.field_kl_reading_lists
+    - field.field.node.kl_shortcut.field_kl_series
+    - field.field.node.kl_shortcut.field_kl_shortcut_type
+    - node.type.kl_shortcut
   module:
     - feeds_log
     - feeds_tamper
@@ -167,6 +168,13 @@ third_party_settings:
         source: folders
         weight: -8
         label: 'Characters to trim'
+      f5c53fd3-9ef5-4dac-a2fa-ba2ede4c8b90:
+        text: '[parentsubtype]'
+        uuid: f5c53fd3-9ef5-4dac-a2fa-ba2ede4c8b90
+        plugin: rewrite
+        source: computed2
+        weight: 0
+        label: Rewrite
   feeds_log:
     status: true
     operations:
@@ -179,8 +187,8 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
-label: 'KL Import Metadata'
-id: kl_import_metadata
+label: 'KL Import Shortcuts'
+id: kl_import_shortcuts
 description: ''
 help: ''
 import_period: -1
@@ -196,7 +204,7 @@ parser_configuration:
 processor: 'entity:node'
 processor_configuration:
   values:
-    type: kl_document
+    type: kl_shortcut
   langcode: en
   insert_new: 1
   update_existing: 2
@@ -328,6 +336,11 @@ custom_sources:
     label: OriginDataID
     machine_name: origindataid
     type: csv
+  computed2:
+    value: Computed2
+    label: Computed2
+    machine_name: computed2
+    type: blank
 mappings:
   -
     target: title
@@ -476,4 +489,11 @@ mappings:
       value: origindataid
     settings:
       language: ''
+    unique: {  }
+  -
+    target: field_kl_shortcut_type
+    map:
+      value: computed2
+    settings:
+      language: null
     unique: {  }

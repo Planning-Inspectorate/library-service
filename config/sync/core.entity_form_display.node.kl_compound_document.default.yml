@@ -4,7 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_compound_document.body
+    - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_kl_authors
+    - field.field.node.kl_compound_document.field_kl_classification
     - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_kl_doc_id
+    - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
+    - field.field.node.kl_compound_document.field_kl_doc_parentid
+    - field.field.node.kl_compound_document.field_kl_doc_unique_id
+    - field.field.node.kl_compound_document.field_kl_doc_version
+    - field.field.node.kl_compound_document.field_kl_reading_lists
+    - field.field.node.kl_compound_document.field_kl_series
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -32,9 +42,89 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_kl_authors:
+    type: entity_reference_autocomplete
+    weight: 25
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_classification:
+    type: entity_reference_autocomplete
+    weight: 24
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_kl_doc_folder:
     type: entity_reference_autocomplete
     weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_id:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parent_subtype:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parentid:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_unique_id:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_version:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_reading_lists:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_series:
+    type: entity_reference_autocomplete
+    weight: 27
     region: content
     settings:
       match_operator: CONTAINS
@@ -100,4 +190,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  feeds_item: true

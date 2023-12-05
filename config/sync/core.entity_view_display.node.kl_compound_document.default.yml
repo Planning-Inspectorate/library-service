@@ -4,7 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_compound_document.body
+    - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_kl_authors
+    - field.field.node.kl_compound_document.field_kl_classification
     - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_kl_doc_id
+    - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
+    - field.field.node.kl_compound_document.field_kl_doc_parentid
+    - field.field.node.kl_compound_document.field_kl_doc_unique_id
+    - field.field.node.kl_compound_document.field_kl_doc_version
+    - field.field.node.kl_compound_document.field_kl_reading_lists
+    - field.field.node.kl_compound_document.field_kl_series
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -22,6 +32,22 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_kl_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_kl_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 114
+    region: content
   field_kl_doc_folder:
     type: entity_reference_label
     label: above
@@ -29,6 +55,62 @@ content:
       link: true
     third_party_settings: {  }
     weight: 109
+    region: content
+  field_kl_doc_id:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_kl_doc_parent_subtype:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_kl_doc_parentid:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_kl_doc_unique_id:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_kl_doc_version:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_kl_reading_lists:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_kl_series:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
     region: content
   field_weight:
     type: number_integer
@@ -48,5 +130,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  feeds_item: true
   langcode: true
   search_api_excerpt: true

@@ -1,0 +1,19 @@
+uuid: a8e2d94c-3cd7-4d2c-a81f-644b6af38f24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_parent_subtype
+    - node.type.kl_virtual_folder
+id: node.kl_virtual_folder.field_kl_doc_parent_subtype
+field_name: field_kl_doc_parent_subtype
+entity_type: node
+bundle: kl_virtual_folder
+label: 'KL Doc Parent SubType'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,20 +1,19 @@
-uuid: 7b6e2da2-2b69-4c5f-af05-bb7c27d2740b
+uuid: bff16489-f357-4219-add1-077585c2ec5d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_document.field_kl_authors
-    - field.field.node.kl_document.field_kl_classification
-    - field.field.node.kl_document.field_kl_doc_folder
-    - field.field.node.kl_document.field_kl_doc_id
-    - field.field.node.kl_document.field_kl_doc_origindataid
-    - field.field.node.kl_document.field_kl_doc_parent_subtype
-    - field.field.node.kl_document.field_kl_doc_parentid
-    - field.field.node.kl_document.field_kl_doc_unique_id
-    - field.field.node.kl_document.field_kl_doc_version
-    - field.field.node.kl_document.field_kl_reading_lists
-    - field.field.node.kl_document.field_kl_series
-    - node.type.kl_document
+    - field.field.node.kl_compound_document.field_kl_authors
+    - field.field.node.kl_compound_document.field_kl_classification
+    - field.field.node.kl_compound_document.field_kl_doc_folder
+    - field.field.node.kl_compound_document.field_kl_doc_id
+    - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
+    - field.field.node.kl_compound_document.field_kl_doc_parentid
+    - field.field.node.kl_compound_document.field_kl_doc_unique_id
+    - field.field.node.kl_compound_document.field_kl_doc_version
+    - field.field.node.kl_compound_document.field_kl_reading_lists
+    - field.field.node.kl_compound_document.field_kl_series
+    - node.type.kl_compound_document
   module:
     - feeds_log
     - feeds_tamper
@@ -179,8 +178,8 @@ third_party_settings:
       skipped: skipped
       failed: failed
     source: true
-label: 'KL Import Metadata'
-id: kl_import_metadata
+label: 'KL Import Compound Documents'
+id: kl_import_compoundfolders
 description: ''
 help: ''
 import_period: -1
@@ -196,7 +195,7 @@ parser_configuration:
 processor: 'entity:node'
 processor_configuration:
   values:
-    type: kl_document
+    type: kl_compound_document
   langcode: en
   insert_new: 1
   update_existing: 2
@@ -469,11 +468,4 @@ mappings:
       value: parentsubtype
     settings:
       language: null
-    unique: {  }
-  -
-    target: field_kl_doc_origindataid
-    map:
-      value: origindataid
-    settings:
-      language: ''
     unique: {  }

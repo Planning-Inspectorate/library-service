@@ -109,14 +109,6 @@ third_party_settings:
         label: 'Import Taxonomy Terms Hierarchy'
         delimiter: '|'
         vocabulary: kl_classification
-      ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9:
-        default_value: x-unclassified
-        only_if_empty: true
-        uuid: ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9
-        plugin: default_value
-        source: classifications
-        weight: -9
-        label: 'Set value or default value'
       2980725d-6805-43bf-ba45-8e8a1905ee39:
         text: '[name][nameb]'
         uuid: 2980725d-6805-43bf-ba45-8e8a1905ee39
