@@ -48,7 +48,7 @@ class UploadMetaDataForm extends FormBase {
         'kl_import_hardcopy' => t('Import KL Hardcopy'),
         'kl_import_shortcuts' => t('Import KL Shortcuts'),
         'kl_import_compoundfolders' => t('Import KL Compound Folders'),
-        'kl_import_compoundfolderdocs' => t('Import KL Compound Folder Docs'),
+        'kl_import_compound_subdocs' => t('Import KL Compound Sub Docs'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),

@@ -15,11 +15,12 @@ dependencies:
     - field.field.node.kl_shortcut.field_kl_reading_lists
     - field.field.node.kl_shortcut.field_kl_series
     - field.field.node.kl_shortcut.field_kl_shortcut_type
+    - field.field.node.kl_shortcut.field_weight
     - node.type.kl_shortcut
   module:
-    - feeds_log
     - feeds_tamper
     - node
+    - weight
 third_party_settings:
   feeds_tamper:
     tampers:
@@ -176,17 +177,8 @@ third_party_settings:
         weight: 0
         label: Rewrite
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Shortcuts'
 id: kl_import_shortcuts
 description: ''
@@ -341,6 +333,11 @@ custom_sources:
     label: Computed2
     machine_name: computed2
     type: blank
+  ordering:
+    value: Ordering
+    label: Ordering
+    machine_name: ordering
+    type: csv
 mappings:
   -
     target: title
@@ -494,6 +491,13 @@ mappings:
     target: field_kl_shortcut_type
     map:
       value: computed2
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_weight
+    map:
+      value: ordering
     settings:
       language: null
     unique: {  }

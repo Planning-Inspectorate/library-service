@@ -45,6 +45,9 @@ third_party_settings:
         source: displayorder
         weight: 2
         label: 'Set value or default value'
+  feeds_log:
+    operations: {  }
+    items: {  }
 label: 'KL Import Authors'
 id: kl_import_authors
 description: ''

@@ -1,0 +1,9 @@
+adding:
+  dependencies:
+    config:
+      - feeds.feed_type.kl_import_authors
+  settings:
+    handler_settings:
+      target_bundles:
+        kl_import_authors: kl_import_authors
+removing: {  }

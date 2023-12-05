@@ -1,0 +1,25 @@
+adding:
+  dependencies:
+    module:
+      - feeds_log
+  third_party_settings:
+    feeds_log:
+      status: true
+      operations:
+        created: created
+        skipped: skipped
+        failed: failed
+        cleaned: cleaned
+      items:
+        created: created
+        skipped: skipped
+        failed: failed
+      source: true
+removing:
+  dependencies:
+    config:
+      - field.field.node.kl_document.field_kl_doc_origindataid
+      - field.field.node.kl_document.field_kl_doc_parent_subtype
+      - field.field.node.kl_document.field_weight
+    module:
+      - weight

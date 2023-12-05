@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_classification
     - field.field.node.kl_compound_document.field_kl_doc_folder
     - field.field.node.kl_compound_document.field_kl_doc_id
+    - field.field.node.kl_compound_document.field_kl_doc_origindataid
     - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
     - field.field.node.kl_compound_document.field_kl_doc_parentid
     - field.field.node.kl_compound_document.field_kl_doc_unique_id
@@ -48,6 +49,7 @@ hidden:
   field_kl_classification: true
   field_kl_doc_folder: true
   field_kl_doc_id: true
+  field_kl_doc_origindataid: true
   field_kl_doc_parent_subtype: true
   field_kl_doc_parentid: true
   field_kl_doc_unique_id: true
