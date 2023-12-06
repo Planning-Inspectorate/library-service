@@ -52,9 +52,9 @@ third_party_settings:
         - field_kl_doc_parent_subtype
         - field_kl_doc_origindataid
       label: 'Legacy Migration Data'
-      region: hidden
+      region: content
       parent_name: group_tabs
-      weight: 23
+      weight: 15
       format_type: tab
       format_settings:
         classes: ''
@@ -71,9 +71,9 @@ third_party_settings:
         - field_kl_reading_lists
         - field_kl_series
       label: Categories
-      region: hidden
+      region: content
       parent_name: group_tabs
-      weight: 22
+      weight: 14
       format_type: tab
       format_settings:
         classes: ''
@@ -135,7 +135,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
-    weight: 10
+    weight: 15
     region: content
     settings:
       size: 60
@@ -143,7 +143,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 15
+    weight: 22
     region: content
     settings:
       size: 60
@@ -151,7 +151,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 14
+    weight: 21
     region: content
     settings:
       size: 60
@@ -159,7 +159,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 13
+    weight: 20
     region: content
     settings:
       size: 60
@@ -167,7 +167,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 11
+    weight: 17
     region: content
     settings:
       size: 60
@@ -175,7 +175,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 12
+    weight: 19
     region: content
     settings:
       size: 60

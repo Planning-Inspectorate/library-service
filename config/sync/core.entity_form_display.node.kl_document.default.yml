@@ -38,7 +38,7 @@ third_party_settings:
       label: Tabs
       region: content
       parent_name: ''
-      weight: 10
+      weight: 11
       format_type: tabs
       format_settings:
         classes: ''
@@ -61,7 +61,7 @@ third_party_settings:
       label: 'Legacy Migration Data'
       region: content
       parent_name: group_tabs
-      weight: 16
+      weight: 14
       format_type: tab
       format_settings:
         classes: ''
@@ -80,7 +80,7 @@ third_party_settings:
       label: Categories
       region: content
       parent_name: group_tabs
-      weight: 15
+      weight: 13
       format_type: tab
       format_settings:
         classes: ''
@@ -132,7 +132,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_compound_folder:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -149,7 +149,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -157,7 +157,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -183,7 +183,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 15
+    weight: 16
     region: content
     settings:
       size: 60
@@ -191,7 +191,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 19
+    weight: 20
     region: content
     settings:
       size: 60
@@ -199,7 +199,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 18
+    weight: 19
     region: content
     settings:
       size: 60
@@ -207,7 +207,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 17
+    weight: 18
     region: content
     settings:
       size: 60
@@ -215,7 +215,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -223,7 +223,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 16
+    weight: 17
     region: content
     settings:
       size: 60
@@ -251,7 +251,7 @@ content:
     third_party_settings: {  }
   field_weight:
     type: weight_selector
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }

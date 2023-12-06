@@ -39,6 +39,12 @@ class UploadMetaDataForm extends FormBase {
       '#description' => t('WARNING! This deletes all terms from kl_folders and kl_classification.'),
     );
 
+    $form['attach_files'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Attach files?'),
+      '#description' => t('By default no actual files are attached, only the metadata is imported.'),
+    );
+
     $form['feed_type_id'] = [
       '#type' => 'select',
       '#title' => t('Import process to perform'),

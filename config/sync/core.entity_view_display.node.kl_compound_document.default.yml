@@ -19,8 +19,63 @@ dependencies:
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
+    - field_group
     - text
     - user
+    - weight
+third_party_settings:
+  field_group:
+    group_accordion:
+      children:
+        - group_categories
+        - group_legacy_migration_data
+      label: Accordion
+      parent_name: ''
+      region: content
+      weight: 14
+      format_type: accordion
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        effect: none
+    group_legacy_migration_data:
+      children:
+        - field_kl_doc_id
+        - field_kl_doc_unique_id
+        - field_kl_doc_version
+        - field_kl_doc_parentid
+        - field_kl_doc_parent_subtype
+        - field_kl_doc_origindataid
+      label: 'Legacy Migration Data'
+      parent_name: group_accordion
+      region: content
+      weight: 22
+      format_type: accordion_item
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        formatter: closed
+        description: ''
+    group_categories:
+      children:
+        - field_kl_doc_folder
+        - field_kl_classification
+        - field_kl_reading_lists
+        - field_kl_authors
+        - field_kl_series
+      label: Categories
+      parent_name: group_accordion
+      region: hidden
+      weight: 21
+      format_type: accordion_item
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        formatter: closed
+        description: ''
 id: node.kl_compound_document.default
 targetEntityType: node
 bundle: kl_compound_document
@@ -31,7 +86,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_kl_authors:
     type: entity_reference_label
@@ -39,7 +94,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 111
+    weight: 8
     region: content
   field_kl_classification:
     type: entity_reference_label
@@ -47,7 +102,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 114
+    weight: 6
     region: content
   field_kl_doc_folder:
     type: entity_reference_label
@@ -55,7 +110,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 109
+    weight: 5
     region: content
   field_kl_doc_id:
     type: string
@@ -63,7 +118,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 103
+    weight: 2
     region: content
   field_kl_doc_origindataid:
     type: string
@@ -71,7 +126,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 117
+    weight: 7
     region: content
   field_kl_doc_parent_subtype:
     type: string
@@ -79,7 +134,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 116
+    weight: 6
     region: content
   field_kl_doc_parentid:
     type: string
@@ -87,7 +142,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 115
+    weight: 5
     region: content
   field_kl_doc_unique_id:
     type: string
@@ -95,7 +150,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 104
+    weight: 3
     region: content
   field_kl_doc_version:
     type: string
@@ -103,7 +158,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 108
+    weight: 4
     region: content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -111,7 +166,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 112
+    weight: 7
     region: content
   field_kl_series:
     type: entity_reference_label
@@ -119,21 +174,19 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 113
+    weight: 9
     region: content
   field_weight:
-    type: number_integer
+    type: default_weight
     label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
+    settings: {  }
     third_party_settings: {  }
-    weight: 110
+    weight: 6
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true

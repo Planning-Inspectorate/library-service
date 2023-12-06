@@ -50,6 +50,7 @@ third_party_settings:
         - field_kl_doc_origindataid
         - field_kl_doc_unique_id
         - field_kl_doc_version
+        - field_kl_extended_data
       label: 'Legacy Migration Data'
       region: content
       parent_name: group_tabs
@@ -192,7 +193,7 @@ content:
     third_party_settings: {  }
   field_kl_extended_data:
     type: string_textarea
-    weight: 26
+    weight: 10
     region: content
     settings:
       rows: 5
