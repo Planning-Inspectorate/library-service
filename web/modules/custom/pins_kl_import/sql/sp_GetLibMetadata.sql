@@ -27,6 +27,8 @@ BEGIN
 	  t1.SubType as SubType,
 	  t1.VersionNum as VersionNum,
 	  isnull(t1.Ordering,0) as Ordering,
+	  '"' + substring(REPLACE(CAST(t1.ExtendedData as NVARCHAR(MAX)),'"','""'),1,250) + '"' as ExtendedData,
+	  '"' + substring(REPLACE(CAST(t1.ExtendedData as NVARCHAR(MAX)),'"','""'),251,250) + '"' as ExtendedDataB,
 	  '"' + substring(REPLACE(isnull(STUFF(
 			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
 			  where c.ID = t1.DataID

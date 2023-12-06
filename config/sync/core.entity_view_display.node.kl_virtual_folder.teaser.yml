@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.kl_virtual_folder.field_kl_doc_parentid
     - field.field.node.kl_virtual_folder.field_kl_doc_unique_id
     - field.field.node.kl_virtual_folder.field_kl_doc_version
+    - field.field.node.kl_virtual_folder.field_kl_extended_data
     - field.field.node.kl_virtual_folder.field_kl_reading_lists
     - field.field.node.kl_virtual_folder.field_kl_series
     - field.field.node.kl_virtual_folder.field_weight
@@ -56,6 +57,7 @@ hidden:
   field_kl_doc_parentid: true
   field_kl_doc_unique_id: true
   field_kl_doc_version: true
+  field_kl_extended_data: true
   field_kl_reading_lists: true
   field_kl_series: true
   field_weight: true

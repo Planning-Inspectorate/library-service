@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.kl_virtual_folder.field_kl_doc_parentid
     - field.field.node.kl_virtual_folder.field_kl_doc_unique_id
     - field.field.node.kl_virtual_folder.field_kl_doc_version
+    - field.field.node.kl_virtual_folder.field_kl_extended_data
     - field.field.node.kl_virtual_folder.field_kl_reading_lists
     - field.field.node.kl_virtual_folder.field_kl_series
     - field.field.node.kl_virtual_folder.field_weight
@@ -168,6 +169,13 @@ third_party_settings:
         source: folders
         weight: -8
         label: 'Characters to trim'
+      a86cbc5f-fdce-4fb4-bea3-950b36f08293:
+        text: '[extendeddata][extendeddatab]'
+        uuid: a86cbc5f-fdce-4fb4-bea3-950b36f08293
+        plugin: rewrite
+        source: extendeddata
+        weight: 0
+        label: Rewrite
   feeds_log:
     operations: {  }
     items: {  }
@@ -325,6 +333,16 @@ custom_sources:
     label: Ordering
     machine_name: ordering
     type: csv
+  extendeddata:
+    value: ExtendedData
+    label: ExtendedData
+    machine_name: extendeddata
+    type: csv
+  extendeddatab:
+    value: ExtendedDataB
+    label: ExtendedDataB
+    machine_name: extendeddatab
+    type: csv
 mappings:
   -
     target: title
@@ -481,3 +499,13 @@ mappings:
     settings:
       language: null
     unique: {  }
+  -
+    target: field_kl_extended_data
+    map:
+      value: extendeddata
+    settings:
+      language: null
+  -
+    target: temporary_target
+    map:
+      temporary: extendeddatab
