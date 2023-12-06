@@ -26,7 +26,7 @@ class UploadVocabsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['intro_text'] = [
-      '#markup' => '<p>Creates/updates the taxonomy vocabularies from downloaded CSV files from the Horizon Data Maintenance facility..</p>',
+      '#markup' => '<p>Creates/updates the taxonomy vocabularies from downloaded CSV files from the Horizon Data Maintenance facility.</p>',
     ];
 
     $form['feed_type_id'] = [
@@ -34,7 +34,6 @@ class UploadVocabsForm extends FormBase {
       '#title' => t('Import process to perform'),
       '#options' => [
         'kl_import_authors' => t('Import KL Authors'),
-        'kl_import_folders' => t('Import KL Folders'),
         'kl_import_reading_lists' => t('Import KL Reading Lists'),
         'kl_import_series' => t('Import KL Series'),
       ],
@@ -49,7 +48,7 @@ class UploadVocabsForm extends FormBase {
       '#upload_validators' => [
         'file_validate_extensions' => ['csv'],
         // Pass the maximum file size in bytes.
-        'file_validate_size' => [1 * 1024 * 1024],
+        'file_validate_size' => [20 * 1024 * 1024],
       ],
     ];
 

@@ -1,13 +1,12 @@
 USE [otcs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 30/11/2023 13:34:02 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 06/12/2023 07:45:19 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[sp_GetLibMetadata] (@numrecs integer = 10000, @subtype integer = 144, @parentsubtype integer = 0)
 AS
@@ -27,6 +26,7 @@ BEGIN
 	  '"' + substring(REPLACE(t1.Name,'"','""'),501,250) + '"' as NameC,
 	  t1.SubType as SubType,
 	  t1.VersionNum as VersionNum,
+	  isnull(t1.Ordering,0) as Ordering,
 	  '"' + substring(REPLACE(isnull(STUFF(
 			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
 			  where c.ID = t1.DataID
@@ -84,7 +84,7 @@ BEGIN
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
 	where
 	  t1.SubType = @subtype
-	  and ll.ValStr ='Knowledge Document'
+	  and ll.ValStr = 'Knowledge Document'
 	  and t1.SubType != 0
 	  and t1.DataID not in(18123764, 2000)
 	  and t2.SubType = @parentsubtype
@@ -92,4 +92,3 @@ BEGIN
 	;
 END
 GO
-

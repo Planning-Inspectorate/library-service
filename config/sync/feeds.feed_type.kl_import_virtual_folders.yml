@@ -1,21 +1,21 @@
-uuid: 0847b08f-6c2f-41cc-93a0-140970666fe6
+uuid: 07aaf7ac-049d-412e-837c-33d8b95cb06e
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_document.field_kl_authors
-    - field.field.node.kl_document.field_kl_classification
-    - field.field.node.kl_document.field_kl_doc_compound_folder
-    - field.field.node.kl_document.field_kl_doc_id
-    - field.field.node.kl_document.field_kl_doc_origindataid
-    - field.field.node.kl_document.field_kl_doc_parent_subtype
-    - field.field.node.kl_document.field_kl_doc_parentid
-    - field.field.node.kl_document.field_kl_doc_unique_id
-    - field.field.node.kl_document.field_kl_doc_version
-    - field.field.node.kl_document.field_kl_reading_lists
-    - field.field.node.kl_document.field_kl_series
-    - field.field.node.kl_document.field_weight
-    - node.type.kl_document
+    - field.field.node.kl_virtual_folder.field_kl_authors
+    - field.field.node.kl_virtual_folder.field_kl_classification
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder
+    - field.field.node.kl_virtual_folder.field_kl_doc_id
+    - field.field.node.kl_virtual_folder.field_kl_doc_origindataid
+    - field.field.node.kl_virtual_folder.field_kl_doc_parent_subtype
+    - field.field.node.kl_virtual_folder.field_kl_doc_parentid
+    - field.field.node.kl_virtual_folder.field_kl_doc_unique_id
+    - field.field.node.kl_virtual_folder.field_kl_doc_version
+    - field.field.node.kl_virtual_folder.field_kl_reading_lists
+    - field.field.node.kl_virtual_folder.field_kl_series
+    - field.field.node.kl_virtual_folder.field_weight
+    - node.type.kl_virtual_folder
   module:
     - feeds_tamper
     - node
@@ -23,6 +23,14 @@ dependencies:
 third_party_settings:
   feeds_tamper:
     tampers:
+      cd205b2d-085c-4d5a-a3a6-27c4f403a073:
+        uuid: cd205b2d-085c-4d5a-a3a6-27c4f403a073
+        plugin: import_term_hierarchy
+        source: folders
+        weight: -7
+        label: 'Import Taxonomy Terms Hierarchy'
+        delimiter: '|'
+        vocabulary: kl_folders
       1cd496a6-fb87-47f6-96ea-746324474f07:
         text: '[dataid]-[versionnum]'
         uuid: 1cd496a6-fb87-47f6-96ea-746324474f07
@@ -109,6 +117,13 @@ third_party_settings:
         source: name
         weight: 1
         label: Rewrite
+      3d05fa9f-aa79-492d-ab6a-02d31969ea72:
+        text: '[folders][foldersb][foldersc]'
+        uuid: 3d05fa9f-aa79-492d-ab6a-02d31969ea72
+        plugin: rewrite
+        source: folders
+        weight: -10
+        label: Rewrite
       7cb2c212-4277-40e3-94d9-e2cdab7bca30:
         text: '[readinglists][readinglistsb][readinglistsc]'
         uuid: 7cb2c212-4277-40e3-94d9-e2cdab7bca30
@@ -137,11 +152,27 @@ third_party_settings:
         source: classifications
         weight: -10
         label: Rewrite
+      25c7c223-f797-48f8-99fa-fba8585b8f48:
+        character: ''
+        side: trim
+        uuid: 25c7c223-f797-48f8-99fa-fba8585b8f48
+        plugin: trim
+        source: folders
+        weight: -9
+        label: 'Characters to trim'
+      aba722b6-bd4d-4b09-a2ba-54044d54f729:
+        character: '|'
+        side: rtrim
+        uuid: aba722b6-bd4d-4b09-a2ba-54044d54f729
+        plugin: trim
+        source: folders
+        weight: -8
+        label: 'Characters to trim'
   feeds_log:
     operations: {  }
     items: {  }
-label: 'KL Import Compound SubDocs'
-id: kl_import_compound_subdocs
+label: 'KL Import Virtual Folders'
+id: kl_import_virtual_folders
 description: ''
 help: ''
 import_period: -1
@@ -157,7 +188,7 @@ parser_configuration:
 processor: 'entity:node'
 processor_configuration:
   values:
-    type: kl_document
+    type: kl_virtual_folder
   langcode: en
   insert_new: 1
   update_existing: 2
@@ -294,11 +325,6 @@ custom_sources:
     label: Ordering
     machine_name: ordering
     type: csv
-  computed2:
-    value: Computed2
-    label: Computed2
-    machine_name: computed2
-    type: blank
 mappings:
   -
     target: title
@@ -307,6 +333,16 @@ mappings:
     settings:
       language: null
     unique: {  }
+  -
+    target: field_kl_doc_folder
+    map:
+      target_id: folders
+    settings:
+      language: ''
+      reference_by: tid
+      feeds_item: guid
+      autocreate: 0
+      autocreate_bundle: kl_folders
   -
     target: field_kl_doc_id
     map:
@@ -376,6 +412,10 @@ mappings:
   -
     target: temporary_target
     map:
+      temporary: foldersb
+  -
+    target: temporary_target
+    map:
       temporary: classificationsb
   -
     target: temporary_target
@@ -393,6 +433,10 @@ mappings:
     target: temporary_target
     map:
       temporary: namec
+  -
+    target: temporary_target
+    map:
+      temporary: foldersc
   -
     target: temporary_target
     map:
@@ -437,13 +481,3 @@ mappings:
     settings:
       language: null
     unique: {  }
-  -
-    target: field_kl_doc_compound_folder
-    map:
-      target_id: computed2
-    settings:
-      language: ''
-      reference_by: nid
-      feeds_item: guid
-      autocreate: 0
-      autocreate_bundle: kl_compound_document
