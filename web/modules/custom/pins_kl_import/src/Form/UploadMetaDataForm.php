@@ -102,13 +102,10 @@ class UploadMetaDataForm extends FormBase {
       $del_all_terms = ($vals['del_all_terms'] == 1) ? TRUE : FALSE;
     }
 
-    // Delete all existing file entities owned by this module.
+    // Delete all existing terms in these vocabularies.
     if ($del_all_terms) {
-      //$this->delete_terms_from_vocab('kl_authors');
-      //$this->delete_terms_from_vocab('kl_series');
       $this->delete_terms_from_vocab('kl_folders');
       $this->delete_terms_from_vocab('kl_classification');
-      //$this->delete_terms_from_vocab('kl_reading_lists');
     }
 
     // The CSV file.

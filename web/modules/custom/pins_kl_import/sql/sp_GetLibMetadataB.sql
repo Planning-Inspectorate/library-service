@@ -1,7 +1,7 @@
 USE [otcs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 07/12/2023 15:01:31 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadataB]    Script Date: 07/12/2023 15:02:34 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,8 +10,7 @@ GO
 
 
 
-
-CREATE PROCEDURE [dbo].[sp_GetLibMetadata] (@numrecs integer = 20000, @subtype integer = 144, @parentsubtype integer = 0)
+CREATE PROCEDURE [dbo].[sp_GetLibMetadataB] (@numrecs integer = 20000, @subtype integer = 144, @parentsubtype integer = 0)
 AS
 BEGIN
 
@@ -108,21 +107,12 @@ BEGIN
 	  '"' + substring(REPLACE(isnull(STUFF(
 			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 25
 			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),501,250) + '"' AS AuthorsC,
-	  t3.VerCDate as VerCDate,
-	  t3.VerMDate as VerMDate,
-	  t3.FileCDate as FileCDate,
-	  t3.FileMDate as FileMDate,
-	  '"' + REPLACE(t3.FileType,'"','""') + '"' as Filetype,
-	  '"' + REPLACE(t3.FileName,'"','""') + '"' as Filename,
-	  t3.DataSize as DataSize,
-	  '"' + REPLACE(t3.MimeType,'"','""') + '"' as MimeType
+			  , 1, 1, ''),''),'"','""'),501,250) + '"' AS AuthorsC
 	from
 	  DTree t1
 	  inner join @LibTreeTempTable tt ON t1.DataID = tt.DataID
 	  inner join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 -- and t1.VersionNum = ll.VerNum
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
-	  inner join DVersData t3 on t3.DocID = t1.DataID and t3.Version = lla.VerNum
 	where
 	  t1.SubType = @subtype
 	  --and lla.ValStr = 'Knowledge Document'

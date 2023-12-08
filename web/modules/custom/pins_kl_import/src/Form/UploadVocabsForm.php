@@ -29,6 +29,12 @@ class UploadVocabsForm extends FormBase {
       '#markup' => '<p>Creates/updates the taxonomy vocabularies from downloaded CSV files from the Horizon Data Maintenance facility.</p>',
     ];
 
+    $form['del_all_terms'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Delete all terms first?'),
+      '#description' => t('WARNING! This deletes all terms from the selected vocabulary.'),
+    );
+
     $form['feed_type_id'] = [
       '#type' => 'select',
       '#title' => t('Import process to perform'),
@@ -84,6 +90,24 @@ class UploadVocabsForm extends FormBase {
     // The Feed to run.
     $feed_type_id = $vals['feed_type_id'];
 
+    $del_all_terms = FALSE;
+    if (array_key_exists('del_all_terms', $vals)) {
+      $del_all_terms = ($vals['del_all_terms'] == 1) ? TRUE : FALSE;
+    }
+
+    // Delete all terms from these vocabularies.
+    if ($del_all_terms) {
+      if ($feed_type_id == 'kl_import_authors') {
+        $this->delete_terms_from_vocab('kl_authors');
+      }
+      if ($feed_type_id == 'kl_import_series') {
+        $this->delete_terms_from_vocab('kl_series');
+      }
+      if ($feed_type_id == 'kl_import_reading_lists') {
+        $this->delete_terms_from_vocab('kl_reading_lists');
+      }
+    }
+
     $file_storage = \Drupal::entityTypeManager()->getStorage('file');
     $file = $file_storage->load($fid);
     $uri = $file->getFileUri();
@@ -98,6 +122,28 @@ class UploadVocabsForm extends FormBase {
 
     $this->messenger()->addStatus($this->t('Import complete.'));
     $form_state->setRedirect('pins_kl_import.kl_upload_vocabs');
+  }
+
+  /**
+   * Delete all taxonomy terms from a vocabulary
+   * @param $vid
+   */
+  public function delete_terms_from_vocab($vid) {
+
+    $tids = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', $vid)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (empty($tids)) {
+      return;
+    }
+
+    $term_storage = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term');
+    $entities = $term_storage->loadMultiple($tids);
+
+    $term_storage->delete($entities);
   }
 
 }
