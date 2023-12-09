@@ -50,6 +50,7 @@ class UploadMetaDataForm extends FormBase {
       '#title' => t('Import process to perform'),
       '#options' => [
         'kl_import_metadata' => t('Import KL Metadata'),
+        'kl_import_metadataC' => t('Import KL MetadataC'),
         'kl_import_virtual_folders' => t('Import KL Virtual Folders'),
         'kl_import_hardcopy' => t('Import KL Hardcopy'),
         'kl_import_shortcuts' => t('Import KL Shortcuts'),
