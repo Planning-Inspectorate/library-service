@@ -1,0 +1,23 @@
+uuid: 4c21b8db-cad9-4e66-889b-a8b83e7a9b9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_archived
+    - node.type.kl_document
+id: node.kl_document.field_kl_archived
+field_name: field_kl_archived
+entity_type: node
+bundle: kl_document
+label: 'KL Archived'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

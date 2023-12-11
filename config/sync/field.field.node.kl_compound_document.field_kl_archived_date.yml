@@ -1,0 +1,21 @@
+uuid: aae4980f-604a-498f-bd68-c60efe043d39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_archived_date
+    - node.type.kl_compound_document
+  module:
+    - datetime
+id: node.kl_compound_document.field_kl_archived_date
+field_name: field_kl_archived_date
+entity_type: node
+bundle: kl_compound_document
+label: 'KL Archived Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

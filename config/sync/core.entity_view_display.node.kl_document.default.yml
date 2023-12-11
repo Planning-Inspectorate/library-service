@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
     - field.field.node.kl_document.field_kl_alternative_title
+    - field.field.node.kl_document.field_kl_archived
+    - field.field.node.kl_document.field_kl_archived_date
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
     - field.field.node.kl_document.field_kl_doc_compound_folder
@@ -54,6 +56,25 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 119
+    region: content
+  field_kl_archived:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 126
+    region: content
+  field_kl_archived_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 127
     region: content
   field_kl_authors:
     type: entity_reference_label

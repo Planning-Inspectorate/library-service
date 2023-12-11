@@ -1,12 +1,13 @@
 USE [otcs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 07/12/2023 15:01:31 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 11/12/2023 17:46:53 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -40,93 +41,78 @@ BEGIN
 
 	  --select * from @LibTreeTempTable;
 
+	DECLARE @LibDVersTempTable TABLE
+	(
+	   DocID int,
+	   Version int,
+	   VersionID int,
+	   theRank int
+	)
+	INSERT INTO @LibDVersTempTable(DocID, Version, VersionID, theRank) SELECT * FROM (
+	SELECT DocID,
+		   Version,
+		   VersionID,
+		   RANK() OVER(PARTITION BY DocID, Version ORDER BY VersionID desc) theRank
+	FROM DVersData
+	where DocID in ( select DataID from @LibTreeTempTable where SubType = 144)
+	) as td where theRank = 1
+
+	--select * from @LibDVersTempTable where DocID = 27277708;
 
 	select top (@numrecs)
 	  t1.DataID as DataID,
 	  t1.ParentID as ParentID,
 	  t2.SubType as ParentSubType,
 	  isnull(t1.OriginDataID, 0) as OriginDataID,
-	  '"' + substring(REPLACE(REPLACE([dbo].[GET_LIB_PATH] (t1.ParentId),'Enterprise|',''),'"','""'),1,250) + '"' as Folders,
-	  '"' + substring(REPLACE(REPLACE([dbo].[GET_LIB_PATH] (t1.ParentId),'Enterprise|',''),'"','""'),251,250) + '"' as FoldersB,
-	  '"' + substring(REPLACE(REPLACE([dbo].[GET_LIB_PATH] (t1.ParentId),'Enterprise|',''),'"','""'),501,250) + '"' as FoldersC,
-	  '"' + substring(REPLACE(t1.Name,'"','""'),1,250) + '"' as Name,
-	  '"' + substring(REPLACE(t1.Name,'"','""'),251,250) + '"' as NameB,
-	  '"' + substring(REPLACE(t1.Name,'"','""'),501,250) + '"' as NameC,
+	  REPLACE([dbo].[GET_LIB_PATH] (t1.ParentId),'Enterprise|','') as Folders,
+	  t1.Name as Name,
 	  t1.SubType as SubType,
 	  t1.VersionNum as VersionNum,
-	  lla.VerNum as VerNum,
+	  isnull(lla.VerNum,1) as VerNum,
+	  isnull(lla.ValStr,'') as ValStr,
+	  isnull(llb.VerNum,1) as VerNumB,
+	  isnull(llb.ValStr,'') as ValStrB,
+	  isnull(t3.VersionID,'') as VersionID,
 	  isnull(t1.Ordering,0) as Ordering,
-	  '"' + substring(REPLACE(CAST(t1.ExtendedData as NVARCHAR(MAX)),'"','""'),1,250) + '"' as ExtendedData,
-	  '"' + substring(REPLACE(CAST(t1.ExtendedData as NVARCHAR(MAX)),'"','""'),251,250) + '"' as ExtendedDataB,
-	  '"' + substring(REPLACE(isnull(STUFF(
+	  isnull(t1.ExtendedData,'') as ExtendedData,
+	  isnull(STUFF(
 			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
 			  where c.ID = t1.DataID
+			  FOR XML PATH ('')),1,1,''),'') as Classifications,
+	  isnull(STUFF(
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 26
 			  FOR XML PATH (''))
-			  ,1,1,''),''),'"','""'),1,250) + '"' as Classifications,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
-			  where c.ID = t1.DataID
-			  FOR XML PATH (''))
-			  ,1,1,''),''),'"','""'),251,250) + '"' as ClassificationsB,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
-			  where c.ID = t1.DataID
-			  FOR XML PATH (''))
-			  ,1,1,''),''),'"','""'),501,250) + '"' as ClassificationsC,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 26
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),1,250) + '"' AS ReadingLists,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 26
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),251,250) + '"' AS ReadingListsB,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 26
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),501,250) + '"' AS ReadingListsC,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 2
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),1,250) + '"' AS Series,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 2
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),251,250) + '"' AS SeriesB,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 2
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),501,250) + '"' AS SeriesC,
-	  '"' + substring(REPLACE(isnull(STUFF(
+			  , 1, 1, ''),'') AS ReadingLists,
+	  isnull(STUFF(
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 2
+			  FOR XML PATH ('')), 1, 1, ''),'') AS Series,
+	  isnull(STUFF(
 			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 25
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),1,250) + '"' AS Authors,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 25
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),251,250) + '"' AS AuthorsB,
-	  '"' + substring(REPLACE(isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 25
-			  FOR XML PATH (''))
-			  , 1, 1, ''),''),'"','""'),501,250) + '"' AS AuthorsC,
-	  t3.VerCDate as VerCDate,
-	  t3.VerMDate as VerMDate,
-	  t3.FileCDate as FileCDate,
-	  t3.FileMDate as FileMDate,
-	  '"' + REPLACE(t3.FileType,'"','""') + '"' as Filetype,
-	  '"' + REPLACE(t3.FileName,'"','""') + '"' as Filename,
-	  t3.DataSize as DataSize,
-	  '"' + REPLACE(t3.MimeType,'"','""') + '"' as MimeType
+			  FOR XML PATH ('')), 1, 1, ''),'') AS Authors,
+	  isnull(STUFF(
+			 (SELECT '|' + cast(ValLong as nvarchar(max)) from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 20
+			  FOR XML PATH ('')), 1, 1, ''),'') AS Notes,
+	  isnull(STUFF(
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 6
+			  FOR XML PATH ('')), 1, 1, ''),'') AS AltTitle,
+	  isnull(t3.VerCDate,'') as VerCDate,
+	  isnull(t3.VerMDate,'') as VerMDate,
+	  isnull(t3.FileCDate,'') as FileCDate,
+	  isnull(t3.FileMDate,'') as FileMDate,
+	  isnull(t3.FileType,'') as Filetype,
+	  isnull(t3.FileName,'') as Filename,
+	  isnull(t3.DataSize,'') as DataSize,
+	  isnull(t3.MimeType,'') as MimeType
 	from
 	  DTree t1
 	  inner join @LibTreeTempTable tt ON t1.DataID = tt.DataID
-	  inner join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 -- and t1.VersionNum = ll.VerNum
+      left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
+      left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
-	  inner join DVersData t3 on t3.DocID = t1.DataID and t3.Version = lla.VerNum
+	  inner join @LibDVersTempTable td ON td.DocID = t1.DataID and td.Version = isnull(lla.VerNum,1)
+      inner join DVersData t3 on t3.DocID = t1.DataID and t3.VersionID = td.VersionID and t3.Version = isnull(lla.VerNum,1)
 	where
 	  t1.SubType = @subtype
-	  --and lla.ValStr = 'Knowledge Document'
-	  --and t1.SubType != 0
 	  and t1.DataID not in(@Id, 2000)
 	  and t2.SubType = @parentsubtype
 	order by t1.DataID asc, t1.VersionNum asc
