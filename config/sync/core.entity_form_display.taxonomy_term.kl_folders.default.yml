@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.kl_folders.feeds_item
     - field.field.taxonomy_term.kl_folders.field_kl_admin_only
     - field.field.taxonomy_term.kl_folders.field_kl_folder_type
     - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
@@ -105,5 +104,4 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-hidden:
-  feeds_item: true
+hidden: {  }

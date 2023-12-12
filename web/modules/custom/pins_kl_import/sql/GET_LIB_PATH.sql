@@ -1,7 +1,7 @@
 USE [otcs]
 GO
 
-/****** Object:  UserDefinedFunction [dbo].[GET_LIB_PATH]    Script Date: 06/12/2023 07:44:32 ******/
+/****** Object:  UserDefinedFunction [dbo].[GET_LIB_PATH]    Script Date: 12/12/2023 09:34:27 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -39,3 +39,5 @@ BEGIN
 	RETURN @RetVal
 END
 GO
+
+

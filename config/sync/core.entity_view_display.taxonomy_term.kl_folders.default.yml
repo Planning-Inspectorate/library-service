@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.kl_folders.feeds_item
     - field.field.taxonomy_term.kl_folders.field_kl_admin_only
     - field.field.taxonomy_term.kl_folders.field_kl_folder_type
     - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
@@ -44,7 +43,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  feeds_item: true
   field_kl_term_unique_id: true
   langcode: true
   search_api_excerpt: true

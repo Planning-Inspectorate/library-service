@@ -53,6 +53,9 @@ BEGIN
 	  t1.SubType as SubType,
 	  t1.VersionNum as VersionNum,
 	  isnull(lla.VerNum,1) as VerNum,
+	  isnull(lla.ValStr,'') as ValStr,
+	  isnull(llb.VerNum,1) as VerNumB,
+	  isnull(llb.ValStr,'') as ValStrB,
 	  isnull(t1.Ordering,0) as Ordering,
 	  isnull(t1.ExtendedData,'') as ExtendedData,
 	  isnull(STUFF(
@@ -60,25 +63,26 @@ BEGIN
 			  where c.ID = t1.DataID
 			  FOR XML PATH ('')),1,1,''),'') as Classifications,
 	  isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 26
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 26
 			  FOR XML PATH (''))
 			  , 1, 1, ''),'') AS ReadingLists,
 	  isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 2
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 2
 			  FOR XML PATH ('')), 1, 1, ''),'') AS Series,
 	  isnull(STUFF(
 			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 25
 			  FOR XML PATH ('')), 1, 1, ''),'') AS Authors,
 	  isnull(STUFF(
-			 (SELECT '|' + cast(ValLong as nvarchar(max)) from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 20
+			 (SELECT '|' + cast(ValLong as nvarchar(max)) from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 20
 			  FOR XML PATH ('')), 1, 1, ''),'') AS Notes,
 	  isnull(STUFF(
-			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.AttrID = 6
+			 (SELECT '|' + ValStr from LLAttrData ll where ll.ID = t1.DataID and ll.VerNum = lla.VerNum and ll.DefID = 18122884 and ll.AttrID = 6
 			  FOR XML PATH ('')), 1, 1, ''),'') AS AltTitle
 	from
 	  DTree t1
 	  inner join @LibTreeTempTable tt ON t1.DataID = tt.DataID
-	  left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1
+    left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
+    left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
 	where
 	  t1.SubType = @subtype

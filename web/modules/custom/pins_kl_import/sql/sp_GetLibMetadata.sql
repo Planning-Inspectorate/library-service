@@ -1,7 +1,7 @@
 USE [otcs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 11/12/2023 17:46:53 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 12/12/2023 09:35:40 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -106,16 +106,16 @@ BEGIN
 	from
 	  DTree t1
 	  inner join @LibTreeTempTable tt ON t1.DataID = tt.DataID
-      left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
-      left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
+    left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
+    left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
 	  inner join @LibDVersTempTable td ON td.DocID = t1.DataID and td.Version = isnull(lla.VerNum,1)
-      inner join DVersData t3 on t3.DocID = t1.DataID and t3.VersionID = td.VersionID and t3.Version = isnull(lla.VerNum,1)
+    inner join DVersData t3 on t3.DocID = t1.DataID and t3.VersionID = td.VersionID and t3.Version = isnull(lla.VerNum,1)
 	where
 	  t1.SubType = @subtype
 	  and t1.DataID not in(@Id, 2000)
 	  and t2.SubType = @parentsubtype
-	order by t1.DataID asc, t1.VersionNum asc
+	--order by t1.DataID asc, t1.VersionNum asc
 	;
 END
 GO
