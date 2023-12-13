@@ -39,13 +39,22 @@ class UploadMetaDataForm extends FormBase {
       '#description' => t('WARNING! This deletes all terms from kl_folders and kl_classification.'),
     );
 
+    $form['attach_files'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Attach files?'),
+      '#description' => t('By default no actual files are attached, only the metadata is imported.'),
+    );
+
     $form['feed_type_id'] = [
       '#type' => 'select',
       '#title' => t('Import process to perform'),
       '#options' => [
-        'kl_import_metadata' => t('Import KL Metadata'),
-        'kl_import_metadata_b' => t('Import KL Metadata B'),
-        'kl_import_hardcopy' => t('Import KL Hardcopy'),
+        'kl_import_metadata' => t('Import KL Metadata (subtype 144)'),
+        'kl_import_virtual_folders' => t('Import KL Virtual Folders (subtype 899)'),
+        'kl_import_hardcopy' => t('Import KL Hardcopy (subtype 411)'),
+        'kl_import_shortcuts' => t('Import KL Shortcuts (subtype 1)'),
+        'kl_import_compoundfolders' => t('Import KL Compound Documents (subtype 136)'),
+        'kl_import_compound_subdocs' => t('Import KL Compound Sub Documents (subtype 144)'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
@@ -93,13 +102,10 @@ class UploadMetaDataForm extends FormBase {
       $del_all_terms = ($vals['del_all_terms'] == 1) ? TRUE : FALSE;
     }
 
-    // Delete all existing file entities owned by this module.
+    // Delete all existing terms in these vocabularies.
     if ($del_all_terms) {
-      //$this->delete_terms_from_vocab('kl_authors');
-      //$this->delete_terms_from_vocab('kl_series');
       $this->delete_terms_from_vocab('kl_folders');
       $this->delete_terms_from_vocab('kl_classification');
-      //$this->delete_terms_from_vocab('kl_reading_lists');
     }
 
     // The CSV file.
@@ -129,20 +135,16 @@ class UploadMetaDataForm extends FormBase {
    * @param $vid
    */
   public function delete_terms_from_vocab($vid) {
-
     $tids = \Drupal::entityQuery('taxonomy_term')
       ->condition('vid', $vid)
       ->accessCheck(FALSE)
       ->execute();
-
     if (empty($tids)) {
       return;
     }
-
     $term_storage = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term');
     $entities = $term_storage->loadMultiple($tids);
-
     $term_storage->delete($entities);
   }
 

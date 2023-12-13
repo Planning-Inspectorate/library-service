@@ -1,0 +1,19 @@
+uuid: e65c0503-a4ab-4ab6-9dae-a9134abcee72
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_vernum
+    - node.type.kl_document
+id: node.kl_document.field_kl_vernum
+field_name: field_kl_vernum
+entity_type: node
+bundle: kl_document
+label: 'KL VerNum'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

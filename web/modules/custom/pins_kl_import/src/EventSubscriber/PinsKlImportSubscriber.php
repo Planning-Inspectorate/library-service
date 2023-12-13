@@ -30,42 +30,57 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
     /** @var \Drupal\feeds\Result\ParserResultInterface */
     $parser_result = $event->getParserResult();
 
-    // Check if this is the feed type we want to manipulate.
-    if ($feed->getType()->id() !== 'import_kl_document_files') {
-      // Not the feed type that we are interested in. Abort.
+   if (
+      //($feed->getType()->id() == 'kl_import_files') ||
+      ($feed->getType()->id() == 'kl_import_compound_subdocs') ||
+      ($feed->getType()->id() == 'kl_import_metadata')
+      ) {
+
+      /** @var \Drupal\feeds\Feeds\Item\ItemInterface */
+      foreach ($parser_result as $item) {
+
+        // Fix-up link to parent entity.
+        if ($feed->getType()->id() == 'kl_import_compound_subdocs') {
+          $parentid = $item->get('parentid');
+          $query = \Drupal::entityQuery('node')
+            ->condition('type', 'kl_compound_document')
+            ->condition('field_kl_doc_id', $parentid)
+            ->accessCheck(FALSE);
+          $results = $query->execute();
+          if (!empty($results)) {
+            $nid = array_values($results)[0];
+            $item->set('computed2', $nid);
+          }
+        }
+
+        // TODO: The following code should be used when files are available.
+        /*
+        $filename = $item->get('filename');
+        $filepath = 'public://lib-mig/' . $filename;
+        $query = \Drupal::entityQuery('file');
+        $query->condition('uri', 'public://lib-mig/' . basename($filepath));
+        $query->accessCheck(FALSE);
+        $entity_ids = $query->execute();
+        if ($entity_ids) {
+            $file = File::load(reset($entity_ids));
+        }
+        else {
+          $file = File::create([
+            'filename' => basename($filepath),
+            'uri' => 'public://lib-mig/' . basename($filepath),
+            'status' => 1,
+            'uid' => 1,
+          ]);
+          $file->save();
+        }
+        $fid = $file->id();
+        $item->set('computed_5', $fid);
+        */
+      }
       return;
     }
 
-    /** @var \Drupal\feeds\Feeds\Item\ItemInterface */
-    foreach ($parser_result as $item) {
-
-      $filename = $item->get('filename');
-
-      $filepath = 'public://lib-mig/' . $filename;
-
-      // Determine if file is already managed by Drupal.
-      $query = \Drupal::entityQuery('file');
-      $query->condition('uri', 'public://lib-mig/' . basename($filepath));
-      $query->accessCheck(FALSE);
-      $entity_ids = $query->execute();
-      if ($entity_ids) {
-          $file = File::load(reset($entity_ids));
-      }
-      else {
-        $file = File::create([
-          'filename' => basename($filepath),
-          'uri' => 'public://lib-mig/' . basename($filepath),
-          'status' => 1,
-          'uid' => 1,
-        ]);
-        $file->save();
-      }
-
-      $fid = $file->id();
-
-      $item->set('computed_5', $fid);
-
-    }
+    return;
   }
 
 }

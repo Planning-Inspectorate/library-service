@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_kl_alternative_title
+    - field.field.node.kl_document.field_kl_archived
+    - field.field.node.kl_document.field_kl_archived_date
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
+    - field.field.node.kl_document.field_kl_doc_compound_folder
     - field.field.node.kl_document.field_kl_doc_file
     - field.field.node.kl_document.field_kl_doc_file_path
     - field.field.node.kl_document.field_kl_doc_filename
@@ -18,11 +22,18 @@ dependencies:
     - field.field.node.kl_document.field_kl_doc_parentid
     - field.field.node.kl_document.field_kl_doc_unique_id
     - field.field.node.kl_document.field_kl_doc_version
+    - field.field.node.kl_document.field_kl_filecdate
+    - field.field.node.kl_document.field_kl_filemdate
+    - field.field.node.kl_document.field_kl_filetype
     - field.field.node.kl_document.field_kl_reading_lists
     - field.field.node.kl_document.field_kl_series
+    - field.field.node.kl_document.field_kl_vercdate
+    - field.field.node.kl_document.field_kl_vermdate
+    - field.field.node.kl_document.field_kl_vernum
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
+    - datetime
     - file
     - text
     - user
@@ -39,6 +50,32 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_kl_alternative_title:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_kl_archived:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 126
+    region: content
+  field_kl_archived_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 127
+    region: content
   field_kl_authors:
     type: entity_reference_label
     label: above
@@ -54,6 +91,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 114
+    region: content
+  field_kl_doc_compound_folder:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 118
     region: content
   field_kl_doc_file:
     type: file_default
@@ -143,6 +188,32 @@ content:
     third_party_settings: {  }
     weight: 108
     region: content
+  field_kl_filecdate:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 122
+    region: content
+  field_kl_filemdate:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 123
+    region: content
+  field_kl_filetype:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 124
+    region: content
   field_kl_reading_lists:
     type: entity_reference_label
     label: above
@@ -158,6 +229,32 @@ content:
       link: true
     third_party_settings: {  }
     weight: 113
+    region: content
+  field_kl_vercdate:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 120
+    region: content
+  field_kl_vermdate:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 121
+    region: content
+  field_kl_vernum:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 125
     region: content
   field_weight:
     type: default_weight

@@ -7,14 +7,14 @@ pins_kl_import.kl_upload_vocabs:
     _permissions: 'access kl upload form'
     _access: 'TRUE'
 
-pins_kl_import.kl_upload_files:
-  path: '/admin/pins-kl-import/kl-upload-files'
-  defaults:
-    _form: '\Drupal\pins_kl_import\Form\UploadFilesForm'
-    _title: 'Upload KL Files'
-  requirements:
-    _permissions: 'access kl upload form'
-    _access: 'TRUE'
+#pins_kl_import.kl_upload_files:
+#  path: '/admin/pins-kl-import/kl-upload-files'
+#  defaults:
+#    _form: '\Drupal\pins_kl_import\Form\UploadFilesForm'
+#    _title: 'Upload KL Files'
+#  requirements:
+#    _permissions: 'access kl upload form'
+#    _access: 'TRUE'
 
 pins_kl_import.kl_upload_metadata:
   path: '/admin/pins-kl-import/kl-upload-metadata'

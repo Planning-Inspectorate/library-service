@@ -1,0 +1,21 @@
+uuid: 0266ce26-19d7-49e7-afee-a0662d1b7ed5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_shortcut_type
+    - node.type.kl_shortcut
+  module:
+    - options
+id: node.kl_shortcut.field_kl_shortcut_type
+field_name: field_kl_shortcut_type
+entity_type: node
+bundle: kl_shortcut
+label: 'KL Shortcut Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

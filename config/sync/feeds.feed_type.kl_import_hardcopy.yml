@@ -14,11 +14,12 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
     - field.field.node.kl_hardcopy.field_kl_series
+    - field.field.node.kl_hardcopy.field_weight
     - node.type.kl_hardcopy
   module:
-    - feeds_log
     - feeds_tamper
     - node
+    - weight
 third_party_settings:
   feeds_tamper:
     tampers:
@@ -109,56 +110,6 @@ third_party_settings:
         label: 'Import Taxonomy Terms Hierarchy'
         delimiter: '|'
         vocabulary: kl_classification
-      ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9:
-        default_value: x-unclassified
-        only_if_empty: true
-        uuid: ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9
-        plugin: default_value
-        source: classifications
-        weight: -9
-        label: 'Set value or default value'
-      2980725d-6805-43bf-ba45-8e8a1905ee39:
-        text: '[name][nameb]'
-        uuid: 2980725d-6805-43bf-ba45-8e8a1905ee39
-        plugin: rewrite
-        source: name
-        weight: 1
-        label: Rewrite
-      3d05fa9f-aa79-492d-ab6a-02d31969ea72:
-        text: '[folders][foldersb][foldersc]'
-        uuid: 3d05fa9f-aa79-492d-ab6a-02d31969ea72
-        plugin: rewrite
-        source: folders
-        weight: -10
-        label: Rewrite
-      7cb2c212-4277-40e3-94d9-e2cdab7bca30:
-        text: '[readinglists][readinglistsb][readinglistsc]'
-        uuid: 7cb2c212-4277-40e3-94d9-e2cdab7bca30
-        plugin: rewrite
-        source: readinglists
-        weight: -10
-        label: Rewrite
-      651c3d0a-0570-4a7f-b91f-bc35c64a8b78:
-        text: '[authors][authorsb][authorsc]'
-        uuid: 651c3d0a-0570-4a7f-b91f-bc35c64a8b78
-        plugin: rewrite
-        source: authors
-        weight: -10
-        label: Rewrite
-      f11180be-90a7-48b4-835f-73562265fd3b:
-        text: '[series][seriesb][seriesc]'
-        uuid: f11180be-90a7-48b4-835f-73562265fd3b
-        plugin: rewrite
-        source: series
-        weight: -10
-        label: Rewrite
-      40339816-e120-45b9-a41c-269c19921202:
-        text: '[classifications][classificationsb][classificationsc]'
-        uuid: 40339816-e120-45b9-a41c-269c19921202
-        plugin: rewrite
-        source: classifications
-        weight: -10
-        label: Rewrite
       25c7c223-f797-48f8-99fa-fba8585b8f48:
         character: ''
         side: trim
@@ -176,17 +127,8 @@ third_party_settings:
         weight: -8
         label: 'Characters to trim'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Hardcopy'
 id: kl_import_hardcopy
 description: ''
@@ -336,6 +278,11 @@ custom_sources:
     label: OriginDataID
     machine_name: origindataid
     type: csv
+  ordering:
+    value: Ordering
+    label: Ordering
+    machine_name: ordering
+    type: csv
 mappings:
   -
     target: title
@@ -417,54 +364,6 @@ mappings:
       autocreate: 0
       autocreate_bundle: kl_classification
   -
-    target: temporary_target
-    map:
-      temporary: nameb
-  -
-    target: temporary_target
-    map:
-      temporary: foldersb
-  -
-    target: temporary_target
-    map:
-      temporary: classificationsb
-  -
-    target: temporary_target
-    map:
-      temporary: readinglistsb
-  -
-    target: temporary_target
-    map:
-      temporary: seriesb
-  -
-    target: temporary_target
-    map:
-      temporary: authorsb
-  -
-    target: temporary_target
-    map:
-      temporary: namec
-  -
-    target: temporary_target
-    map:
-      temporary: foldersc
-  -
-    target: temporary_target
-    map:
-      temporary: classificationsc
-  -
-    target: temporary_target
-    map:
-      temporary: readinglistsc
-  -
-    target: temporary_target
-    map:
-      temporary: authorsc
-  -
-    target: temporary_target
-    map:
-      temporary: seriesc
-  -
     target: field_kl_doc_parentid
     map:
       value: parentid
@@ -484,4 +383,11 @@ mappings:
       value: origindataid
     settings:
       language: ''
+    unique: {  }
+  -
+    target: field_weight
+    map:
+      value: ordering
+    settings:
+      language: null
     unique: {  }

@@ -1,15 +1,17 @@
-uuid: 3891d8ce-8a7b-41e4-88b2-35e35fc880e2
+uuid: e43bd673-e5fe-4f17-be55-505dc3acf406
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_kl_document_reference
-field_name: field_kl_document_reference
+id: node.field_kl_filetype
+field_name: field_kl_filetype
 entity_type: node
-type: entity_reference
+type: string
 settings:
-  target_type: node
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

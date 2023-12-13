@@ -7,18 +7,21 @@ dependencies:
 id: kl_document_folders_path
 label: 'KL Document - folders path'
 type: 'canonical_entities:node'
-pattern: '/library/[node:field_kl_doc_folder:0:entity:parents:join-path]/[node:field_kl_doc_folder:0:entity]/[node:title]'
+pattern: '/[node:field_kl_doc_folder:0:entity:parents:join-path]/[node:field_kl_doc_folder:0:entity]/[node:title]'
 selection_criteria:
-  bbd3002c-0da3-4113-bc72-3a3778ef1d94:
+  e34d3e32-bc44-4135-a8d8-190f150bedbd:
     id: 'entity_bundle:node'
     negate: false
-    uuid: bbd3002c-0da3-4113-bc72-3a3778ef1d94
+    uuid: e34d3e32-bc44-4135-a8d8-190f150bedbd
     context_mapping:
       node: node
     bundles:
+      kl_classification_shortcut: kl_classification_shortcut
+      kl_compound_document: kl_compound_document
       kl_document: kl_document
       kl_hardcopy: kl_hardcopy
       kl_shortcut: kl_shortcut
+      kl_virtual_folder: kl_virtual_folder
 selection_logic: and
 weight: -5
 relationships: {  }

@@ -1,24 +1,36 @@
-uuid: 7b6e2da2-2b69-4c5f-af05-bb7c27d2740b
+uuid: 9b9f96d9-e1d5-4926-ad81-0d4193c41679
 langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.kl_document.body
+    - field.field.node.kl_document.field_kl_alternative_title
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
+    - field.field.node.kl_document.field_kl_doc_file
+    - field.field.node.kl_document.field_kl_doc_filename
     - field.field.node.kl_document.field_kl_doc_folder
     - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_mime_type
     - field.field.node.kl_document.field_kl_doc_origindataid
     - field.field.node.kl_document.field_kl_doc_parent_subtype
     - field.field.node.kl_document.field_kl_doc_parentid
     - field.field.node.kl_document.field_kl_doc_unique_id
     - field.field.node.kl_document.field_kl_doc_version
+    - field.field.node.kl_document.field_kl_filecdate
+    - field.field.node.kl_document.field_kl_filemdate
+    - field.field.node.kl_document.field_kl_filetype
     - field.field.node.kl_document.field_kl_reading_lists
     - field.field.node.kl_document.field_kl_series
+    - field.field.node.kl_document.field_kl_vercdate
+    - field.field.node.kl_document.field_kl_vermdate
+    - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
+    - weight
 third_party_settings:
   feeds_tamper:
     tampers:
@@ -31,7 +43,7 @@ third_party_settings:
         delimiter: '|'
         vocabulary: kl_folders
       1cd496a6-fb87-47f6-96ea-746324474f07:
-        text: '[dataid]-[versionnum]'
+        text: '[dataid]-[vernum]'
         uuid: 1cd496a6-fb87-47f6-96ea-746324474f07
         plugin: rewrite
         source: computed1
@@ -109,56 +121,6 @@ third_party_settings:
         label: 'Import Taxonomy Terms Hierarchy'
         delimiter: '|'
         vocabulary: kl_classification
-      ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9:
-        default_value: x-unclassified
-        only_if_empty: true
-        uuid: ed4be39c-b8cc-4c35-ba27-e01ff13ac7d9
-        plugin: default_value
-        source: classifications
-        weight: -9
-        label: 'Set value or default value'
-      2980725d-6805-43bf-ba45-8e8a1905ee39:
-        text: '[name][nameb]'
-        uuid: 2980725d-6805-43bf-ba45-8e8a1905ee39
-        plugin: rewrite
-        source: name
-        weight: 1
-        label: Rewrite
-      3d05fa9f-aa79-492d-ab6a-02d31969ea72:
-        text: '[folders][foldersb][foldersc]'
-        uuid: 3d05fa9f-aa79-492d-ab6a-02d31969ea72
-        plugin: rewrite
-        source: folders
-        weight: -10
-        label: Rewrite
-      7cb2c212-4277-40e3-94d9-e2cdab7bca30:
-        text: '[readinglists][readinglistsb][readinglistsc]'
-        uuid: 7cb2c212-4277-40e3-94d9-e2cdab7bca30
-        plugin: rewrite
-        source: readinglists
-        weight: -10
-        label: Rewrite
-      651c3d0a-0570-4a7f-b91f-bc35c64a8b78:
-        text: '[authors][authorsb][authorsc]'
-        uuid: 651c3d0a-0570-4a7f-b91f-bc35c64a8b78
-        plugin: rewrite
-        source: authors
-        weight: -10
-        label: Rewrite
-      f11180be-90a7-48b4-835f-73562265fd3b:
-        text: '[series][seriesb][seriesc]'
-        uuid: f11180be-90a7-48b4-835f-73562265fd3b
-        plugin: rewrite
-        source: series
-        weight: -10
-        label: Rewrite
-      40339816-e120-45b9-a41c-269c19921202:
-        text: '[classifications][classificationsb][classificationsc]'
-        uuid: 40339816-e120-45b9-a41c-269c19921202
-        plugin: rewrite
-        source: classifications
-        weight: -10
-        label: Rewrite
       25c7c223-f797-48f8-99fa-fba8585b8f48:
         character: ''
         side: trim
@@ -175,18 +137,17 @@ third_party_settings:
         source: folders
         weight: -8
         label: 'Characters to trim'
+      04e39c98-085b-423c-80cf-37e114f2c906:
+        default_value: ''
+        only_if_empty: true
+        uuid: 04e39c98-085b-423c-80cf-37e114f2c906
+        plugin: default_value
+        source: computed2
+        weight: 0
+        label: 'Set value or default value'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Metadata'
 id: kl_import_metadata
 description: ''
@@ -336,6 +297,71 @@ custom_sources:
     label: OriginDataID
     machine_name: origindataid
     type: csv
+  ordering:
+    value: Ordering
+    label: Ordering
+    machine_name: ordering
+    type: csv
+  notes:
+    value: Notes
+    label: Notes
+    machine_name: notes
+    type: csv
+  computed2:
+    value: Computed2
+    label: Computed2
+    machine_name: computed2
+    type: blank
+  filetype:
+    value: FileType
+    label: FileType
+    machine_name: filetype
+    type: csv
+  filecdate:
+    value: FileCDate
+    label: FileCDate
+    machine_name: filecdate
+    type: csv
+  filemdate:
+    value: FileMDate
+    label: FileMDate
+    machine_name: filemdate
+    type: csv
+  vercdate:
+    value: VerCDate
+    label: VerCDate
+    machine_name: vercdate
+    type: csv
+  vermdate:
+    value: VerMDate
+    label: VerMDate
+    machine_name: vermdate
+    type: csv
+  filename:
+    value: Filename
+    label: Filename
+    machine_name: filename
+    type: csv
+  mimetype:
+    value: MimeType
+    label: MimeType
+    machine_name: mimetype
+    type: csv
+  vernum:
+    value: VerNum
+    label: VerNum
+    machine_name: vernum
+    type: csv
+  alttitle:
+    value: AltTitle
+    label: AltTitle
+    machine_name: alttitle
+    type: csv
+  computed_5:
+    value: 'Computed 5'
+    label: 'Computed 5'
+    machine_name: computed_5
+    type: blank
 mappings:
   -
     target: title
@@ -417,54 +443,6 @@ mappings:
       autocreate: 0
       autocreate_bundle: kl_classification
   -
-    target: temporary_target
-    map:
-      temporary: nameb
-  -
-    target: temporary_target
-    map:
-      temporary: foldersb
-  -
-    target: temporary_target
-    map:
-      temporary: classificationsb
-  -
-    target: temporary_target
-    map:
-      temporary: readinglistsb
-  -
-    target: temporary_target
-    map:
-      temporary: seriesb
-  -
-    target: temporary_target
-    map:
-      temporary: authorsb
-  -
-    target: temporary_target
-    map:
-      temporary: namec
-  -
-    target: temporary_target
-    map:
-      temporary: foldersc
-  -
-    target: temporary_target
-    map:
-      temporary: classificationsc
-  -
-    target: temporary_target
-    map:
-      temporary: readinglistsc
-  -
-    target: temporary_target
-    map:
-      temporary: authorsc
-  -
-    target: temporary_target
-    map:
-      temporary: seriesc
-  -
     target: field_kl_doc_parentid
     map:
       value: parentid
@@ -485,3 +463,92 @@ mappings:
     settings:
       language: ''
     unique: {  }
+  -
+    target: field_weight
+    map:
+      value: ordering
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: notes
+      summary: computed2
+    settings:
+      language: ''
+      format: plain_text
+  -
+    target: field_kl_filetype
+    map:
+      value: filetype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_filecdate
+    map:
+      value: filecdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_filemdate
+    map:
+      value: filemdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_vercdate
+    map:
+      value: vercdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_vermdate
+    map:
+      value: vermdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_doc_filename
+    map:
+      value: filename
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_mime_type
+    map:
+      value: mimetype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_vernum
+    map:
+      value: vernum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_alternative_title
+    map:
+      value: alttitle
+    settings:
+      language: null
+  -
+    target: field_kl_doc_file
+    map:
+      target_id: ''
+      description: computed_5
+    settings:
+      language: ''
+      reference_by: fid
+      feeds_item: guid
+      autocreate: 0
+      existing: '2'
+      autocreate_bundle: false

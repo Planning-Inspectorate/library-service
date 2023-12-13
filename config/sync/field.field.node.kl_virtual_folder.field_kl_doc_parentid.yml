@@ -1,0 +1,19 @@
+uuid: f6e04dc2-922b-4d48-a2e3-4034d9b50b9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_parentid
+    - node.type.kl_virtual_folder
+id: node.kl_virtual_folder.field_kl_doc_parentid
+field_name: field_kl_doc_parentid
+entity_type: node
+bundle: kl_virtual_folder
+label: 'KL Doc ParentID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
