@@ -1,12 +1,14 @@
 USE [otcs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 12/12/2023 09:35:40 ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetLibMetadata]    Script Date: 14/12/2023 13:46:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -75,6 +77,8 @@ BEGIN
 	  isnull(t3.VersionID,'') as VersionID,
 	  isnull(t1.Ordering,0) as Ordering,
 	  isnull(t1.ExtendedData,'') as ExtendedData,
+	  isnull(t1.ExAtt1,'') as ExAtt1,
+	  isnull(t1.ExAtt2,'') as ExAtt2,
 	  isnull(STUFF(
 			 (SELECT '^' + dbo.GET_LIB_PATH(cd.DataID) FROM LLClassify c inner join DTree cd on cd.DataID = c.CID
 			  where c.ID = t1.DataID
@@ -106,11 +110,11 @@ BEGIN
 	from
 	  DTree t1
 	  inner join @LibTreeTempTable tt ON t1.DataID = tt.DataID
-    left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
-    left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
+      left join LLAttrData lla on lla.ID = t1.DataID and lla.AttrID = 1 and lla.DefID = 18122884 -- Knowledge Document
+      left join LLAttrData llb on llb.ID = t1.DataID and llb.AttrID = 1 and llb.DefID = 19674254 -- Secretary of State Decision
 	  inner join DTree t2 ON t2.DataID = t1.ParentID
 	  inner join @LibDVersTempTable td ON td.DocID = t1.DataID and td.Version = isnull(lla.VerNum,1)
-    inner join DVersData t3 on t3.DocID = t1.DataID and t3.VersionID = td.VersionID and t3.Version = isnull(lla.VerNum,1)
+      inner join DVersData t3 on t3.DocID = t1.DataID and t3.VersionID = td.VersionID and t3.Version = isnull(lla.VerNum,1)
 	where
 	  t1.SubType = @subtype
 	  and t1.DataID not in(@Id, 2000)
