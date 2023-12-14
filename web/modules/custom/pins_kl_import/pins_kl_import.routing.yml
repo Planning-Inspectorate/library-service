@@ -24,3 +24,11 @@ pins_kl_import.kl_upload_metadata:
   requirements:
     _permissions: 'access kl upload form'
     _access: 'TRUE'
+
+pins_kl_import.delete_vocabulary_term_form:
+  path: '/admin/pins-kl-import/delete-vocabulary-term-form'
+  defaults:
+    _form: '\Drupal\pins_kl_import\Form\DeleteVocabularyTermForm'
+    _title: 'Delete Vocabulary terms'
+  requirements:
+    _permission: 'administer pins kl import'
