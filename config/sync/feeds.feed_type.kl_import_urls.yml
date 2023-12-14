@@ -1,20 +1,21 @@
-uuid: bff16489-f357-4219-add1-077585c2ec5d
+uuid: 8f353fe7-129a-465b-ba93-ce8c418a01ca
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_compound_document.field_kl_authors
-    - field.field.node.kl_compound_document.field_kl_classification
-    - field.field.node.kl_compound_document.field_kl_doc_folder
-    - field.field.node.kl_compound_document.field_kl_doc_id
-    - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
-    - field.field.node.kl_compound_document.field_kl_doc_parentid
-    - field.field.node.kl_compound_document.field_kl_doc_unique_id
-    - field.field.node.kl_compound_document.field_kl_doc_version
-    - field.field.node.kl_compound_document.field_kl_reading_lists
-    - field.field.node.kl_compound_document.field_kl_series
-    - field.field.node.kl_compound_document.field_weight
-    - node.type.kl_compound_document
+    - field.field.node.kl_url.field_kl_authors
+    - field.field.node.kl_url.field_kl_classification
+    - field.field.node.kl_url.field_kl_doc_folder
+    - field.field.node.kl_url.field_kl_doc_id
+    - field.field.node.kl_url.field_kl_doc_parent_subtype
+    - field.field.node.kl_url.field_kl_doc_parentid
+    - field.field.node.kl_url.field_kl_doc_unique_id
+    - field.field.node.kl_url.field_kl_doc_version
+    - field.field.node.kl_url.field_kl_reading_lists
+    - field.field.node.kl_url.field_kl_series
+    - field.field.node.kl_url.field_kl_url
+    - field.field.node.kl_url.field_weight
+    - node.type.kl_url
   module:
     - feeds_tamper
     - node
@@ -125,11 +126,18 @@ third_party_settings:
         source: folders
         weight: -8
         label: 'Characters to trim'
+      f1dffcee-af7b-4889-b1b2-1f339c6d4c67:
+        text: '[exattr1]'
+        uuid: f1dffcee-af7b-4889-b1b2-1f339c6d4c67
+        plugin: rewrite
+        source: computed2
+        weight: 0
+        label: Rewrite
   feeds_log:
     operations: {  }
     items: {  }
-label: 'KL Import Compound Documents'
-id: kl_import_compoundfolders
+label: 'KL Import Urls'
+id: kl_import_urls
 description: ''
 help: ''
 import_period: -1
@@ -145,7 +153,7 @@ parser_configuration:
 processor: 'entity:node'
 processor_configuration:
   values:
-    type: kl_compound_document
+    type: kl_url
   langcode: en
   insert_new: 1
   update_existing: 2
@@ -277,6 +285,21 @@ custom_sources:
     label: OriginDataID
     machine_name: origindataid
     type: csv
+  exattr1:
+    value: ExAttr1
+    label: ExAttr1
+    machine_name: exattr1
+    type: csv
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: blank
+  computed2:
+    value: Computed2
+    label: Computed2
+    machine_name: computed2
+    type: blank
   ordering:
     value: Ordering
     label: Ordering
@@ -376,6 +399,13 @@ mappings:
     settings:
       language: null
     unique: {  }
+  -
+    target: field_kl_url
+    map:
+      uri: exattr1
+      title: computed2
+    settings:
+      language: null
   -
     target: field_weight
     map:

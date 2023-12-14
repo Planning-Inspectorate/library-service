@@ -1,0 +1,19 @@
+uuid: 9862c3a8-7f98-4218-a866-aeb18f165eb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_parentid
+    - node.type.kl_url
+id: node.kl_url.field_kl_doc_parentid
+field_name: field_kl_doc_parentid
+entity_type: node
+bundle: kl_url
+label: 'KL Doc ParentID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
