@@ -1,0 +1,29 @@
+uuid: 426b7386-e894-492c-99bd-d50336908d78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_reading_lists
+    - node.type.kl_url
+    - taxonomy.vocabulary.kl_reading_lists
+id: node.kl_url.field_kl_reading_lists
+field_name: field_kl_reading_lists
+entity_type: node
+bundle: kl_url
+label: 'KL Reading Lists'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_reading_lists: kl_reading_lists
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

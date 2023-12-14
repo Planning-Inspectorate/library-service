@@ -55,6 +55,7 @@ class UploadMetaDataForm extends FormBase {
         'kl_import_shortcuts' => t('Import KL Shortcuts (subtype 1)'),
         'kl_import_compoundfolders' => t('Import KL Compound Documents (subtype 136)'),
         'kl_import_compound_subdocs' => t('Import KL Compound Sub Documents (subtype 144)'),
+        'kl_import_urls' => t('Import KL Urls (subtype 140)'),
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),

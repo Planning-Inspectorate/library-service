@@ -1,0 +1,11 @@
+uuid: 6f600357-56f2-4d37-9fd9-fe3f3b1e1b05
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.kl_url
+id: node.kl_url
+target_entity_type_id: node
+target_bundle: kl_url
+default_langcode: site_default
+language_alterable: false
