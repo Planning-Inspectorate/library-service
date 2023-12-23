@@ -1,5 +1,5 @@
 pins_kl_import.admin:
-  title: PINS KL Import
+  title: Horizon Import
   route_name: 'pins_kl_import.kl_upload_vocabs'
   parent: 'system.admin'
   description: 'PINS Knowledge Library (Horizon) Import functions'

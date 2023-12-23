@@ -2,7 +2,7 @@ pins_kl_import.kl_upload_vocabs:
   path: '/admin/pins-kl-import/kl-upload-vocabs'
   defaults:
     _form: '\Drupal\pins_kl_import\Form\UploadVocabsForm'
-    _title: 'Upload KL Vocabs'
+    _title: 'Upload vocabs'
   requirements:
     _permissions: 'access kl upload form'
     _access: 'TRUE'
@@ -20,7 +20,7 @@ pins_kl_import.kl_upload_metadata:
   path: '/admin/pins-kl-import/kl-upload-metadata'
   defaults:
     _form: '\Drupal\pins_kl_import\Form\UploadMetaDataForm'
-    _title: 'Upload KL Metadata'
+    _title: 'Upload Metadata'
   requirements:
     _permissions: 'access kl upload form'
     _access: 'TRUE'
