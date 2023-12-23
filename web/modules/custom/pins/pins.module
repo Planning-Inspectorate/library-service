@@ -58,7 +58,7 @@ function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
 /**
   *  
   *function pins_entity_insert_unique_reference_id
-  * Used for get Entity_id as a reference id
+  * Used for setting Entity_id as a reference id
   *
 */
 
@@ -106,4 +106,22 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
   }
 }
 
+/**
+ * Implements hook_preprocess_HOOK() for page_title template.
+ */
+function pins_preprocess_page_title(&$variables) {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() === 'node.add') {
+    $variables['title'] = str_replace('Create', 'Add ', $variables['title']);
+  }
+}
 
+/**
+ * Implements hook_preprocess_HOOK() for page_html template.
+ */
+function pins_preprocess_html(&$variables) {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() === 'node.add') {
+    $variables['head_title']['title'] = str_replace('Create', 'Add ', $variables['head_title']['title']);
+  }
+}
