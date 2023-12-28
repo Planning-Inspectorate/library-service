@@ -1,0 +1,33 @@
+global-styling:
+  css:
+    theme:
+      css/style.css: {}
+custom-js:
+  version: VERSION
+  js:
+    js/custom.js: {}
+# govuk-design-system-scripts:
+#       version: VERSION
+#       js:
+#         assets/js/vendor/modernizr-3.5.0.min.js: {}
+govuk-design-system-style:
+  remote:  https://design-system.service.gov.uk
+  version: 65.x
+  license:
+    name: Govuk design system css
+    url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    gpl-compatible: true
+  css:
+    theme:
+      https://cdn.ons.gov.uk/sdc/design-system/65.2.5/css/main.css: { type: external, minified: true }
+govuk-design-system-scripts:
+  remote:  https://design-system.service.gov.uk
+  version: 65.x
+  license:
+    name: Govuk design system js
+    url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+    gpl-compatible: true
+  js:
+    theme:
+      https://cdn.ons.gov.uk/sdc/design-system/65.2.5/css/main.js: { type: external, minified: true }
+

@@ -1,0 +1,182 @@
+// ---------------------------------------------------
+// General search form styles
+// ---------------------------------------------------
+
+.js-form-item {
+  label {
+    font-weight: $bolder;
+    @include font-size-rem(19px, 25px);
+    color: $dark;
+    margin-bottom: 10px;
+  }
+  input,
+  select,
+  textarea {
+    border: 2px solid $dark-border;
+    border-radius: 0;
+    margin-right: 22px
+  }
+  input {
+    &.form-date {
+      text-transform: uppercase;
+    }
+    &.form-submit {
+      font-style: normal;
+      font-weight: $bolder;
+      @include font-size-rem(19px, 25px);
+      padding: 0 40px;
+      text-align: center;
+      color: $white;
+    }
+    &.form-autocomplete {
+      background-position: right 2% bottom 50%;
+    }
+  }
+}
+
+// ---------------------------------------------------
+// Advanced search form styles and wrappers
+// ---------------------------------------------------
+
+#views-exposed-form-search-results-page-1,
+#views-exposed-form-taxonomy-results-page-1 {
+  .form--inline.clearfix {
+    flex-direction: column;
+    align-items: normal;
+    display: flex;
+    
+    .search-wrapper {
+      display: flex;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      justify-content: space-between;
+
+      &.buttons {
+        justify-content: start;
+        margin: 10px 0;
+      }
+
+      .form-item {
+        margin: 0 0 0 20px;
+        
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.form-item-search-api-fulltext {
+          flex: 1;
+        }
+        &.js-form-item-author {
+          flex: .5;
+        }
+      }
+
+    }
+    .extra-filters {
+      margin: 10px 0;
+      .search-wrapper {
+        margin-top: 0;
+        .form-item {
+          flex-grow: 1;
+          flex-basis: 0;
+          &.js-form-item-tags {
+            flex:1;
+            input {
+              background-position: right 1% bottom 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .form-submit {
+    align-self: start;
+    margin-left: 0;
+    margin-right: 20px;
+  }
+}
+
+// Buttons
+.form-submit {
+  font-weight: $bolder;
+  @include font-size-rem(19px, 25px);
+  font-style: normal;
+  padding: 0 50px;
+  text-align: center;
+  color: $white;
+  background-color: $btn-color;
+  height: 40px;
+  border-radius: 0;
+}
+
+// Add extra top margin for the taxonomy show filters link
+#views-exposed-form-taxonomy-results-page-1 {
+  .form--inline.clearfix {
+    .extra-filters {
+      margin: 30px 0 10px;
+
+      > .search-wrapper:first-child {
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+input.btn-primary {
+  background-color: $btn-color;
+  height: 40px;
+  border-radius: 0;
+  color: $white;
+  box-shadow: inset 0px -2px 0px $btn-box-shadow;
+}
+
+// Additional filter classes
+.links-wrapper {
+  flex-direction: row;
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+
+  .search-wrapper {
+    width: 100%;
+    margin: 20px 0 10px!important;
+    a {
+      margin-left: 30px;
+      &:first-child {
+        padding-left: 30px;
+        flex: 1;
+        position: relative;
+        margin-left: 0;
+        
+          &::before {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            content: "";
+            transition: transform var(--details-transform-transition-duration) ease-in 0s;
+            transform: rotate(270deg);
+            text-align: center;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3e%3cpath d='M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z' fill='%23545560'/%3e%3c/svg%3e");
+          }
+
+          &.closed {
+            &::before {
+              transform: rotate(90deg);
+            }
+          }
+      
+      }
+    }
+  }
+  #views-exposed-form-taxonomy-results-page-1 & {
+    .search-wrapper {
+      margin: 0!important;
+    }
+  }
+}

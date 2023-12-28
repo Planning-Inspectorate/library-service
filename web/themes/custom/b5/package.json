@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "description": "See instructions in README_gulp.md",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NTTData",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.47.0"
+  },
+  "devDependencies": {}
+}

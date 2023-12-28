@@ -1,0 +1,21 @@
+<div class="govuk-header___logo govuk-grid-column-one-quarter">
+  <a href="{{ path('<front>') }}" rel="home" class="govuk-header__link govuk-header__link--homepage" title="Home">
+    <span class="govuk-header__logotype">
+      <img src="{{ site_logo_url }}"  class="govuk-header__logotype-organisation-fallback-image" alt="Library home" />
+     
+
+      {# {% if site_name %}
+      <span class="govuk-header__logotype-text">
+        <span class="gem-c-organisation-logo__name">
+        {{ site_name }}
+        </span>
+      </span>
+      {% endif %} #}
+
+      {% if site_slogan %}
+        <span class="govuk-header__product-name">{{ site_slogan }}</span>
+      {% endif %}
+    </span>
+  </a>
+</div>
+    

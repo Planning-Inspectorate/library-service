@@ -1,0 +1,23 @@
+framework:
+  version: 1.x
+  css:
+    theme:
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css': { type: external }
+      css/style.css: {}
+      css/govuk_pins.css: {}
+  js:
+    node_modules/govuk-frontend/govuk/all.js: {weight: 0}
+    js/govuk_pins.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal
+    
+webform:
+  version: 1.x
+  js:
+    js/webform.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal

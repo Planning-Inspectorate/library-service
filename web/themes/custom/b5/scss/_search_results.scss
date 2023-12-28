@@ -1,0 +1,54 @@
+.view-search-results,
+.view-latest-updates {
+  margin: 0 10px 0 20px;
+}
+.view-taxonomy-results {
+  margin-right: 10px;
+}
+
+.view-header {
+  h2 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.29);
+    padding: 10px 0px;
+  }
+}
+
+//search list titles
+.view-content {
+  .views-row {
+    padding-bottom: 26px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.29);
+  }
+  .field-content a {
+    color: $blue;
+    font-size: 20px;
+  }
+  .views-field.views-field-field-series {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0B0C0C;
+  }
+  .views-field.views-field-body,
+  .views-field.views-field-search-api-excerpt {
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 2px;
+  }
+  .sub-listing-data {
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration-line: underline;
+    color: #0B0C0C;
+  }
+  .views-field-nothing,
+  .views-field-nothing-1 {
+    margin-top: 15px;
+    .field-content {
+      a, p {
+        font-size: 15px;
+      }
+    }
+  }
+}

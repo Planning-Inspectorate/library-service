@@ -1,0 +1,75 @@
+// Sub theme styling.
+@import 'variables_drupal';
+
+// Bootstrap overriden variables.
+// @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
+@import 'variables_bootstrap';
+
+// Custom variables for KS
+@import 'variables';
+
+// Mixins for global usage
+@import 'mixins';
+
+// Include bootstrap.
+@import '../../../../themes/contrib/bootstrap5/scss/style';
+
+@import
+'base',
+'header',
+'blocks',
+'articles',
+'search_forms',
+'search_results',
+'browse_library',
+'autocomplete',
+'tabs',
+'pager',
+'footer';
+
+
+// breadcrumbs
+.region-breadcrumb {
+  padding: 0 0.5rem;
+}
+// article metadata spacing
+.field--type-entity-reference-revisions.field--label-above,
+.field--name-field-alternative-title.field--label-above {
+  margin-bottom: 1rem;
+}
+// main spacing
+main {
+  margin-bottom: 1.5rem;
+}
+// text under title
+.title-strapline {
+  @include font-size-rem(19px);
+}
+// alignments
+.align-r {
+  text-align: right;
+}
+// grey box wrapper
+.grey-box {
+  background: $white-smoke;
+  padding: 10px 20px;
+  margin-bottom: 25px;
+  h2 {
+    border-bottom: 1px solid $body;
+    padding-bottom: 10px;
+  }
+  .sidebar-external-links {
+    margin-bottom: 0;
+    a {
+      font-style: normal;
+      @include font-size-rem(19px, 25px);
+      font-weight: $bolder;
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+}
+.sidebar-links li {
+  padding: 0;
+  margin: 0;
+}

@@ -1,0 +1,13 @@
+.ui-autocomplete .ui-menu-item-wrapper {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  color: inherit;
+  background: inherit;
+  text-decoration: none;
+  &:hover {
+    background: $bg-green;
+    background: $btn-color;
+    color: $white;
+    border-color: transparent;
+  }
+}

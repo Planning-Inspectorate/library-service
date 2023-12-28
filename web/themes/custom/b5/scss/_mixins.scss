@@ -1,0 +1,12 @@
+// Mixin to convert px to rem
+
+@use 'sass:math';
+
+// Mixin to convert px to rem
+@mixin font-size-rem($font-size, $line-height: null) {
+  font-size: math.div($font-size, $base-font-size) * 1rem;
+
+  @if $line-height != null {
+    line-height: math.div($line-height, $base-font-size) * 1rem;
+  }
+}

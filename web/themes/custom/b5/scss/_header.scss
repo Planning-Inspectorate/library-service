@@ -1,0 +1,44 @@
+// Page top header
+header > nav.navbar-dark {
+  height: 90px;
+  background-color: $bg-green !important;
+
+  .navbar-brand .site-title,
+  .navbar-brand .site-logo {
+    letter-spacing: 0;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    align-self: end;
+  }
+}
+
+// Page content above blue background wrapper
+.page-node-type-article main > .container-fluid,
+.page-node-type-pdf main > .container-fluid,
+.path-browse-library main > .container-fluid,
+.path-taxonomy main > .container-fluid:first-of-type {
+  background: $bg-navy;
+  color: $white;
+  height: 260px;
+  margin-bottom: 30px;
+  #block-backlink {
+    padding: 10px 0;
+  }
+  a {
+    font-style: normal;
+    @include font-size-rem(16px, 16px);
+    color: $white;
+    text-decoration: none;
+  }
+}
+// Target taxonomy extra conetnt region
+.path-taxonomy main > .container-fluid:nth-of-type(2) {
+  height: auto;
+  background: $white-smoke;
+  margin: -30px 0 30px;
+  padding: 20px 0;
+}

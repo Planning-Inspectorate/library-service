@@ -1,0 +1,68 @@
+// Prototype banner
+.prototype-banner {
+  border-bottom: 1px solid #B1B4B6;
+  @include font-size-rem(16px, 20px);
+  font-weight: $lighter;
+  padding: 10px 0 18px;
+  margin: 1rem 0 0;
+  a {
+    color: $blue;
+    font-weight: $bold;
+    text-decoration: underline!important;
+  }
+  span {
+    background-color: $blue;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 8px 4px;
+    margin-right: 10px;
+    font-weight: $bolder;
+    color: $white;
+  }
+}
+
+// Breadcrumbs
+#block-breadcrumbs,
+#block-b5-breadcrumbs,
+#block-backlink {
+  height: 60px;
+  padding-top: 10px;
+}
+
+// Hide breadcrumbs for articles and pdfs
+.page-node-type-article,
+.page-node-type-pdf {
+  #block-breadcrumbs {
+    display: none;
+  }
+}
+
+// Header block wrapper with link
+.header-wrapper {
+  .header-title {
+    flex:1;
+  }
+  .header-link a {
+    font-size: 19px!important;
+    text-decoration: none;
+    font-weight: $lighter;
+    display: flex;
+    margin-top: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Homepage title block spacing
+.path-frontpage #block-searchresultstitle {
+  margin-top: 60px;
+}
+
+// Search results block
+#block-exposedformsearch-resultspage-1 {
+  background: $white-smoke;
+  padding: 10px 20px;
+  margin-bottom: 25px;
+}
+

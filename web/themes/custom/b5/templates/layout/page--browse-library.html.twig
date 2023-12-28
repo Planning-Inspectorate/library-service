@@ -1,0 +1,35 @@
+{% extends "page.html.twig" %}
+{% block breadcrumb %}{% endblock %}
+{% block content %}
+  <div class="tab-container">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="tab1">
+        <!-- View block 1 goes here -->
+        {% set block = drupal_view('browse_library', 'block_1') %}
+        <h2>Source (Series)</h2>
+        {{ block }}
+      </div>
+      <div class="tab-pane fade" id="tab2">
+        <!-- View block 3 goes here -->
+        {% set block = drupal_view('browse_library', 'block_3') %}
+        <h2>Taxonomy</h2>
+        {{ block }}
+      </div>
+      <div class="tab-pane fade" id="tab3">
+        <!-- View block 2 goes here -->
+        <h2>Reading Lists</h2>
+        {{ drupal_view('browse_library', 'block_2') }}
+      </div>
+      <div class="tab-pane fade" id="tab4">
+        <!-- View block 4 goes here -->
+        <h2>Topics</h2>
+        {{ drupal_view('browse_library', 'block_4') }}
+      </div>
+      <div class="tab-pane fade" id="tab5">
+        <!-- View block 5 goes here -->
+        <h2>Authors</h2>
+        {{ drupal_view('browse_library', 'block_5') }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

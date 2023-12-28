@@ -1,0 +1,8 @@
+//pager
+nav.pager {
+  margin: 3rem 0;
+  @include font-size-rem(19px);
+  a {
+    color: $blue;
+  }
+}

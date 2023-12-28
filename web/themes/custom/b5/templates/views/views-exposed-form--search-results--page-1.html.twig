@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Theme override for a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+{{ q }}
+{% endif %}
+
+<div class="form--inline clearfix">
+  <div class="search-wrapper">
+    {{ form.search_api_fulltext }}
+    {{ form.author }}
+  </div>
+  <div class="extra-filters"> 
+    <div class="search-wrapper">
+      {{ form.series }}
+      {{ form.category }}
+    </div>
+    <div class="search-wrapper">
+      {{ form.reading_list }}
+      {{ form.topic }}
+    </div>
+    <div class="search-wrapper">
+      {{ form.tags }}
+    </div>
+    <div class="search-wrapper">
+      {{ form.created }}
+      {{ form.created_1 }}
+      {{ form.type }}
+      {{ form.items_per_page }}
+      {{ form.sort_by }}
+    </div>
+  </div>
+  <div class="search-wrapper buttons">
+    {{ form.actions.submit }}
+    {{ form.actions.reset }}
+  </div>
+  <div class="links-wrapper">
+    <div class="search-wrapper">
+      <a href="#" class="show-filters" title="Advanced Search">Advanced Search</a> <a href="#" title="My Bookmarks">My Bookmarks</a> <a href="#" title="Recent Searches">Recent Searches</a> <a href="#" title="Saved Searches">Saved Searches</a>
+    </div>
+    <!-- {{dump(form)}} -->
+  </div>
+</div>

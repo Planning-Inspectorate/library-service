@@ -1,0 +1,12 @@
+//Page headers
+footer.bg-secondary {
+  background-color: $bg-grey !important;
+  min-height: 243px;
+  color: $body !important;
+  
+  a {
+    color: $body !important;
+    text-decoration: underline;
+  }
+  
+}

@@ -1,0 +1,39 @@
+// Full page article view
+.page-node-type-article {
+  .node--type-article {
+
+    footer.node__meta {
+      padding: 0 0 3rem 0;
+  
+      .node__submitted {
+        font-weight: 300;
+        @include font-size-rem(20px, 25px);
+      }
+    }
+
+    .field--name-body {
+      margin: 0 0 3rem 0;
+    }
+  
+  }
+}
+
+// Full page pdf article view
+.page-node-type-pdf {
+  .node--type-pdf {
+
+    footer.node__meta {
+      padding: 0 0 3rem 0;
+  
+      .node__submitted {
+        font-weight: 300;
+        @include font-size-rem(20px, 25px);
+      }
+    }
+
+    .field--name-field-pdf {
+      margin: 0 0 3rem 0;
+    }
+  
+  }
+}
