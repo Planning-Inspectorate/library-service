@@ -1,0 +1,10 @@
+uuid: a9dcda66-2037-45a8-829d-58627ada29ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.tiny_teaser
+label: 'Tiny teaser'
+targetEntityType: node
+cache: true

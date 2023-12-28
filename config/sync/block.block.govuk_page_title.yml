@@ -1,6 +1,6 @@
 uuid: a4da173b-5a40-42b7-a35b-9cfbfe4267ca
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -10,7 +10,7 @@ _core:
   default_config_hash: EZEhhzHGp4H-Uq04TN3bCzeBIn1fR1QpJG208DAiaFU
 id: govuk_page_title
 theme: govuk
-region: page_title
+region: cookies
 weight: -12
 provider: null
 plugin: page_title_block

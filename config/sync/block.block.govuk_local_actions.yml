@@ -1,6 +1,6 @@
 uuid: b22c8af4-6cc7-47fb-bae2-babd716214b7
 langcode: en
-status: true
+status: false
 dependencies:
   theme:
     - govuk
@@ -8,7 +8,7 @@ _core:
   default_config_hash: mrEgRZgXdTBlhwvKm8lE9Jvb9ax4SVVMM00fuPyAQcU
 id: govuk_local_actions
 theme: govuk
-region: edit_tab
+region: cookies
 weight: -10
 provider: null
 plugin: local_actions_block

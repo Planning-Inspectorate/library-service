@@ -62,3 +62,4 @@ hidden:
   field_kl_vernum: true
   field_weight: true
   langcode: true
+  search_api_excerpt: true

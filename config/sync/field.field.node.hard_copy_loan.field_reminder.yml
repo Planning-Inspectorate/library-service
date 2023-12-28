@@ -1,0 +1,21 @@
+uuid: 9ed7a54a-8f72-4aeb-8f51-680e04b4af32
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reminder
+    - node.type.hard_copy_loan
+id: node.hard_copy_loan.field_reminder
+field_name: field_reminder
+entity_type: node
+bundle: hard_copy_loan
+label: 'Send reminder notification'
+description: 'This is used for a reminder notification only.  '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

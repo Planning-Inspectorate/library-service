@@ -9,7 +9,7 @@ id: node.kl_document.field_kl_doc_mime_type
 field_name: field_kl_doc_mime_type
 entity_type: node
 bundle: kl_document
-label: 'KL Doc Mime Type'
+label: 'Doc Mime Type'
 description: ''
 required: false
 translatable: false

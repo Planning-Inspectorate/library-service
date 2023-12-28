@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'KL Url'
 type: kl_url
-description: ''
+description: 'Use KL Url to define a link to an alternate KL Document item.'
 help: ''
 new_revision: false
 preview_mode: 1

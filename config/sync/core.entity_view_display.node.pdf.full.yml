@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.pdf.field_pdf
     - field.field.node.pdf.field_pdf_media
     - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_publications
     - field.field.node.pdf.field_reading_lists
     - field.field.node.pdf.field_series
     - field.field.node.pdf.field_tags
@@ -28,13 +29,14 @@ dependencies:
     - ds
     - entity_reference_revisions
     - field_group
-    - text
     - user
 third_party_settings:
   ds:
     layout:
       id: ds_reset
       settings:
+        disable_css: false
+        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
@@ -44,33 +46,24 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
-        disable_css: false
-        entity_classes: all_classes
     regions:
       content:
         - field_pdf_media
         - field_publication_date
         - field_author
-        - body
         - field_isbn
         - field_volume
         - field_archive
         - field_content_reference
-        - field_reading_lists
-        - field_series
-        - field_tags
-        - group_classification
         - flag_bookmark
   field_group:
     group_classification:
       children:
-        - field_reading_lists
-        - field_series
         - field_tags
       label: Classification
       parent_name: ''
-      region: content
-      weight: 11
+      region: hidden
+      weight: 33
       format_type: html_element
       format_settings:
         classes: 'govuk-list govuk-list--spaced'
@@ -88,7 +81,7 @@ third_party_settings:
       label: bookmark
       parent_name: ''
       region: hidden
-      weight: 20
+      weight: 34
       format_type: html_element
       format_settings:
         classes: ''
@@ -106,13 +99,6 @@ targetEntityType: node
 bundle: pdf
 mode: full
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_archive:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -148,7 +134,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: content
   field_author:
     type: entity_reference_revisions_entity_view
@@ -222,7 +208,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 6
     region: content
   field_isbn:
     type: string
@@ -258,7 +244,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 3
     region: content
   field_pdf_media:
     type: entity_reference_revisions_entity_view
@@ -303,7 +289,7 @@ content:
     label: inline
     settings:
       timezone_override: ''
-      format_type: olivero_medium
+      format_type: dd_mn_yy
     third_party_settings:
       ds:
         ft:
@@ -334,120 +320,6 @@ content:
             prefix: ''
             suffix: ''
     weight: 1
-    region: content
-  field_reading_lists:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: h3
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 8
-    region: content
-  field_series:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: h3
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 9
-    region: content
-  field_tags:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: h3
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 10
     region: content
   field_volume:
     type: string
@@ -483,14 +355,15 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: content
   flag_bookmark:
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 7
     region: content
 hidden:
+  body: true
   comment: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -500,6 +373,10 @@ hidden:
   field_links: true
   field_note: true
   field_pdf: true
+  field_publications: true
+  field_reading_lists: true
+  field_series: true
+  field_tags: true
   field_topics: true
   langcode: true
   links: true

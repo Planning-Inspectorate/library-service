@@ -8,15 +8,29 @@ dependencies:
     - media.type.document
     - media.type.image
     - media.type.pdf
+    - node.type.article
     - node.type.hard_copy
-    - node.type.issued_hard_copy
+    - node.type.hard_copy_loan
+    - node.type.kl_classification_shortcut
+    - node.type.kl_compound_document
+    - node.type.kl_document
+    - node.type.kl_hardcopy
+    - node.type.kl_shortcut
+    - node.type.kl_url
+    - node.type.kl_virtual_folder
+    - node.type.page
     - node.type.pdf
+    - taxonomy.vocabulary.authors
+    - taxonomy.vocabulary.kl_authors
+    - taxonomy.vocabulary.kl_classification
+    - taxonomy.vocabulary.kl_folders
+    - taxonomy.vocabulary.kl_reading_lists
+    - taxonomy.vocabulary.kl_series
     - taxonomy.vocabulary.locations
     - taxonomy.vocabulary.reading_lists
     - taxonomy.vocabulary.series
     - taxonomy.vocabulary.tags
   module:
-    - contextual
     - file
     - filter
     - flag
@@ -26,8 +40,8 @@ dependencies:
     - shortcut
     - system
     - taxonomy
-    - toolbar
-    - tour
+    - views_bulk_edit
+    - views_send
 id: library_admin
 label: 'Library admin'
 weight: 5
@@ -35,79 +49,114 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
-  - 'access contextual links'
   - 'access files overview'
   - 'access media overview'
   - 'access shortcuts'
-  - 'access site in maintenance mode'
   - 'access taxonomy overview'
-  - 'access toolbar'
-  - 'access tour'
   - 'access user profiles'
   - 'administer nodes'
+  - 'attachments with views_send'
+  - 'clone article content'
   - 'clone hard_copy content'
-  - 'clone issued_hard_copy content'
+  - 'clone hard_copy_loan content'
   - 'clone pdf content'
   - 'create document media'
   - 'create hard_copy content'
   - 'create image media'
-  - 'create issued_hard_copy content'
   - 'create media'
   - 'create pdf content'
   - 'create pdf media'
+  - 'create terms in authors'
   - 'create terms in reading_lists'
   - 'create terms in series'
   - 'create terms in tags'
   - 'delete all revisions'
+  - 'delete any article content'
   - 'delete any document media'
   - 'delete any hard_copy content'
+  - 'delete any hard_copy_loan content'
   - 'delete any image media'
-  - 'delete any issued_hard_copy content'
+  - 'delete any kl_classification_shortcut content'
+  - 'delete any kl_compound_document content'
+  - 'delete any kl_document content'
+  - 'delete any kl_hardcopy content'
+  - 'delete any kl_shortcut content'
+  - 'delete any kl_url content'
+  - 'delete any kl_virtual_folder content'
+  - 'delete any page content'
   - 'delete any pdf content'
   - 'delete any pdf media'
+  - 'delete article revisions'
   - 'delete hard_copy revisions'
-  - 'delete issued_hard_copy revisions'
+  - 'delete hard_copy_loan revisions'
+  - 'delete kl_classification_shortcut revisions'
+  - 'delete kl_compound_document revisions'
+  - 'delete kl_document revisions'
+  - 'delete kl_hardcopy revisions'
+  - 'delete kl_shortcut revisions'
+  - 'delete kl_url revisions'
+  - 'delete kl_virtual_folder revisions'
   - 'delete own document media'
   - 'delete own files'
   - 'delete own hard_copy content'
   - 'delete own image media'
-  - 'delete own issued_hard_copy content'
   - 'delete own pdf content'
   - 'delete own pdf media'
   - 'delete pdf revisions'
+  - 'delete terms in authors'
+  - 'delete terms in kl_authors'
+  - 'delete terms in kl_classification'
+  - 'delete terms in kl_folders'
+  - 'delete terms in kl_reading_lists'
+  - 'delete terms in kl_series'
   - 'delete terms in locations'
   - 'delete terms in reading_lists'
   - 'delete terms in series'
   - 'delete terms in tags'
+  - 'edit any article content'
   - 'edit any document media'
   - 'edit any hard_copy content'
+  - 'edit any hard_copy_loan content'
   - 'edit any image media'
-  - 'edit any issued_hard_copy content'
   - 'edit any pdf content'
   - 'edit any pdf media'
+  - 'edit own article content'
   - 'edit own document media'
   - 'edit own hard_copy content'
+  - 'edit own hard_copy_loan content'
   - 'edit own image media'
-  - 'edit own issued_hard_copy content'
   - 'edit own pdf content'
   - 'edit own pdf media'
+  - 'edit terms in authors'
   - 'edit terms in locations'
   - 'edit terms in reading_lists'
   - 'edit terms in series'
   - 'edit terms in tags'
   - 'flag bookmark'
+  - 'mass mailing with views_send'
   - 'revert all revisions'
+  - 'revert article revisions'
   - 'revert hard_copy revisions'
-  - 'revert issued_hard_copy revisions'
+  - 'revert hard_copy_loan revisions'
+  - 'revert kl_classification_shortcut revisions'
+  - 'revert kl_compound_document revisions'
+  - 'revert kl_document revisions'
+  - 'revert kl_hardcopy revisions'
+  - 'revert kl_shortcut revisions'
+  - 'revert kl_url revisions'
+  - 'revert kl_virtual_folder revisions'
   - 'revert pdf revisions'
   - 'unflag bookmark'
   - 'use text format basic_html'
   - 'use text format full_html'
+  - 'use views bulk edit'
   - 'view all media revisions'
   - 'view all revisions'
+  - 'view article revisions'
   - 'view hard_copy revisions'
-  - 'view issued_hard_copy revisions'
+  - 'view hard_copy_loan revisions'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view pdf revisions'
+  - 'view the administration theme'
   - 'view user email addresses'

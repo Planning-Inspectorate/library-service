@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.hard_copy.field_page_number
     - field.field.node.hard_copy.field_pdf
     - field.field.node.hard_copy.field_publication_date
+    - field.field.node.hard_copy.field_publications
     - field.field.node.hard_copy.field_reading_lists
     - field.field.node.hard_copy.field_series
     - field.field.node.hard_copy.field_stock_level
@@ -69,6 +70,7 @@ hidden:
   field_page_number: true
   field_pdf: true
   field_publication_date: true
+  field_publications: true
   field_reading_lists: true
   field_series: true
   field_stock_level: true

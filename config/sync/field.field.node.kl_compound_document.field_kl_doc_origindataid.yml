@@ -9,7 +9,7 @@ id: node.kl_compound_document.field_kl_doc_origindataid
 field_name: field_kl_doc_origindataid
 entity_type: node
 bundle: kl_compound_document
-label: 'KL Doc OriginDataID'
+label: 'Doc OriginDataID'
 description: ''
 required: false
 translatable: false

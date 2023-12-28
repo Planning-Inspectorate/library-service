@@ -1,0 +1,33 @@
+uuid: 050335d6-6001-48b9-b91a-c5b120b79c1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sidebar
+  module:
+    - node
+    - views
+  theme:
+    - govuk_pins
+id: govuk_pins_views_block__sidebar_block_1
+theme: govuk_pins
+region: sidebar_first
+weight: -10
+provider: null
+plugin: 'views_block:sidebar-block_1'
+settings:
+  id: 'views_block:sidebar-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      pdf: pdf

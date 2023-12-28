@@ -1,0 +1,20 @@
+uuid: 47391779-f58a-456c-9256-e0183d3e32db
+langcode: en
+status: true
+dependencies:
+  theme:
+    - govuk_pins
+_core:
+  default_config_hash: mrEgRZgXdTBlhwvKm8lE9Jvb9ax4SVVMM00fuPyAQcU
+id: govuk_pins_local_actions
+theme: govuk_pins
+region: edit_tab
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

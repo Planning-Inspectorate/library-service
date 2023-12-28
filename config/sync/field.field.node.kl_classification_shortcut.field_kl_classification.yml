@@ -10,7 +10,7 @@ id: node.kl_classification_shortcut.field_kl_classification
 field_name: field_kl_classification
 entity_type: node
 bundle: kl_classification_shortcut
-label: 'KL Classification'
+label: Classification
 description: ''
 required: false
 translatable: false

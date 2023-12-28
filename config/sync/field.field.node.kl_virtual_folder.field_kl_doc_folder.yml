@@ -10,7 +10,7 @@ id: node.kl_virtual_folder.field_kl_doc_folder
 field_name: field_kl_doc_folder
 entity_type: node
 bundle: kl_virtual_folder
-label: 'KL Doc Folder'
+label: 'Doc Folder'
 description: ''
 required: false
 translatable: false

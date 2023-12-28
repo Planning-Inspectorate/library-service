@@ -20,3 +20,18 @@ contexts:
       -
         source: 'Username or email address'
         translation: 'Email address'
+      -
+        source: 'Create Article'
+        translation: 'Add Article'
+      -
+        source: 'Create Hard copy'
+        translation: 'Add Hard copy'
+      -
+        source: 'Create Hard copy loan'
+        translation: 'Add Hard copy loan'
+      -
+        source: 'Create PDF'
+        translation: 'Add PDF'
+      -
+        source: 'Create Basic page'
+        translation: 'Add Basic page'

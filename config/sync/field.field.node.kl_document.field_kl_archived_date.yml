@@ -11,7 +11,7 @@ id: node.kl_document.field_kl_archived_date
 field_name: field_kl_archived_date
 entity_type: node
 bundle: kl_document
-label: 'KL Archived Date'
+label: 'Archived Date'
 description: ''
 required: false
 translatable: false

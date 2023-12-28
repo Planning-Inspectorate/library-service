@@ -1,6 +1,6 @@
 uuid: 9f768980-d8cf-4033-941c-ff48ae4d41a1
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.admin
@@ -11,7 +11,7 @@ dependencies:
     - govuk
 id: govuk_administration
 theme: govuk
-region: nav_branding
+region: cookies
 weight: 0
 provider: null
 plugin: 'menu_block:admin'

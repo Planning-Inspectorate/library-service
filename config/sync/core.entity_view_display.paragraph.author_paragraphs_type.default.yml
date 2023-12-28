@@ -5,6 +5,27 @@ dependencies:
   config:
     - field.field.paragraph.author_paragraphs_type.field_author_name
     - paragraphs.paragraphs_type.author_paragraphs_type
+  module:
+    - ds
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - field_author_name
 id: paragraph.author_paragraphs_type.default
 targetEntityType: paragraph
 bundle: author_paragraphs_type
@@ -14,8 +35,13 @@ content:
     type: entity_reference_label
     label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 0
     region: content
 hidden:

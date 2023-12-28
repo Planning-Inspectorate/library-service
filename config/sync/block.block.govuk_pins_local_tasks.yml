@@ -1,0 +1,22 @@
+uuid: 1e879086-b4d6-4bac-9f6b-4d97bb3c3aac
+langcode: en
+status: true
+dependencies:
+  theme:
+    - govuk_pins
+_core:
+  default_config_hash: xhzCwUpz1737N-6JlCQlC1xgPR6sAj5FnYAGbIaiwHw
+id: govuk_pins_local_tasks
+theme: govuk_pins
+region: edit_tab
+weight: -11
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

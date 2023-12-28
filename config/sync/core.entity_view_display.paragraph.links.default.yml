@@ -6,7 +6,27 @@ dependencies:
     - field.field.paragraph.links.field_link
     - paragraphs.paragraphs_type.links
   module:
+    - ds
     - link
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - field_link
 id: paragraph.links.default
 targetEntityType: paragraph
 bundle: links
@@ -14,14 +34,19 @@ mode: default
 content:
   field_link:
     type: link
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 0
     region: content
 hidden:

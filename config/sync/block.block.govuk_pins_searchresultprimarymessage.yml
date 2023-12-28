@@ -1,0 +1,30 @@
+uuid: 59214174-328e-4039-92be-336b8e2ee673
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:324f96e1-6c07-43d0-b225-e101dfabe7b5'
+  module:
+    - block_content
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_searchresultprimarymessage
+theme: govuk_pins
+region: search_box
+weight: -11
+provider: null
+plugin: 'block_content:324f96e1-6c07-43d0-b225-e101dfabe7b5'
+settings:
+  id: 'block_content:324f96e1-6c07-43d0-b225-e101dfabe7b5'
+  label: 'Search result primary message'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/lib-search\r\n<front>\r\n/search-library\r\n/search-library/*"

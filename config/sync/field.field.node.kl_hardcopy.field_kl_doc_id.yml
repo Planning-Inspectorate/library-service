@@ -9,7 +9,7 @@ id: node.kl_hardcopy.field_kl_doc_id
 field_name: field_kl_doc_id
 entity_type: node
 bundle: kl_hardcopy
-label: 'KL Doc Id'
+label: 'Doc Id'
 description: ''
 required: false
 translatable: false

@@ -1,0 +1,33 @@
+uuid: 19489839-f42c-42f5-90c8-882fc5607bc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.documents.body
+    - node.type.documents
+  module:
+    - text
+    - user
+id: node.documents.default
+targetEntityType: node
+bundle: documents
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.pdf.field_pdf
     - field.field.node.pdf.field_pdf_media
     - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_publications
     - field.field.node.pdf.field_reading_lists
     - field.field.node.pdf.field_series
     - field.field.node.pdf.field_tags
@@ -33,7 +34,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 13
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -47,7 +48,7 @@ content:
     third_party_settings: {  }
   field_archive:
     type: paragraphs
-    weight: 9
+    weight: 10
     region: content
     settings:
       title: Paragraph
@@ -66,7 +67,7 @@ content:
     third_party_settings: {  }
   field_author:
     type: paragraphs
-    weight: 5
+    weight: 6
     region: content
     settings:
       title: Paragraph
@@ -83,17 +84,9 @@ content:
         collapse_edit_all: '0'
         duplicate: '0'
     third_party_settings: {  }
-  field_content_reference:
-    type: string_textfield
-    weight: 18
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_isbn:
     type: string_textfield
-    weight: 2
+    weight: 3
     region: content
     settings:
       size: 60
@@ -101,25 +94,26 @@ content:
     third_party_settings: {  }
   field_links:
     type: paragraphs
-    weight: 10
+    weight: 11
     region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: open
+      edit_mode: closed
       closed_mode: summary
-      autocollapse: none
+      autocollapse: all
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: links
       features:
+        add_above: '0'
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
   field_note:
     type: paragraphs
-    weight: 11
+    weight: 12
     region: content
     settings:
       title: Paragraph
@@ -138,7 +132,7 @@ content:
     third_party_settings: {  }
   field_pdf_media:
     type: paragraphs
-    weight: 4
+    weight: 5
     region: content
     settings:
       title: Paragraph
@@ -157,30 +151,21 @@ content:
     third_party_settings: {  }
   field_publication_date:
     type: datetime_default
-    weight: 26
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_reading_lists:
-    type: paragraphs
-    weight: 6
+  field_publications:
+    type: entity_reference_autocomplete
+    weight: 10
     region: content
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: closed
-      closed_mode: preview
-      autocollapse: all
-      closed_mode_threshold: 0
-      add_mode: button
-      form_display_mode: default
-      default_paragraph_type: _none
-      features:
-        add_above: '0'
-        collapse_edit_all: '0'
-        duplicate: '0'
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-  field_series:
+  field_reading_lists:
     type: paragraphs
     weight: 7
     region: content
@@ -199,7 +184,7 @@ content:
         collapse_edit_all: '0'
         duplicate: '0'
     third_party_settings: {  }
-  field_tags:
+  field_series:
     type: paragraphs
     weight: 8
     region: content
@@ -218,9 +203,28 @@ content:
         collapse_edit_all: '0'
         duplicate: '0'
     third_party_settings: {  }
+  field_tags:
+    type: paragraphs
+    weight: 9
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: '0'
+        duplicate: '0'
+    third_party_settings: {  }
   field_volume:
     type: string_textfield
-    weight: 3
+    weight: 4
     region: content
     settings:
       size: 60
@@ -239,23 +243,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    weight: 14
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 17
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    weight: 15
+    weight: 13
     region: content
     settings:
       display_label: true
@@ -270,7 +260,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -282,5 +272,8 @@ hidden:
   body: true
   comment: true
   field_category: true
+  field_content_reference: true
   field_pdf: true
   field_topics: true
+  promote: true
+  sticky: true

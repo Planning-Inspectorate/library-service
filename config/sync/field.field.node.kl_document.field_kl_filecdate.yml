@@ -11,7 +11,7 @@ id: node.kl_document.field_kl_filecdate
 field_name: field_kl_filecdate
 entity_type: node
 bundle: kl_document
-label: 'KL FileCDate'
+label: FileCDate
 description: ''
 required: false
 translatable: false

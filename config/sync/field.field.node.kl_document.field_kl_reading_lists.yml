@@ -10,7 +10,7 @@ id: node.kl_document.field_kl_reading_lists
 field_name: field_kl_reading_lists
 entity_type: node
 bundle: kl_document
-label: 'KL Reading Lists'
+label: 'Reading Lists'
 description: ''
 required: false
 translatable: false

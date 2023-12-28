@@ -1,0 +1,28 @@
+display:
+  default:
+    display_title: Diofyn
+    display_options:
+      fields:
+        title:
+          label: Pennawd
+        name:
+          label: Awdur
+        changed:
+          label: 'Diweddariad diwethaf'
+      pager:
+        options:
+          tags:
+            next: '>>'
+            previous: '<<'
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+  attachment_1:
+    display_title: Atodiad
+  page_1:
+    display_title: Tudalen

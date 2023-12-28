@@ -9,7 +9,7 @@ id: node.kl_document.field_kl_archived
 field_name: field_kl_archived
 entity_type: node
 bundle: kl_document
-label: 'KL Archived'
+label: Archived
 description: ''
 required: false
 translatable: false

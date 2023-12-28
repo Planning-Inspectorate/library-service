@@ -1,4 +1,4 @@
-uuid: 44c45f2f-3c92-4404-8f32-357dcff35d4b
+uuid: 7a651edc-7e78-4a4c-bcc3-daae322f9255
 langcode: en
 status: false
 dependencies:
@@ -8,6 +8,5 @@ _core:
   default_config_hash: 8I9Vm3L0dLCdctKfCjpw5vLwMetyaJzxbWNMzb2V7-I
 id: feeds_feed.full
 label: 'Full feed'
-description: ''
 targetEntityType: feeds_feed
 cache: true

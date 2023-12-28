@@ -1,0 +1,24 @@
+uuid: 31e6efc2-7936-4a43-86bd-fa4dd3d62803
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.hard_copy_loan
+  module:
+    - text
+id: node.hard_copy_loan.body
+field_name: body
+entity_type: node
+bundle: hard_copy_loan
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

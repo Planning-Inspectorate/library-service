@@ -1,0 +1,22 @@
+uuid: cd8a5919-8de2-42d4-93f0-b54ca62660cd
+langcode: en
+status: true
+dependencies:
+  theme:
+    - b5
+_core:
+  default_config_hash: fChIUIyEKcqJkslxCO3mCysYHfLVGbNDtyfUCFnZVvs
+id: b5_local_tasks
+theme: b5
+region: content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

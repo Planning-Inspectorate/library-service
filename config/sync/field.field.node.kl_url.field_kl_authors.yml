@@ -10,7 +10,7 @@ id: node.kl_url.field_kl_authors
 field_name: field_kl_authors
 entity_type: node
 bundle: kl_url
-label: 'KL Authors'
+label: Authors
 description: ''
 required: false
 translatable: false

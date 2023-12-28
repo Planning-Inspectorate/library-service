@@ -1,0 +1,30 @@
+uuid: d5a26854-21bb-4f45-b708-26ba400507de
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.browse_library
+  module:
+    - system
+    - views
+  theme:
+    - govuk_pins
+id: govuk_pins_views_block__browse_library_publications
+theme: govuk_pins
+region: sidebar_first
+weight: -14
+provider: null
+plugin: 'views_block:browse_library-publications'
+settings:
+  id: 'views_block:browse_library-publications'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

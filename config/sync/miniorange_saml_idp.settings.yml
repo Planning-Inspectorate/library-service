@@ -8,7 +8,7 @@ miniorange_saml_enable_backdoor: false
 miniorange_saml_default_relaystate: ''
 miniorange_saml_idp_name: ''
 miniorange_saml_idp_issuer: ''
-miniorange_saml_idp_login_url: 'http://library-test.planninginspectorate.gov.uk:8000/initiatelogon'
+miniorange_saml_idp_login_url: ''
 miniorange_saml_idp_logout_url: ''
 miniorange_saml_idp_x509_certificate: ''
 miniorange_saml_response_signed: false
@@ -51,4 +51,3 @@ redirect_plan_after_registration_premium: ''
 _core:
   default_config_hash: eq-qDgMyEVycRW9bsJTudjpr_dFSAGAibdzK8_YwwVs
 miniorange_saml_idp_feedback: '1'
-miniorange_saml_idp_entity_id_issuer: 'http://library-test.planninginspectorate.gov.uk:8000/?q=admin/config/people/miniorange_saml_idp/'

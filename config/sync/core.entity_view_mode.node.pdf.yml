@@ -6,6 +6,5 @@ dependencies:
     - node
 id: node.pdf
 label: PDF
-description: ''
 targetEntityType: node
 cache: true

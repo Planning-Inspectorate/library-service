@@ -27,7 +27,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'KL Terms'
+      title: 'Imported vocals and terms'
       fields:
         name:
           id: name
@@ -401,9 +401,13 @@ display:
       path: admin/pins-kl-import/kl-terms
       menu:
         type: normal
-        title: 'KL Terms'
+        title: 'Imported vocals & terms'
+        description: ''
+        weight: 0
+        expanded: false
         menu_name: admin
         parent: pins_kl_import.admin
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

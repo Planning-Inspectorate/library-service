@@ -1,0 +1,21 @@
+uuid: 37936591-d473-4ba7-b988-97a47012c728
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_topic_areas
+    - taxonomy.vocabulary.classifications
+id: taxonomy_term.classifications.field_topic_areas
+field_name: field_topic_areas
+entity_type: taxonomy_term
+bundle: classifications
+label: 'Topic Areas'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

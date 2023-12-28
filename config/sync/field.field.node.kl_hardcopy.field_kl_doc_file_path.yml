@@ -9,7 +9,7 @@ id: node.kl_hardcopy.field_kl_doc_file_path
 field_name: field_kl_doc_file_path
 entity_type: node
 bundle: kl_hardcopy
-label: 'KL Doc File Path'
+label: 'Doc File Path'
 description: ''
 required: false
 translatable: false

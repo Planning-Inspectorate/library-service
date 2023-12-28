@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: PDF
 type: pdf
-description: ''
+description: 'Used for creating physical related documents'
 help: ''
 new_revision: true
 preview_mode: 0

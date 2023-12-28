@@ -33,14 +33,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_content_reference:
-    type: text_textfield
-    weight: 3
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_long_text:
     type: text_textarea
     weight: 2
@@ -51,4 +43,5 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_content_reference: true
   status: true

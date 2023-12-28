@@ -11,11 +11,9 @@ entity_type: node
 bundle: article
 label: 'Content Reference'
 description: ''
-required: true
+required: false
 translatable: false
-default_value:
-  -
-    value: '[node:title]'
+default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string

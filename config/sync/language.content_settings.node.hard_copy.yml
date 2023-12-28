@@ -1,0 +1,11 @@
+uuid: 8e2cb410-0138-49fc-9402-476b5014dea7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.hard_copy
+id: node.hard_copy
+target_entity_type_id: node
+target_bundle: hard_copy
+default_langcode: site_default
+language_alterable: false

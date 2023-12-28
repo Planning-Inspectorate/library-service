@@ -1,0 +1,20 @@
+uuid: 3e215edc-a475-451b-8ce8-cecde2adb2a0
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_breadcrumbs
+theme: govuk_pins
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

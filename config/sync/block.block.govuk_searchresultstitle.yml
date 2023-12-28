@@ -11,7 +11,7 @@ dependencies:
     - govuk
 id: govuk_searchresultstitle
 theme: govuk
-region: page_title
+region: cookies
 weight: -11
 provider: null
 plugin: 'block_content:60e89d56-acb8-45ec-8194-a8ef2023d7e3'

@@ -3,27 +3,43 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_kl_alternative_title
     - field.storage.node.field_kl_authors
     - field.storage.node.field_kl_classification
     - field.storage.node.field_kl_doc_compound_folder
     - field.storage.node.field_kl_doc_folder
     - field.storage.node.field_kl_doc_mime_type
+    - field.storage.node.field_kl_doc_parentid
+    - field.storage.node.field_kl_doc_version
     - field.storage.node.field_kl_reading_lists
     - field.storage.node.field_kl_series
+    - field.storage.node.field_kl_vercdate
+    - field.storage.node.field_kl_vermdate
+    - field.storage.node.field_kl_vernum
+    - node.type.article
+    - node.type.documents
+    - node.type.hard_copy
+    - node.type.hard_copy_loan
     - node.type.kl_classification_shortcut
     - node.type.kl_compound_document
     - node.type.kl_document
     - node.type.kl_hardcopy
     - node.type.kl_shortcut
+    - node.type.kl_url
     - node.type.kl_virtual_folder
+    - node.type.page
+    - node.type.pdf
+    - node.type.webform
     - system.menu.admin
+    - user.role.authenticated
   module:
     - better_exposed_filters
+    - datetime
     - node
     - user
     - views_bulk_operations
 id: kl_views
-label: 'KL Views'
+label: 'Migration report'
 module: views
 description: ''
 tag: ''
@@ -36,7 +52,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'KL Views'
+      title: 'Imported contents'
       fields:
         views_bulk_operations_bulk_form:
           id: views_bulk_operations_bulk_form
@@ -593,9 +609,10 @@ display:
                   collapsible: false
                   is_secondary: false
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -768,11 +785,125 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
+            status: status
             title: title
+            field_kl_alternative_title: field_kl_alternative_title
+            type: type
+            field_kl_doc_folder: field_kl_doc_folder
+            field_kl_classification: field_kl_classification
+            field_kl_authors: field_kl_authors
+            field_kl_reading_lists: field_kl_reading_lists
+            field_kl_series: field_kl_series
+            field_kl_doc_compound_folder: field_kl_doc_compound_folder
+            field_kl_doc_parentid: field_kl_doc_parentid
+            field_kl_vernum: field_kl_vernum
+            field_kl_doc_version: field_kl_doc_version
+            field_kl_doc_mime_type: field_kl_doc_mime_type
+            field_kl_vercdate: field_kl_vercdate
+            field_kl_vermdate: field_kl_vermdate
           default: '-1'
           info:
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
-              sortable: false
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_alternative_title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_folder:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_classification:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_authors:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_reading_lists:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_series:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_compound_folder:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_parentid:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_vernum:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_version:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_mime_type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_vercdate:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_vermdate:
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -822,7 +953,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_kl_classification'
         - 'config:field.storage.node.field_kl_doc_folder'
@@ -833,7 +964,7 @@ display:
     display_plugin: page
     position: 2
     display_options:
-      title: 'KL Counts'
+      title: Counts
       fields:
         type_1:
           id: type_1
@@ -1063,7 +1194,55 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
-      filters: {  }
+      filters:
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: 'not in'
+          value:
+            article: article
+            page: page
+            documents: documents
+            hard_copy: hard_copy
+            hard_copy_loan: hard_copy_loan
+            pdf: pdf
+            webform: webform
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups: {  }
@@ -1081,7 +1260,7 @@ display:
       path: admin/pins-kl-import/kl-views-2
       menu:
         type: normal
-        title: 'KL Counts'
+        title: Counts
         description: ''
         weight: 10
         expanded: false
@@ -1093,8 +1272,9 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   page_2:
     id: page_2
@@ -1161,27 +1341,83 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
+            3:
+              action_id: node_unpromote_action
+              preconfiguration:
+                add_confirmation: false
             4:
+              action_id: node_promote_action
+              preconfiguration:
+                add_confirmation: false
+            5:
+              action_id: node_make_unsticky_action
+              preconfiguration:
+                add_confirmation: false
+            7:
+              action_id: node_assign_owner_action
+              preconfiguration:
+                add_confirmation: false
+            8:
               action_id: node_make_sticky_action
               preconfiguration:
                 add_confirmation: false
                 label_override: 'Stick at top of lists'
-            5:
-              action_id: node_assign_owner_action
+            10:
+              action_id: vbo_export_generate_csv_action
               preconfiguration:
                 add_confirmation: false
-            6:
-              action_id: node_promote_action
-              preconfiguration:
-                add_confirmation: false
-            7:
-              action_id: node_unpromote_action
-              preconfiguration:
-                add_confirmation: false
-            8:
-              action_id: node_make_unsticky_action
-              preconfiguration:
-                add_confirmation: false
+                strip_tags: false
+                field_override: false
+                field_config:
+                  status:
+                    active: false
+                    label: ''
+                  title:
+                    active: false
+                    label: ''
+                  field_kl_alternative_title:
+                    active: false
+                    label: ''
+                  type:
+                    active: false
+                    label: ''
+                  field_kl_doc_folder:
+                    active: false
+                    label: ''
+                  field_kl_classification:
+                    active: false
+                    label: ''
+                  field_kl_authors:
+                    active: false
+                    label: ''
+                  field_kl_reading_lists:
+                    active: false
+                    label: ''
+                  field_kl_series:
+                    active: false
+                    label: ''
+                  field_kl_doc_compound_folder:
+                    active: false
+                    label: ''
+                  field_kl_doc_parentid:
+                    active: false
+                    label: ''
+                  field_kl_vernum:
+                    active: false
+                    label: ''
+                  field_kl_doc_version:
+                    active: false
+                    label: ''
+                  field_kl_doc_mime_type:
+                    active: false
+                    label: ''
+                  field_kl_vercdate:
+                    active: false
+                    label: ''
+                  field_kl_vermdate:
+                    active: false
+                    label: ''
+                separator: ;
             14:
               action_id: views_bulk_operations_delete_entity
             16:
@@ -1192,6 +1428,135 @@ display:
               action_id: 'entity:publish_action:node'
               preconfiguration:
                 add_confirmation: false
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+          label: ID
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_doc_parentid:
+          id: field_kl_doc_parentid
+          table: node__field_kl_doc_parentid
+          field: field_kl_doc_parentid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ' Horizon - Parent ID (link)'
+          exclude: false
+          alter:
+            alter_text: false
+            text: View
+            make_link: true
+            path: 'https://horizonweb.planninginspectorate.gov.uk/otcs/llisapi.dll?func=ll&objId={{ field_kl_doc_parentid__value }}&objAction=browse&viewType=1'
+            absolute: false
+            external: true
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: 'Horizonweb link'
+            rel: ''
+            link_class: edit-link
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         status:
           id: status
           table: node_field_data
@@ -1259,69 +1624,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_kl_doc_folder:
-          id: field_kl_doc_folder
-          table: node__field_kl_doc_folder
-          field: field_kl_doc_folder
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Folder
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: ul
-          separator: ', '
-          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -1377,6 +1679,68 @@ display:
           type: string
           settings:
             link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_alternative_title:
+          id: field_kl_alternative_title
+          table: node__field_kl_alternative_title
+          field: field_kl_alternative_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Alternative Title'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: '/node/{{ nid }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1452,15 +1816,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_kl_doc_mime_type:
-          id: field_kl_doc_mime_type
-          table: node__field_kl_doc_mime_type
-          field: field_kl_doc_mime_type
+        field_kl_doc_folder:
+          id: field_kl_doc_folder
+          table: node__field_kl_doc_folder
+          field: field_kl_doc_folder
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'Mime Type'
+          label: Folder
           exclude: false
           alter:
             alter_text: false
@@ -1501,18 +1865,18 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            link_to_entity: false
-          group_column: value
+            link: true
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: separator
+          multi_type: ul
           separator: ', '
           field_api_classes: false
         field_kl_classification:
@@ -1830,6 +2194,323 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_kl_vernum:
+          id: field_kl_vernum
+          table: node__field_kl_vernum
+          field: field_kl_vernum
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: VerNum
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_doc_version:
+          id: field_kl_doc_version
+          table: node__field_kl_doc_version
+          field: field_kl_doc_version
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Doc Version'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_doc_mime_type:
+          id: field_kl_doc_mime_type
+          table: node__field_kl_doc_mime_type
+          field: field_kl_doc_mime_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Mime Type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_vercdate:
+          id: field_kl_vercdate
+          table: node__field_kl_vercdate
+          field: field_kl_vercdate
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: VerCDate
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: dd_mn_yy
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_vermdate:
+          id: field_kl_vermdate
+          table: node__field_kl_vermdate
+          field: field_kl_vermdate
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: VerMDate
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: dd_mn_yy
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: full
         options:
@@ -1938,7 +2619,6 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            kl_classification_shortcut: kl_classification_shortcut
             kl_compound_document: kl_compound_document
             kl_document: kl_document
             kl_hardcopy: kl_hardcopy
@@ -2112,6 +2792,54 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            kl_classification_shortcut: kl_classification_shortcut
+            kl_compound_document: kl_compound_document
+            kl_document: kl_document
+            kl_hardcopy: kl_hardcopy
+            kl_shortcut: kl_shortcut
+            kl_url: kl_url
+            kl_virtual_folder: kl_virtual_folder
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -2127,7 +2855,7 @@ display:
       path: admin/pins-kl-import/kl-views
       menu:
         type: normal
-        title: 'KL Reports'
+        title: 'Imported contents'
         description: ''
         weight: 0
         expanded: false
@@ -2147,12 +2875,18 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
+        - 'config:field.storage.node.field_kl_alternative_title'
         - 'config:field.storage.node.field_kl_authors'
         - 'config:field.storage.node.field_kl_classification'
         - 'config:field.storage.node.field_kl_doc_compound_folder'
         - 'config:field.storage.node.field_kl_doc_folder'
         - 'config:field.storage.node.field_kl_doc_mime_type'
+        - 'config:field.storage.node.field_kl_doc_parentid'
+        - 'config:field.storage.node.field_kl_doc_version'
         - 'config:field.storage.node.field_kl_reading_lists'
         - 'config:field.storage.node.field_kl_series'
+        - 'config:field.storage.node.field_kl_vercdate'
+        - 'config:field.storage.node.field_kl_vermdate'
+        - 'config:field.storage.node.field_kl_vernum'

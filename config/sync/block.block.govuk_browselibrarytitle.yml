@@ -1,6 +1,6 @@
 uuid: e7c44226-1323-402e-ac6d-eb43c5fed32b
 langcode: en
-status: true
+status: false
 dependencies:
   content:
     - 'block_content:basic:0c3b171e-40c8-42a5-83d4-18d51e5d8bef'
@@ -11,7 +11,7 @@ dependencies:
     - govuk
 id: govuk_browselibrarytitle
 theme: govuk
-region: search_box
+region: cookies
 weight: -12
 provider: null
 plugin: 'block_content:0c3b171e-40c8-42a5-83d4-18d51e5d8bef'

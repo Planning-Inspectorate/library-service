@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.hard_copy.field_page_number
     - field.field.node.hard_copy.field_pdf
     - field.field.node.hard_copy.field_publication_date
+    - field.field.node.hard_copy.field_publications
     - field.field.node.hard_copy.field_reading_lists
     - field.field.node.hard_copy.field_series
     - field.field.node.hard_copy.field_stock_level
@@ -25,6 +26,7 @@ dependencies:
     - field.field.node.hard_copy.field_volume
     - node.type.hard_copy
   module:
+    - barcodes
     - datetime
     - ds
     - entity_reference_revisions
@@ -35,6 +37,8 @@ third_party_settings:
     layout:
       id: ds_reset
       settings:
+        disable_css: false
+        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
@@ -44,10 +48,9 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
-        disable_css: false
-        entity_classes: all_classes
     regions:
       content:
+        - field_alternative_title
         - field_publication_date
         - field_author
         - body
@@ -75,7 +78,24 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 2
+    weight: 3
+    region: content
+  field_alternative_title:
+    type: barcode
+    label: above
+    settings:
+      type: QRCODE
+      color: '#000000'
+      height: 100
+      width: 100
+      padding_top: 0
+      padding_right: 0
+      padding_bottom: 0
+      padding_left: 0
+      show_value: false
+      format: SVG
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_archive:
     type: entity_reference_revisions_entity_view
@@ -89,7 +109,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 8
+    weight: 9
     region: content
   field_author:
     type: entity_reference_revisions_entity_view
@@ -127,7 +147,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 2
     region: content
   field_content_reference:
     type: string
@@ -163,7 +183,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 8
     region: content
   field_edition_number:
     type: string
@@ -199,7 +219,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 6
     region: content
   field_individual_copy:
     type: entity_reference_revisions_entity_view
@@ -237,7 +257,7 @@ content:
             fi-def-at: false
             prefix: '<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">'
             suffix: ''
-    weight: 11
+    weight: 12
     region: content
   field_isbn:
     type: string
@@ -273,7 +293,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: content
   field_locations:
     type: entity_reference_label
@@ -310,14 +330,14 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 7
     region: content
   field_publication_date:
     type: datetime_default
     label: inline
     settings:
       timezone_override: ''
-      format_type: olivero_medium
+      format_type: dd_mn_yy
     third_party_settings:
       ds:
         ft:
@@ -347,7 +367,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 0
+    weight: 1
     region: content
   field_volume:
     type: string
@@ -383,28 +403,28 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: content
   flag_bookmark:
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 11
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_alternative_title: true
   field_initial_stock_level: true
   field_note: true
   field_number_of_times_borrowed: true
   field_page_number: true
   field_pdf: true
+  field_publications: true
   field_reading_lists: true
   field_series: true
   field_stock_level: true

@@ -1,0 +1,30 @@
+uuid: fba88fe2-e309-4ff5-9133-eca038f4f6b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.browse_library
+  module:
+    - system
+    - views
+  theme:
+    - govuk_pins
+id: govuk_pins_views_block__browse_library_block_7
+theme: govuk_pins
+region: content
+weight: -14
+provider: null
+plugin: 'views_block:browse_library-block_7'
+settings:
+  id: 'views_block:browse_library-block_7'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /disabled

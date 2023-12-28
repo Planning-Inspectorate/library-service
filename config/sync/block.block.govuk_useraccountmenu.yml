@@ -1,6 +1,6 @@
 uuid: d048a3da-4ebc-4d25-b8e2-79816fa4d600
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.account
@@ -10,7 +10,7 @@ dependencies:
     - govuk
 id: govuk_useraccountmenu
 theme: govuk
-region: nav_branding
+region: cookies
 weight: 0
 provider: null
 plugin: 'system_menu_block:account'

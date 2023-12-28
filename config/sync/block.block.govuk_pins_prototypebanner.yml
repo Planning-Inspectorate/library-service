@@ -1,0 +1,25 @@
+uuid: 82bebab3-9719-4da5-8f30-bc63cc049c41
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:77285221-5090-439c-9ed3-472124c998e9'
+  module:
+    - block_content
+  theme:
+    - govuk_pins
+id: govuk_pins_prototypebanner
+theme: govuk_pins
+region: pre_content
+weight: -12
+provider: null
+plugin: 'block_content:77285221-5090-439c-9ed3-472124c998e9'
+settings:
+  id: 'block_content:77285221-5090-439c-9ed3-472124c998e9'
+  label: 'Prototype banner'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

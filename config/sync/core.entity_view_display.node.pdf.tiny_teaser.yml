@@ -1,0 +1,118 @@
+uuid: 2633df1a-a453-4b16-b6bb-e4da4617ca2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.tiny_teaser
+    - field.field.node.pdf.body
+    - field.field.node.pdf.comment
+    - field.field.node.pdf.field_alternative_title
+    - field.field.node.pdf.field_archive
+    - field.field.node.pdf.field_author
+    - field.field.node.pdf.field_category
+    - field.field.node.pdf.field_content_reference
+    - field.field.node.pdf.field_isbn
+    - field.field.node.pdf.field_links
+    - field.field.node.pdf.field_note
+    - field.field.node.pdf.field_pdf
+    - field.field.node.pdf.field_pdf_media
+    - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_publications
+    - field.field.node.pdf.field_reading_lists
+    - field.field.node.pdf.field_series
+    - field.field.node.pdf.field_tags
+    - field.field.node.pdf.field_topics
+    - field.field.node.pdf.field_volume
+    - node.type.pdf
+  module:
+    - ds
+    - entity_reference_revisions
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - field_links
+id: node.pdf.tiny_teaser
+targetEntityType: node
+bundle: pdf
+mode: tiny_teaser
+content:
+  field_links:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: 'govuk-list  govuk-list--spaced'
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: govuk-list--spaced--item
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: content
+hidden:
+  body: true
+  comment: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_alternative_title: true
+  field_archive: true
+  field_author: true
+  field_category: true
+  field_content_reference: true
+  field_isbn: true
+  field_note: true
+  field_pdf: true
+  field_pdf_media: true
+  field_publication_date: true
+  field_publications: true
+  field_reading_lists: true
+  field_series: true
+  field_tags: true
+  field_topics: true
+  field_volume: true
+  flag_bookmark: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

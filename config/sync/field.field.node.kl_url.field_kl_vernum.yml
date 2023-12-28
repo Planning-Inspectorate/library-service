@@ -9,7 +9,7 @@ id: node.kl_url.field_kl_vernum
 field_name: field_kl_vernum
 entity_type: node
 bundle: kl_url
-label: 'KL VerNum'
+label: VerNum
 description: ''
 required: false
 translatable: false

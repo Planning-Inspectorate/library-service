@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.article.field_isbn
     - field.field.node.article.field_note
     - field.field.node.article.field_publication_date
+    - field.field.node.article.field_publications
     - field.field.node.article.field_reading_lists
     - field.field.node.article.field_series
     - field.field.node.article.field_tags
@@ -52,6 +53,7 @@ hidden:
   field_isbn: true
   field_note: true
   field_publication_date: true
+  field_publications: true
   field_reading_lists: true
   field_series: true
   field_tags: true

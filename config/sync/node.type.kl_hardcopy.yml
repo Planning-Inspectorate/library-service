@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'KL Hardcopy'
 type: kl_hardcopy
-description: ''
+description: 'Used for creating physical related documents.'
 help: ''
 new_revision: false
 preview_mode: 0

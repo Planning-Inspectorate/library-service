@@ -11,7 +11,7 @@ id: node.kl_url.field_kl_url
 field_name: field_kl_url
 entity_type: node
 bundle: kl_url
-label: 'KL Url'
+label: Url
 description: ''
 required: false
 translatable: false

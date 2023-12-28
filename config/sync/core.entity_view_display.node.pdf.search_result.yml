@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.pdf.field_pdf
     - field.field.node.pdf.field_pdf_media
     - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_publications
     - field.field.node.pdf.field_reading_lists
     - field.field.node.pdf.field_series
     - field.field.node.pdf.field_tags
@@ -33,6 +34,8 @@ third_party_settings:
     layout:
       id: ds_reset
       settings:
+        disable_css: false
+        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
@@ -42,8 +45,6 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
-        disable_css: false
-        entity_classes: all_classes
     regions:
       content:
         - node_title
@@ -93,6 +94,7 @@ hidden:
   field_note: true
   field_pdf: true
   field_pdf_media: true
+  field_publications: true
   field_reading_lists: true
   field_series: true
   field_tags: true

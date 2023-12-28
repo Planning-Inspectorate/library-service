@@ -9,7 +9,7 @@ id: node.kl_url.field_kl_doc_version
 field_name: field_kl_doc_version
 entity_type: node
 bundle: kl_url
-label: 'KL Doc Version'
+label: 'Doc Version'
 description: ''
 required: false
 translatable: false

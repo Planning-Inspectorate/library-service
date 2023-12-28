@@ -9,7 +9,7 @@ id: node.kl_url.field_kl_alternative_title
 field_name: field_kl_alternative_title
 entity_type: node
 bundle: kl_url
-label: 'KL Alternative Title'
+label: 'Alternative Title'
 description: ''
 required: false
 translatable: false

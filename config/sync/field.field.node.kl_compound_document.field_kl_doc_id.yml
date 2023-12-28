@@ -9,7 +9,7 @@ id: node.kl_compound_document.field_kl_doc_id
 field_name: field_kl_doc_id
 entity_type: node
 bundle: kl_compound_document
-label: 'KL Doc Id'
+label: 'Doc Id'
 description: ''
 required: false
 translatable: false

@@ -10,7 +10,7 @@ id: node.kl_compound_document.field_kl_doc_folder
 field_name: field_kl_doc_folder
 entity_type: node
 bundle: kl_compound_document
-label: 'KL Doc Folder'
+label: 'Doc Folder'
 description: ''
 required: false
 translatable: false

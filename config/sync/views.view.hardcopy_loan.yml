@@ -1,4 +1,4 @@
-uuid: ff77caee-c279-405f-88f4-82faccb8d341
+uuid: 9d6d314e-6b68-4bf9-a1c9-9337faebd823
 langcode: en
 status: true
 dependencies:
@@ -6,12 +6,10 @@ dependencies:
     - field.storage.node.field_borrowed_by
     - field.storage.node.field_borrowed_date
     - field.storage.node.field_isbn
-    - field.storage.node.field_location
     - field.storage.node.field_return_date
     - field.storage.paragraph.field_barcode
     - field.storage.paragraph.field_content_reference
-    - node.type.issued_hard_copy
-    - taxonomy.vocabulary.locations
+    - node.type.hard_copy_loan
     - user.role.administrator
     - user.role.content_editor
     - user.role.library_admin
@@ -21,7 +19,6 @@ dependencies:
     - datetime
     - node
     - paragraphs
-    - taxonomy
     - text
     - user
 id: hardcopy_loan
@@ -753,7 +750,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            issued_hard_copy: issued_hard_copy
+            hard_copy_loan: hard_copy_loan
           group: 1
           exposed: false
           expose:
@@ -1034,7 +1031,6 @@ display:
       tags:
         - 'config:field.storage.node.field_borrowed_by'
         - 'config:field.storage.node.field_borrowed_date'
-        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_return_date'
         - 'config:field.storage.paragraph.field_barcode'
         - 'config:field.storage.paragraph.field_content_reference'
@@ -1557,78 +1553,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_barcode:
-          id: field_barcode
-          table: paragraph__field_barcode
-          field: field_barcode
-          relationship: field_individual_copy
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Barcode
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: barcode
-          settings:
-            type: QRCODE
-            color: '#000000'
-            height: 100
-            width: 100
-            padding_top: 0
-            padding_right: 0
-            padding_bottom: 0
-            padding_left: 0
-            show_value: false
-            format: SVG
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
       pager:
         type: some
         options:
@@ -1689,7 +1613,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            issued_hard_copy: issued_hard_copy
+            hard_copy_loan: hard_copy_loan
           group: 1
           exposed: false
           expose:
@@ -1818,9 +1742,7 @@ display:
       tags:
         - 'config:field.storage.node.field_borrowed_by'
         - 'config:field.storage.node.field_borrowed_date'
-        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_return_date'
-        - 'config:field.storage.paragraph.field_barcode'
         - 'config:field.storage.paragraph.field_content_reference'
   block_2:
     id: block_2
@@ -2341,78 +2263,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_barcode:
-          id: field_barcode
-          table: paragraph__field_barcode
-          field: field_barcode
-          relationship: field_individual_copy
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Barcode
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: barcode
-          settings:
-            type: QRCODE
-            color: '#000000'
-            height: 100
-            width: 100
-            padding_top: 0
-            padding_right: 0
-            padding_bottom: 0
-            padding_left: 0
-            show_value: false
-            format: SVG
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
       pager:
         type: some
         options:
@@ -2469,6 +2319,7 @@ display:
           title: ''
           default_argument_type: node
           default_argument_options: {  }
+          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -2509,7 +2360,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            issued_hard_copy: issued_hard_copy
+            hard_copy_loan: hard_copy_loan
           group: 1
           exposed: false
           expose:
@@ -2641,9 +2492,7 @@ display:
       tags:
         - 'config:field.storage.node.field_borrowed_by'
         - 'config:field.storage.node.field_borrowed_date'
-        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_return_date'
-        - 'config:field.storage.paragraph.field_barcode'
         - 'config:field.storage.paragraph.field_content_reference'
   hardcopy:
     id: hardcopy
@@ -3016,7 +2865,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: olivero_medium
+            format_type: dd_mn_yy
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -3080,7 +2929,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: olivero_medium
+            format_type: dd_mn_yy
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -3280,78 +3129,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_barcode:
-          id: field_barcode
-          table: paragraph__field_barcode
-          field: field_barcode
-          relationship: field_individual_copy
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Barcode
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: barcode
-          settings:
-            type: QRCODE
-            color: '#000000'
-            height: 100
-            width: 100
-            padding_top: 0
-            padding_right: 0
-            padding_bottom: 0
-            padding_left: 0
-            show_value: false
-            format: SVG
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
       filters:
         status:
           id: status
@@ -3376,7 +3153,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            issued_hard_copy: issued_hard_copy
+            hard_copy_loan: hard_copy_loan
           group: 1
           exposed: false
           expose:
@@ -3654,7 +3431,7 @@ display:
         filters: false
         filter_groups: false
       display_extenders: {  }
-      path: admin/hardcopy-loans
+      path: admin/hardcopy-loan-report
     cache_metadata:
       max-age: 0
       contexts:
@@ -3668,7 +3445,5 @@ display:
         - 'config:field.storage.node.field_borrowed_by'
         - 'config:field.storage.node.field_borrowed_date'
         - 'config:field.storage.node.field_isbn'
-        - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_return_date'
-        - 'config:field.storage.paragraph.field_barcode'
         - 'config:field.storage.paragraph.field_content_reference'

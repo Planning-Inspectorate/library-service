@@ -1,0 +1,43 @@
+display:
+  default:
+    display_title: Diofyn
+    display_options:
+      fields:
+        severity:
+          label: Difrifoldeb
+        type:
+          label: Math
+        timestamp:
+          label: Dyddiad
+        message:
+          label: Neges
+        name:
+          label: Defnyddiwr
+        link:
+          label: Gweithrediad
+      pager:
+        options:
+          tags:
+            next: '>>'
+            previous: '<<'
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      exposed_form:
+        options:
+          submit_button: Hidlydd
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      empty:
+        area:
+          admin_label: 'Dim negeseuon log ar gael.'
+          content: 'Dim negeseuon log ar gael.'
+      filters:
+        type:
+          expose:
+            label: Math
+        severity:
+          expose:
+            label: Difrifoldeb
+  page:
+    display_title: Tudalen

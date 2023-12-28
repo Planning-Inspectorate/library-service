@@ -11,7 +11,7 @@ id: node.kl_document.field_kl_vercdate
 field_name: field_kl_vercdate
 entity_type: node
 bundle: kl_document
-label: 'KL VerCDate'
+label: VerCDate
 description: ''
 required: false
 translatable: false
