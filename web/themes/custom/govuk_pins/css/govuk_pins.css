@@ -136,3 +136,115 @@ aside .editorschoice-menu.govuk-list ul {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+.box-link {
+  border-radius: var(--border-radius-alt);
+  /* border-top-left-radius: ;
+  border-top-right-radius: ;
+  border-bottom-right-radius: ;
+  border-bottom-left-radius: ; */
+  margin-bottom: var(--grid-gap);
+}
+
+@media only screen and (min-width: 1024px){
+  
+.box-link__top {
+    height: 200px;
+  }
+}
+.box-link__top {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-medium);
+  border-top-left-radius: var(--border-radius-alt);
+  border-top-right-radius: var(--border-radius-alt);
+  border: #19615B solid 2px;
+}
+
+.box-link h3 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 23px;  /* font-size: calc($font-size/10)rem; */
+  text-align: center;
+}
+.box-link__bottom {
+  background: #19615B;
+  padding: var(--space-sm);
+  border-bottom-left-radius: var(--border-radius-alt);
+  border-bottom-right-radius: var(--border-radius-alt);
+}
+
+.box-link__bottom p {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+}
+.box-link:link, .box-link a:link {
+  color: #19615B;
+}
+
+.box-link h3 a{
+  font-weight: 900;;
+}
+.flag-bookmark{ 
+  margin: 25px 0;
+  clear: both;
+}
+.frontpage-tiles, #block-govuk-pins-frontpage{
+  margin: 15px 0;
+  clear: both;
+}
+
+.govuk-grid-column-one-third .box-link__bottom  {
+  /* background: #ccc; */
+}
+
+:root{
+  /* --border-radius-alt: 1rem;
+  --space-small: 1rem; */
+  --text-color-default: #313131;
+  --body-color: #f4f4f4;
+  --box-link-bg: #f4f4f4;
+  --unpublished-color: #ccc;
+  --link-color: #d01c2f;
+  --cta-text-color: #fff;
+  --cta-color: #d01c2f;
+  --cta-border: #d01c2f;
+  --container-size: 1200px;
+  --text-decoration-thickness: 2px;
+  --text-decoration-border-color: #f4f4f4;
+  --form-input-bg: #fff;
+  --border-radius-default: 5px;
+  --border-radius-alt: 1rem;
+  --border-width-default: 1px;
+  --border-width-alt: 3px;
+  --duration-default: .25s;
+  --duration-alt: .5s;
+  --spacing-small: 1rem;
+  --spacing-default: 2rem;
+  --spacing-medium: 3.2rem;
+  --spacing-large: 6.4rem;
+  --spacing-x-large: 12.8rem;
+  --flow-space: 2rem;
+  --list-item-spacing: 2rem;
+  --grid-gap: 2.8rem;
+  --auto-fill: repeat(auto-fill, minmax(400px, 1fr));
+  --color-border: #1D1D1B;
+  --color-border-alt: #E8E8E8;
+  --space: 2rem; 
+  --space-xs: calc(var(--space)/3); 
+  --space-sm: calc(var(--space)/2); 
+  --space-md: calc(var(--space)*2); 
+  --color-primary: lightgray; 
+  --color-accent: whitesmoke; 
+  --color-dark: black; 
+  --color-mid: gray; 
+  --color-light: white; 
+  --color-highlight: dodgerblue; 
+  --radius: 0.125rem;
+}
+
