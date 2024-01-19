@@ -17,6 +17,7 @@
     "require": {
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "1.7.3",
+        "drupal/accordion_blocks": "^2.0",
         "drupal/admin_toolbar": "3.4.2",
         "drupal/auto_entitylabel": "3.0",
         "drupal/barcodes": "2.0.6",
@@ -27,6 +28,7 @@
         "drupal/captcha": "2.0.5",
         "drupal/clientside_validation": "4.0.2",
         "drupal/coder": "^8.3",
+        "drupal/collapsiblock": "^4.1",
         "drupal/config_entity_cloner": "^1.1@RC",
         "drupal/config_filter": "^2.6",
         "drupal/config_ignore": "^3.1",
@@ -93,6 +95,7 @@
         "drupal/views_bulk_edit": "2.9",
         "drupal/views_bulk_operations": "4.2.5",
         "drupal/views_contextual_filters_or": "^1.4",
+        "drupal/views_data_export": "^1.4",
         "drupal/views_send": "^2.0@RC",
         "drupal/webform": "6.2.0",
         "drupal/weight": "3.4",

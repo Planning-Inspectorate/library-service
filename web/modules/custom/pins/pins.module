@@ -13,6 +13,12 @@ use Drupal\node\NodeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\user\Entity\User;
+
 
 /**
   * Implements hook_form_alter().  
@@ -165,4 +171,101 @@ function pins_preprocess_html(&$variables) {
   if ($route_match->getRouteName() === 'node.add') {
     $variables['head_title']['title'] = str_replace('Create', 'Add ', $variables['head_title']['title']);
   }
+}
+
+/**
+* Implements hook_views_query_alter().
+*/
+
+function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
+  $user = \Drupal::currentUser();
+
+  if (($view->storage->get('id') == 'horizon') ) {
+    if (($view->getDisplay()->display['id'] == 'versions') ) {
+      
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof \Drupal\node\NodeInterface) {
+        //Get the current node object.
+        $nid = $node->id();
+        //get document version id
+        if($node->hasField('field_kl_doc_id')){
+          $doc_id = $node->get('field_kl_doc_id')->value;
+        }
+      }
+
+      if (!empty($doc_id)) {
+        foreach ($query->where as &$condition_group) {
+          foreach ($condition_group['conditions'] as &$condition) {
+            if ($condition['field'] == 'node__field_kl_doc_id.field_kl_doc_id_value') {
+              $condition = [
+              'field' => 'node__field_kl_doc_id.field_kl_doc_id_value',
+              'value' => $doc_id,
+              'operator' => 'LIKE'
+              ];
+            }       
+          }
+        }
+      }
+    }
+  }
+}
+
+function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_doc_id'){
+  $data = null;
+  $user = \Drupal::currentUser();
+  $uid = $user->id();
+  $cid = $cid;
+
+  if($cache = \Drupal::cache()->get($cid)) {
+      $data = $cache->data;
+  }
+  else {      
+    $data = pins_get_version_doc_id($nid);
+     \Drupal::cache()
+       ->set($cid, $data);
+  }
+  
+  return  $data;
+}
+
+function pins_get_version_doc_id($nid){
+
+  $query = \Drupal::database()->select('nood__field_kl_doc_id', 'd');
+
+  $query->fields('d', ['field_kl_doc_id_value']);
+  $query->condition('d.entity_id', $nid);
+  $query->distinct();
+  return $result = $query->execute()->fetchAll();
+}
+
+function pins_get_cached_doc_version_id($doc_id, $cid = 'pins_get_revision_nid_by_doc_id'){
+  $data = null;
+  $user = \Drupal::currentUser();
+  $uid = $user->id();
+  $cid = $cid;
+
+  if($cache = \Drupal::cache()->get($cid)) {
+      $data = $cache->data;
+  }
+  else {      
+    $data = pins_get_doc_version_id($doc_id);
+     \Drupal::cache()
+       ->set($cid, $data);
+  }
+  return  $data;
+}
+
+function pins_get_doc_version_id($doc_id, $nid=0){
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+  $nodeQuery = $nodeStorage->getQuery();
+  $nids = $nodeQuery->accessCheck(false)
+    ->condition('type', 'kl_document')
+    ->condition('field_kl_doc_id', $doc_id);
+    
+    if(!empty($nid)){
+      $nodeQuery->condition('entity_id', $nid, '<>');
+    }
+
+    $nodeQuery->execute();
+  return $nids;
 }
