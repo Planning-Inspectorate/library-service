@@ -63,6 +63,8 @@ function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'article':
         case 'hard_copy':
         case 'pdf':
+        case 'kl_compound_document':
+        case 'kl_document':
           //Use nid as a unique value
           $reference_id = $entity->id();
           pins_entity_insert_unique_reference_id($entity, $reference_id);    
@@ -85,6 +87,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'article':
         case 'hard_copy':
         case 'pdf':
+        case 'kl_document':
           //Use nid as a unique reference id
           if(!$entity->isNew()){
             $reference_id = $entity->id();
@@ -100,9 +103,74 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
+        case 'kl_compound_document':
+          pins_compound_document($entity);
+          
+          //Use nid as a unique reference id
+          if(!$entity->isNew()){
+            $reference_id = $entity->id();
+            pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
+          }
+          break;
+
       }
       break;
   }
+}
+
+/**
+  *  
+  *function pins_compound_document
+  * For creating and updating compound document based on referenced
+  *
+*/
+
+function pins_compound_document(&$entity, $field_name='field_documents'){
+  if($entity->hasField($field_name)){
+    $document_entities = $entity->get($field_name)->referencedEntities();
+    $authors = $classification = $doc_folder = $series = [];
+    $fieldnames = [
+      "field_kl_authors",
+      "field_kl_classification",
+      "field_kl_doc_folder",
+      "field_kl_series",
+    ];
+    $results = [];
+
+    foreach ($document_entities as $key => $document_entity) {
+      foreach ($fieldnames as $key => $fieldname) {
+        //host target ids
+        $host_target_ids = (array)pins_get_target_ids($entity, $fieldname);
+        //compound target ids
+        $compounded_target_ids = (array)pins_get_target_ids($document_entity, $fieldname);
+
+        $merged_ids = array_merge((array)$results[$fieldname], $host_target_ids, $compounded_target_ids);
+        $target_ids = array_unique($merged_ids);
+        $results[$fieldname] = $target_ids;
+      }   
+    }
+
+    foreach ($results as $fieldname => $target_ids) {
+      $entity->get($fieldname)->setValue($target_ids);
+    }
+  }
+}
+
+/**
+  *  
+  *function pins_get_target_ids
+  * get field values
+  *
+*/
+function pins_get_target_ids($entity, $fieldname){
+  $target_ids = [];
+  if($fieldname && $entity->hasField($fieldname)){
+    if($entity->get($fieldname)->target_id){
+      $target_id_strs = $entity->get($fieldname)->getString();
+      $target_ids = explode(',',str_replace(" ", "",$target_id_strs));
+    }
+  }
+  return $target_ids;
 }
 
 /**
@@ -229,7 +297,6 @@ function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_
 }
 
 function pins_get_version_doc_id($nid){
-
   $query = \Drupal::database()->select('nood__field_kl_doc_id', 'd');
 
   $query->fields('d', ['field_kl_doc_id_value']);
