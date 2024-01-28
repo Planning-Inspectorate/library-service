@@ -11,8 +11,8 @@ id: node.kl_document.field_kl_vermdate
 field_name: field_kl_vermdate
 entity_type: node
 bundle: kl_document
-label: VerMDate
-description: ''
+label: 'Modified/Updated Date'
+description: "VerMDate)\r\n"
 required: false
 translatable: false
 default_value: {  }

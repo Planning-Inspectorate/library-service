@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'KL Virtual Folder'
+name: 'Virtual Folder'
 type: kl_virtual_folder
 description: 'Use <em>KL Virtual Folders</em> to define a link to an alternate KL Folders (taxonomy term) item.'
 help: ''

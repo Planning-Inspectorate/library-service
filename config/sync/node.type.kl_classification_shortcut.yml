@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'KL Classification Shortcut'
+name: 'Classification Shortcut'
 type: kl_classification_shortcut
 description: 'Use <em>KL Classification Shortcut</em> for linking to alternate terms in the KL Classification vocabulary.'
 help: ''

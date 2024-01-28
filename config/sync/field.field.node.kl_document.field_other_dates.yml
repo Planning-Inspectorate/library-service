@@ -1,0 +1,70 @@
+uuid: 358ed19c-e716-422e-a06e-6d7bf7a0d09f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_other_dates
+    - node.type.kl_document
+    - paragraphs.paragraphs_type.other_dates
+  module:
+    - entity_reference_revisions
+id: node.kl_document.field_other_dates
+field_name: field_other_dates
+entity_type: node
+bundle: kl_document
+label: 'Other Dates'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      other_dates: other_dates
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 15
+        enabled: false
+      archive_paragraphs_type:
+        weight: 16
+        enabled: false
+      author_paragraphs_type:
+        weight: 17
+        enabled: false
+      category_paragraphs_type:
+        weight: 18
+        enabled: false
+      hard_copy:
+        weight: 19
+        enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
+      note:
+        weight: 22
+        enabled: false
+      other_dates:
+        weight: 23
+        enabled: true
+      pdf:
+        weight: 24
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 25
+        enabled: false
+      series_paragraphs_type:
+        weight: 26
+        enabled: false
+      tags_paragraphs_type:
+        weight: 27
+        enabled: false
+      topic_paragraphs_type:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

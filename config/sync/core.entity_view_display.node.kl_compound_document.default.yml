@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_content_reference
+    - field.field.node.kl_compound_document.field_documents
     - field.field.node.kl_compound_document.field_kl_archived
     - field.field.node.kl_compound_document.field_kl_archived_date
     - field.field.node.kl_compound_document.field_kl_authors
@@ -36,7 +38,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: content
-      weight: 4
+      weight: 5
       format_type: accordion
       format_settings:
         classes: ''
@@ -54,7 +56,7 @@ third_party_settings:
       label: 'Legacy Migration Data'
       parent_name: group_accordion
       region: content
-      weight: 6
+      weight: 7
       format_type: accordion_item
       format_settings:
         classes: ''
@@ -97,22 +99,23 @@ third_party_settings:
         label: ''
     regions:
       content:
+        - field_dom
         - body
         - field_weight
-        - field_kl_archived
         - field_kl_doc_id
-        - field_kl_archived_date
+        - field_kl_archived
         - field_kl_doc_unique_id
-        - group_accordion
+        - field_kl_archived_date
         - field_kl_doc_folder
         - field_kl_doc_version
+        - group_accordion
         - group_categories
         - field_kl_classification
         - field_kl_doc_parentid
         - field_kl_reading_lists
-        - group_legacy_migration_data
         - field_kl_doc_parent_subtype
         - field_kl_authors
+        - group_legacy_migration_data
         - field_kl_series
         - field_kl_doc_origindataid
 id: node.kl_compound_document.default
@@ -125,7 +128,23 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
+    region: content
+  field_content_reference:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_documents:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 12
     region: content
   field_kl_archived:
     type: boolean
@@ -163,7 +182,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 2
+    weight: 3
     region: content
   field_kl_archived_date:
     type: datetime_default
@@ -200,7 +219,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: content
   field_kl_authors:
     type: entity_reference_label
@@ -636,7 +655,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 2
     region: content
 hidden:
   entity_print_view_epub: true

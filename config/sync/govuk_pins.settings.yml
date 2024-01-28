@@ -21,3 +21,8 @@ govuk_cookie_policy:
   analytics: analytics
   functional: functional
   other: other
+search_library_box: 1
+govuk_pins_phase_banner: prototype
+govuk_pins_phase_banner_message:
+  value: '<p>This is a new service – your <a class="govuk-link" href="/contact/feedback">feedback</a> will help us to improve it.</p>'
+  format: full_html

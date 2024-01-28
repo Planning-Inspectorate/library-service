@@ -5,6 +5,11 @@ dependencies:
   config:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_archived_note
+    - field.field.node.kl_document.field_content_reference
+    - field.field.node.kl_document.field_edition_number
+    - field.field.node.kl_document.field_general_notes
+    - field.field.node.kl_document.field_isbn
     - field.field.node.kl_document.field_kl_alternative_title
     - field.field.node.kl_document.field_kl_archived
     - field.field.node.kl_document.field_kl_archived_date
@@ -30,11 +35,17 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_other_dates
+    - field.field.node.kl_document.field_publication_date
+    - field.field.node.kl_document.field_security_classification_ty
+    - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
     - datetime
     - ds
+    - entity_reference_revisions
+    - field_group
     - file
     - text
     - user
@@ -77,7 +88,6 @@ third_party_settings:
         - field_kl_filemdate
         - field_kl_archived
         - field_kl_archived_date
-        - field_weight
         - field_kl_doc_folder
         - field_kl_doc_compound_folder
         - field_kl_classification
@@ -85,6 +95,36 @@ third_party_settings:
         - field_kl_reading_lists
         - field_kl_series
         - links
+        - field_weight
+        - group_migration_report
+  field_group:
+    group_migration_report:
+      children:
+        - group_migration_report_items
+      label: 'Migration report'
+      parent_name: ''
+      region: content
+      weight: 28
+      format_type: accordion
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        effect: none
+    group_migration_report_items:
+      children:
+        - field_weight
+      label: 'Migration report items'
+      parent_name: group_migration_report
+      region: hidden
+      weight: 20
+      format_type: accordion_item
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
 id: node.kl_document.default
 targetEntityType: node
 bundle: kl_document
@@ -101,6 +141,28 @@ content:
           settings:
             lb: ''
     weight: 1
+    region: content
+  field_archived_note:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 30
+    region: content
+  field_content_reference:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_general_notes:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 29
     region: content
   field_kl_alternative_title:
     type: basic_string
@@ -247,7 +309,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 24
+    weight: 23
     region: content
   field_kl_classification:
     type: entity_reference_label
@@ -284,7 +346,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 23
+    weight: 22
     region: content
   field_kl_doc_compound_folder:
     type: entity_reference_label
@@ -321,7 +383,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 22
+    weight: 21
     region: content
   field_kl_doc_file:
     type: file_default
@@ -466,7 +528,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 21
+    weight: 20
     region: content
   field_kl_doc_id:
     type: string
@@ -865,7 +927,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 25
+    weight: 24
     region: content
   field_kl_series:
     type: entity_reference_label
@@ -902,7 +964,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 26
+    weight: 25
     region: content
   field_kl_vercdate:
     type: datetime_default
@@ -1014,6 +1076,15 @@ content:
             suffix: ''
     weight: 16
     region: content
+  field_other_dates:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 31
+    region: content
   field_weight:
     type: default_weight
     label: inline
@@ -1047,17 +1118,22 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 20
+    weight: 27
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 27
+    weight: 26
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_edition_number: true
+  field_isbn: true
+  field_publication_date: true
+  field_security_classification_ty: true
+  field_volume: true
   langcode: true
   search_api_excerpt: true

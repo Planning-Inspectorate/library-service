@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_content_reference
+    - field.field.node.kl_compound_document.field_documents
     - field.field.node.kl_compound_document.field_kl_archived
     - field.field.node.kl_compound_document.field_kl_archived_date
     - field.field.node.kl_compound_document.field_kl_authors
@@ -47,6 +49,8 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_content_reference: true
+  field_documents: true
   field_kl_archived: true
   field_kl_archived_date: true
   field_kl_authors: true

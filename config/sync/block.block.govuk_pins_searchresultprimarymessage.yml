@@ -27,4 +27,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/lib-search\r\n<front>\r\n/search-library\r\n/search-library/*"
+    pages: "/lib-search\r\n/search-library\r\n/search-library/*"

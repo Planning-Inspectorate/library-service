@@ -12,12 +12,8 @@ dependencies:
     - field.storage.node.field_content_reference
     - field.storage.node.field_edition_number
     - field.storage.node.field_isbn
-    - field.storage.node.field_links
     - field.storage.media.field_media_document
     - field.storage.node.field_pdf
-    - field.storage.node.field_pdf_media
-    - field.storage.paragraph.field_pdf
-    - field.storage.paragraph.field_pdf_file
     - field.storage.node.field_publication_date
     - field.storage.node.field_reading_lists
     - field.storage.paragraph.field_reading_list
@@ -129,14 +125,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_isbn
-  field_links:
-    label: 'External links'
-    datasource_id: 'entity:node'
-    property_path: field_links
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_links
   field_media_document:
     label: 'PDF » Media » Document'
     datasource_id: 'entity:node'
@@ -148,37 +136,15 @@ field_settings:
         - field.storage.node.field_pdf
       module:
         - media
-  field_pdf:
-    label: 'PDF and Number of pages » Paragraph » PDF media'
-    datasource_id: 'entity:node'
-    property_path: 'field_pdf_media:entity:field_pdf'
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_pdf_media
-        - field.storage.paragraph.field_pdf
-      module:
-        - paragraphs
-  field_pdf_file:
-    label: 'PDF and Number of pages » Paragraph » PDF'
-    datasource_id: 'entity:node'
-    property_path: 'field_pdf_media:entity:field_pdf_file'
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_pdf_media
-        - field.storage.paragraph.field_pdf_file
-      module:
-        - paragraphs
-  field_pdf_media:
-    label: 'PDF and Number of pages'
-    datasource_id: 'entity:node'
-    property_path: field_pdf_media
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_pdf_media
   field_publication_date:
+    label: 'Publication Date'
+    datasource_id: 'entity:node'
+    property_path: field_publication_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_publication_date
+  field_publication_date_1:
     label: 'Publication Date'
     datasource_id: 'entity:node'
     property_path: field_publication_date
@@ -311,9 +277,10 @@ datasource_settings:
       selected: {  }
   'entity:node':
     bundles:
-      default: true
+      default: false
       selected:
-        - issued_hard_copy
+        - article
+        - hard_copy
     languages:
       default: true
       selected: {  }

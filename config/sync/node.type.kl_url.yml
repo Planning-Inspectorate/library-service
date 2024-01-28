@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'KL Url'
+name: Url
 type: kl_url
 description: 'Use KL Url to define a link to an alternate KL Document item.'
 help: ''

@@ -1990,7 +1990,6 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-        - user
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
@@ -2031,7 +2030,7 @@ display:
               autosubmit_hide: false
               input_required: true
               allow_secondary: true
-              secondary_label: Filters
+              secondary_label: 'Advanced search'
               secondary_open: false
               reset_button_always_show: false
             sort:
@@ -2561,7 +2560,6 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-        - user
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
@@ -2595,7 +2593,6 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-        - user
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'

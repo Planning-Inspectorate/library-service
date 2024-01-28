@@ -15,14 +15,14 @@ third_party_settings:
     classes: 'govuk-list govuk-list--spaced'
 id: govuk_pins_editorschoice
 theme: govuk_pins
-region: sidebar_first
+region: content
 weight: -15
 provider: null
 plugin: 'menu_block:editor-s-choice'
 settings:
   id: 'menu_block:editor-s-choice'
   label: "Editor's choice"
-  label_display: visible
+  label_display: '0'
   provider: menu_block
   follow: false
   follow_parent: child
@@ -37,4 +37,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: '<front>'
+    pages: "/disabled\r\n/editors-choice"

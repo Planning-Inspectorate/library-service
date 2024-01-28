@@ -117,8 +117,10 @@ field_settings:
 datasource_settings:
   'entity:node':
     bundles:
-      default: true
-      selected: {  }
+      default: false
+      selected:
+        - article
+        - hard_copy
     languages:
       default: true
       selected: {  }
@@ -140,6 +142,7 @@ processor_settings:
     weights:
       preprocess_index: -6
       preprocess_query: -4
+  custom_value: {  }
   entity_status:
     weights:
       preprocess_index: -10

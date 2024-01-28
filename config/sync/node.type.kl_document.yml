@@ -9,7 +9,7 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'KL Document'
+name: Document
 type: kl_document
 description: 'Use <em>KL Documents</em> to create a page representing a document in the Knowledge Library.'
 help: ''

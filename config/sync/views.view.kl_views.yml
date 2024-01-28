@@ -8,6 +8,7 @@ dependencies:
     - field.storage.node.field_kl_classification
     - field.storage.node.field_kl_doc_compound_folder
     - field.storage.node.field_kl_doc_folder
+    - field.storage.node.field_kl_doc_id
     - field.storage.node.field_kl_doc_mime_type
     - field.storage.node.field_kl_doc_parentid
     - field.storage.node.field_kl_doc_version
@@ -17,7 +18,6 @@ dependencies:
     - field.storage.node.field_kl_vermdate
     - field.storage.node.field_kl_vernum
     - node.type.article
-    - node.type.documents
     - node.type.hard_copy
     - node.type.hard_copy_loan
     - node.type.kl_classification_shortcut
@@ -1209,7 +1209,6 @@ display:
           value:
             article: article
             page: page
-            documents: documents
             hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
             pdf: pdf
@@ -1517,6 +1516,69 @@ display:
             alt: 'Horizonweb link'
             rel: ''
             link_class: edit-link
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_doc_id:
+          id: field_kl_doc_id
+          table: node__field_kl_doc_id
+          field: field_kl_doc_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Horizon - Doc Id (link)'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'https://horizonweb.planninginspectorate.gov.uk/otcs/cs.exe?func=ll&objId={{ field_kl_doc_id__value }}&objAction=properties&nexturl=%2Fotcs%2Fcs%2Eexe%3Ffunc%3Dll%26objid%3D22423001%26objAction%3Dbrowse%26sort%3Dname'
+            absolute: false
+            external: true
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
             prefix: ''
             suffix: ''
             target: _blank
@@ -2840,6 +2902,50 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_kl_doc_id_value:
+          id: field_kl_doc_id_value
+          table: node__field_kl_doc_id
+          field: field_kl_doc_id_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_kl_doc_id_value_op
+            label: 'Doc Id'
+            description: ''
+            use_operator: false
+            operator: field_kl_doc_id_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: doc_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -2882,6 +2988,7 @@ display:
         - 'config:field.storage.node.field_kl_classification'
         - 'config:field.storage.node.field_kl_doc_compound_folder'
         - 'config:field.storage.node.field_kl_doc_folder'
+        - 'config:field.storage.node.field_kl_doc_id'
         - 'config:field.storage.node.field_kl_doc_mime_type'
         - 'config:field.storage.node.field_kl_doc_parentid'
         - 'config:field.storage.node.field_kl_doc_version'

@@ -37,6 +37,7 @@ dependencies:
     - shortcut
     - system
     - taxonomy
+    - taxonomy_manager
     - toolbar
     - views_bulk_edit
     - views_send
@@ -51,6 +52,7 @@ permissions:
   - 'access content overview'
   - 'access files overview'
   - 'access shortcuts'
+  - 'access taxonomy manager list'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
