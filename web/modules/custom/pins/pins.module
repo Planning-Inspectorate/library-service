@@ -144,7 +144,13 @@ function pins_compound_document(&$entity, $field_name='field_documents'){
         //compound target ids
         $compounded_target_ids = (array)pins_get_target_ids($document_entity, $fieldname);
 
-        $merged_ids = array_merge((array)$results[$fieldname], $host_target_ids, $compounded_target_ids);
+        if(isset($results[$fieldname])){
+          $merged_ids = array_merge((array)$results[$fieldname], $host_target_ids, $compounded_target_ids);
+        }
+        else{
+          $merged_ids = array_merge($host_target_ids, $compounded_target_ids);
+        }
+
         $target_ids = array_unique($merged_ids);
         $results[$fieldname] = $target_ids;
       }   
