@@ -12,7 +12,7 @@ dependencies:
 id: govuk_pins_views_block__browse_library_publications
 theme: govuk_pins
 region: sidebar_first
-weight: -14
+weight: -19
 provider: null
 plugin: 'views_block:browse_library-publications'
 settings:

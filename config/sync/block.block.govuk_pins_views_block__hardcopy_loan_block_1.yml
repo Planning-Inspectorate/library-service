@@ -13,7 +13,7 @@ dependencies:
 id: govuk_pins_views_block__hardcopy_loan_block_1
 theme: govuk_pins
 region: sidebar_first
-weight: -12
+weight: -17
 provider: null
 plugin: 'views_block:hardcopy_loan-block_1'
 settings:

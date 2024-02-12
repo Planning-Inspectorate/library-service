@@ -742,7 +742,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 50
+          items_per_page: 1000
           total_pages: null
           id: 0
           tags:
@@ -1506,7 +1506,7 @@ display:
               responsive: ''
             changed:
               sortable: true
-              default_sort_order: desc
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false

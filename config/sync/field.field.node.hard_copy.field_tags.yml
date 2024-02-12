@@ -37,6 +37,24 @@ settings:
       category_paragraphs_type:
         weight: 12
         enabled: false
+      hard_copy:
+        weight: 19
+        enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
+      note:
+        weight: 22
+        enabled: false
+      other_dates:
+        weight: 23
+        enabled: false
+      pdf:
+        weight: 24
+        enabled: false
       reading_list_paragraphs_type:
         weight: 13
         enabled: false

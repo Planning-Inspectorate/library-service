@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_archived_note
     - field.field.node.kl_compound_document.field_content_reference
+    - field.field.node.kl_compound_document.field_date
     - field.field.node.kl_compound_document.field_documents
     - field.field.node.kl_compound_document.field_kl_archived
     - field.field.node.kl_compound_document.field_kl_archived_date
@@ -21,6 +23,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_doc_version
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
+    - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -39,7 +42,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: content
-      weight: 5
+      weight: 6
       format_type: accordion
       format_settings:
         classes: ''
@@ -57,7 +60,7 @@ third_party_settings:
       label: 'Legacy Migration Data'
       parent_name: group_accordion
       region: content
-      weight: 6
+      weight: 7
       format_type: accordion_item
       format_settings:
         classes: ''
@@ -72,6 +75,7 @@ third_party_settings:
         - field_kl_reading_lists
         - field_kl_series
         - field_kl_doc_folder
+        - field_security_classification
       label: Categories
       parent_name: group_accordion
       region: content
@@ -108,17 +112,19 @@ third_party_settings:
         - field_kl_doc_unique_id
         - field_kl_archived_date
         - field_kl_doc_version
-        - group_accordion
+        - field_content_reference
         - group_categories
-        - group_legacy_migration_data
         - field_kl_doc_parentid
-        - field_kl_authors
+        - group_accordion
         - field_kl_doc_parent_subtype
-        - field_kl_classification
+        - field_kl_authors
+        - group_legacy_migration_data
         - field_kl_doc_origindataid
+        - field_kl_classification
         - field_kl_reading_lists
         - field_kl_series
         - field_kl_doc_folder
+        - field_security_classification
 id: node.kl_compound_document.full
 targetEntityType: node
 bundle: kl_compound_document
@@ -130,6 +136,42 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_content_reference:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: 'reference field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 5
     region: content
   field_documents:
     type: entity_reference_label
@@ -156,7 +198,7 @@ content:
             ow-def-cl: false
             fis: true
             fis-el: ul
-            fis-cl: 'c-documents govuk-list'
+            fis-cl: govuk-list
             fis-at: ''
             fis-def-at: false
             fi: true
@@ -352,7 +394,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 11
     region: content
   field_kl_doc_id:
     type: string
@@ -424,7 +466,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 7
     region: content
   field_kl_doc_parent_subtype:
     type: string
@@ -460,7 +502,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 6
     region: content
   field_kl_doc_parentid:
     type: string
@@ -496,7 +538,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: content
   field_kl_doc_unique_id:
     type: string
@@ -605,7 +647,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
+    weight: 9
     region: content
   field_kl_series:
     type: entity_reference_label
@@ -642,7 +684,15 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
+    weight: 10
+    region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 12
     region: content
   field_weight:
     type: default_weight
@@ -684,7 +734,8 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
-  field_content_reference: true
+  field_archived_note: true
+  field_date: true
   langcode: true
   links: true
   search_api_excerpt: true

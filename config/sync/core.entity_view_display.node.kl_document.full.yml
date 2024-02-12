@@ -6,8 +6,10 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_archived_note
     - field.field.node.kl_document.field_content_reference
+    - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
     - field.field.node.kl_document.field_general_notes
     - field.field.node.kl_document.field_isbn
@@ -36,9 +38,11 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
-    - field.field.node.kl_document.field_other_dates
+    - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_pdf_media
     - field.field.node.kl_document.field_publication_date
-    - field.field.node.kl_document.field_security_classification_ty
+    - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
@@ -46,6 +50,7 @@ dependencies:
     - barcodes
     - datetime
     - ds
+    - entity_reference_revisions
     - field_group
     - file
     - text
@@ -156,6 +161,42 @@ content:
           settings:
             lb: ''
     weight: 1
+    region: content
+  field_alternative_title:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: true
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: content
   field_content_reference:
     type: string
@@ -1102,6 +1143,44 @@ content:
             suffix: ''
     weight: 7
     region: content
+  field_pdf_media:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: pdf-wrapper
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: content
   field_publication_date:
     type: datetime_plain
     label: above
@@ -1145,8 +1224,10 @@ hidden:
   entity_print_view_word_docx: true
   feeds_item: true
   field_archived_note: true
+  field_date: true
   field_general_notes: true
-  field_other_dates: true
-  field_security_classification_ty: true
+  field_long_text: true
+  field_other_date: true
+  field_security_classification: true
   langcode: true
   search_api_excerpt: true

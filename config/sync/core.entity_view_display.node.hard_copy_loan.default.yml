@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.hard_copy_loan.field_obtained_by
     - field.field.node.hard_copy_loan.field_reminder
     - field.field.node.hard_copy_loan.field_return_date
+    - field.field.node.hard_copy_loan.field_security_classification
     - node.type.hard_copy_loan
   module:
     - datetime
@@ -194,6 +195,14 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
+    region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 13
     region: content
 hidden:
   body: true

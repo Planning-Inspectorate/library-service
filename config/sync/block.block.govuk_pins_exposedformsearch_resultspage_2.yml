@@ -2,10 +2,6 @@ uuid: ca8e3408-7765-48dd-9b7e-c9656f70866c
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.search_results
-  module:
-    - views
   theme:
     - govuk_pins
 id: govuk_pins_exposedformsearch_resultspage_2

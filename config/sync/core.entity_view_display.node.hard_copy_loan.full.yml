@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.hard_copy_loan.field_obtained_by
     - field.field.node.hard_copy_loan.field_reminder
     - field.field.node.hard_copy_loan.field_return_date
+    - field.field.node.hard_copy_loan.field_security_classification
     - node.type.hard_copy_loan
   module:
     - datetime
@@ -263,6 +264,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_security_classification: true
   langcode: true
   links: true
   search_api_excerpt: true

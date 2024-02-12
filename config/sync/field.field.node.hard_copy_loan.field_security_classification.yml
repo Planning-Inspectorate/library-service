@@ -1,18 +1,18 @@
-uuid: a1b71a22-ad54-4fbd-abf7-368877895a1a
+uuid: 9636656c-8328-4832-8e94-45f4c1e3f8ce
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_security_classification_ty
-    - node.type.kl_document
+    - field.storage.node.field_security_classification
+    - node.type.hard_copy_loan
     - taxonomy.vocabulary.security_classifications
   content:
     - 'taxonomy_term:security_classifications:c90b50fa-aaa1-43f1-b624-91d08c8276d5'
-id: node.kl_document.field_security_classification_ty
-field_name: field_security_classification_ty
+id: node.hard_copy_loan.field_security_classification
+field_name: field_security_classification
 entity_type: node
-bundle: kl_document
-label: 'Security classification type'
+bundle: hard_copy_loan
+label: 'Security classification'
 description: ''
 required: false
 translatable: false

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.kl_classification_shortcut.body
     - field.field.node.kl_classification_shortcut.field_kl_classification
     - field.field.node.kl_classification_shortcut.field_kl_classification_shortcut
+    - field.field.node.kl_classification_shortcut.field_security_classification
     - field.field.node.kl_classification_shortcut.field_weight
     - node.type.kl_classification_shortcut
   module:
@@ -52,6 +53,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_security_classification:
+    type: options_select
+    weight: 26
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_weight:
     type: weight_selector

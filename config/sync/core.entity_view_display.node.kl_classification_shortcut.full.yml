@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.kl_classification_shortcut.body
     - field.field.node.kl_classification_shortcut.field_kl_classification
     - field.field.node.kl_classification_shortcut.field_kl_classification_shortcut
+    - field.field.node.kl_classification_shortcut.field_security_classification
     - field.field.node.kl_classification_shortcut.field_weight
     - node.type.kl_classification_shortcut
   module:
@@ -171,5 +172,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_security_classification: true
   langcode: true
   search_api_excerpt: true

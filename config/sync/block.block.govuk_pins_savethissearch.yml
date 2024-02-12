@@ -12,7 +12,7 @@ dependencies:
 id: govuk_pins_savethissearch
 theme: govuk_pins
 region: sidebar_first
-weight: -7
+weight: -5
 provider: null
 plugin: 'block_content:85f1814f-4497-4828-8aa3-186d8ae2a411'
 settings:

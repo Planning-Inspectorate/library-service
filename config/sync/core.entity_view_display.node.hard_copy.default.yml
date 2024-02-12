@@ -8,10 +8,16 @@ dependencies:
     - field.field.node.hard_copy.field_archive
     - field.field.node.hard_copy.field_author
     - field.field.node.hard_copy.field_content_reference
+    - field.field.node.hard_copy.field_date
     - field.field.node.hard_copy.field_edition_number
     - field.field.node.hard_copy.field_individual_copy
     - field.field.node.hard_copy.field_initial_stock_level
     - field.field.node.hard_copy.field_isbn
+    - field.field.node.hard_copy.field_kl_authors
+    - field.field.node.hard_copy.field_kl_classification
+    - field.field.node.hard_copy.field_kl_doc_folder
+    - field.field.node.hard_copy.field_kl_reading_lists
+    - field.field.node.hard_copy.field_kl_series
     - field.field.node.hard_copy.field_locations
     - field.field.node.hard_copy.field_note
     - field.field.node.hard_copy.field_number_of_times_borrowed
@@ -20,6 +26,7 @@ dependencies:
     - field.field.node.hard_copy.field_publication_date
     - field.field.node.hard_copy.field_publications
     - field.field.node.hard_copy.field_reading_lists
+    - field.field.node.hard_copy.field_security_classification
     - field.field.node.hard_copy.field_series
     - field.field.node.hard_copy.field_stock_level
     - field.field.node.hard_copy.field_tags
@@ -30,6 +37,7 @@ dependencies:
     - datetime
     - ds
     - entity_reference_revisions
+    - taxonomy
     - text
     - user
 third_party_settings:
@@ -51,17 +59,22 @@ third_party_settings:
     regions:
       content:
         - field_alternative_title
-        - field_publication_date
-        - field_author
+        - field_date
         - body
         - field_isbn
         - field_volume
         - field_edition_number
         - field_locations
-        - field_content_reference
         - field_archive
-        - links
+        - field_kl_authors
+        - field_kl_doc_folder
+        - field_kl_series
+        - field_kl_reading_lists
+        - field_kl_classification
+        - field_security_classification
+        - field_content_reference
         - flag_bookmark
+        - links
         - field_individual_copy
 id: node.hard_copy.default
 targetEntityType: node
@@ -78,7 +91,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 3
+    weight: 2
     region: content
   field_alternative_title:
     type: barcode
@@ -109,45 +122,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 9
-    region: content
-  field_author:
-    type: entity_reference_revisions_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
-            lbw-at: ''
-            lb-col: false
-            ow: true
-            ow-el: p
-            ow-cl: 'author-wrapper  field-label-above'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: ul
-            fis-cl: 'authors govuk-list'
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: author
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 2
+    weight: 7
     region: content
   field_content_reference:
     type: string
@@ -183,7 +158,44 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 14
+    region: content
+  field_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: dd_mn_yy
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'time-date field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: time
+            fis-cl: field-value
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: content
   field_edition_number:
     type: string
@@ -219,7 +231,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: content
   field_individual_copy:
     type: entity_reference_revisions_entity_view
@@ -257,7 +269,7 @@ content:
             fi-def-at: false
             prefix: '<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">'
             suffix: ''
-    weight: 12
+    weight: 17
     region: content
   field_isbn:
     type: string
@@ -293,7 +305,191 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 3
+    region: content
+  field_kl_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading-s
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'author-wrapper  field-label-above'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: 'authors govuk-list'
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: author
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 8
+    region: content
+  field_kl_classification:
+    type: entity_reference_rss_category
+    label: above
+    settings: {  }
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'classification field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: 'classification govuk-list'
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 12
+    region: content
+  field_kl_doc_folder:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading-s
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'folder-wrapper  field-label-above'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 9
+    region: content
+  field_kl_reading_lists:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading-s
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'reading-list-wrapper  field-label-above'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 11
+    region: content
+  field_kl_series:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading-s
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'series-wrapper  field-label-above'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 10
     region: content
   field_locations:
     type: entity_reference_label
@@ -330,14 +526,13 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 6
     region: content
-  field_publication_date:
-    type: datetime_default
+  field_security_classification:
+    type: entity_reference_label
     label: inline
     settings:
-      timezone_override: ''
-      format_type: dd_mn_yy
+      link: true
     third_party_settings:
       ds:
         ft:
@@ -351,13 +546,13 @@ content:
             lb-col: true
             ow: true
             ow-el: p
-            ow-cl: 'time-date field-label-inline'
+            ow-cl: field-inline-lable
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
             fis: true
-            fis-el: time
-            fis-cl: field-value
+            fis-el: span
+            fis-cl: ''
             fis-at: ''
             fis-def-at: false
             fi: false
@@ -367,7 +562,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 13
     region: content
   field_volume:
     type: string
@@ -403,27 +598,29 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: content
   flag_bookmark:
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 15
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 16
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_author: true
   field_initial_stock_level: true
   field_note: true
   field_number_of_times_borrowed: true
   field_page_number: true
   field_pdf: true
+  field_publication_date: true
   field_publications: true
   field_reading_lists: true
   field_series: true

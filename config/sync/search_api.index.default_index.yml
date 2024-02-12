@@ -1,6 +1,6 @@
 uuid: 8ea75a78-5201-46a8-a2fe-f0f0c48c017d
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.field_tags
@@ -117,10 +117,12 @@ field_settings:
 datasource_settings:
   'entity:node':
     bundles:
-      default: false
+      default: true
       selected:
         - article
-        - hard_copy
+        - kl_hardcopy
+        - pdf
+        - webform
     languages:
       default: true
       selected: {  }

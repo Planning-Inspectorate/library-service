@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_archived_note
     - field.field.node.kl_document.field_content_reference
+    - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
     - field.field.node.kl_document.field_general_notes
     - field.field.node.kl_document.field_isbn
@@ -35,16 +37,17 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
-    - field.field.node.kl_document.field_other_dates
+    - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_pdf_media
     - field.field.node.kl_document.field_publication_date
-    - field.field.node.kl_document.field_security_classification_ty
+    - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
     - datetime
     - ds
-    - entity_reference_revisions
     - field_group
     - file
     - text
@@ -82,6 +85,7 @@ third_party_settings:
         - field_kl_doc_origindataid
         - field_kl_doc_version
         - field_kl_vercdate
+        - field_date
         - field_kl_vermdate
         - field_kl_filecdate
         - field_kl_vernum
@@ -96,6 +100,7 @@ third_party_settings:
         - field_kl_series
         - links
         - field_weight
+        - field_security_classification
         - group_migration_report
   field_group:
     group_migration_report:
@@ -104,7 +109,7 @@ third_party_settings:
       label: 'Migration report'
       parent_name: ''
       region: content
-      weight: 28
+      weight: 29
       format_type: accordion
       format_settings:
         classes: ''
@@ -142,27 +147,23 @@ content:
             lb: ''
     weight: 1
     region: content
-  field_archived_note:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 30
-    region: content
-  field_content_reference:
+  field_alternative_title:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
+    weight: 0
     region: content
-  field_general_notes:
-    type: basic_string
+  field_date:
+    type: datetime_time_ago
     label: above
-    settings: {  }
+    settings:
+      future_format: '@interval hence'
+      past_format: '@interval ago'
+      granularity: 2
     third_party_settings: {  }
-    weight: 29
+    weight: 14
     region: content
   field_kl_alternative_title:
     type: basic_string
@@ -235,7 +236,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 18
+    weight: 19
     region: content
   field_kl_archived_date:
     type: datetime_default
@@ -272,7 +273,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 19
+    weight: 20
     region: content
   field_kl_authors:
     type: entity_reference_label
@@ -309,7 +310,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 23
+    weight: 24
     region: content
   field_kl_classification:
     type: entity_reference_label
@@ -346,7 +347,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 22
+    weight: 23
     region: content
   field_kl_doc_compound_folder:
     type: entity_reference_label
@@ -383,7 +384,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 21
+    weight: 22
     region: content
   field_kl_doc_file:
     type: file_default
@@ -528,7 +529,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 20
+    weight: 21
     region: content
   field_kl_doc_id:
     type: string
@@ -817,7 +818,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 15
+    weight: 16
     region: content
   field_kl_filemdate:
     type: datetime_default
@@ -854,7 +855,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 17
+    weight: 18
     region: content
   field_kl_filetype:
     type: string
@@ -927,7 +928,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 24
+    weight: 25
     region: content
   field_kl_series:
     type: entity_reference_label
@@ -964,7 +965,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 25
+    weight: 26
     region: content
   field_kl_vercdate:
     type: datetime_default
@@ -1038,7 +1039,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 14
+    weight: 15
     region: content
   field_kl_vernum:
     type: string
@@ -1074,16 +1075,31 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 16
+    weight: 17
     region: content
-  field_other_dates:
-    type: entity_reference_revisions_entity_view
+  field_long_text:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 32
+    region: content
+  field_other_date:
+    type: datetime_default
     label: above
     settings:
-      view_mode: default
-      link: ''
+      timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
-    weight: 31
+    weight: 30
+    region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 28
     region: content
   field_weight:
     type: default_weight
@@ -1123,17 +1139,20 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 26
+    weight: 27
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_archived_note: true
+  field_content_reference: true
   field_edition_number: true
+  field_general_notes: true
   field_isbn: true
+  field_pdf_media: true
   field_publication_date: true
-  field_security_classification_ty: true
   field_volume: true
   langcode: true
   search_api_excerpt: true

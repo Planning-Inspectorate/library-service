@@ -14,7 +14,7 @@ entity_type: node
 bundle: pdf
 label: 'PDF and Number of pages'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -40,11 +40,17 @@ settings:
       hard_copy:
         weight: 16
         enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
       note:
         weight: 17
         enabled: false
-      page_number:
-        weight: 19
+      other_dates:
+        weight: 23
         enabled: false
       pdf:
         weight: 18

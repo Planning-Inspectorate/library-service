@@ -1,18 +1,18 @@
-uuid: 358ed19c-e716-422e-a06e-6d7bf7a0d09f
+uuid: d1d509a2-69a2-4eaf-a8bb-3254ab716115
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_other_dates
+    - field.storage.node.field_pdf_media
     - node.type.kl_document
-    - paragraphs.paragraphs_type.other_dates
+    - paragraphs.paragraphs_type.pdf
   module:
     - entity_reference_revisions
-id: node.kl_document.field_other_dates
-field_name: field_other_dates
+id: node.kl_document.field_pdf_media
+field_name: field_pdf_media
 entity_type: node
 bundle: kl_document
-label: 'Other Dates'
+label: 'PDF and Number of pages'
 description: ''
 required: false
 translatable: false
@@ -22,23 +22,23 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      other_dates: other_dates
+      pdf: pdf
     negate: 0
     target_bundles_drag_drop:
       archive:
-        weight: 15
+        weight: 12
         enabled: false
       archive_paragraphs_type:
-        weight: 16
+        weight: 13
         enabled: false
       author_paragraphs_type:
-        weight: 17
+        weight: 14
         enabled: false
       category_paragraphs_type:
-        weight: 18
+        weight: 15
         enabled: false
       hard_copy:
-        weight: 19
+        weight: 16
         enabled: false
       individual_hardcopy:
         weight: 20
@@ -47,24 +47,24 @@ settings:
         weight: 21
         enabled: false
       note:
-        weight: 22
+        weight: 17
         enabled: false
       other_dates:
         weight: 23
-        enabled: true
-      pdf:
-        weight: 24
         enabled: false
+      pdf:
+        weight: 18
+        enabled: true
       reading_list_paragraphs_type:
-        weight: 25
+        weight: 19
         enabled: false
       series_paragraphs_type:
-        weight: 26
+        weight: 20
         enabled: false
       tags_paragraphs_type:
-        weight: 27
+        weight: 21
         enabled: false
       topic_paragraphs_type:
-        weight: 28
+        weight: 22
         enabled: false
 field_type: entity_reference_revisions

@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.kl_url.field_kl_series
     - field.field.node.kl_url.field_kl_url
     - field.field.node.kl_url.field_kl_vernum
+    - field.field.node.kl_url.field_security_classification
     - field.field.node.kl_url.field_weight
     - node.type.kl_url
   module:
@@ -60,6 +61,7 @@ hidden:
   field_kl_series: true
   field_kl_url: true
   field_kl_vernum: true
+  field_security_classification: true
   field_weight: true
   langcode: true
   search_api_excerpt: true

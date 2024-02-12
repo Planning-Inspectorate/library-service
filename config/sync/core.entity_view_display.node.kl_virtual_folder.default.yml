@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.kl_virtual_folder.body
     - field.field.node.kl_virtual_folder.feeds_item
+    - field.field.node.kl_virtual_folder.field_date
     - field.field.node.kl_virtual_folder.field_kl_authors
     - field.field.node.kl_virtual_folder.field_kl_classification
     - field.field.node.kl_virtual_folder.field_kl_doc_folder
@@ -18,9 +19,11 @@ dependencies:
     - field.field.node.kl_virtual_folder.field_kl_extended_data
     - field.field.node.kl_virtual_folder.field_kl_reading_lists
     - field.field.node.kl_virtual_folder.field_kl_series
+    - field.field.node.kl_virtual_folder.field_security_classification
     - field.field.node.kl_virtual_folder.field_weight
     - node.type.kl_virtual_folder
   module:
+    - datetime
     - ds
     - text
     - user
@@ -58,6 +61,7 @@ third_party_settings:
         - field_kl_authors
         - field_kl_reading_lists
         - field_kl_series
+        - field_security_classification
         - links
 id: node.kl_virtual_folder.default
 targetEntityType: node
@@ -70,6 +74,43 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: dd_mn_yy
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'time-date field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: time
+            fis-cl: field-value
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: content
   field_kl_authors:
     type: entity_reference_label
@@ -543,6 +584,14 @@ content:
             suffix: ''
     weight: 14
     region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 15
+    region: content
   field_weight:
     type: default_weight
     label: inline
@@ -581,7 +630,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 15
+    weight: 16
     region: content
 hidden:
   entity_print_view_epub: true

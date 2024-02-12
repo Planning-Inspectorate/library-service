@@ -12,7 +12,7 @@ id: node.hard_copy.field_reading_lists
 field_name: field_reading_lists
 entity_type: node
 bundle: hard_copy
-label: 'Reading lists'
+label: '_Reading lists'
 description: ''
 required: false
 translatable: true
@@ -36,6 +36,24 @@ settings:
         enabled: false
       category_paragraphs_type:
         weight: 12
+        enabled: false
+      hard_copy:
+        weight: 19
+        enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
+      note:
+        weight: 22
+        enabled: false
+      other_dates:
+        weight: 23
+        enabled: false
+      pdf:
+        weight: 24
         enabled: false
       reading_list_paragraphs_type:
         weight: 13

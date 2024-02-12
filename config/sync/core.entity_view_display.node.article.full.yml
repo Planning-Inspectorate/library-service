@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.article.field_publication_date
     - field.field.node.article.field_publications
     - field.field.node.article.field_reading_lists
+    - field.field.node.article.field_security_classification
     - field.field.node.article.field_series
     - field.field.node.article.field_tags
     - field.field.node.article.field_topics
@@ -279,6 +280,7 @@ hidden:
   field_note: true
   field_publications: true
   field_reading_lists: true
+  field_security_classification: true
   field_series: true
   field_tags: true
   field_topics: true

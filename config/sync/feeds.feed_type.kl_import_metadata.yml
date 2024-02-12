@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_document.body
+    - field.field.node.kl_document.field_alternative_title
+    - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_kl_alternative_title
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
@@ -145,6 +147,17 @@ third_party_settings:
         source: computed2
         weight: 0
         label: 'Set value or default value'
+      d531ed0e-a95e-48ea-96ba-219d048cc070:
+        find: /
+        replace: '-'
+        case_sensitive: false
+        word_boundaries: false
+        whole: false
+        uuid: d531ed0e-a95e-48ea-96ba-219d048cc070
+        plugin: find_replace
+        source: pubdate
+        weight: 0
+        label: 'Find replace'
   feeds_log:
     operations: {  }
     items: {  }
@@ -362,6 +375,11 @@ custom_sources:
     label: 'Computed 5'
     machine_name: computed_5
     type: blank
+  pubdate:
+    value: PubDate
+    label: PubDate
+    machine_name: pubdate
+    type: csv
 mappings:
   -
     target: title
@@ -552,3 +570,24 @@ mappings:
       autocreate: 0
       existing: '2'
       autocreate_bundle: false
+  -
+    target: field_date
+    map:
+      value: vermdate
+    settings:
+      language: ''
+      timezone: Europe/London
+  -
+    target: created
+    map:
+      value: pubdate
+    settings:
+      language: ''
+      timezone: UTC
+  -
+    target: field_alternative_title
+    map:
+      value: alttitle
+    settings:
+      language: null
+    unique: {  }

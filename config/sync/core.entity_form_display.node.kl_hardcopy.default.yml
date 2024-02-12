@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
     - field.field.node.kl_hardcopy.field_kl_series
+    - field.field.node.kl_hardcopy.field_security_classification
     - field.field.node.kl_hardcopy.field_weight
     - node.type.kl_hardcopy
   module:
@@ -40,7 +41,7 @@ third_party_settings:
       label: Tabs
       region: content
       parent_name: ''
-      weight: 10
+      weight: 11
       format_type: tabs
       format_settings:
         classes: ''
@@ -111,14 +112,14 @@ content:
     third_party_settings: {  }
   field_kl_archived:
     type: boolean_checkbox
-    weight: 33
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 34
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -144,7 +145,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file:
     type: file_generic
-    weight: 11
+    weight: 12
     region: content
     settings:
       progress_indicator: throbber
@@ -177,7 +178,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -185,7 +186,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 9
+    weight: 10
     region: content
     settings:
       size: 60
@@ -193,7 +194,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 19
+    weight: 14
     region: content
     settings:
       size: 60
@@ -201,7 +202,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 18
+    weight: 13
     region: content
     settings:
       size: 60
@@ -209,7 +210,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 17
+    weight: 12
     region: content
     settings:
       size: 60
@@ -217,7 +218,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -225,7 +226,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 10
+    weight: 11
     region: content
     settings:
       size: 60
@@ -233,7 +234,7 @@ content:
     third_party_settings: {  }
   field_kl_reading_lists:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
@@ -243,13 +244,19 @@ content:
     third_party_settings: {  }
   field_kl_series:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_security_classification:
+    type: options_select
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_weight:
     type: weight_selector

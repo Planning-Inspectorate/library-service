@@ -14,7 +14,7 @@ entity_type: node
 bundle: pdf
 label: Author
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
@@ -25,11 +25,35 @@ settings:
       author_paragraphs_type: author_paragraphs_type
     negate: 0
     target_bundles_drag_drop:
+      archive:
+        weight: 15
+        enabled: false
+      archive_paragraphs_type:
+        weight: 16
+        enabled: false
       author_paragraphs_type:
         weight: 7
         enabled: true
       category_paragraphs_type:
         weight: 8
+        enabled: false
+      hard_copy:
+        weight: 19
+        enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
+      note:
+        weight: 22
+        enabled: false
+      other_dates:
+        weight: 23
+        enabled: false
+      pdf:
+        weight: 24
         enabled: false
       reading_list_paragraphs_type:
         weight: 9

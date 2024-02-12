@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
     - field.field.node.kl_hardcopy.field_kl_series
+    - field.field.node.kl_hardcopy.field_security_classification
     - field.field.node.kl_hardcopy.field_weight
     - node.type.kl_hardcopy
   module:
@@ -68,6 +69,7 @@ third_party_settings:
         - field_kl_classification
         - field_kl_reading_lists
         - field_kl_series
+        - field_security_classification
         - links
 id: node.kl_hardcopy.default
 targetEntityType: node
@@ -729,6 +731,14 @@ content:
             suffix: ''
     weight: 18
     region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 19
+    region: content
   field_weight:
     type: default_weight
     label: inline
@@ -767,7 +777,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 19
+    weight: 20
     region: content
 hidden:
   entity_print_view_epub: true

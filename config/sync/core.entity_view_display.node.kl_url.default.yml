@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.kl_url.field_kl_series
     - field.field.node.kl_url.field_kl_url
     - field.field.node.kl_url.field_kl_vernum
+    - field.field.node.kl_url.field_security_classification
     - field.field.node.kl_url.field_weight
     - node.type.kl_url
   module:
@@ -142,6 +143,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 125
+    region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 13
     region: content
   field_weight:
     type: number_integer

@@ -1,0 +1,34 @@
+uuid: b7d17d2c-58e6-47b8-a63b-fced2cf542eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.classification
+  module:
+    - block_class
+    - collapsiblock
+    - facets
+    - system
+  theme:
+    - govuk_pins
+third_party_settings:
+  collapsiblock:
+    collapse_action: 3
+id: govuk_pins_classification
+theme: govuk_pins
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'facet_block:classification'
+settings:
+  id: 'facet_block:classification'
+  label: Classification
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_classification
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search-library\r\n/search-library/*"

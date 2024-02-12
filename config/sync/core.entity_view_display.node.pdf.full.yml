@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.pdf.field_author
     - field.field.node.pdf.field_category
     - field.field.node.pdf.field_content_reference
+    - field.field.node.pdf.field_date
     - field.field.node.pdf.field_isbn
     - field.field.node.pdf.field_links
     - field.field.node.pdf.field_note
@@ -19,6 +20,7 @@ dependencies:
     - field.field.node.pdf.field_publication_date
     - field.field.node.pdf.field_publications
     - field.field.node.pdf.field_reading_lists
+    - field.field.node.pdf.field_security_classification
     - field.field.node.pdf.field_series
     - field.field.node.pdf.field_tags
     - field.field.node.pdf.field_topics
@@ -210,6 +212,43 @@ content:
             suffix: ''
     weight: 6
     region: content
+  field_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: dd_mn_yy
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'time-date field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: time
+            fis-cl: field-value
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
+    region: content
   field_isbn:
     type: string
     label: inline
@@ -375,6 +414,7 @@ hidden:
   field_pdf: true
   field_publications: true
   field_reading_lists: true
+  field_security_classification: true
   field_series: true
   field_tags: true
   field_topics: true

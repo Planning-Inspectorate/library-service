@@ -12,7 +12,7 @@ id: node.hard_copy.field_author
 field_name: field_author
 entity_type: node
 bundle: hard_copy
-label: Author
+label: _Author
 description: ''
 required: false
 translatable: true
@@ -40,11 +40,17 @@ settings:
       hard_copy:
         weight: 17
         enabled: false
+      individual_hardcopy:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
       note:
         weight: 18
         enabled: false
-      page_number:
-        weight: 19
+      other_dates:
+        weight: 23
         enabled: false
       pdf:
         weight: 20

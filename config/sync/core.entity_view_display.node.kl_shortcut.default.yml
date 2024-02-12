@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.kl_shortcut.field_kl_shortcut_target_content
     - field.field.node.kl_shortcut.field_kl_shortcut_target_folder
     - field.field.node.kl_shortcut.field_kl_shortcut_type
+    - field.field.node.kl_shortcut.field_security_classification
     - field.field.node.kl_shortcut.field_weight
     - node.type.kl_shortcut
   module:
@@ -61,6 +62,7 @@ third_party_settings:
         - field_kl_reading_lists
         - field_kl_series
         - field_kl_classification
+        - field_security_classification
         - links
 id: node.kl_shortcut.default
 targetEntityType: node
@@ -471,6 +473,14 @@ content:
             suffix: ''
     weight: 5
     region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 16
+    region: content
   field_weight:
     type: default_weight
     label: inline
@@ -509,7 +519,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 17
     region: content
 hidden:
   entity_print_view_epub: true

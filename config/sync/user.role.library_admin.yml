@@ -40,6 +40,7 @@ dependencies:
     - shortcut
     - system
     - taxonomy
+    - taxonomy_manager
     - views_bulk_edit
     - views_send
 id: library_admin
@@ -52,6 +53,7 @@ permissions:
   - 'access files overview'
   - 'access media overview'
   - 'access shortcuts'
+  - 'access taxonomy manager list'
   - 'access taxonomy overview'
   - 'access user profiles'
   - 'administer nodes'

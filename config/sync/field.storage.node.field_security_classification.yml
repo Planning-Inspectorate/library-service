@@ -1,12 +1,12 @@
-uuid: 55212bac-71f4-46c2-b74e-4447b5480a5d
+uuid: 2c15dc4c-9e49-4936-a8de-2f4afd0089af
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_security_classification_ty
-field_name: field_security_classification_ty
+id: node.field_security_classification
+field_name: field_security_classification
 entity_type: node
 type: entity_reference
 settings:

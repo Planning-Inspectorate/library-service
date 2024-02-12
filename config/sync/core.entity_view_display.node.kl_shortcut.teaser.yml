@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.kl_shortcut.field_kl_shortcut_target_content
     - field.field.node.kl_shortcut.field_kl_shortcut_target_folder
     - field.field.node.kl_shortcut.field_kl_shortcut_type
+    - field.field.node.kl_shortcut.field_security_classification
     - field.field.node.kl_shortcut.field_weight
     - node.type.kl_shortcut
   module:
@@ -62,6 +63,7 @@ hidden:
   field_kl_shortcut_target_content: true
   field_kl_shortcut_target_folder: true
   field_kl_shortcut_type: true
+  field_security_classification: true
   field_weight: true
   langcode: true
   search_api_excerpt: true

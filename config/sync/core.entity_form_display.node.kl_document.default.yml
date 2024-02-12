@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_archived_note
     - field.field.node.kl_document.field_content_reference
+    - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
     - field.field.node.kl_document.field_general_notes
     - field.field.node.kl_document.field_isbn
@@ -35,9 +37,11 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
-    - field.field.node.kl_document.field_other_dates
+    - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_pdf_media
     - field.field.node.kl_document.field_publication_date
-    - field.field.node.kl_document.field_security_classification_ty
+    - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
@@ -53,19 +57,24 @@ third_party_settings:
   field_group:
     group_tabs:
       children:
-        - group_categories
-        - group_legacy_migration_data
+        - group_general
+        - group_other_dates
+        - group_documents
         - group_file_dates
+        - group_categories
+        - group_archive
+        - group_legacy_migration_data
+        - group_admin
       label: Tabs
       region: content
       parent_name: ''
-      weight: 12
+      weight: 0
       format_type: tabs
       format_settings:
         classes: ''
         show_empty_fields: true
         id: ''
-        direction: vertical
+        direction: horizontal
         width_breakpoint: 640
     group_legacy_migration_data:
       children:
@@ -81,10 +90,15 @@ third_party_settings:
         - field_kl_doc_parent_subtype
         - field_kl_doc_origindataid
         - field_kl_filetype
-      label: 'Legacy Migration Data'
+        - field_kl_vercdate
+        - field_kl_vermdate
+        - field_kl_filecdate
+        - field_kl_filemdate
+        - field_kl_alternative_title
+      label: 'Legacy  Data'
       region: content
       parent_name: group_tabs
-      weight: 14
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -95,16 +109,19 @@ third_party_settings:
         required_fields: true
     group_categories:
       children:
+        - field_volume
+        - field_isbn
+        - field_edition_number
         - field_kl_doc_folder
         - field_kl_classification
         - field_kl_authors
         - field_kl_reading_lists
         - field_kl_series
-        - field_security_classification_ty
+        - field_security_classification
       label: Categories
       region: content
       parent_name: group_tabs
-      weight: 13
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -115,18 +132,99 @@ third_party_settings:
         required_fields: true
     group_file_dates:
       children:
-        - field_kl_vercdate
-        - field_kl_vermdate
-        - field_kl_filecdate
-        - field_kl_filemdate
-      label: 'File Dates'
+        - field_kl_doc_compound_folder
+      label: Compound
       region: content
       parent_name: group_tabs
-      weight: 15
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
-        show_empty_fields: true
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_general:
+      children:
+        - title
+        - field_alternative_title
+        - field_date
+        - field_other_dates
+      label: General
+      region: content
+      parent_name: group_tabs
+      weight: 18
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_admin:
+      children:
+        - field_content_reference
+        - field_weight
+      label: Admin
+      region: content
+      parent_name: group_tabs
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_documents:
+      children:
+        - field_pdf_media
+        - body
+        - field_general_notes
+      label: Documents
+      region: content
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_archive:
+      children:
+        - field_kl_archived
+        - field_kl_archived_date
+        - field_archived_note
+      label: Archive
+      region: content
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_other_dates:
+      children:
+        - field_other_date
+        - field_long_text
+      label: 'Other Dates'
+      region: content
+      parent_name: group_tabs
+      weight: 19
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
         id: ''
         formatter: closed
         description: ''
@@ -138,7 +236,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 9
+    weight: 15
     region: content
     settings:
       rows: 5
@@ -152,9 +250,17 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_alternative_title:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_archived_note:
     type: string_textarea
-    weight: 37
+    weight: 18
     region: content
     settings:
       rows: 5
@@ -162,15 +268,21 @@ content:
     third_party_settings: {  }
   field_content_reference:
     type: string_textfield
-    weight: 39
+    weight: 5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_date:
+    type: datetime_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_edition_number:
     type: string_textfield
-    weight: 12
+    weight: 16
     region: content
     settings:
       size: 60
@@ -178,7 +290,7 @@ content:
     third_party_settings: {  }
   field_general_notes:
     type: string_textarea
-    weight: 36
+    weight: 16
     region: content
     settings:
       rows: 5
@@ -186,7 +298,7 @@ content:
     third_party_settings: {  }
   field_isbn:
     type: string_textfield
-    weight: 9
+    weight: 15
     region: content
     settings:
       size: 60
@@ -194,7 +306,7 @@ content:
     third_party_settings: {  }
   field_kl_alternative_title:
     type: string_textarea
-    weight: 1
+    weight: 35
     region: content
     settings:
       rows: 3
@@ -202,20 +314,20 @@ content:
     third_party_settings: {  }
   field_kl_archived:
     type: boolean_checkbox
-    weight: 33
+    weight: 16
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 34
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_authors:
     type: entity_reference_autocomplete
-    weight: 30
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -225,7 +337,7 @@ content:
     third_party_settings: {  }
   field_kl_classification:
     type: entity_reference_autocomplete
-    weight: 29
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
@@ -235,7 +347,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_compound_folder:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -245,14 +357,14 @@ content:
     third_party_settings: {  }
   field_kl_doc_file:
     type: file_generic
-    weight: 10
+    weight: 18
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 15
+    weight: 23
     region: content
     settings:
       size: 60
@@ -260,7 +372,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 14
+    weight: 22
     region: content
     settings:
       size: 60
@@ -268,7 +380,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_folder:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -278,7 +390,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
-    weight: 11
+    weight: 19
     region: content
     settings:
       size: 60
@@ -286,7 +398,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 16
+    weight: 24
     region: content
     settings:
       size: 60
@@ -294,7 +406,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 21
+    weight: 29
     region: content
     settings:
       size: 60
@@ -302,7 +414,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 20
+    weight: 28
     region: content
     settings:
       size: 60
@@ -310,7 +422,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 19
+    weight: 27
     region: content
     settings:
       size: 60
@@ -318,7 +430,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 12
+    weight: 20
     region: content
     settings:
       size: 60
@@ -326,7 +438,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 17
+    weight: 25
     region: content
     settings:
       size: 60
@@ -334,19 +446,19 @@ content:
     third_party_settings: {  }
   field_kl_filecdate:
     type: datetime_default
-    weight: 32
+    weight: 33
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filemdate:
     type: datetime_default
-    weight: 33
+    weight: 34
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filetype:
     type: string_textfield
-    weight: 22
+    weight: 30
     region: content
     settings:
       size: 60
@@ -354,7 +466,7 @@ content:
     third_party_settings: {  }
   field_kl_reading_lists:
     type: entity_reference_autocomplete
-    weight: 31
+    weight: 20
     region: content
     settings:
       match_operator: CONTAINS
@@ -364,7 +476,7 @@ content:
     third_party_settings: {  }
   field_kl_series:
     type: entity_reference_autocomplete
-    weight: 32
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
@@ -374,58 +486,66 @@ content:
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
-    weight: 29
+    weight: 31
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vermdate:
     type: datetime_default
-    weight: 31
+    weight: 32
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vernum:
     type: string_textfield
-    weight: 18
+    weight: 26
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_other_dates:
+  field_long_text:
+    type: text_textarea
+    weight: 9
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_other_date:
+    type: datetime_default
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pdf_media:
     type: paragraphs
-    weight: 38
+    weight: 14
     region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: open
-      closed_mode: summary
+      closed_mode: preview
       autocollapse: none
       closed_mode_threshold: 0
       add_mode: button
       form_display_mode: default
-      default_paragraph_type: other_dates
+      default_paragraph_type: _none
       features:
         add_above: '0'
         collapse_edit_all: '0'
         duplicate: '0'
     third_party_settings: {  }
-  field_publication_date:
-    type: datetime_default
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_security_classification_ty:
+  field_security_classification:
     type: options_select
-    weight: 33
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   field_volume:
     type: string_textfield
-    weight: 4
+    weight: 13
     region: content
     settings:
       size: 60
@@ -433,13 +553,13 @@ content:
     third_party_settings: {  }
   field_weight:
     type: weight_selector
-    weight: 11
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
@@ -473,7 +593,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: 10
     region: content
     settings:
       size: 60
@@ -491,3 +611,4 @@ content:
     third_party_settings: {  }
 hidden:
   feeds_item: true
+  field_publication_date: true

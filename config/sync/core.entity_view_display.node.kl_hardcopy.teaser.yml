@@ -23,6 +23,7 @@ dependencies:
     - field.field.node.kl_hardcopy.field_kl_doc_version
     - field.field.node.kl_hardcopy.field_kl_reading_lists
     - field.field.node.kl_hardcopy.field_kl_series
+    - field.field.node.kl_hardcopy.field_security_classification
     - field.field.node.kl_hardcopy.field_weight
     - node.type.kl_hardcopy
   module:
@@ -68,6 +69,7 @@ hidden:
   field_kl_doc_version: true
   field_kl_reading_lists: true
   field_kl_series: true
+  field_security_classification: true
   field_weight: true
   langcode: true
   search_api_excerpt: true

@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.hard_copy_loan.field_obtained_by
     - field.field.node.hard_copy_loan.field_reminder
     - field.field.node.hard_copy_loan.field_return_date
+    - field.field.node.hard_copy_loan.field_security_classification
     - node.type.hard_copy_loan
   module:
     - text
@@ -51,5 +52,6 @@ hidden:
   field_obtained_by: true
   field_reminder: true
   field_return_date: true
+  field_security_classification: true
   langcode: true
   search_api_excerpt: true

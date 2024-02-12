@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.kl_shortcut.field_kl_shortcut_target_content
     - field.field.node.kl_shortcut.field_kl_shortcut_target_folder
     - field.field.node.kl_shortcut.field_kl_shortcut_type
+    - field.field.node.kl_shortcut.field_security_classification
     - field.field.node.kl_shortcut.field_weight
     - node.type.kl_shortcut
   module:
@@ -70,6 +71,7 @@ third_party_settings:
         - field_kl_authors
         - field_kl_reading_lists
         - field_kl_series
+        - field_security_classification
       label: Categories
       region: content
       parent_name: group_tabs
@@ -143,7 +145,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 22
+    weight: 21
     region: content
     settings:
       size: 60
@@ -151,7 +153,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 21
+    weight: 20
     region: content
     settings:
       size: 60
@@ -159,7 +161,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 20
+    weight: 19
     region: content
     settings:
       size: 60
@@ -175,7 +177,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 19
+    weight: 18
     region: content
     settings:
       size: 60
@@ -224,6 +226,12 @@ content:
   field_kl_shortcut_type:
     type: options_select
     weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_security_classification:
+    type: options_select
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.article.field_publication_date
     - field.field.node.article.field_publications
     - field.field.node.article.field_reading_lists
+    - field.field.node.article.field_security_classification
     - field.field.node.article.field_series
     - field.field.node.article.field_tags
     - field.field.node.article.field_topics
@@ -216,6 +217,14 @@ content:
             prefix: ''
             suffix: ''
     weight: 8
+    region: content
+  field_security_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 13
     region: content
   field_series:
     type: entity_reference_revisions_entity_view

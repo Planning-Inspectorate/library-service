@@ -1,0 +1,34 @@
+uuid: 46ec384c-e32e-4f0f-99f0-e7b356431c61
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.series
+  module:
+    - block_class
+    - collapsiblock
+    - facets
+    - system
+  theme:
+    - govuk_pins
+third_party_settings:
+  collapsiblock:
+    collapse_action: 3
+id: govuk_pins_series
+theme: govuk_pins
+region: sidebar_first
+weight: -7
+provider: null
+plugin: 'facet_block:series'
+settings:
+  id: 'facet_block:series'
+  label: Series
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_series
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search-library\r\n/search-library/*"
