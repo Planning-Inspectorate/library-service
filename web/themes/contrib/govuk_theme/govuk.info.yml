@@ -21,7 +21,7 @@ regions:
   sidebar_first: 'First sidebar'
   footer: 'Footer'
 
-# Information added by Drupal.org packaging script on 2023-08-03
-version: '8.x-1.14'
+# Information added by Drupal.org packaging script on 2024-02-11
+version: '8.x-1.16'
 project: 'govuk_theme'
-datestamp: 1691074965
+datestamp: 1707628127
