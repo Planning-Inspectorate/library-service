@@ -19,8 +19,8 @@ field_identifier: type
 query_operator: or
 hard_limit: 0
 exclude: false
-use_hierarchy: false
-keep_hierarchy_parents_active: false
+use_hierarchy: true
+keep_hierarchy_parents_active: true
 hierarchy:
   type: taxonomy
   config: {  }
@@ -86,6 +86,12 @@ processor_configs:
     weights:
       build: 5
     settings: {  }
+  show_siblings_processor:
+    processor_id: show_siblings_processor
+    weights:
+      build: 11
+    settings:
+      show_parent_siblings: true
   translate_entity:
     processor_id: translate_entity
     weights:

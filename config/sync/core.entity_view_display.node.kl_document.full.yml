@@ -39,6 +39,7 @@ dependencies:
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
     - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_pdf_media
     - field.field.node.kl_document.field_publication_date
@@ -48,6 +49,7 @@ dependencies:
     - node.type.kl_document
   module:
     - barcodes
+    - cshs
     - datetime
     - ds
     - entity_reference_revisions
@@ -60,26 +62,30 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
-        disable_css: false
-        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
         label: ''
     regions:
-      content:
+      ds_content:
+        - field_alternative_title
         - field_kl_alternative_title
+        - field_pdf_media
         - body
         - field_kl_doc_filename
         - field_kl_doc_file
         - field_kl_filetype
         - field_kl_doc_unique_id
+        - field_content_reference
         - field_kl_vermdate
         - field_kl_vernum
         - field_kl_archived
@@ -91,23 +97,19 @@ third_party_settings:
         - field_kl_authors
         - field_kl_reading_lists
         - field_kl_doc_id
-        - field_kl_series
         - field_kl_doc_mime_type
-        - field_edition_number
+        - field_kl_series
         - field_kl_filecdate
-        - field_archived_note
+        - field_edition_number
         - field_kl_filemdate
-        - field_isbn
         - field_kl_doc_parentid
-        - field_publication_date
+        - field_isbn
         - field_kl_doc_parent_subtype
-        - field_volume
+        - field_publication_date
         - field_kl_vercdate
-        - field_general_notes
+        - field_volume
         - field_kl_doc_origindataid
-        - group_migration_report_items
         - field_kl_doc_file_path
-        - group_accordion_group
         - field_weight
         - links
   field_group:
@@ -125,7 +127,7 @@ third_party_settings:
         - field_weight
       label: 'Accordion group'
       parent_name: ''
-      region: content
+      region: hidden
       weight: 25
       format_type: details
       format_settings:
@@ -137,7 +139,7 @@ third_party_settings:
       children: {  }
       label: 'Migration report items'
       parent_name: ''
-      region: content
+      region: hidden
       weight: 24
       format_type: details
       format_settings:
@@ -161,7 +163,7 @@ content:
           settings:
             lb: ''
     weight: 1
-    region: content
+    region: ds_content
   field_alternative_title:
     type: string
     label: inline
@@ -197,7 +199,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 0
-    region: content
+    region: ds_content
   field_content_reference:
     type: string
     label: inline
@@ -205,7 +207,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 6
-    region: content
+    region: ds_content
   field_edition_number:
     type: string
     label: above
@@ -213,7 +215,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 18
-    region: content
+    region: ds_content
   field_isbn:
     type: barcode
     label: above
@@ -230,7 +232,7 @@ content:
       format: SVG
     third_party_settings: {  }
     weight: 20
-    region: content
+    region: ds_content
   field_kl_alternative_title:
     type: basic_string
     label: inline
@@ -265,7 +267,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 0
-    region: content
+    region: ds_content
   field_kl_archived:
     type: boolean
     label: inline
@@ -303,7 +305,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 8
-    region: content
+    region: ds_content
   field_kl_archived_date:
     type: datetime_default
     label: inline
@@ -340,7 +342,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 9
-    region: content
+    region: ds_content
   field_kl_authors:
     type: entity_reference_label
     label: above
@@ -377,7 +379,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 14
-    region: content
+    region: ds_content
   field_kl_classification:
     type: entity_reference_label
     label: above
@@ -414,7 +416,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 13
-    region: content
+    region: ds_content
   field_kl_doc_compound_folder:
     type: entity_reference_label
     label: inline
@@ -451,7 +453,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 12
-    region: content
+    region: ds_content
   field_kl_doc_file:
     type: file_default
     label: inline
@@ -487,7 +489,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 3
-    region: content
+    region: ds_content
   field_kl_doc_file_path:
     type: string
     label: inline
@@ -523,7 +525,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 24
-    region: content
+    region: ds_content
   field_kl_doc_filename:
     type: string
     label: inline
@@ -559,15 +561,16 @@ content:
             prefix: ''
             suffix: ''
     weight: 2
-    region: content
+    region: ds_content
   field_kl_doc_folder:
-    type: entity_reference_label
+    type: cshs_full_hierarchy
     label: inline
     settings:
-      link: true
+      linked: '1'
+      separator: ' » '
+      reverse: 0
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
@@ -596,7 +599,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 11
-    region: content
+    region: ds_content
   field_kl_doc_id:
     type: string
     label: inline
@@ -632,7 +635,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 16
-    region: content
+    region: ds_content
   field_kl_doc_mime_type:
     type: string
     label: inline
@@ -668,7 +671,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 17
-    region: content
+    region: ds_content
   field_kl_doc_origindataid:
     type: string
     label: inline
@@ -704,7 +707,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 23
-    region: content
+    region: ds_content
   field_kl_doc_parent_subtype:
     type: string
     label: inline
@@ -740,7 +743,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 21
-    region: content
+    region: ds_content
   field_kl_doc_parentid:
     type: string
     label: inline
@@ -776,7 +779,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 20
-    region: content
+    region: ds_content
   field_kl_doc_unique_id:
     type: string
     label: inline
@@ -812,7 +815,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
-    region: content
+    region: ds_content
   field_kl_doc_version:
     type: string
     label: inline
@@ -848,7 +851,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 10
-    region: content
+    region: ds_content
   field_kl_filecdate:
     type: datetime_default
     label: inline
@@ -885,7 +888,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 18
-    region: content
+    region: ds_content
   field_kl_filemdate:
     type: datetime_default
     label: inline
@@ -922,7 +925,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 19
-    region: content
+    region: ds_content
   field_kl_filetype:
     type: string
     label: inline
@@ -958,7 +961,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 4
-    region: content
+    region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
     label: above
@@ -995,7 +998,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 15
-    region: content
+    region: ds_content
   field_kl_series:
     type: entity_reference_label
     label: above
@@ -1032,7 +1035,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 17
-    region: content
+    region: ds_content
   field_kl_vercdate:
     type: datetime_default
     label: inline
@@ -1069,7 +1072,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 22
-    region: content
+    region: ds_content
   field_kl_vermdate:
     type: datetime_default
     label: inline
@@ -1106,7 +1109,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 6
-    region: content
+    region: ds_content
   field_kl_vernum:
     type: string
     label: inline
@@ -1142,7 +1145,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 7
-    region: content
+    region: ds_content
   field_pdf_media:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -1180,7 +1183,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 0
-    region: content
+    region: ds_content
   field_publication_date:
     type: datetime_plain
     label: above
@@ -1188,7 +1191,7 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     weight: 21
-    region: content
+    region: ds_content
   field_volume:
     type: barcode
     label: above
@@ -1205,19 +1208,19 @@ content:
       format: SVG
     third_party_settings: {  }
     weight: 22
-    region: content
+    region: ds_content
   field_weight:
     type: default_weight
     label: inline
     settings: {  }
     third_party_settings: {  }
     weight: 25
-    region: content
+    region: ds_content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 26
-    region: content
+    region: ds_content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -1227,6 +1230,7 @@ hidden:
   field_date: true
   field_general_notes: true
   field_long_text: true
+  field_number_decimal: true
   field_other_date: true
   field_security_classification: true
   langcode: true

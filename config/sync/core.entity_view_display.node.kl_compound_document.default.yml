@@ -40,7 +40,7 @@ third_party_settings:
         - group_legacy_migration_data
       label: Accordion
       parent_name: ''
-      region: content
+      region: hidden
       weight: 4
       format_type: accordion
       format_settings:
@@ -58,7 +58,7 @@ third_party_settings:
         - field_kl_doc_origindataid
       label: 'Legacy Migration Data'
       parent_name: group_accordion
-      region: content
+      region: hidden
       weight: 7
       format_type: accordion_item
       format_settings:
@@ -77,7 +77,7 @@ third_party_settings:
         - field_security_classification
       label: Categories
       parent_name: group_accordion
-      region: content
+      region: hidden
       weight: 5
       format_type: accordion_item
       format_settings:
@@ -89,39 +89,38 @@ third_party_settings:
   ds:
     layout:
       id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
-        disable_css: false
-        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
         label: ''
     regions:
-      content:
+      ds_content:
         - body
         - field_weight
-        - field_kl_archived
         - field_kl_doc_id
-        - field_kl_archived_date
+        - field_kl_archived
         - field_kl_doc_unique_id
-        - group_accordion
+        - field_kl_archived_date
         - field_kl_doc_folder
         - field_kl_doc_version
-        - group_categories
         - field_kl_classification
         - field_kl_doc_parentid
         - field_kl_reading_lists
         - field_kl_doc_parent_subtype
         - field_kl_authors
-        - group_legacy_migration_data
         - field_kl_doc_origindataid
         - field_kl_series
         - field_security_classification
+        - field_date
 id: node.kl_compound_document.default
 targetEntityType: node
 bundle: kl_compound_document
@@ -133,7 +132,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
-    region: content
+    region: ds_content
   field_date:
     type: datetime_time_ago
     label: above
@@ -143,7 +142,7 @@ content:
       granularity: 2
     third_party_settings: {  }
     weight: 14
-    region: content
+    region: ds_content
   field_kl_archived:
     type: boolean
     label: inline
@@ -181,7 +180,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 2
-    region: content
+    region: ds_content
   field_kl_archived_date:
     type: datetime_default
     label: inline
@@ -218,7 +217,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 3
-    region: content
+    region: ds_content
   field_kl_authors:
     type: entity_reference_label
     label: above
@@ -255,7 +254,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 7
-    region: content
+    region: ds_content
   field_kl_classification:
     type: entity_reference_label
     label: above
@@ -292,15 +291,15 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
-    region: content
+    region: ds_content
   field_kl_doc_folder:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: above
     settings:
-      link: true
+      view_mode: full
+      link: false
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
@@ -329,7 +328,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 4
-    region: content
+    region: ds_content
   field_kl_doc_id:
     type: string
     label: inline
@@ -365,7 +364,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 2
-    region: content
+    region: ds_content
   field_kl_doc_origindataid:
     type: string
     label: inline
@@ -401,7 +400,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 7
-    region: content
+    region: ds_content
   field_kl_doc_parent_subtype:
     type: string
     label: inline
@@ -437,7 +436,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 6
-    region: content
+    region: ds_content
   field_kl_doc_parentid:
     type: string
     label: inline
@@ -473,7 +472,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
-    region: content
+    region: ds_content
   field_kl_doc_unique_id:
     type: string
     label: inline
@@ -509,7 +508,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 3
-    region: content
+    region: ds_content
   field_kl_doc_version:
     type: string
     label: inline
@@ -545,7 +544,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 4
-    region: content
+    region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
     label: above
@@ -582,7 +581,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 6
-    region: content
+    region: ds_content
   field_kl_series:
     type: entity_reference_label
     label: above
@@ -619,7 +618,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 8
-    region: content
+    region: ds_content
   field_security_classification:
     type: entity_reference_label
     label: above
@@ -627,7 +626,7 @@ content:
       link: true
     third_party_settings: {  }
     weight: 9
-    region: content
+    region: ds_content
   field_weight:
     type: default_weight
     label: inline
@@ -662,7 +661,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 1
-    region: content
+    region: ds_content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

@@ -1,0 +1,20 @@
+uuid: 73dabeff-ae72-4c7e-b09c-a5867d1521aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_saved_searches
+    - taxonomy
+id: search_api_saved_search.field_kl_authors
+field_name: field_kl_authors
+entity_type: search_api_saved_search
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

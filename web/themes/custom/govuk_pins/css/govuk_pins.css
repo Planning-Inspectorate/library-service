@@ -361,6 +361,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   /* background: #ccc; */
 }
 
+.collapsiblockContent h3{
+  display: none;
+}
+
 :root{
   /* --border-radius-alt: 1rem;
   --space-small: 1rem; */

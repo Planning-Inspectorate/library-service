@@ -1,32 +1,30 @@
-uuid: 937330cb-8e51-4e34-b9b4-0b3425bc2f21
+uuid: 203a91fd-f179-4b92-8de3-d49f5c59fb06
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.doc_folder
+    - search_api_saved_searches.type.default
   module:
-    - block_class
     - collapsiblock
-    - facets
+    - search_api_saved_searches
     - system
   theme:
     - govuk_pins
 third_party_settings:
   collapsiblock:
-    collapse_action: 3
-id: govuk_pins_docfolder
+    collapse_action: 0
+id: govuk_pins_savesearch
 theme: govuk_pins
 region: sidebar_first
-weight: -10
+weight: -6
 provider: null
-plugin: 'facet_block:doc_folder'
+plugin: search_api_saved_searches
 settings:
-  id: 'facet_block:doc_folder'
-  label: 'Doc Folder'
+  id: search_api_saved_searches
+  label: 'Save search'
   label_display: visible
-  provider: facets
-  context_mapping: {  }
-  block_id: govuk_pins_docfolder
+  provider: search_api_saved_searches
+  type: default
 visibility:
   request_path:
     id: request_path

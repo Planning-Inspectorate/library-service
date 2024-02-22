@@ -5,7 +5,6 @@ dependencies:
   config:
     - facets.facet.publication_date
   module:
-    - block_class
     - collapsiblock
     - facets
     - system
@@ -17,7 +16,7 @@ third_party_settings:
 id: govuk_pins_publicationdate
 theme: govuk_pins
 region: sidebar_first
-weight: -12
+weight: -13
 provider: null
 plugin: 'facet_block:publication_date'
 settings:

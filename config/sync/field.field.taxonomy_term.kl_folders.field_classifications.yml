@@ -1,0 +1,29 @@
+uuid: a8a57235-ba3b-43c7-b300-9827acf1800c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_classifications
+    - taxonomy.vocabulary.kl_classification
+    - taxonomy.vocabulary.kl_folders
+id: taxonomy_term.kl_folders.field_classifications
+field_name: field_classifications
+entity_type: taxonomy_term
+bundle: kl_folders
+label: Classifications
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_classification: kl_classification
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

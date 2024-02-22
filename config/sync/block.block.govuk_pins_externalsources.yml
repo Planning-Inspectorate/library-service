@@ -11,7 +11,7 @@ dependencies:
 id: govuk_pins_externalsources
 theme: govuk_pins
 region: sidebar_first
-weight: -6
+weight: -8
 provider: null
 plugin: 'block_content:d04ed079-ca6b-4606-a2a0-cb5d5e068a70'
 settings:

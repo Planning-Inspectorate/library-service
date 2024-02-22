@@ -1,0 +1,95 @@
+uuid: 5c6268c3-b8bd-4f66-a4a5-9c3e6d6f9f3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.search_api_saved_search.create
+    - field.field.search_api_saved_search.default.field_kl_authors
+    - field.field.search_api_saved_search.default.field_kl_classification
+    - field.field.search_api_saved_search.default.field_kl_doc_folder
+    - field.field.search_api_saved_search.default.field_kl_reading_lists
+    - field.field.search_api_saved_search.default.field_kl_series
+    - field.field.search_api_saved_search.default.field_security_classification
+    - search_api_saved_searches.type.default
+id: search_api_saved_search.default.create
+targetEntityType: search_api_saved_search
+bundle: default
+mode: create
+content:
+  field_kl_authors:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_classification:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_folder:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_reading_lists:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_series:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  label:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  search_keywords:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_security_classification: true
+  langcode: true
+  last_executed: true
+  mail: true
+  next_execution: true
+  notify_interval: true
+  path: true
+  status: true
+  uid: true

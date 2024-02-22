@@ -5,7 +5,6 @@ dependencies:
   config:
     - facets.facet.series
   module:
-    - block_class
     - collapsiblock
     - facets
     - system
@@ -17,7 +16,7 @@ third_party_settings:
 id: govuk_pins_series
 theme: govuk_pins
 region: sidebar_first
-weight: -7
+weight: -10
 provider: null
 plugin: 'facet_block:series'
 settings:

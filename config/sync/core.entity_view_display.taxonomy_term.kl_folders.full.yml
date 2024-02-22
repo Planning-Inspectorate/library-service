@@ -1,0 +1,233 @@
+uuid: 65fa1950-d20f-4bcb-bf5b-0cd54c5d904f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - field.field.taxonomy_term.kl_folders.field_authors
+    - field.field.taxonomy_term.kl_folders.field_classifications
+    - field.field.taxonomy_term.kl_folders.field_kl_admin_only
+    - field.field.taxonomy_term.kl_folders.field_kl_authors
+    - field.field.taxonomy_term.kl_folders.field_kl_classification
+    - field.field.taxonomy_term.kl_folders.field_kl_folder_type
+    - field.field.taxonomy_term.kl_folders.field_kl_reading_lists
+    - field.field.taxonomy_term.kl_folders.field_kl_series
+    - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
+    - field.field.taxonomy_term.kl_folders.field_reading_lists
+    - field.field.taxonomy_term.kl_folders.field_series
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - ds
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        classes:
+          layout_class: {  }
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      ds_content:
+        - taxonomy_term_title
+        - description
+        - field_kl_authors
+        - field_kl_series
+        - field_kl_classification
+        - field_kl_reading_lists
+    fields:
+      taxonomy_term_title:
+        plugin_id: taxonomy_term_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          link_target: ''
+          wrapper: h2
+          class: govuk-heading-m
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+id: taxonomy_term.kl_folders.full
+targetEntityType: taxonomy_term
+bundle: kl_folders
+mode: full
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: ds_content
+  field_kl_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list-s
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: ds_content
+  field_kl_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list-s
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 4
+    region: ds_content
+  field_kl_reading_lists:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: 'govuk-heading '
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list-s
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 5
+    region: ds_content
+  field_kl_series:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: h3
+            lbw-cl: govuk-heading
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: ' govuk-list-s'
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 3
+    region: ds_content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_authors: true
+  field_classifications: true
+  field_kl_admin_only: true
+  field_kl_folder_type: true
+  field_kl_term_unique_id: true
+  field_reading_lists: true
+  field_series: true
+  langcode: true
+  search_api_excerpt: true

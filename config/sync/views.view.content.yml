@@ -5,11 +5,11 @@ dependencies:
   config:
     - field.storage.node.field_alternative_title
     - field.storage.node.field_publication_date
-    - taxonomy.vocabulary.authors
-    - taxonomy.vocabulary.category
-    - taxonomy.vocabulary.reading_lists
-    - taxonomy.vocabulary.series
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.kl_authors
+    - taxonomy.vocabulary.kl_classification
+    - taxonomy.vocabulary.kl_folders
+    - taxonomy.vocabulary.kl_reading_lists
+    - taxonomy.vocabulary.kl_series
     - user.role.administrator
   module:
     - better_exposed_filters
@@ -742,7 +742,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 1000
+          items_per_page: 50
           total_pages: null
           id: 0
           tags:
@@ -1086,216 +1086,16 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_op
-            label: Sseries
-            description: ''
-            use_operator: false
-            operator: tid_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: series
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: series
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-        tid_1:
-          id: tid_1
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_1_op
-            label: 'Reading list'
-            description: ''
-            use_operator: false
-            operator: tid_1_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: readinglist
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: reading_lists
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
-        tid_2:
-          id: tid_2
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_2_op
-            label: ' Category'
-            description: ''
-            use_operator: false
-            operator: tid_2_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: category
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: category
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-        tid_3:
-          id: tid_3
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_3_op
-            label: Tags
-            description: ''
-            use_operator: false
-            operator: tid_3_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: tag
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: tags
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
         tid_5:
           id: tid_5
           table: taxonomy_index
           field: tid
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: Authors
           plugin_id: taxonomy_index_tid
           operator: or
-          value: {  }
+          value: null
           group: 1
           exposed: true
           expose:
@@ -1331,11 +1131,246 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: true
-          vid: authors
-          type: textfield
+          vid: kl_authors
+          type: cshs
           hierarchy: false
           limit: true
           error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        tid_3:
+          id: tid_3
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: Folders
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: tid_3_op
+            label: Folder
+            description: ''
+            use_operator: false
+            operator: tid_3_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: folder
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          vid: kl_folders
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: Series
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: tid_op
+            label: Series
+            description: ''
+            use_operator: false
+            operator: tid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: series
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          vid: kl_series
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        tid_2:
+          id: tid_2
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: Classifications
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: tid_2_op
+            label: ' Classifications'
+            description: ''
+            use_operator: false
+            operator: tid_2_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: classifications
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          vid: kl_classification
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        tid_1:
+          id: tid_1
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: 'Reading Lists'
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: tid_1_op
+            label: 'Reading list'
+            description: ''
+            use_operator: false
+            operator: tid_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: readinglist
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: kl_reading_lists
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
         created:
           id: created
           table: node_field_data

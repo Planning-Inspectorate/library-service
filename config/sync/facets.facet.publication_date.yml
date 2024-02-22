@@ -20,7 +20,7 @@ query_operator: and
 hard_limit: 0
 exclude: false
 use_hierarchy: true
-keep_hierarchy_parents_active: false
+keep_hierarchy_parents_active: true
 hierarchy:
   type: taxonomy
   config: {  }
@@ -30,7 +30,7 @@ widget:
   type: checkbox
   config:
     show_numbers: true
-    soft_limit: 0
+    soft_limit: 5
     show_reset_link: false
     reset_text: 'Show all'
     hide_reset_when_no_selection: false
@@ -95,6 +95,12 @@ processor_configs:
     weights:
       build: 5
     settings: {  }
+  show_siblings_processor:
+    processor_id: show_siblings_processor
+    weights:
+      build: 11
+    settings:
+      show_parent_siblings: true
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

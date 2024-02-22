@@ -1,0 +1,29 @@
+uuid: 78197fef-0e91-43d6-98ce-b0cf3ceda4fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_reading_lists
+    - taxonomy.vocabulary.kl_folders
+    - taxonomy.vocabulary.reading_lists
+id: taxonomy_term.kl_folders.field_reading_lists
+field_name: field_reading_lists
+entity_type: taxonomy_term
+bundle: kl_folders
+label: 'Reading Lists'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      reading_lists: reading_lists
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

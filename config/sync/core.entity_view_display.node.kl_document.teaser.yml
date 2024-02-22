@@ -39,6 +39,7 @@ dependencies:
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
     - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_pdf_media
     - field.field.node.kl_document.field_publication_date
@@ -105,6 +106,7 @@ hidden:
   field_kl_vermdate: true
   field_kl_vernum: true
   field_long_text: true
+  field_number_decimal: true
   field_other_date: true
   field_pdf_media: true
   field_publication_date: true

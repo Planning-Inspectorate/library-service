@@ -9,7 +9,7 @@ id: node.kl_compound_document.field_documents
 field_name: field_documents
 entity_type: node
 bundle: kl_compound_document
-label: 'Add document'
+label: Documents
 description: ''
 required: false
 translatable: false

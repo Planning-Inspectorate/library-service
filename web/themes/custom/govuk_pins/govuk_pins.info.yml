@@ -23,6 +23,8 @@ regions:
   edit_tab: 'Editing tab'
   pre_content: 'Pre content'
   content: Content
+  content_two_cols: 'Content 2 columns (top)'
+  content_three_cols: 'Content 3 columns (bottom)'
   post_content: 'Post content'
   sidebar_first: 'First sidebar'
   footer: 'Footer'

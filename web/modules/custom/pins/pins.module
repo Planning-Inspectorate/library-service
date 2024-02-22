@@ -23,6 +23,10 @@ use Drupal\user\Entity\User;
  * Increase the length of "field_alternative_title" to 255 characters.
  */
 function pins_update_8002() {
+  pins_change_alternative_size();
+}
+
+function pins_change_alternative_size(){
   $database = \Drupal::database();
   $database->query("ALTER TABLE node__field_alternative_title MODIFY field_alternative_title_value VARCHAR(255)");
   $database->query("ALTER TABLE node_revision__field_alternative_title MODIFY field_alternative_title_value VARCHAR(255)");
@@ -35,10 +39,22 @@ function pins_update_8002() {
   $storage_schema->set($storage_key, $field_schema);
 
   // Update field configuration.
-$config = \Drupal::configFactory()
-->getEditable('field.storage.node.field_alternative_title');
-$config->set('settings.max_length', 255);
-$config->save(TRUE);
+  $config = \Drupal::configFactory()
+  ->getEditable('field.storage.node.field_alternative_title');
+  $config->set('settings.max_length', 255);
+  $config->save(TRUE);
+
+}
+
+function pins_load_all_folders(){
+  $vid = 'kl_folders';
+  $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+  foreach ($terms as $term) {
+    $term_data[$term->name] = array(
+      'id' => $term->tid,
+      'name' => $term->name
+    );
+  }
 }
 
 /**
@@ -109,6 +125,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'hard_copy':
         case 'pdf':
         case 'kl_document':
+          pins_set_inheritance($entity);
           //Use nid as a unique reference id
           if(!$entity->isNew()){
             $reference_id = $entity->id();
@@ -124,7 +141,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
-        case 'kl_compound_document':
+        case 'kl_compound_document':          
+          pins_set_inheritance($entity);
           //migrate compound docs once
           if($compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
             $fieldname = 'field_documents';
@@ -145,6 +163,13 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
+        
+        case 'kl_shortcut': 
+        case 'kl_url':
+        case 'kl_virtual_folder': 
+        case 'kl_classification_shortcut':        
+            pins_set_inheritance($entity);   
+          break;
 
       }
       break;
@@ -160,7 +185,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
 
 function pins_compound_document(&$entity, $field_name='field_documents'){
   if($entity->hasField($field_name)){
-    $document_entities = $entity->get($field_name)->referencedEntities();
+    $referenced_entities = $entity->get($field_name)->referencedEntities();
     $authors = $classification = $doc_folder = $series = [];
     $fieldnames = [
       "field_kl_authors",
@@ -170,12 +195,12 @@ function pins_compound_document(&$entity, $field_name='field_documents'){
     ];
     $results = [];
 
-    foreach ($document_entities as $key => $document_entity) {
+    foreach ($referenced_entities as $key => $referenced_entity) {
       foreach ($fieldnames as $key => $fieldname) {
         //host target ids
         $host_target_ids = (array)pins_get_target_ids($entity, $fieldname);
         //compound target ids
-        $compounded_target_ids = (array)pins_get_target_ids($document_entity, $fieldname);
+        $compounded_target_ids = (array)pins_get_target_ids($referenced_entity, $fieldname);
 
         if(isset($results[$fieldname])){
           $merged_ids = array_merge((array)$results[$fieldname], $host_target_ids, $compounded_target_ids);
@@ -210,6 +235,52 @@ function pins_get_target_ids($entity, $fieldname){
     }
   }
   return $target_ids;
+}
+
+
+/**
+  *  
+  *function pins_compound_document
+  * For creating and updating compound document based on referenced
+  *
+*/
+
+function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
+  if($entity->hasField($field_name)){
+    $referenced_entities = $entity->get($field_name)->referencedEntities();
+    $authors = $classification = $doc_folder = $series = [];
+    $fieldnames = [
+      'field_kl_authors' => "field_kl_authors",
+      'field_kl_classification' => "field_kl_classification",
+      'field_kl_reading_lists' => 'field_kl_reading_lists',
+      'field_kl_series' => "field_kl_series",
+    ];
+
+    $results = [];
+
+    foreach ($referenced_entities as $key => $referenced_entity) {
+      foreach ($fieldnames as $referenced_fieldname => $host_fieldname) {
+        //host target ids
+        $host_target_ids = (array)pins_get_target_ids($entity, $host_fieldname);
+        //compound target ids
+        $referenced_target_ids = (array)pins_get_target_ids($referenced_entity, $referenced_fieldname);
+
+        if(isset($results[$host_fieldname])){
+          $merged_ids = array_merge((array)$results[$host_fieldname], $host_target_ids, $referenced_target_ids);
+        }
+        else{
+          $merged_ids = array_merge($host_target_ids, $referenced_target_ids);
+        }
+
+        $target_ids = array_unique($merged_ids);
+        $results[$host_fieldname] = $target_ids;
+      }   
+    }
+
+    foreach ($results as $host_fieldname => $target_ids) {
+      $entity->get($host_fieldname)->setValue($target_ids);
+    }
+  }
 }
 
 /**

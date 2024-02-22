@@ -74,9 +74,9 @@ third_party_settings:
       children:
         - field_kl_doc_folder
         - field_kl_classification
-        - field_kl_authors
         - field_kl_reading_lists
         - field_kl_series
+        - field_kl_authors
         - field_security_classification
       label: Categories
       region: content
@@ -198,54 +198,34 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_kl_authors:
-    type: entity_reference_autocomplete
-    weight: 27
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_kl_classification:
-    type: entity_reference_autocomplete
-    weight: 26
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_kl_doc_folder:
-    type: entity_reference_autocomplete
-    weight: 25
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_kl_reading_lists:
-    type: entity_reference_autocomplete
-    weight: 28
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_kl_series:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 29
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
+    third_party_settings: {  }
+  field_kl_classification:
+    type: options_select
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_kl_doc_folder:
+    type: options_select
+    weight: 25
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_kl_reading_lists:
+    type: options_select
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_kl_series:
+    type: options_select
+    weight: 28
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_security_classification:
     type: options_select

@@ -32,7 +32,6 @@ dependencies:
     - field_group
     - text
     - user
-    - weight
 third_party_settings:
   field_group:
     group_accordion:
@@ -41,89 +40,75 @@ third_party_settings:
         - group_legacy_migration_data
       label: Accordion
       parent_name: ''
-      region: content
-      weight: 6
-      format_type: accordion
+      region: hidden
+      weight: 31
+      format_type: fieldset
       format_settings:
         classes: ''
         show_empty_fields: true
         id: ''
+        description: ''
         effect: none
     group_legacy_migration_data:
       children:
-        - field_kl_doc_id
+        - field_kl_doc_origindataid
+        - field_kl_doc_parent_subtype
+        - field_kl_doc_parentid
         - field_kl_doc_unique_id
         - field_kl_doc_version
-        - field_kl_doc_parentid
-        - field_kl_doc_parent_subtype
-        - field_kl_doc_origindataid
       label: 'Legacy Migration Data'
       parent_name: group_accordion
-      region: content
+      region: hidden
       weight: 7
-      format_type: accordion_item
+      format_type: fieldset
       format_settings:
         classes: ''
         show_empty_fields: true
         id: ''
-        formatter: closed
         description: ''
+        formatter: closed
     group_categories:
-      children:
-        - field_kl_authors
-        - field_kl_classification
-        - field_kl_reading_lists
-        - field_kl_series
-        - field_kl_doc_folder
-        - field_security_classification
+      children: {  }
       label: Categories
       parent_name: group_accordion
-      region: content
+      region: hidden
       weight: 5
-      format_type: accordion_item
+      format_type: fieldset
       format_settings:
         classes: ''
         show_empty_fields: true
         id: ''
-        formatter: closed
         description: ''
+        formatter: closed
   ds:
     layout:
       id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
-        disable_css: false
-        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
         label: ''
     regions:
-      content:
+      ds_content:
         - body
-        - field_documents
-        - field_weight
-        - field_kl_doc_id
-        - field_kl_archived
-        - field_kl_doc_unique_id
-        - field_kl_archived_date
-        - field_kl_doc_version
-        - field_content_reference
-        - group_categories
-        - field_kl_doc_parentid
-        - group_accordion
-        - field_kl_doc_parent_subtype
-        - field_kl_authors
-        - group_legacy_migration_data
-        - field_kl_doc_origindataid
         - field_kl_classification
-        - field_kl_reading_lists
         - field_kl_series
+        - field_kl_reading_lists
+        - field_kl_authors
+        - field_documents
         - field_kl_doc_folder
+        - field_content_reference
+        - field_kl_archived
+        - field_kl_archived_date
+        - field_kl_doc_id
         - field_security_classification
 id: node.kl_compound_document.full
 targetEntityType: node
@@ -136,7 +121,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
-    region: content
+    region: ds_content
   field_content_reference:
     type: string
     label: inline
@@ -171,8 +156,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
-    region: content
+    weight: 7
+    region: ds_content
   field_documents:
     type: entity_reference_label
     label: above
@@ -208,8 +193,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
-    region: content
+    weight: 5
+    region: ds_content
   field_kl_archived:
     type: boolean
     label: inline
@@ -246,8 +231,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
-    region: content
+    weight: 8
+    region: ds_content
   field_kl_archived_date:
     type: datetime_default
     label: inline
@@ -283,8 +268,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
-    region: content
+    weight: 9
+    region: ds_content
   field_kl_authors:
     type: entity_reference_label
     label: above
@@ -320,8 +305,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
-    region: content
+    weight: 4
+    region: ds_content
   field_kl_classification:
     type: entity_reference_label
     label: above
@@ -357,16 +342,15 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
-    region: content
+    weight: 1
+    region: ds_content
   field_kl_doc_folder:
     type: entity_reference_label
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
@@ -394,224 +378,16 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
-    region: content
+    weight: 6
+    region: ds_content
   field_kl_doc_id:
     type: string
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: 'reference field-label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'reference-number field-value'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 2
-    region: content
-  field_kl_doc_origindataid:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: field-label-inline
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'field-value reference'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 7
-    region: content
-  field_kl_doc_parent_subtype:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: field-label-inline
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'field-value subtype'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 6
-    region: content
-  field_kl_doc_parentid:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: field-label-inline
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'field-value reference'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 5
-    region: content
-  field_kl_doc_unique_id:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: 'reference field-label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'reference-number field-value'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 3
-    region: content
-  field_kl_doc_version:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: 'version field-label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'version-number field-value'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 4
-    region: content
+    third_party_settings: {  }
+    weight: 10
+    region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
     label: above
@@ -647,8 +423,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
-    region: content
+    weight: 3
+    region: ds_content
   field_kl_series:
     type: entity_reference_label
     label: above
@@ -684,51 +460,16 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
-    region: content
+    weight: 2
+    region: ds_content
   field_security_classification:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 12
-    region: content
-  field_weight:
-    type: default_weight
-    label: inline
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: 'weight field-label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: field-value
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 2
-    region: content
+    weight: 11
+    region: ds_content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -736,6 +477,12 @@ hidden:
   feeds_item: true
   field_archived_note: true
   field_date: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
+  field_weight: true
   langcode: true
   links: true
   search_api_excerpt: true
