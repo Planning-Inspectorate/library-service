@@ -37,8 +37,6 @@ third_party_settings:
     layout:
       id: ds_reset
       settings:
-        disable_css: false
-        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
@@ -48,6 +46,8 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
+        disable_css: false
+        entity_classes: all_classes
     regions:
       content:
         - field_pdf_media

@@ -1,9 +1,9 @@
-uuid: d538594f-e670-404e-a327-7b56f909e067
+uuid: 566bb5cf-dae4-4a03-9795-12737f74199b
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.tiny_teaser
     - field.field.node.kl_document.body
     - field.field.node.kl_document.feeds_item
     - field.field.node.kl_document.field_alternative_title
@@ -46,27 +46,104 @@ dependencies:
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
-    - text
+    - ds
+    - field_group
+    - link
     - user
-id: node.kl_document.teaser
+third_party_settings:
+  field_group:
+    group_migration_report:
+      children:
+        - group_migration_report_items
+      label: 'Migration report'
+      parent_name: ''
+      region: hidden
+      weight: 55
+      format_type: accordion
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        effect: none
+    group_migration_report_items:
+      children: {  }
+      label: 'Migration report items'
+      parent_name: group_migration_report
+      region: hidden
+      weight: 20
+      format_type: accordion_item
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+  ds:
+    layout:
+      id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        classes:
+          layout_class: {  }
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      ds_content:
+        - field_links
+id: node.kl_document.tiny_teaser
 targetEntityType: node
 bundle: kl_document
-mode: teaser
+mode: tiny_teaser
 content:
-  body:
-    type: text_summary_or_trimmed
+  field_links:
+    type: link
     label: hidden
     settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: h2
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: ul
+            fis-cl: 'govuk-list  govuk-list--spaced'
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: li
+            fi-cl: govuk-list--spaced--item
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: ds_content
 hidden:
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
@@ -102,7 +179,6 @@ hidden:
   field_kl_vercdate: true
   field_kl_vermdate: true
   field_kl_vernum: true
-  field_links: true
   field_long_text: true
   field_number_decimal: true
   field_other_date: true
@@ -110,4 +186,5 @@ hidden:
   field_volume: true
   field_weight: true
   langcode: true
+  links: true
   search_api_excerpt: true

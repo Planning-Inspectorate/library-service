@@ -1,16 +1,16 @@
-uuid: 6a757bfa-9392-466c-8b5a-f9618a3990aa
+uuid: 3358389a-30c7-4bbf-9915-7c9269c4493e
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_links
-    - node.type.pdf
+    - node.type.kl_document
   module:
     - link
-id: node.pdf.field_links
+id: node.kl_document.field_links
 field_name: field_links
 entity_type: node
-bundle: pdf
+bundle: kl_document
 label: 'External links'
 description: ''
 required: false

@@ -1,13 +1,12 @@
 uuid: 143a33a5-a91d-4c88-895d-b33b2b3b8b1d
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.tiny_teaser
-    - field.storage.node.field_links
+    - node.type.kl_document
     - node.type.pdf
   module:
-    - entity_reference_revisions
     - node
     - user
 id: sidebar
@@ -25,70 +24,7 @@ display:
     position: 0
     display_options:
       title: 'External links'
-      fields:
-        field_links:
-          id: field_links
-          table: node__field_links
-          field: field_links
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: '0'
-          element_class: ''
-          element_label_type: '0'
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: '0'
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_revisions_entity_view
-          settings:
-            view_mode: default
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ''
-          field_api_classes: false
+      fields: {  }
       pager:
         type: some
         options:
@@ -164,7 +100,6 @@ display:
           title: ''
           default_argument_type: node
           default_argument_options: {  }
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -205,6 +140,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
+            kl_document: kl_document
             pdf: pdf
           group: 1
           exposed: false
@@ -235,19 +171,16 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_links_target_id:
-          id: field_links_target_id
+        field_links_uri:
+          id: field_links_uri
           table: node__field_links
-          field: field_links_target_id
+          field: field_links_uri
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: string
           operator: 'not empty'
-          value:
-            min: ''
-            max: ''
-            value: ''
+          value: ''
           group: 1
           exposed: false
           expose:
@@ -264,8 +197,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
             placeholder: ''
           is_grouped: false
           group_info:
@@ -279,6 +210,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
         options:
@@ -306,13 +241,11 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_links'
+      tags: {  }
   block_1:
     id: block_1
     display_title: 'External links'
@@ -325,10 +258,8 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_links'
+      tags: {  }

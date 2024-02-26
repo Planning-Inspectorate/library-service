@@ -11,7 +11,7 @@ id: node.kl_document.field_long_text
 field_name: field_long_text
 entity_type: node
 bundle: kl_document
-label: Description
+label: 'Other dates description'
 description: ''
 required: false
 translatable: false

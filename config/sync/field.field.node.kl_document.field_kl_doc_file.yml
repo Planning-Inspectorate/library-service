@@ -11,7 +11,7 @@ id: node.kl_document.field_kl_doc_file
 field_name: field_kl_doc_file
 entity_type: node
 bundle: kl_document
-label: 'Doc File'
+label: 'Choose file to add'
 description: ''
 required: false
 translatable: false
@@ -23,5 +23,5 @@ settings:
   file_directory: 'lib-mig/[date:custom:Y]-[date:custom:m]'
   file_extensions: 'txt csv docx pdf doc xlsx pptx ppt jpg jpeg'
   max_filesize: ''
-  description_field: false
+  description_field: true
 field_type: file

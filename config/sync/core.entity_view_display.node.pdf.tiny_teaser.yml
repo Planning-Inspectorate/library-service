@@ -28,15 +28,12 @@ dependencies:
     - node.type.pdf
   module:
     - ds
-    - entity_reference_revisions
     - user
 third_party_settings:
   ds:
     layout:
       id: ds_reset
       settings:
-        disable_css: false
-        entity_classes: all_classes
         classes:
           layout_class: {  }
         wrappers:
@@ -46,6 +43,8 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
+        disable_css: false
+        entity_classes: all_classes
     regions:
       content:
         - field_links
@@ -53,45 +52,7 @@ id: node.pdf.tiny_teaser
 targetEntityType: node
 bundle: pdf
 mode: tiny_teaser
-content:
-  field_links:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: ul
-            fis-cl: 'govuk-list  govuk-list--spaced'
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: govuk-list--spaced--item
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 0
-    region: content
+content: {  }
 hidden:
   body: true
   comment: true
@@ -105,6 +66,7 @@ hidden:
   field_content_reference: true
   field_date: true
   field_isbn: true
+  field_links: true
   field_note: true
   field_pdf: true
   field_pdf_media: true
