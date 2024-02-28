@@ -47,3 +47,6 @@
 /LICENSE.md
 /phpunit.xml.dist
 /config/library
+
+# Ignore azure blod directory
+/config/azure/
