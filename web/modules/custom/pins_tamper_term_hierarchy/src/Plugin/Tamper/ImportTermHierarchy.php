@@ -72,13 +72,40 @@ class ImportTermHierarchy extends TamperBase {
     ]);
   }
 
+  public function pins_kl_import_get_tid($name, $vid, $ptid=0){
+    $tid = 0;
+    $term = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadByProperties([
+            'name' => $name,
+            'vid' => $vid,
+            'parent' => $ptid,
+        ]);
+
+    if ($term) {
+        $term = reset($term);
+        $tid = $term->id();
+    }
+    else{
+        $term = Term::create([
+            'name' => $name,
+            'vid' => $vid,
+            'parent' => $ptid,
+        ]);
+
+        $term->save();
+        $tid =  $term->id();
+    }
+    return $term;
+}
+
   /**
    * {@inheritdoc}
    */
   public function tamper($data, TamperableItemInterface $item = NULL) {
     
     // Check for empty data
-    if ($data == "") {
+    if (!$data) {
       return NULL;
     }
 
@@ -87,37 +114,73 @@ class ImportTermHierarchy extends TamperBase {
     }
 
     // Explode and trim spaces around term names
-    $terms = array_map('trim', explode($this->getSetting('delimiter'), $data));
+    $term_row = $terms = array_map('trim', explode($this->getSetting('delimiter'), $data));
 
-    $vocabulary = $this->getSetting('vocabulary');
+    $vid = $vocabulary = $this->getSetting('vocabulary');
+    $hierarchy = [];
+    for ($i=0; $i < count($term_row) ; $i++) { 
+      $name = $term_row[$i];
+    
+      if($i < 1){
+          $ptid = 0;
+          $term = $this->pins_kl_import_get_tid($name, $vid, $ptid);
+          $tid = $term->id();
+          
+          $hierarchy['names'][$name]=$tid;
+      }
+      else{
+          //set hierarchy
+          $prev_index = $i -1;
+          $prev_name =  $term_row[$prev_index];
+          $ptid = $hierarchy['names'][$prev_name];
+          $term = $this->pins_kl_import_get_tid($name, $vid, $ptid);
+          $tid = $term->id();
 
-    $parent = '';
-    foreach ($terms as $key => $term_name) {
-      $term = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadByProperties([
-          'name' => $term_name,
-          'vid' => $vocabulary,
-          'parent' => $key == 0 ? 0 : $parent,
-        ]);
-      if ($term) {
-        $term = reset($term);
-        $parent = [$term->id()];
+          $hierarchy['names'][$name]=$tid;
       }
-      // If the term doesn't exists yet, create the term
-      else {
-        $term = Term::create([
-          'name' => $term_name,
-          'vid' => $vocabulary,
-          'parent' => $key == 0 ? 0 : $parent,
-        ]);
-        $term->save();
-        $parent = [$term->id()];
-      }
+
+      if(!in_array($tid,(array)$hierarchy['lineage'])){
+          $hierarchy['lineage'][] = $tid;
+          $hierarchy['terms'][$tid] = $term;
+      }  
     }
-    $data = $term->id();
+    if(!isset($hierarchy['last'][$tid]) ){
+        $hierarchy['last']['term'] = $term;
+        $hierarchy['last']['tid'] = $tid;
+    }
 
-    return $data;
-  }
+    return $tid;
+
+
+
+
+    // $parent = '';
+    // foreach ($terms as $key => $term_name) {
+    //   $term = \Drupal::entityTypeManager()
+    //     ->getStorage('taxonomy_term')
+    //     ->loadByProperties([
+    //       'name' => $term_name,
+    //       'vid' => $vocabulary,
+    //       'parent' => $key == 0 ? 0 : $parent,
+    //     ]);
+    //   if ($term) {
+    //     $term = reset($term);
+    //     $parent = [$term->id()];
+    //   }
+    //   // If the term doesn't exists yet, create the term
+    //   else {
+    //     $term = Term::create([
+    //       'name' => $term_name,
+    //       'vid' => $vocabulary,
+    //       'parent' => $key == 0 ? 0 : $parent,
+    //     ]);
+    //     $term->save();
+    //     $parent = [$term->id()];
+    //   }
+    // }
+    // $data = $term->id();
+
+    // return $data;
+  } 
 
 }

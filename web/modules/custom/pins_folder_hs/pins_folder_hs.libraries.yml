@@ -1,0 +1,3 @@
+pins_folder_hs_js_lib:
+  js:
+    js/pins_folder_hs.js: {}

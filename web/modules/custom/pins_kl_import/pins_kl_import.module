@@ -2,6 +2,261 @@
 
 /**
  * @file
+ * PINS module used for extending site functionalities.
+ *
+*/
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\user\Entity\User;
+
+/**
+ * @file
  * Primary module hooks for PINS KL Import module.
  */
 
+/**
+  * Implements hook_form_alter().  
+*/
+ 
+function pins_kl_import_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    switch ($form_id) {
+        case 'node_kl_document_edit_form':
+            $tag = 'Classifications|RM Classifications|Knowledge^Classifications|Library|Guidance|Planning Practice Guidance^Classifications|Library|Waste^Classifications|Library|Guidance';
+            // $term_rows = explode('^', $import);
+            // foreach ($term_rows as $dalta => $term) {
+            //     $term_rows[$dalta] = array_map('trim',explode('|', $term));
+            // }
+            // $term_rows = pins_kl_import_get_tag_rows($tag);
+            // foreach ($term_rows as $delta => $term_row) {
+            //     $hierarchy = pins_kl_import_extract_terms($term_row);
+            //     // ksm($hierarchy);
+            // }
+            // pins_kl_import_get_predefind_folder_tids();
+        break;
+    }
+}
+
+// function pins_kl_import_get_tag_rows($tag){
+//     $term_rows = explode('^', $tag);
+//     foreach ($term_rows as $dalta => $term) {
+//         $term_rows[$dalta] = array_map('trim',explode('|', $term));
+//     }
+//     return $term_rows;
+// }
+
+// function pins_kl_import_extract_terms($term_row, $vid ='hierarchy'){
+//     // ksm($term_row);
+//     $hierarchy = [];
+//     for ($i=0; $i < count($term_row) ; $i++) { 
+//         $name = $term_row[$i];
+//         // ksm($term_row[$i]);
+//         if($i < 1){
+//             $ptid = 0;
+//             $term = pins_kl_import_get_tid($name, $vid, $ptid);
+//             $tid = $term->id();
+            
+//             $hierarchy['names'][$name]=$tid;
+//         }
+//         else{
+//             //set hierarchy
+//             $prev_index = $i -1;
+//             $prev_name =  $term_row[$prev_index];
+//             $ptid = $hierarchy['names'][$prev_name];
+//             $term = pins_kl_import_get_tid($name, $vid, $ptid);
+//             $tid = $term->id();
+
+//             $hierarchy['names'][$name]=$tid;
+//         }
+
+//         if(!in_array($tid,(array)$hierarchy['lineage'])){
+//             $hierarchy['lineage'][] = $tid;
+//             $hierarchy['terms'][$tid] = $term;
+//         }  
+//     }
+//     if(!isset($hierarchy['last'][$tid]) ){
+//         $hierarchy['last']['term'] = $term;
+//         $hierarchy['last']['tid'] = $tid;
+//     }
+//     return $hierarchy;
+// }
+
+// function pins_kl_import_get_predefind_folder_tids($import=""){
+//     //$import, $fieldname, $vid ='hierarchy'
+//     $folder = 'Library|04 Knowledge Library Wales|00 Local Index Wales|2. Legislation and Case Law|2. Wales Statutory Instruments';
+//     $classification = 'Classifications|Library|Legislation and Case Law^Classifications|Library|Legislation and Case Law|Statutory Instruments^Classifications|RM Classifications|Knowledge^Classifications|Library|Wales';
+//     $series = 'Statutory Instruments';
+//     $author = 'HM Government';
+
+//     //vids
+//     $vid_classification = 'kl_classification';
+//     $vid_author = 'kl_authors';
+//     $vid_folder = 'kl_folder';
+//     $vid_series = 'kl_series';
+
+//     //fields
+//     $fieldname_series = 'field_kl_series';
+//     $fieldname_authors = 'field_kl_authors';
+//     $fieldname_series = 'field_kl_classification';
+
+//     // $folder_tags = explode('^', $folder);
+//     // $classification_tags = explode('^', $classification);
+//     // $series_tags = explode('^', $series);
+//     // $author_tags = explode('^', $author);
+
+//     // classification
+//     $term_rows = pins_kl_import_get_tag_rows($classification);
+//     $vid ='kl_classification';
+//     $classification_tags = [];
+//     foreach ($term_rows as $delta => $term_row) {
+//         $hierarchy = pins_kl_import_extract_terms($term_row,$vid);
+//         $classification_tags [] = $hierarchy['last']['tid'];
+//     }
+
+//     // series
+//     $term_rows = pins_kl_import_get_tag_rows($series);
+//     $vid ='kl_series';
+//     $series_tags = [];
+//     foreach ($term_rows as $delta => $term_row) {
+//         $hierarchy = pins_kl_import_extract_terms($term_row,$vid);
+//         $series_tags [] = $hierarchy['last']['tid'];
+//     }
+
+//     // author
+//     $term_rows = pins_kl_import_get_tag_rows($author);
+//     $vid ='kl_authors';
+//     $author_tags = [];
+//     foreach ($term_rows as $delta => $term_row) {
+//         $hierarchy = pins_kl_import_extract_terms($term_row,$vid);
+//         $author_tags [] = $hierarchy['last']['tid'];
+//     }
+
+//     // hierarchy
+//     $term_rows = pins_kl_import_get_tag_rows($folder);
+//     $vid ='hierarchy';
+//     ksm( $term_rows);
+//     $folder_tags = [];
+//     foreach ($term_rows as $delta => $term_row) {
+//         $hierarchy = pins_kl_import_extract_terms($term_row,$vid);
+//         ksm($hierarchy);
+//         $folder_tags [] = $hierarchy['last']['tid'];
+//         $folder_term  = $hierarchy['last']['term'];
+//         ksm( $folder_term);
+//         if(!is_null($folder_term)){
+//             if($series_tags){
+//                 if($target_ids = $entity ->get('field_kl_series')->target_id){
+//                     $target_ids_str = str_replace(" ","",$entity->field_product_variation->getString());
+//                     $target_ids = explode(",", $target_ids_str);
+//                     $series_tags = array_merge($target_ids,$series_tags);    
+//                 }
+//                 $series_tags = array_unique($series_tags);
+//                 $folder_term ->get('field_kl_series')->setValue($series_tags);
+//             }
+
+//             if($classification_tags){
+//                 if($target_ids = $entity ->get('field_kl_classification')->target_id){
+//                     $target_ids_str = str_replace(" ","",$entity->field_product_variation->getString());
+//                     $target_ids = explode(",", $target_ids_str);
+//                     $classification_tags = array_merge($target_ids,$classification_tags);    
+//                 }
+//                 $classification_tags = array_unique($classification_tags);
+//                 $folder_term ->get('field_kl_classification')->setValue($classification_tags);
+//             }
+
+//             if($author_tags){
+//                 if($target_ids = $entity ->get('field_kl_authors')->target_id){
+//                     $target_ids_str = str_replace(" ","",$entity->field_product_variation->getString());
+//                     $target_ids = explode(",", $target_ids_str);
+//                     $author_tags = array_merge($target_ids,$author_tags);    
+//                 }
+//                 $author_tags = array_unique($author_tags);
+//                 $folder_term ->get('field_kl_authors')->setValue($author_tags);
+//             } 
+//             $folder_term->save();
+//         }
+        
+//     }
+// }
+
+// // $exhibitor = showguide_pay_get_exhibitor_client();
+// //       if($topicProductIds = $exhibitor ->getTopicProductId($entity)){
+// //         if($field_product_variation = $entity ->get('field_product_variation')->target_id){
+// //           $target_ids = str_replace(" ","",$entity->field_product_variation->getString());
+// //           $existing_variation_pids = explode(",", $target_ids);
+// //           $topicProductIds = array_merge($existing_variation_pids,$topicProductIds);
+// //           $variationIds = $exhibitor->getOutStockVariationId();
+// //           $topicProductIds = array_diff($topicProductIds,$variationIds);
+// //         }
+// //         $topicProductIds = array_unique($topicProductIds);
+// //         $entity->get('field_product_variation')->setValue($topicProductIds);
+// //       }
+
+// function _pins_kl_import_get_predefind_folder_tids($import){
+//     //$import, $fieldname, $vid ='hierarchy'
+//     $folder = 'Library|04 Knowledge Library Wales|00 Local Index Wales|2. Legislation and Case Law|2. Wales Statutory Instruments';
+//     $classification = 'Classifications|Library|Legislation and Case Law^Classifications|Library|Legislation and Case Law|Statutory Instruments^Classifications|RM Classifications|Knowledge^Classifications|Library|Wales';
+//     $series = 'Statutory Instruments';
+//     $author = 'HM Government';
+
+//     //vids
+//     $vid_classification = 'kl_classification';
+//     $vid_author = 'kl_authors';
+//     $vid_folder = 'kl_folder';
+//     $vid_series = 'kl_series';
+
+//     //fields
+//     $fieldname_series = 'field_kl_series';
+//     $fieldname_authors = 'field_authors';
+//     $fieldname_series = 'field_classifications';
+
+//     $folder_tags = explode('^', $folder);
+//     $classification_tags = explode('^', $classification);
+//     $series_tags = explode('^', $series);
+//     $author_tags = explode('^', $author);
+
+//     $import = 'Classifications|RM Classifications|Knowledge^Classifications|Library|Guidance|Planning Practice Guidance^Classifications|Library|Waste^Classifications|Library|Guidance';
+//     $term_rows = explode('^', $import);
+//     foreach ($term_rows as $dalta => $term) {
+//         $term_rows[$dalta] = array_map('trim',explode('|', $term));
+//     }
+//     return $term_rows;
+
+//     ksm($folder_tags);
+// }
+
+
+// function pins_kl_import_get_tid($name, $vid, $ptid=0){
+//     $tid = 0;
+//     $term = \Drupal::entityTypeManager()
+//         ->getStorage('taxonomy_term')
+//         ->loadByProperties([
+//             'name' => $name,
+//             'vid' => $vid,
+//             'parent' => $ptid,
+//         ]);
+
+//     if ($term) {
+//         $term = reset($term);
+//         $tid = $term->id();
+//     }
+//     else{
+//         $term = Term::create([
+//             'name' => $name,
+//             'vid' => $vid,
+//             'parent' => $ptid,
+//         ]);
+
+//         $term->save();
+//         $tid =  $term->id();
+//     }
+//     return $term;
+// }

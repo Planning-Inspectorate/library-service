@@ -32,3 +32,11 @@ pins_kl_import.delete_vocabulary_term_form:
     _title: 'Delete Vocabulary terms'
   requirements:
     _permission: 'administer pins kl import'
+
+pins_kl_import.search_exclude_revisions:
+  path: '/admin/pins-kl-import/search-exclude-revisions'
+  defaults:
+    _form: '\Drupal\pins_kl_import\Form\SearchExcludeRevisionsForm'
+    _title: 'Search exclude revisions'
+  requirements:
+    _permission: 'administer pins kl import'
