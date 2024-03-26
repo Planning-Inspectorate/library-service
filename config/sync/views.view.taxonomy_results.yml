@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_alternative_title
-    - field.storage.paragraph.field_author_name
     - search_api.index.pins_content_index
   module:
     - search_api
@@ -632,7 +631,6 @@ display:
             limit: false
             vids: {  }
             anyall: +
-          default_argument_skip_url: false
           summary_options: {  }
           summary:
             sort_order: asc
@@ -667,7 +665,6 @@ display:
             limit: false
             vids: {  }
             anyall: +
-          default_argument_skip_url: false
           summary_options: {  }
           summary:
             sort_order: asc
@@ -702,7 +699,6 @@ display:
             limit: false
             vids: {  }
             anyall: +
-          default_argument_skip_url: false
           summary_options: {  }
           summary:
             sort_order: asc
@@ -737,7 +733,6 @@ display:
             limit: false
             vids: {  }
             anyall: +
-          default_argument_skip_url: false
           summary_options: {  }
           summary:
             sort_order: asc
@@ -939,7 +934,6 @@ display:
             limit: false
             vids: {  }
             anyall: +
-          default_argument_skip_url: false
           summary_options: {  }
           summary:
             sort_order: asc

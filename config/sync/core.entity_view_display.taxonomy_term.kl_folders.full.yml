@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
+    - field.field.taxonomy_term.kl_folders.feeds_item
     - field.field.taxonomy_term.kl_folders.field_authors
-    - field.field.taxonomy_term.kl_folders.field_classifications
     - field.field.taxonomy_term.kl_folders.field_kl_admin_only
     - field.field.taxonomy_term.kl_folders.field_kl_authors
     - field.field.taxonomy_term.kl_folders.field_kl_classification
@@ -222,8 +222,8 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  feeds_item: true
   field_authors: true
-  field_classifications: true
   field_kl_admin_only: true
   field_kl_folder_type: true
   field_kl_term_unique_id: true

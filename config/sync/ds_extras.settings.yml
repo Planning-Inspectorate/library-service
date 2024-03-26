@@ -1,9 +1,13 @@
 _core:
   default_config_hash: t8e2t_Br0niDkKrqiSp51R2-jfyJF2BKfGIC0A35oZs
-fields_extra: true
-fields_extra_list: {  }
-field_permissions: false
-switch_field: false
-hidden_region: false
-override_node_revision: true
-override_node_revision_view_mode: full
+region_blocks: null
+fields_extra: null
+fields_extra_list: null
+field_permissions: null
+switch_field: null
+hidden_region: null
+region_to_block: null
+override_node_revision: null
+override_node_revision_view_mode: null
+switch_view_mode: null
+switch_field_prefix: node--view-mode-

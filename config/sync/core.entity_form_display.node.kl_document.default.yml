@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.kl_document.field_content_reference
     - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
+    - field.field.node.kl_document.field_filemd5
     - field.field.node.kl_document.field_general_notes
     - field.field.node.kl_document.field_isbn
     - field.field.node.kl_document.field_kl_archived
@@ -40,7 +41,9 @@ dependencies:
     - field.field.node.kl_document.field_long_text
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
+    - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
@@ -174,6 +177,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_filemd5:
+    type: string_textfield
+    weight: 42
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_general_notes:
     type: string_textarea
     weight: 30
@@ -214,17 +225,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_kl_classification:
-    type: cshs
+    type: entity_reference_autocomplete
     weight: 27
     region: content
     settings:
-      save_lineage: false
-      force_deepest: false
-      parent: ''
-      level_labels: ''
-      hierarchy_depth: 0
-      required_depth: 0
-      none_label: '- Please select -'
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_kl_doc_file:
     type: file_generic
@@ -339,30 +347,24 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_kl_reading_lists:
-    type: cshs
+    type: entity_reference_autocomplete
     weight: 26
     region: content
     settings:
-      save_lineage: false
-      force_deepest: false
-      parent: ''
-      level_labels: ''
-      hierarchy_depth: 0
-      required_depth: 0
-      none_label: '- Please select -'
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_kl_series:
-    type: cshs
+    type: entity_reference_autocomplete
     weight: 23
     region: content
     settings:
-      save_lineage: false
-      force_deepest: false
-      parent: ''
-      level_labels: ''
-      hierarchy_depth: 0
-      required_depth: 0
-      none_label: '- Please select -'
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
@@ -413,11 +415,26 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_search_exclude:
+    type: boolean_checkbox
+    weight: 43
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_security_classification:
     type: options_select
     weight: 37
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_version_id:
+    type: string_textfield
+    weight: 41
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_volume:
     type: string_textfield

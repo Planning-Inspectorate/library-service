@@ -1,0 +1,19 @@
+uuid: 3e18edca-423c-4400-b131-0b7fdb176240
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_filemd5
+    - node.type.kl_document
+id: node.kl_document.field_filemd5
+field_name: field_filemd5
+entity_type: node
+bundle: kl_document
+label: fileMD5
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

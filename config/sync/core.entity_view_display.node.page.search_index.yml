@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_index
     - field.field.node.page.body
+    - field.field.node.page.field_kl_doc_file
     - field.field.node.page.field_security_classification
     - node.type.page
   module:
@@ -33,6 +34,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_kl_doc_file: true
   field_security_classification: true
   langcode: true
   links: true

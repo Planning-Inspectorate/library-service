@@ -15,7 +15,4 @@ adding:
         skipped: skipped
         failed: failed
       source: true
-removing:
-  dependencies:
-    config:
-      - field.field.node.kl_document.field_alternative_title
+removing: {  }

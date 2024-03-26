@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_alternative_title
-    - field.storage.node.field_publication_date
+    - field.storage.node.field_date
     - taxonomy.vocabulary.kl_authors
     - taxonomy.vocabulary.kl_classification
     - taxonomy.vocabulary.kl_folders
@@ -543,8 +543,8 @@ display:
           entity_type: node
           entity_field: created
           plugin_id: field
-          label: 'Created  on'
-          exclude: true
+          label: Created
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -587,7 +587,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: dd_mn_yy
             custom_date_format: ''
             timezone: ''
             tooltip:
@@ -610,74 +610,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_publication_date:
-          id: field_publication_date
-          table: node__field_publication_date
-          field: field_publication_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Publication Date'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: '{{ created }}'
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: medium
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_publication_date_1:
-          id: field_publication_date_1
-          table: node__field_publication_date
-          field: field_publication_date
+        field_date:
+          id: field_date
+          table: node__field_date
+          field: field_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -727,7 +663,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: medium
+            format_type: short
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1495,9 +1431,8 @@ display:
             changed: changed
             operations: operations
             created: created
-            field_publication_date: field_publication_date
-            field_publication_date_1: field_publication_date_1
-          default: changed
+            field_date: field_date
+          default: created
           info:
             views_bulk_operations_bulk_form:
               align: ''
@@ -1558,15 +1493,8 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_publication_date:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_publication_date_1:
-              sortable: true
+            field_date:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -1604,7 +1532,7 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_alternative_title'
-        - 'config:field.storage.node.field_publication_date'
+        - 'config:field.storage.node.field_date'
   page_1:
     id: page_1
     display_title: Page
@@ -1638,4 +1566,4 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_alternative_title'
-        - 'config:field.storage.node.field_publication_date'
+        - 'config:field.storage.node.field_date'

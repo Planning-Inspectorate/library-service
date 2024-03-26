@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_kl_doc_file
     - field.field.node.page.field_security_classification
     - node.type.page
   module:
+    - file
     - path
     - text
 _core:
@@ -31,6 +33,13 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_kl_doc_file:
+    type: file_generic
+    weight: 18
+    region: content
+    settings:
+      progress_indicator: throbber
     third_party_settings: {  }
   field_security_classification:
     type: options_select

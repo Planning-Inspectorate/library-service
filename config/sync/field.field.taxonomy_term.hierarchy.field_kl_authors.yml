@@ -1,16 +1,16 @@
-uuid: a8a57235-ba3b-43c7-b300-9827acf1800c
+uuid: 41a912c3-b59a-40f3-8d83-20d3ebca545e
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_classifications
-    - taxonomy.vocabulary.kl_classification
-    - taxonomy.vocabulary.kl_folders
-id: taxonomy_term.kl_folders.field_classifications
-field_name: field_classifications
+    - field.storage.taxonomy_term.field_kl_authors
+    - taxonomy.vocabulary.hierarchy
+    - taxonomy.vocabulary.kl_authors
+id: taxonomy_term.hierarchy.field_kl_authors
+field_name: field_kl_authors
 entity_type: taxonomy_term
-bundle: kl_folders
-label: Classifications
+bundle: hierarchy
+label: kl_authors
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      kl_classification: kl_classification
+      kl_authors: kl_authors
     sort:
       field: name
       direction: asc

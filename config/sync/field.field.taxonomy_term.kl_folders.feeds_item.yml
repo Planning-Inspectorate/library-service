@@ -1,0 +1,23 @@
+uuid: f627ab98-f70e-4c42-ab83-12725de9362a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.feeds_item
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - feeds
+id: taxonomy_term.kl_folders.feeds_item
+field_name: feeds_item
+entity_type: taxonomy_term
+bundle: kl_folders
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item
