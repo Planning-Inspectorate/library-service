@@ -190,7 +190,7 @@
                 "      https://www.drupal.org/getting-involved",
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
-            ] 
+            ]  
         },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
@@ -202,7 +202,7 @@
             },
             "drupal/clientside_validation": {
                 "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402.patch"
-            }    
+            }     
         },
         "enable-patching": true
     }
