@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5c437ecf71ae790901cb5e48729764a",
+    "content-hash": "5f498e1d62f2e6b80b9e598e2d2c4217",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7445,30 +7445,29 @@
         },
         {
             "name": "drupal/shs",
-            "version": "2.0.0-rc6",
+            "version": "2.0.0-rc11",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/shs.git",
-                "reference": "2.0.0-rc6"
+                "reference": "2.0.0-rc11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/shs-2.0.0-rc6.zip",
-                "reference": "2.0.0-rc6",
-                "shasum": "5be63a55bf60884e4702e9b5371a7e09b76594e2"
+                "url": "https://ftp.drupal.org/files/projects/shs-2.0.0-rc11.zip",
+                "reference": "2.0.0-rc11",
+                "shasum": "b9a685ad99ab08446e765a9b08b2bec9f0cc6353"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
             },
             "require-dev": {
-                "drupal/chosen": "*",
-                "drupal/select2": "*"
+                "drupal/chosen": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-rc6",
-                    "datestamp": "1711305453",
+                    "version": "2.0.0-rc11",
+                    "datestamp": "1711424677",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -7577,20 +7576,20 @@
         },
         {
             "name": "drupal/structure_sync",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/structure_sync.git",
-                "reference": "2.0.6"
+                "reference": "2.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/structure_sync-2.0.6.zip",
-                "reference": "2.0.6",
-                "shasum": "4891c7fb8360c6becb0c693dabcbcd653921941c"
+                "url": "https://ftp.drupal.org/files/projects/structure_sync-2.0.7.zip",
+                "reference": "2.0.7",
+                "shasum": "d77a8b3cfd614cf7699187fce610e4d490f8f0fc"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10",
+                "drupal/core": "^8 || ^9 || ^10 || ^11",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -7599,8 +7598,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.6",
-                    "datestamp": "1705960357",
+                    "version": "2.0.7",
+                    "datestamp": "1711457726",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -10021,6 +10020,63 @@
                 "source": "https://github.com/jfeltkamp/cookiesjsr.git"
             },
             "time": "2022-03-25T09:05:23+00:00"
+        },
+        {
+            "name": "jjj/chosen",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JJJ/chosen.git",
+                "reference": "06e7a6ae249a12944c223f2b2a545d4b16d98e24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JJJ/chosen/zipball/06e7a6ae249a12944c223f2b2a545d4b16d98e24",
+                "reference": "06e7a6ae249a12944c223f2b2a545d4b16d98e24",
+                "shasum": ""
+            },
+            "type": "npm-asset",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John James Jacoby",
+                    "homepage": "https://github.com/jjj"
+                },
+                {
+                    "name": "Patrick Filler",
+                    "homepage": "https://github.com/pfiller"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "homepage": "https://github.com/stof"
+                },
+                {
+                    "name": "Ken Earley",
+                    "homepage": "https://github.com/kenearley"
+                },
+                {
+                    "name": "Koen Punt",
+                    "homepage": "https://github.com/koenpunt"
+                }
+            ],
+            "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
+            "homepage": "https://jjj.github.io/chosen/",
+            "keywords": [
+                "dropdown",
+                "form",
+                "input",
+                "multiselect",
+                "select",
+                "ui"
+            ],
+            "support": {
+                "issues": "https://github.com/JJJ/chosen/issues",
+                "source": "https://github.com/JJJ/chosen/tree/2.2.1"
+            },
+            "time": "2021-05-20T18:37:55+00:00"
         },
         {
             "name": "kint-php/kint",

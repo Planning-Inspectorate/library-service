@@ -114,6 +114,7 @@
         "drupal/webform": "6.2.0",
         "drupal/weight": "3.4",
         "drush/drush": "^12.4",
+        "jjj/chosen": "^2.2",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2"
     },
@@ -198,7 +199,10 @@
         "patches": {
             "drupal/elasticsearch_connector_views": {
                 "Ignore Elasticsearch system indexes from Views": "https://www.drupal.org/files/issues/2021-08-25/elasticsearch_connector-hide-system-indices-3229401.patch"
-            }
+            },
+            "drupal/clientside_validation": {
+                "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402.patch"
+            }    
         },
         "enable-patching": true
     }
