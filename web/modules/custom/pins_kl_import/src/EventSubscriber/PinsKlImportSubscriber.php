@@ -245,8 +245,18 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
             } 
             //save predefined folder
             // $folder_term->save();
-          }          
-        }
+          }
+          
+          // exclude revision from search
+          $versions = (int)trim($event->getEntity()->get('field_kl_doc_version')->value);
+          $version_nr = (int)trim($event->getEntity()->get('field_kl_vernum')->value);     
+
+          if(!empty($version_nr) && !empty($versions) && $version_nr != $versions){
+            $event->getEntity()->set('field_search_exclude',1); 
+          }
+
+          
+          }
         break;
     }
   }
