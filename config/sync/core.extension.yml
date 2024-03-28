@@ -89,7 +89,6 @@ module:
   path_alias: 0
   phpass: 0
   pins: 0
-  pins_folder_hs: 0
   pins_kl_import: 0
   pins_tamper_term_hierarchy: 0
   quick_node_clone: 0
