@@ -201,7 +201,7 @@
                 "Ignore Elasticsearch system indexes from Views": "https://www.drupal.org/files/issues/2021-08-25/elasticsearch_connector-hide-system-indices-3229401.patch"
             },
             "drupal/clientside_validation": {
-                "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402.patch"
+                "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402-5.patch"
             }     
         },
         "enable-patching": true
