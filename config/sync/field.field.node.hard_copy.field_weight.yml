@@ -1,0 +1,24 @@
+uuid: 8c69fc2e-1a49-4370-b356-aeee4b953756
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.hard_copy
+  module:
+    - weight
+id: node.hard_copy.field_weight
+field_name: field_weight
+entity_type: node
+bundle: hard_copy
+label: Weight
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings:
+  range: '50'
+field_type: weight

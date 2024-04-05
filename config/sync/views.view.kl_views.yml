@@ -1209,8 +1209,8 @@ display:
           value:
             article: article
             page: page
-            hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
+            kl_hardcopy: kl_hardcopy
             pdf: pdf
             webform: webform
           group: 1
@@ -2683,7 +2683,7 @@ display:
           value:
             kl_compound_document: kl_compound_document
             kl_document: kl_document
-            kl_hardcopy: kl_hardcopy
+            hard_copy: hard_copy
             kl_shortcut: kl_shortcut
             kl_virtual_folder: kl_virtual_folder
           group: 1
@@ -2869,7 +2869,7 @@ display:
             kl_classification_shortcut: kl_classification_shortcut
             kl_compound_document: kl_compound_document
             kl_document: kl_document
-            kl_hardcopy: kl_hardcopy
+            hard_copy: hard_copy
             kl_shortcut: kl_shortcut
             kl_url: kl_url
             kl_virtual_folder: kl_virtual_folder

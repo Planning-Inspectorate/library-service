@@ -6,6 +6,7 @@ dependencies:
     - views.view.lib_search
   module:
     - block_class
+    - collapsiblock
     - system
     - views
   theme:
@@ -13,6 +14,8 @@ dependencies:
 third_party_settings:
   block_class:
     classes: search-block
+  collapsiblock:
+    collapse_action: 0
 id: govuk_pins_exposedformlib_searchpage_1_2
 theme: govuk_pins
 region: search_box
@@ -29,4 +32,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/lib-search\r\n/lib-search/*\r\n/search-library\r\n/search-library/*\r\n/search-results\r\n/search-results/*\r\n\r\n\r\n"
+    pages: "/lib-search\r\n/lib-search/*\r\n/search-library\r\n/search-library/*\r\n/search-results\r\n/search-results/*\r\n\r\n/lib-search\r\n/search-library\r\n/search-library/*\r\n\r\n\r\n"

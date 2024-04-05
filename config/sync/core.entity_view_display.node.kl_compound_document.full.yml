@@ -6,10 +6,12 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.kl_compound_document.body
     - field.field.node.kl_compound_document.feeds_item
+    - field.field.node.kl_compound_document.field_alternative_title
     - field.field.node.kl_compound_document.field_archived_note
     - field.field.node.kl_compound_document.field_content_reference
     - field.field.node.kl_compound_document.field_date
     - field.field.node.kl_compound_document.field_documents
+    - field.field.node.kl_compound_document.field_general_notes
     - field.field.node.kl_compound_document.field_kl_archived
     - field.field.node.kl_compound_document.field_kl_archived_date
     - field.field.node.kl_compound_document.field_kl_authors
@@ -122,6 +124,42 @@ content:
     third_party_settings: {  }
     weight: 0
     region: ds_content
+  field_alternative_title:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: true
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: content
   field_content_reference:
     type: string
     label: inline
@@ -194,6 +232,13 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
+    region: ds_content
+  field_general_notes:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: ds_content
   field_kl_archived:
     type: boolean

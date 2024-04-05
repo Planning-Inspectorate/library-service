@@ -1,0 +1,19 @@
+uuid: 3f6dd691-d4f4-483a-add3-8489690e98eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_version
+    - node.type.hard_copy
+id: node.hard_copy.field_kl_doc_version
+field_name: field_kl_doc_version
+entity_type: node
+bundle: hard_copy
+label: 'Doc Version'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

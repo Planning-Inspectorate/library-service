@@ -1,22 +1,22 @@
-uuid: bff16489-f357-4219-add1-077585c2ec5d
+uuid: e4ca87b0-d994-40f9-aaa0-f6c3813347d7
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.kl_compound_document.field_alternative_title
-    - field.field.node.kl_compound_document.field_general_notes
-    - field.field.node.kl_compound_document.field_kl_authors
-    - field.field.node.kl_compound_document.field_kl_classification
-    - field.field.node.kl_compound_document.field_kl_doc_folder
-    - field.field.node.kl_compound_document.field_kl_doc_id
-    - field.field.node.kl_compound_document.field_kl_doc_parent_subtype
-    - field.field.node.kl_compound_document.field_kl_doc_parentid
-    - field.field.node.kl_compound_document.field_kl_doc_unique_id
-    - field.field.node.kl_compound_document.field_kl_doc_version
-    - field.field.node.kl_compound_document.field_kl_reading_lists
-    - field.field.node.kl_compound_document.field_kl_series
-    - field.field.node.kl_compound_document.field_weight
-    - node.type.kl_compound_document
+    - field.field.node.hard_copy.field_content_reference
+    - field.field.node.hard_copy.field_kl_authors
+    - field.field.node.hard_copy.field_kl_classification
+    - field.field.node.hard_copy.field_kl_doc_folder
+    - field.field.node.hard_copy.field_kl_doc_id
+    - field.field.node.hard_copy.field_kl_doc_origindataid
+    - field.field.node.hard_copy.field_kl_doc_parent_subtype
+    - field.field.node.hard_copy.field_kl_doc_parentid
+    - field.field.node.hard_copy.field_kl_doc_unique_id
+    - field.field.node.hard_copy.field_kl_doc_version
+    - field.field.node.hard_copy.field_kl_reading_lists
+    - field.field.node.hard_copy.field_kl_series
+    - field.field.node.hard_copy.field_weight
+    - node.type.hard_copy
   module:
     - feeds_tamper
     - node
@@ -130,8 +130,8 @@ third_party_settings:
   feeds_log:
     operations: {  }
     items: {  }
-label: 'KL Import Compound Documents'
-id: kl_import_compoundfolders
+label: 'Import Hardcopy'
+id: import_hardcopy
 description: ''
 help: ''
 import_period: -1
@@ -147,7 +147,7 @@ parser_configuration:
 processor: 'entity:node'
 processor_configuration:
   values:
-    type: kl_compound_document
+    type: hard_copy
   langcode: en
   insert_new: 1
   update_existing: 2
@@ -284,16 +284,6 @@ custom_sources:
     label: Ordering
     machine_name: ordering
     type: csv
-  alttitle:
-    value: AltTitle
-    label: AltTitle
-    machine_name: alttitle
-    type: csv
-  notes:
-    value: Notes
-    label: Notes
-    machine_name: notes
-    type: csv
 mappings:
   -
     target: title
@@ -389,6 +379,13 @@ mappings:
       language: null
     unique: {  }
   -
+    target: field_kl_doc_origindataid
+    map:
+      value: origindataid
+    settings:
+      language: ''
+    unique: {  }
+  -
     target: field_weight
     map:
       value: ordering
@@ -396,15 +393,9 @@ mappings:
       language: null
     unique: {  }
   -
-    target: field_alternative_title
+    target: field_content_reference
     map:
-      value: alttitle
+      value: dataid
     settings:
       language: null
     unique: {  }
-  -
-    target: field_general_notes
-    map:
-      value: notes
-    settings:
-      language: null
