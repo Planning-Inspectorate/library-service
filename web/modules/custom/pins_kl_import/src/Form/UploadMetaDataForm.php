@@ -51,7 +51,7 @@ class UploadMetaDataForm extends FormBase {
       '#options' => [
         'kl_import_metadata' => t('Import KL Metadata (subtype 144)'),
         'kl_import_virtual_folders' => t('Import KL Virtual Folders (subtype 899)'),
-        'kl_import_hardcopy' => t('Import KL Hardcopy (subtype 411)'),
+        'import_hardcopy' => t('Import KL Hardcopy (subtype 411)'),
         'kl_import_shortcuts' => t('Import KL Shortcuts (subtype 1)'),
         'kl_import_compoundfolders' => t('Import KL Compound Documents (subtype 136)'),
         'kl_import_compound_subdocs' => t('Import KL Compound Sub Documents (subtype 144)'),
