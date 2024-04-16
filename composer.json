@@ -202,7 +202,10 @@
             },
             "drupal/clientside_validation": {
                 "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402-5.patch"
-            }     
+            },
+            "drupal/core" : {
+                "access check error fix" : "https://www.drupal.org/files/issues/2023-12-08/core-patch.patch"
+            }         
         },
         "enable-patching": true
     }
