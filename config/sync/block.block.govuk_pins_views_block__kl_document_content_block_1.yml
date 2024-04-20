@@ -1,26 +1,26 @@
-uuid: cc5a06c8-0ffe-4c3f-88a9-95b4d03bb72d
+uuid: 40178cca-632b-42f1-87a2-1c3503e8c449
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.browse_library
+    - views.view.kl_document_content
   module:
-    - block_class
+    - collapsiblock
     - system
     - views
   theme:
     - govuk_pins
 third_party_settings:
-  block_class:
-    classes: govuk-grid-column-one-half
-id: govuk_pins_views_block__browse_library_block_8
+  collapsiblock:
+    collapse_action: 0
+id: govuk_pins_views_block__kl_document_content_block_1
 theme: govuk_pins
 region: content
-weight: -18
+weight: -12
 provider: null
-plugin: 'views_block:browse_library-block_8'
+plugin: 'views_block:kl_document_content-block_1'
 settings:
-  id: 'views_block:browse_library-block_8'
+  id: 'views_block:kl_document_content-block_1'
   label: ''
   label_display: visible
   provider: views
@@ -31,4 +31,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /disabled
+    pages: '/taxonomy/term/*'

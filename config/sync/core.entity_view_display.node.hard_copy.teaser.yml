@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.hard_copy.body
+    - field.field.node.hard_copy.feeds_item
     - field.field.node.hard_copy.field_alternative_title
     - field.field.node.hard_copy.field_archive
     - field.field.node.hard_copy.field_author
@@ -17,6 +18,12 @@ dependencies:
     - field.field.node.hard_copy.field_kl_authors
     - field.field.node.hard_copy.field_kl_classification
     - field.field.node.hard_copy.field_kl_doc_folder
+    - field.field.node.hard_copy.field_kl_doc_id
+    - field.field.node.hard_copy.field_kl_doc_origindataid
+    - field.field.node.hard_copy.field_kl_doc_parent_subtype
+    - field.field.node.hard_copy.field_kl_doc_parentid
+    - field.field.node.hard_copy.field_kl_doc_unique_id
+    - field.field.node.hard_copy.field_kl_doc_version
     - field.field.node.hard_copy.field_kl_reading_lists
     - field.field.node.hard_copy.field_kl_series
     - field.field.node.hard_copy.field_locations
@@ -32,6 +39,7 @@ dependencies:
     - field.field.node.hard_copy.field_stock_level
     - field.field.node.hard_copy.field_tags
     - field.field.node.hard_copy.field_volume
+    - field.field.node.hard_copy.field_weight
     - node.type.hard_copy
   module:
     - text
@@ -63,6 +71,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  feeds_item: true
   field_alternative_title: true
   field_archive: true
   field_author: true
@@ -75,6 +84,12 @@ hidden:
   field_kl_authors: true
   field_kl_classification: true
   field_kl_doc_folder: true
+  field_kl_doc_id: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
   field_kl_reading_lists: true
   field_kl_series: true
   field_locations: true
@@ -90,5 +105,6 @@ hidden:
   field_stock_level: true
   field_tags: true
   field_volume: true
+  field_weight: true
   langcode: true
   search_api_excerpt: true

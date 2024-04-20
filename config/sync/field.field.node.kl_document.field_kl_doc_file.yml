@@ -21,7 +21,7 @@ settings:
   handler: 'default:file'
   handler_settings: {  }
   file_directory: 'lib-mig/[date:custom:Y]-[date:custom:m]'
-  file_extensions: 'txt csv docx pdf doc xlsx pptx ppt jpg jpeg'
+  file_extensions: 'txt csv docx pdf doc xlsx pptx ppt jpg jpeg tif xls rtf pptm pps docm htm html mp4 msg pot ppsx wbk'
   max_filesize: ''
   description_field: true
 field_type: file

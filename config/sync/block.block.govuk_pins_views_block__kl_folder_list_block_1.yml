@@ -1,22 +1,26 @@
-uuid: fba88fe2-e309-4ff5-9133-eca038f4f6b6
+uuid: f8f79638-840b-45de-bff0-c9d0f7fdbafc
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.browse_library
+    - views.view.kl_folder_list
   module:
+    - collapsiblock
     - system
     - views
   theme:
     - govuk_pins
-id: govuk_pins_views_block__browse_library_block_7
+third_party_settings:
+  collapsiblock:
+    collapse_action: 0
+id: govuk_pins_views_block__kl_folder_list_block_1
 theme: govuk_pins
 region: content
-weight: -19
+weight: -13
 provider: null
-plugin: 'views_block:browse_library-block_7'
+plugin: 'views_block:kl_folder_list-block_1'
 settings:
-  id: 'views_block:browse_library-block_7'
+  id: 'views_block:kl_folder_list-block_1'
   label: ''
   label_display: visible
   provider: views
@@ -27,4 +31,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /disabled
+    pages: '/taxonomy/term/*'

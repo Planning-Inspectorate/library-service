@@ -3861,7 +3861,7 @@ display:
           required: false
       css_class: browse-library
       use_ajax: true
-      group_by: false
+      group_by: true
       display_description: ''
       display_extenders: {  }
       path: publications
@@ -4229,7 +4229,7 @@ display:
           required: false
       css_class: browse-library
       use_ajax: true
-      group_by: false
+      group_by: true
       display_description: ''
       display_extenders: {  }
     cache_metadata:

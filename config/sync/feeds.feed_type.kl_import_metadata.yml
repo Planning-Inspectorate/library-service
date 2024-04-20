@@ -30,6 +30,7 @@ dependencies:
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
+    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -254,8 +255,17 @@ third_party_settings:
         weight: 1
         label: 'HTML entity decode'
   feeds_log:
-    operations: {  }
-    items: {  }
+    status: true
+    operations:
+      created: created
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      skipped: skipped
+      failed: failed
+    source: true
 label: 'KL Import Metadata'
 id: kl_import_metadata
 description: ''

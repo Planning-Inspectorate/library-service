@@ -2,9 +2,9 @@ _core:
   default_config_hash: PVw1CqINc8mdBO0v-gKzrhG9fd1pyKwx4wIXdks-k3w
 disabled: false
 field_template: true
-ft_default: null
-ft_show_colon: null
-ft_layout_builder: null
+ft_default: expert
+ft_show_colon: false
+ft_layout_builder: false
 ft_bc: true
 ft_default_bc: true
 ft_expert_prefix_suffix_textarea: false

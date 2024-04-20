@@ -16,7 +16,7 @@ third_party_settings:
 id: govuk_pins_frontpage
 theme: govuk_pins
 region: content
-weight: 0
+weight: -14
 provider: null
 plugin: 'block_content:7939c960-08a1-46b4-86f9-5f42ddf86189'
 settings:

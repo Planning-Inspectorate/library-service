@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
+    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -103,8 +104,17 @@ third_party_settings:
         delimiter: '|'
         vocabulary: kl_classification
   feeds_log:
-    operations: {  }
-    items: {  }
+    status: true
+    operations:
+      created: created
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      skipped: skipped
+      failed: failed
+    source: true
 label: 'KL Import Compound SubDocs'
 id: kl_import_compound_subdocs
 description: ''

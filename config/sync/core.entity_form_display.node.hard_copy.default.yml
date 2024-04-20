@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.hard_copy.body
+    - field.field.node.hard_copy.feeds_item
     - field.field.node.hard_copy.field_alternative_title
     - field.field.node.hard_copy.field_archive
     - field.field.node.hard_copy.field_author
@@ -16,6 +17,12 @@ dependencies:
     - field.field.node.hard_copy.field_kl_authors
     - field.field.node.hard_copy.field_kl_classification
     - field.field.node.hard_copy.field_kl_doc_folder
+    - field.field.node.hard_copy.field_kl_doc_id
+    - field.field.node.hard_copy.field_kl_doc_origindataid
+    - field.field.node.hard_copy.field_kl_doc_parent_subtype
+    - field.field.node.hard_copy.field_kl_doc_parentid
+    - field.field.node.hard_copy.field_kl_doc_unique_id
+    - field.field.node.hard_copy.field_kl_doc_version
     - field.field.node.hard_copy.field_kl_reading_lists
     - field.field.node.hard_copy.field_kl_series
     - field.field.node.hard_copy.field_locations
@@ -31,11 +38,13 @@ dependencies:
     - field.field.node.hard_copy.field_stock_level
     - field.field.node.hard_copy.field_tags
     - field.field.node.hard_copy.field_volume
+    - field.field.node.hard_copy.field_weight
     - node.type.hard_copy
   module:
     - datetime
     - paragraphs
     - path
+    - weight
 id: node.hard_copy.default
 targetEntityType: node
 bundle: hard_copy
@@ -145,6 +154,54 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_kl_doc_id:
+    type: string_textfield
+    weight: 31
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_origindataid:
+    type: string_textfield
+    weight: 30
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parent_subtype:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_parentid:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_unique_id:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_doc_version:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_kl_reading_lists:
     type: entity_reference_autocomplete
     weight: 7
@@ -233,6 +290,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_weight:
+    type: weight_selector
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -273,6 +336,7 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
+  feeds_item: true
   field_author: true
   field_content_reference: true
   field_initial_stock_level: true

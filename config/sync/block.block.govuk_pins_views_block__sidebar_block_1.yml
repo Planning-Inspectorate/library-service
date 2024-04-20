@@ -2,11 +2,8 @@ uuid: 050335d6-6001-48b9-b91a-c5b120b79c1a
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.sidebar
   module:
     - node
-    - views
   theme:
     - govuk_pins
 id: govuk_pins_views_block__sidebar_block_1
