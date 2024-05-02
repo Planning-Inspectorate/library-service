@@ -36,7 +36,7 @@
     {% endif %}
     {% for item in items %}
       <li{{ item.attributes.addClass('govuk-footer__inline-list-item') }}>
-        {{ link(item.title, item.url, { 'class':['govuk-footer__link']}) }}
+        {{ link(item.title, 'mailto:knowledge.centre@planninginspectorate.gov.uk', { 'class':['govuk-footer__link']}) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
