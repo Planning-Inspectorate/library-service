@@ -374,11 +374,62 @@ function pins_preprocess_html(&$variables) {
 }
 
 /**
+ * Implements hook_views_pre_view().
+ */
+function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
+
+  if ($view->id() == 'taxonomy_search' && $display_id === 'page_2') {
+    $term_id = array_key_exists(0, $args) ? $args[0] : '';
+    if ($term_id != '') {
+      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+      if ($term && $term->bundle() == 'kl_publications') {
+        $empty_config = $view->display_handler->getOption('result');
+        $empty_config['content']['value'] = '';
+        $view->display_handler->setOption('empty', $empty_config);
+      }
+    }
+   
+  }
+}
+
+/**
 * Implements hook_views_query_alter().
 */
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   $user = \Drupal::currentUser();
+  // Added for KL Publication 
+  // ToDo need to remove once folder logic is implemented.
+  if ($view->id() === 'content_list_page') {
+    $term_id = $view->args[0];
+    if ($term_id > 0) {
+      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+      if ($term && $custom_field_value = $term->get('field_reading_list')->getValue()) {
+        $id_list = [];
+        if (is_array($custom_field_value)) {
+          foreach ($custom_field_value as $item) {
+            $id_list[] = $item['target_id']; 
+          }
+        }
+
+        if (count($id_list) > 0) {
+            foreach ($query->where as &$condition_group) {
+              foreach ($condition_group['conditions'] as &$condition) {
+                  if ($condition['field'] == 'taxonomy_index.tid = :taxonomy_index_tid1') {
+                      $condition = [
+                          'field' => 'taxonomy_index.tid',
+                          'value' => $id_list,
+                          'operator' => 'IN',
+                      ];
+                    break; 
+                  }
+               }
+            }
+        }
+      }
+    }
+  }
+
 
   if (($view->storage->get('id') == 'horizon') ) {
     if (($view->getDisplay()->display['id'] == 'versions') ) {
