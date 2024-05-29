@@ -380,9 +380,10 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 
   if ($view->id() == 'taxonomy_search' && $display_id === 'page_2') {
     $term_id = array_key_exists(0, $args) ? $args[0] : '';
+    $vocabularies = ["kl_publications", "kl_topics"];
     if ($term_id != '') {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-      if ($term && $term->bundle() == 'kl_publications') {
+      if ($term && && in_array($term->bundle(), $vocabularies)) {
         $empty_config = $view->display_handler->getOption('result');
         $empty_config['content']['value'] = '';
         $view->display_handler->setOption('empty', $empty_config);
