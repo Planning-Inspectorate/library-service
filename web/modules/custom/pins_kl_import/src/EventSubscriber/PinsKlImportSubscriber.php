@@ -170,6 +170,22 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
           
           $event->getEntity() ->set('created',$unixTime);
           $event->getEntity() ->set('field_date',$date_str);
+          $event->getEntity() ->set('field_kl_vercdate',$date_str);
+        }
+
+        if($modified = $item->get('vermdate')){
+          $modified_date_str = $this->getFormattedDate($modified);
+          $event->getEntity() ->set('field_kl_vermdate',$modified_date_str);
+        }
+
+        if($fcreated = $item->get('filecdate')){
+          $fcreated_date_str =  $this->getFormattedDate($fcreated);
+          $event->getEntity() ->set('field_kl_filecdate',$fcreated_date_str);
+        }
+        
+        if($fmodified = $item->get('filemdate')){
+          $fmodified_date_str =  $this->getFormattedDate($fmodified);
+          $event->getEntity() ->set('field_kl_filemdate',$fmodified_date_str);
         }
 
         $version_id = $item->get('VersionID');
@@ -261,6 +277,17 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
     }
   }
 
+
+  public function getFormattedDate($inputDate, $returnTimestamp = 0){
+    $unixTime = strtotime(str_replace('/','-',$inputDate));
+    $date_str = date('Y-m-d\TH:i:s', $unixTime);
+    if ($returnTimestamp == 1){
+      return $unixTime;
+    }
+    else  {
+      return $date_str;
+    }
+  }
 
   public function getTid($name, $vid, $ptid=0){
     $tid = 0;
