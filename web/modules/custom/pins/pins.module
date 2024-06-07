@@ -18,6 +18,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
+use Drupal\Core\Render\Markup;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
