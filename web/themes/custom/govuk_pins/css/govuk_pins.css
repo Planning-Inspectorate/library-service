@@ -434,3 +434,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-image: url("../assets/images/icons_open.png");
 }
 
+.govuk-table-spacing {
+  margin-top: 15px;
+}
