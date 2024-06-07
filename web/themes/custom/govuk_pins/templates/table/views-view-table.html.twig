@@ -40,7 +40,7 @@
     sticky ? 'sticky-enabled',
   ]
 %}
-<table{{ attributes.addClass('govuk-table', classes) }}>
+<table{{ attributes.addClass('govuk-table', 'govuk-table-spacing', classes) }}>
   {% if caption_needed %}
     <caption class="govuk-table__caption govuk-table__caption--m">
     {% if caption %}
@@ -55,13 +55,14 @@
   {% endif %}
   {% if header %}
     <thead class="govuk-table__head">
-      <tr>
+      <tr class="govuk-table__row">
         {% for key, column in header %}
           {% if column.default_classes %}
             {%
               set column_classes = [
                 'views-field',
                 'views-field-' ~ fields[key],
+                'govuk-table__header'
               ]
             %}
           {% endif %}
