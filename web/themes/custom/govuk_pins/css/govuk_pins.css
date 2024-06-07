@@ -410,3 +410,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   --radius: 0.125rem;
 }
 
+.govuk-icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+
+.govuk-icon-download {
+  background-image: url("../assets/images/icons_download.png");
+}
+
+.govuk-icon-folder {
+  background-image: url("../assets/images/icons_folder.png");
+}
+
+.govuk-icon-compound-folder {
+  background-image: url("../assets/images/icons_compound_folder.png");
+}
+
+.govuk-icon-open {
+  background-image: url("../assets/images/icons_open.png");
+}
+
