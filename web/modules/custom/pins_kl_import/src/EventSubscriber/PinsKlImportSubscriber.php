@@ -148,7 +148,7 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
     switch ($feed_type_id) {
 
       case 'kl_import_metadata':
-      // case 'kl_import_compound_subdocs':
+      case 'kl_import_compound_subdocs':
       // case 'kl_import_compoundfolders':
 
         //entity fields
