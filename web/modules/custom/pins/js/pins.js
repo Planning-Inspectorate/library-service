@@ -2,6 +2,14 @@
   Drupal.behaviors.pins = {
     attach: function (context, settings) {
 
+      function befDateFilterFormatChange(context) {
+        $(context).find('.bef-datepicker').each(function () {
+          $(this).datepicker({ dateFormat: 'dd-mm-yy' }); 
+        });
+      }
+    
+      befDateFilterFormatChange(context);
+
       function hardcopy_autocomplete_onchange() {
 
         if(jQuery('.node-issued-hard-copy-edit-form').is(':visible')){
