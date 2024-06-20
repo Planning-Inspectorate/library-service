@@ -234,7 +234,8 @@ aside .editorschoice-menu.govuk-list ul {
 
 .box-link svg {
   height: auto;
-  margin-bottom: var(--spacing-medium);
+  /* margin-bottom: var(--spacing-medium); */
+  margin-bottom: var(--spacing-small);
 }
 
 .l-rs, .pager__items {
