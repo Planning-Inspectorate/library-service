@@ -169,9 +169,21 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
           $date_str = date('Y-m-d\TH:i:s', $unixTime);
           
           $event->getEntity() ->set('created',$unixTime);
-          $event->getEntity() ->set('field_date',$date_str);
+//          $event->getEntity() ->set('field_date',$date_str);
           $event->getEntity() ->set('field_kl_vercdate',$date_str);
         }
+        
+        if($published = $item->get('publicationdate')){
+          $publication_date_str = $this->getFormattedDate($published);
+          $event->getEntity() ->set('field_date',$publication_date_str);
+        }
+
+        if($archived = $item->get('archiveddate')){
+          $archived_date_str = $this->getFormattedDate($archived);
+          $event->getEntity() ->set('field_kl_archived_date',$archived_date_str);
+          $event->getEntity() ->set('field_kl_archived',1);
+        }
+
 
         if($modified = $item->get('vermdate')){
           $modified_date_str = $this->getFormattedDate($modified);
