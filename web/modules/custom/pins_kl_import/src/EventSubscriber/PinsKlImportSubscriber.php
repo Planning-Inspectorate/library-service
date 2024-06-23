@@ -147,6 +147,20 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
 
     switch ($feed_type_id) {
 
+      case 'kl_import_compoundfolders':
+        if($published = $item->get('publicationdate')){
+            $publication_date_str = $this->getFormattedDate($published);
+           $event->getEntity() ->set('field_date',$publication_date_str);
+         }
+ 
+         if($archived = $item->get('archiveddate')){
+           $archived_date_str = $this->getFormattedDate($archived);
+           $event->getEntity() ->set('field_kl_archived_date',$archived_date_str);
+           $event->getEntity() ->set('field_kl_archived',1);
+         }
+ 
+        break;
+
       case 'kl_import_metadata':
       case 'kl_import_compound_subdocs':
       // case 'kl_import_compoundfolders':
