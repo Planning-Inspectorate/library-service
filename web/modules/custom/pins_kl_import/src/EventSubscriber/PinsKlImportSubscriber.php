@@ -148,6 +148,7 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
     switch ($feed_type_id) {
 
       case 'kl_import_compoundfolders':
+      case 'import_hardcopy':
         if($published = $item->get('publicationdate')){
             $publication_date_str = $this->getFormattedDate($published);
            $event->getEntity() ->set('field_date',$publication_date_str);
