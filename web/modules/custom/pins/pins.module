@@ -292,16 +292,32 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
 */
 
 function pins_get_compound_referenced_document_id($entity){
+  // $target_ids = [];
+  // $query = \Drupal::database()->select('node__field_kl_doc_compound_folder', 'd');
+
+  // $query->fields('d', ['entity_id']);
+  // $query->condition('d.field_kl_doc_compound_folder_target_id', $entity->id());
+  // $query->distinct();
+  // $results = $query->execute()->fetchAll();
+
+  // foreach ($results as $key => $result) {
+  //   $target_ids[] = $result->entity_id;
+  // }
+  // return  $target_ids;
   $target_ids = [];
   $query = \Drupal::database()->select('node__field_kl_doc_compound_folder', 'd');
+  $query->join('node__field_kl_doc_id', 't', 'd.entity_id = t.entity_id');
+  $query->join('node__field_vernum', 'f', 'f.entity_id = d.entity_id');
 
   $query->fields('d', ['entity_id']);
+  $query->fields('t', ['field_kl_doc_id_value']);
+  $query->fields('f', ['field_vernum_value']);
   $query->condition('d.field_kl_doc_compound_folder_target_id', $entity->id());
-  $query->distinct();
+  $query->orderBy('f.field_vernum_value', 'ASC');
   $results = $query->execute()->fetchAll();
 
   foreach ($results as $key => $result) {
-    $target_ids[] = $result->entity_id;
+    $target_ids[$result->field_kl_doc_id_value] = $result->entity_id;
   }
   return  $target_ids;
 }
