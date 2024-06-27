@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.hard_copy.field_date
     - field.field.node.hard_copy.field_kl_authors
     - field.field.node.hard_copy.field_kl_classification
     - field.field.node.hard_copy.field_kl_doc_folder
@@ -17,7 +18,6 @@ dependencies:
     - field.field.node.hard_copy.field_weight
     - node.type.hard_copy
   module:
-    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -128,17 +128,8 @@ third_party_settings:
         weight: -8
         label: 'Characters to trim'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'Import Hardcopy'
 id: import_hardcopy
 description: ''
@@ -293,6 +284,11 @@ custom_sources:
     label: Ordering
     machine_name: ordering
     type: csv
+  publicationdate:
+    value: PublicationDate
+    label: PublicationDate
+    machine_name: publicationdate
+    type: csv
 mappings:
   -
     target: title
@@ -401,3 +397,10 @@ mappings:
     settings:
       language: null
     unique: {  }
+  -
+    target: field_date
+    map:
+      value: publicationdate
+    settings:
+      language: null
+      timezone: UTC

@@ -4,19 +4,26 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_alternative_title
-    - field.storage.node.field_publication_date
+    - field.storage.node.field_date
+    - field.storage.node.field_kl_authors
+    - field.storage.node.field_kl_doc_file
+    - field.storage.node.field_kl_vernum
+    - field.storage.node.field_vernum
     - node.type.article
     - node.type.hard_copy
     - node.type.hard_copy_loan
+    - node.type.kl_document
     - node.type.pdf
     - system.menu.admin
-    - taxonomy.vocabulary.authors
-    - taxonomy.vocabulary.reading_lists
+    - taxonomy.vocabulary.kl_authors
+    - taxonomy.vocabulary.kl_folders
+    - taxonomy.vocabulary.kl_reading_lists
     - taxonomy.vocabulary.series
     - taxonomy.vocabulary.tags
   module:
     - better_exposed_filters
     - datetime
+    - file
     - node
     - taxonomy
     - user
@@ -414,25 +421,134 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        name:
-          id: name
-          table: users_field_data
-          field: name
-          relationship: uid
-          entity_type: user
-          entity_field: name
+        field_kl_authors:
+          id: field_kl_authors
+          table: node__field_kl_authors
+          field: field_kl_authors
+          relationship: none
+          group_type: group
+          admin_label: ''
           plugin_id: field
-          label: Author
+          label: Authors
           exclude: false
           alter:
             alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
           element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
           element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        name:
+          id: name
+          table: users_field_data
+          field: name
+          relationship: uid
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
           type: user_name
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         status:
           id: status
           table: node_field_data
@@ -659,10 +775,200 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_publication_date:
-          id: field_publication_date
-          table: node__field_publication_date
-          field: field_publication_date
+        field_vernum:
+          id: field_vernum
+          table: node__field_vernum
+          field: field_vernum
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: vernum
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_vernum:
+          id: field_kl_vernum
+          table: node__field_kl_vernum
+          field: field_kl_vernum
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: VerNum
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_kl_doc_file:
+          id: field_kl_doc_file
+          table: node__field_kl_doc_file
+          field: field_kl_doc_file
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Choose file to add'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: file_default
+          settings:
+            use_description_as_link_text: true
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_date:
+          id: field_date
+          table: node__field_date
+          field: field_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -704,7 +1010,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: '{{ created }}'
+          empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -712,7 +1018,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: dd_mn_yy
+            format_type: olivero_medium
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -834,30 +1140,37 @@ display:
                   placeholder_text: ''
                   collapsible: false
                   is_secondary: true
-              field_publication_date_value:
+              field_kl_doc_folder_target_id:
+                plugin_id: default
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
+              field_kl_doc_id_value:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  is_secondary: false
+              field_alternative_title_value:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  is_secondary: false
+              field_date_value:
                 plugin_id: bef_datepicker
                 advanced:
                   placeholder_text: ''
                   collapsible: false
-                  is_secondary: true
-              field_publication_date_value_1:
+                  is_secondary: false
+              field_date_value_1:
                 plugin_id: bef_datepicker
                 advanced:
                   placeholder_text: ''
                   collapsible: false
-                  is_secondary: true
-              created_1:
-                plugin_id: bef_datepicker
-                advanced:
-                  placeholder_text: ''
-                  collapsible: false
-                  is_secondary: true
-              created:
-                plugin_id: bef_datepicker
-                advanced:
-                  placeholder_text: ''
-                  collapsible: false
-                  is_secondary: true
+                  is_secondary: false
       access:
         type: perm
         options:
@@ -921,6 +1234,50 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_alternative_title_value:
+          id: field_alternative_title_value
+          table: node__field_alternative_title
+          field: field_alternative_title_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_alternative_title_value_op
+            label: 'Alternative Title'
+            description: ''
+            use_operator: false
+            operator: field_alternative_title_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_alternative_title_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         type:
           id: type
           table: node_field_data
@@ -934,6 +1291,7 @@ display:
           operator: in
           value:
             article: article
+            kl_document: kl_document
             hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
             pdf: pdf
@@ -1153,11 +1511,18 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          vid: reading_lists
+          vid: kl_reading_lists
           type: textfield
           hierarchy: false
           limit: true
           error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
         tid:
           id: tid
           table: taxonomy_index
@@ -1258,27 +1623,27 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        tid_5:
-          id: tid_5
-          table: taxonomy_index
-          field: tid
+        field_kl_doc_id_value:
+          id: field_kl_doc_id_value
+          table: node__field_kl_doc_id
+          field: field_kl_doc_id_value
           relationship: none
           group_type: group
-          admin_label: Author
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_5_op
-            label: Author
+            operator_id: field_kl_doc_id_value_op
+            label: 'Doc Id'
             description: ''
             use_operator: false
-            operator: tid_5_op
+            operator: field_kl_doc_id_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: author
+            identifier: field_kl_doc_id_value
             required: false
             remember: false
             multiple: false
@@ -1289,7 +1654,7 @@ display:
               administrator: '0'
               pads: '0'
               library_admin: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1302,12 +1667,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: true
-          vid: authors
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
         changed:
           id: changed
           table: node_field_data
@@ -1347,7 +1706,7 @@ display:
               library_admin: '0'
             min_placeholder: ''
             max_placeholder: ''
-            placeholder: ''
+            placeholder: dd-mm-yyyy
           is_grouped: false
           group_info:
             label: ''
@@ -1399,7 +1758,7 @@ display:
               library_admin: '0'
             min_placeholder: ''
             max_placeholder: ''
-            placeholder: ''
+            placeholder: dd-mm-yyyy
           is_grouped: false
           group_info:
             label: ''
@@ -1412,13 +1771,13 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_publication_date_value:
-          id: field_publication_date_value
-          table: node__field_publication_date
-          field: field_publication_date_value
+        field_date_value:
+          id: field_date_value
+          table: node__field_date
+          field: field_date_value
           relationship: none
           group_type: group
-          admin_label: 'Publication date from'
+          admin_label: 'Publication Date From'
           plugin_id: datetime
           operator: '>='
           value:
@@ -1429,64 +1788,14 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_publication_date_value_op
-            label: 'Publication date from'
+            operator_id: field_date_value_op
+            label: 'Publication Date From'
             description: ''
             use_operator: false
-            operator: field_publication_date_value_op
+            operator: field_date_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: publication_date_from
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_publication_date_value_1:
-          id: field_publication_date_value_1
-          table: node__field_publication_date
-          field: field_publication_date_value
-          relationship: none
-          group_type: group
-          admin_label: 'Publication date to'
-          plugin_id: datetime
-          operator: '<='
-          value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_publication_date_value_1_op
-            label: 'Publication date to'
-            description: ''
-            use_operator: false
-            operator: field_publication_date_value_1_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: publication_date_to
+            identifier: field_date_value
             required: false
             remember: true
             multiple: false
@@ -1499,7 +1808,57 @@ display:
               library_admin: '0'
             min_placeholder: ''
             max_placeholder: ''
-            placeholder: ''
+            placeholder: dd-mm-yyyy
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_date_value_1:
+          id: field_date_value_1
+          table: node__field_date
+          field: field_date_value
+          relationship: none
+          group_type: group
+          admin_label: 'Publication Date To'
+          plugin_id: datetime
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_date_value_1_op
+            label: 'Publication Date To'
+            description: ''
+            use_operator: false
+            operator: field_date_value_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_date_value_to
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: dd-mm-yyyy
           is_grouped: false
           group_info:
             label: ''
@@ -1525,6 +1884,7 @@ display:
           operator: in
           value:
             article: article
+            kl_document: kl_document
             hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
             pdf: pdf
@@ -1557,6 +1917,120 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_kl_doc_folder_target_id:
+          id: field_kl_doc_folder_target_id
+          table: node__field_kl_doc_folder
+          field: field_kl_doc_folder_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_kl_doc_folder_target_id_op
+            label: Folder
+            description: ''
+            use_operator: false
+            operator: field_kl_doc_folder_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_kl_doc_folder_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: kl_folders
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        field_kl_authors_target_id:
+          id: field_kl_authors_target_id
+          table: node__field_kl_authors
+          field: field_kl_authors_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: null
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_kl_authors_target_id_op
+            label: Authors
+            description: ''
+            use_operator: false
+            operator: field_kl_authors_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_kl_authors_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: kl_authors
+          type: cshs
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
       filter_groups:
         operator: AND
         groups:
@@ -1678,7 +2152,11 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_alternative_title'
-        - 'config:field.storage.node.field_publication_date'
+        - 'config:field.storage.node.field_date'
+        - 'config:field.storage.node.field_kl_authors'
+        - 'config:field.storage.node.field_kl_doc_file'
+        - 'config:field.storage.node.field_kl_vernum'
+        - 'config:field.storage.node.field_vernum'
   manage_contents:
     id: manage_contents
     display_title: Page
@@ -1714,4 +2192,8 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_alternative_title'
-        - 'config:field.storage.node.field_publication_date'
+        - 'config:field.storage.node.field_date'
+        - 'config:field.storage.node.field_kl_authors'
+        - 'config:field.storage.node.field_kl_doc_file'
+        - 'config:field.storage.node.field_kl_vernum'
+        - 'config:field.storage.node.field_vernum'

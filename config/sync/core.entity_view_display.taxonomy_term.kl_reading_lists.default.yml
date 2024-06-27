@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.kl_reading_lists.feeds_item
+    - field.field.taxonomy_term.kl_reading_lists.field_display_name
     - field.field.taxonomy_term.kl_reading_lists.field_kl_term_display_order
     - field.field.taxonomy_term.kl_reading_lists.field_kl_term_filter
     - field.field.taxonomy_term.kl_reading_lists.field_kl_term_unique_id
+    - field.field.taxonomy_term.kl_reading_lists.field_publications
+    - field.field.taxonomy_term.kl_reading_lists.field_topic_areas
     - taxonomy.vocabulary.kl_reading_lists
   module:
     - text
@@ -27,8 +30,11 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_display_name: true
   field_kl_term_display_order: true
   field_kl_term_filter: true
   field_kl_term_unique_id: true
+  field_publications: true
+  field_topic_areas: true
   langcode: true
   search_api_excerpt: true

@@ -16,7 +16,7 @@ third_party_settings:
 id: govuk_pins_editorschoice
 theme: govuk_pins
 region: content
-weight: -20
+weight: -21
 provider: null
 plugin: 'menu_block:editor-s-choice'
 settings:

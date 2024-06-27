@@ -43,7 +43,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: hidden
-      weight: 31
+      weight: 33
       format_type: fieldset
       format_settings:
         classes: ''
@@ -101,16 +101,15 @@ third_party_settings:
     regions:
       ds_content:
         - body
+        - field_alternative_title
         - field_kl_classification
         - field_kl_series
         - field_kl_reading_lists
         - field_kl_authors
-        - field_documents
         - field_kl_doc_folder
         - field_content_reference
         - field_kl_archived
         - field_kl_archived_date
-        - field_kl_doc_id
         - field_security_classification
 id: node.kl_compound_document.full
 targetEntityType: node
@@ -136,19 +135,19 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: ''
-            lbw-cl: ''
+            lbw-el: strong
+            lbw-cl: label
             lbw-at: ''
             lb-col: true
-            ow: false
-            ow-el: ''
+            ow: true
+            ow-el: p
             ow-cl: ''
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
+            fis: true
+            fis-el: span
+            fis-cl: field-value
             fis-at: ''
             fis-def-at: false
             fi: false
@@ -158,8 +157,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 0
-    region: content
+    weight: 1
+    region: ds_content
   field_content_reference:
     type: string
     label: inline
@@ -195,50 +194,6 @@ content:
             prefix: ''
             suffix: ''
     weight: 7
-    region: ds_content
-  field_documents:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
-            lbw-at: ''
-            lb-col: false
-            ow: true
-            ow-el: p
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: ul
-            fis-cl: govuk-list
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: li
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 5
-    region: ds_content
-  field_general_notes:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 11
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -350,7 +305,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
@@ -387,7 +342,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 2
     region: ds_content
   field_kl_doc_folder:
     type: entity_reference_label
@@ -425,14 +380,6 @@ content:
             suffix: ''
     weight: 6
     region: ds_content
-  field_kl_doc_id:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 10
-    region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
     label: above
@@ -468,7 +415,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -505,15 +452,43 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 2
+    weight: 3
     region: ds_content
   field_security_classification:
     type: entity_reference_label
     label: above
     settings:
       link: true
-    third_party_settings: {  }
-    weight: 11
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: span
+            fis-cl: field-value
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 10
     region: ds_content
 hidden:
   entity_print_view_epub: true
@@ -522,6 +497,9 @@ hidden:
   feeds_item: true
   field_archived_note: true
   field_date: true
+  field_documents: true
+  field_general_notes: true
+  field_kl_doc_id: true
   field_kl_doc_origindataid: true
   field_kl_doc_parent_subtype: true
   field_kl_doc_parentid: true

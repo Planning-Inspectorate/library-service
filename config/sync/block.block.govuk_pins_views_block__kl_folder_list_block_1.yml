@@ -1,12 +1,11 @@
-uuid: f8f79638-840b-45de-bff0-c9d0f7fdbafc
+uuid: 9184c55f-894d-4ede-9fa1-8b49938b0bb6
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.kl_folder_list
   module:
     - collapsiblock
-    - system
     - views
   theme:
     - govuk_pins
@@ -16,7 +15,7 @@ third_party_settings:
 id: govuk_pins_views_block__kl_folder_list_block_1
 theme: govuk_pins
 region: content
-weight: -13
+weight: -11
 provider: null
 plugin: 'views_block:kl_folder_list-block_1'
 settings:
@@ -27,8 +26,4 @@ settings:
   context_mapping: {  }
   views_label: ''
   items_per_page: none
-visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: '/taxonomy/term/*'
+visibility: {  }

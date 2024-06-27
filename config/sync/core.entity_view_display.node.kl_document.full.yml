@@ -44,6 +44,7 @@ dependencies:
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
+    - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
@@ -57,7 +58,6 @@ dependencies:
     - file
     - text
     - user
-    - weight
 third_party_settings:
   ds:
     layout:
@@ -98,32 +98,14 @@ third_party_settings:
         - field_kl_doc_compound_folder
         - field_content_reference
         - body
-        - links
-        - group_accordion_group
-        - group_migration_report_items
-        - field_kl_doc_version
-        - field_kl_doc_unique_id
-        - field_kl_vernum
-        - field_kl_doc_id
-        - field_kl_doc_mime_type
-        - field_kl_filecdate
-        - field_kl_doc_filename
-        - field_kl_vercdate
-        - field_kl_filemdate
-        - field_kl_doc_parentid
-        - field_kl_doc_parent_subtype
-        - field_kl_doc_origindataid
-        - field_kl_doc_file_path
-        - field_weight
-        - field_kl_vermdate
   field_group:
     group_accordion_group:
       children:
         - group_migration_report_items
       label: 'Accordion group'
       parent_name: ''
-      region: ds_content
-      weight: 22
+      region: hidden
+      weight: 44
       format_type: tabs
       format_settings:
         classes: ''
@@ -133,24 +115,24 @@ third_party_settings:
         width_breakpoint: 640
     group_migration_report_items:
       children:
-        - field_kl_doc_version
-        - field_kl_doc_unique_id
-        - field_kl_vernum
+        - field_kl_doc_filename
+        - field_kl_doc_file_path
         - field_kl_doc_id
         - field_kl_doc_mime_type
-        - field_kl_filecdate
-        - field_kl_doc_filename
-        - field_kl_vercdate
-        - field_kl_filemdate
+        - field_kl_doc_origindataid
         - field_kl_doc_parentid
         - field_kl_doc_parent_subtype
-        - field_kl_doc_origindataid
-        - field_kl_doc_file_path
-        - field_weight
+        - field_kl_doc_unique_id
+        - field_kl_doc_version
+        - field_kl_filecdate
+        - field_kl_filemdate
+        - field_kl_vercdate
         - field_kl_vermdate
+        - field_kl_vernum
+        - field_weight
       label: 'Migration/Legacy data'
       parent_name: group_accordion_group
-      region: ds_content
+      region: hidden
       weight: 23
       format_type: tab
       format_settings:
@@ -188,12 +170,12 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: ''
-            lbw-cl: ''
+            lbw-el: strong
+            lbw-cl: label
             lbw-at: ''
             lb-col: true
-            ow: false
-            ow-el: ''
+            ow: true
+            ow-el: p
             ow-cl: ''
             ow-at: ''
             ow-def-at: false
@@ -203,8 +185,8 @@ content:
             fis-cl: ''
             fis-at: ''
             fis-def-at: false
-            fi: false
-            fi-el: ''
+            fi: true
+            fi-el: span
             fi-cl: ''
             fi-at: ''
             fi-def-at: false
@@ -224,7 +206,35 @@ content:
     label: inline
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 19
     region: ds_content
   field_date:
@@ -232,8 +242,36 @@ content:
     label: above
     settings:
       timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
+      format_type: olivero_medium
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 4
     region: ds_content
   field_edition_number:
@@ -424,12 +462,13 @@ content:
       link: true
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: h3
+            lbw-el: strong
             lbw-cl: label
             lbw-at: ''
             lb-col: true
@@ -464,13 +503,13 @@ content:
           id: expert
           settings:
             lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
             lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
+            lb-col: true
+            ow: true
+            ow-el: p
             ow-cl: ''
             ow-at: ''
             ow-def-at: false
@@ -480,30 +519,14 @@ content:
             fis-cl: ''
             fis-at: ''
             fis-def-at: false
-            fi: false
-            fi-el: ''
+            fi: true
+            fi-el: span
             fi-cl: ''
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
     weight: 1
-    region: ds_content
-  field_kl_doc_file_path:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 36
-    region: ds_content
-  field_kl_doc_filename:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 30
     region: ds_content
   field_kl_doc_folder:
     type: cshs_full_hierarchy
@@ -542,80 +565,6 @@ content:
             prefix: ''
             suffix: ''
     weight: 2
-    region: ds_content
-  field_kl_doc_id:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 27
-    region: ds_content
-  field_kl_doc_mime_type:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 28
-    region: ds_content
-  field_kl_doc_origindataid:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 35
-    region: ds_content
-  field_kl_doc_parent_subtype:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 34
-    region: ds_content
-  field_kl_doc_parentid:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 33
-    region: ds_content
-  field_kl_doc_unique_id:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 24
-    region: ds_content
-  field_kl_doc_version:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 23
-    region: ds_content
-  field_kl_filecdate:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 29
-    region: ds_content
-  field_kl_filemdate:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 32
     region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -691,32 +640,6 @@ content:
             suffix: ''
     weight: 5
     region: ds_content
-  field_kl_vercdate:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 31
-    region: ds_content
-  field_kl_vermdate:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 38
-    region: ds_content
-  field_kl_vernum:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 25
-    region: ds_content
   field_long_text:
     type: text_default
     label: above
@@ -760,28 +683,33 @@ content:
     third_party_settings: {  }
     weight: 6
     region: ds_content
-  field_weight:
-    type: default_weight
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    weight: 37
-    region: ds_content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 21
-    region: ds_content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
   field_filemd5: true
+  field_kl_doc_file_path: true
+  field_kl_doc_filename: true
+  field_kl_doc_id: true
+  field_kl_doc_mime_type: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
+  field_kl_filecdate: true
+  field_kl_filemdate: true
   field_kl_filetype: true
+  field_kl_vercdate: true
+  field_kl_vermdate: true
+  field_kl_vernum: true
   field_links: true
   field_search_exclude: true
   field_security_classification: true
+  field_vernum: true
   field_version_id: true
+  field_weight: true
   langcode: true
+  links: true
   search_api_excerpt: true

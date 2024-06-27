@@ -6,28 +6,17 @@ dependencies:
     - field.field.node.kl_document.field_filemd5
     - field.field.node.kl_document.field_kl_doc_file
     - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_unique_id
+    - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_vernum
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
 third_party_settings:
   feeds_log:
-    status: true
-    operations:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
   feeds_tamper:
     tampers:
       8313591b-eeec-41f4-a454-cba61d3e1787:
@@ -71,6 +60,13 @@ third_party_settings:
         source: view
         weight: -10
         label: 'Set value or default value'
+      fe5c8dc2-956b-4833-944c-946915dcb232:
+        text: '[documentid]-[version]'
+        uuid: fe5c8dc2-956b-4833-944c-946915dcb232
+        plugin: rewrite
+        source: computedvalue
+        weight: 0
+        label: Rewrite
 label: 'import files'
 id: import_files
 description: ''
@@ -130,6 +126,16 @@ custom_sources:
     label: View
     machine_name: view
     type: blank
+  version:
+    value: version
+    label: version
+    machine_name: version
+    type: csv
+  computedvalue:
+    value: ComputedValue
+    label: ComputedValue
+    machine_name: computedvalue
+    type: blank
 mappings:
   -
     target: field_kl_doc_id
@@ -137,8 +143,7 @@ mappings:
       value: documentid
     settings:
       language: null
-    unique:
-      value: 1
+    unique: {  }
   -
     target: temporary_target
     map:
@@ -157,8 +162,7 @@ mappings:
       value: filemd5
     settings:
       language: null
-    unique:
-      value: 1
+    unique: {  }
   -
     target: field_kl_doc_file
     map:
@@ -169,5 +173,27 @@ mappings:
       reference_by: fid
       feeds_item: guid
       autocreate: 0
-      existing: '0'
+      existing: '1'
       autocreate_bundle: false
+  -
+    target: field_kl_doc_unique_id
+    map:
+      value: computedvalue
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_kl_vernum
+    map:
+      value: version
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_vernum
+    map:
+      value: version
+    settings:
+      language: null
+    unique: {  }

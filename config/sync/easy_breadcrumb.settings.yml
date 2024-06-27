@@ -1,15 +1,15 @@
 _core:
   default_config_hash: i76EDs9aAKdrR4nZfe_woXsD0yihn4avDej8uClXES8
 applies_admin_routes: true
-include_invalid_paths: false
-excluded_paths: ''
-replaced_titles: ''
-custom_paths: ''
+include_invalid_paths: true
+excluded_paths: "library\r\nkl-folders"
+replaced_titles: "Kl Topics::Topics Areas\r\nKl Publications::Publications"
+custom_paths: "regex!/kl-topics/([^/]*) :: Topics Areas| /topic_areas :: <title>\r\nregex!/kl-publications/([^/]*) :: Publications| /publications :: <title>"
 include_home_segment: true
 alternative_title_field: field_breadcrumb_title
-home_segment_title: 'Library home'
+home_segment_title: Home
 home_segment_keep: false
-include_title_segment: false
+include_title_segment: true
 title_from_page_when_available: true
 title_segment_as_link: false
 use_menu_title_as_fallback: true
@@ -41,5 +41,5 @@ segment_display_limit: null
 truncator_mode: false
 truncator_length: 100
 truncator_dots: true
-remove_repeated_segments_text_only: 0
-home_segment_validation_skip: 0
+remove_repeated_segments_text_only: false
+home_segment_validation_skip: false

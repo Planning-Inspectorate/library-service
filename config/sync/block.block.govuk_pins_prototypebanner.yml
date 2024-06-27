@@ -11,7 +11,7 @@ dependencies:
 id: govuk_pins_prototypebanner
 theme: govuk_pins
 region: pre_content
-weight: -12
+weight: -21
 provider: null
 plugin: 'block_content:77285221-5090-439c-9ed3-472124c998e9'
 settings:

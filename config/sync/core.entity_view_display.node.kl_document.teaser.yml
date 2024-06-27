@@ -44,6 +44,7 @@ dependencies:
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
+    - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
@@ -112,6 +113,7 @@ hidden:
   field_other_date: true
   field_search_exclude: true
   field_security_classification: true
+  field_vernum: true
   field_version_id: true
   field_volume: true
   field_weight: true

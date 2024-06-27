@@ -1,0 +1,33 @@
+uuid: 279d9dad-58d4-47a1-99da-64be0fb523ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_list_page
+  module:
+    - collapsiblock
+    - system
+    - views
+  theme:
+    - govuk_pins
+third_party_settings:
+  collapsiblock:
+    collapse_action: 0
+id: govuk_pins_views_block__content_list_page_block_1
+theme: govuk_pins
+region: content
+weight: -13
+provider: null
+plugin: 'views_block:content_list_page-block_1'
+settings:
+  id: 'views_block:content_list_page-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/kl-publications/*\r\n/kl-topics/*"

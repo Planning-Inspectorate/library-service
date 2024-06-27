@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.kl_compound_document.field_alternative_title
+    - field.field.node.kl_compound_document.field_date
     - field.field.node.kl_compound_document.field_general_notes
+    - field.field.node.kl_compound_document.field_kl_archived_date
     - field.field.node.kl_compound_document.field_kl_authors
     - field.field.node.kl_compound_document.field_kl_classification
     - field.field.node.kl_compound_document.field_kl_doc_folder
@@ -18,7 +20,6 @@ dependencies:
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -129,17 +130,8 @@ third_party_settings:
         weight: -8
         label: 'Characters to trim'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Compound Documents'
 id: kl_import_compoundfolders
 description: ''
@@ -304,6 +296,16 @@ custom_sources:
     label: Notes
     machine_name: notes
     type: csv
+  publicationdate:
+    value: PublicationDate
+    label: PublicationDate
+    machine_name: publicationdate
+    type: csv
+  archiveddate:
+    value: ArchivedDate
+    label: ArchivedDate
+    machine_name: archiveddate
+    type: csv
 mappings:
   -
     target: title
@@ -418,3 +420,17 @@ mappings:
       value: notes
     settings:
       language: null
+  -
+    target: field_date
+    map:
+      value: publicationdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_archived_date
+    map:
+      value: archiveddate
+    settings:
+      language: null
+      timezone: UTC

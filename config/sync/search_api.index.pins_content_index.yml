@@ -3,38 +3,38 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.media.field_media_document
+    - field.storage.media.field_media_video_file
+    - field.storage.media.field_media_oembed_video
+    - field.storage.node.field_documents
     - field.storage.node.field_alternative_title
     - field.storage.node.field_archive
-    - field.storage.node.field_borrowed_by
-    - field.storage.node.field_borrowed_date
-    - field.storage.node.field_content_reference
-    - field.storage.node.field_date
-    - field.storage.node.field_documents
-    - field.storage.node.field_edition_number
-    - field.storage.node.field_isbn
     - field.storage.node.field_kl_archived
     - field.storage.node.field_kl_archived_date
     - field.storage.node.field_kl_authors
+    - field.storage.node.body
+    - field.storage.node.field_borrowed_by
+    - field.storage.node.field_borrowed_date
+    - field.storage.node.field_kl_doc_file
     - field.storage.node.field_kl_classification
     - field.storage.node.field_kl_classification_shortcut
-    - field.storage.node.field_kl_doc_file
+    - field.storage.node.field_content_reference
+    - field.storage.node.field_long_text
     - field.storage.node.field_kl_doc_folder
+    - field.storage.node.field_edition_number
+    - field.storage.node.field_isbn
+    - field.storage.node.field_locations
+    - field.storage.node.field_other_date
+    - field.storage.node.field_pdf
+    - field.storage.node.field_date
     - field.storage.node.field_kl_reading_lists
     - field.storage.node.field_kl_series
-    - field.storage.node.field_locations
-    - field.storage.node.field_long_text
-    - field.storage.media.field_media_document
-    - field.storage.node.field_pdf
-    - field.storage.media.field_media_oembed_video
-    - field.storage.media.field_media_video_file
-    - field.storage.node.field_other_date
     - field.storage.node.field_volume
     - search_api.server.pins_elasticsearch_server
   module:
+    - file
     - media
     - node
-    - file
     - taxonomy
     - search_api
     - search_api_attachments
@@ -82,6 +82,16 @@ field_settings:
     property_path: fid
     type: integer
     dependencies:
+      module:
+        - file
+  fid_1:
+    label: 'Choose file to add » File » File ID'
+    datasource_id: 'entity:node'
+    property_path: 'field_kl_doc_file:entity:fid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_kl_doc_file
       module:
         - file
   field_alternative_title:

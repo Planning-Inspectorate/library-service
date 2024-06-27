@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.kl_document.body
     - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_date
+    - field.field.node.kl_document.field_kl_archived_date
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
     - field.field.node.kl_document.field_kl_doc_file
@@ -26,11 +27,11 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -255,17 +256,8 @@ third_party_settings:
         weight: 1
         label: 'HTML entity decode'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Metadata'
 id: kl_import_metadata
 description: ''
@@ -490,6 +482,16 @@ custom_sources:
     label: VersionID
     machine_name: versionid
     type: csv
+  archiveddate:
+    value: ArchivedDate
+    label: ArchivedDate
+    machine_name: archiveddate
+    type: csv
+  publicationdate:
+    value: PublicationDate
+    label: PublicationDate
+    machine_name: publicationdate
+    type: csv
 mappings:
   -
     target: title
@@ -617,8 +619,8 @@ mappings:
     map:
       value: filecdate
     settings:
-      language: null
-      timezone: UTC
+      language: ''
+      timezone: Europe/London
   -
     target: field_kl_filemdate
     map:
@@ -676,7 +678,7 @@ mappings:
   -
     target: field_date
     map:
-      value: vercdate
+      value: publicationdate
     settings:
       language: ''
       timezone: Europe/London
@@ -699,3 +701,17 @@ mappings:
     target: temporary_target
     map:
       temporary: ''
+  -
+    target: field_vernum
+    map:
+      value: vernum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_archived_date
+    map:
+      value: archiveddate
+    settings:
+      language: null
+      timezone: UTC

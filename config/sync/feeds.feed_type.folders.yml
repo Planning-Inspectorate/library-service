@@ -8,25 +8,11 @@ dependencies:
     - field.field.taxonomy_term.kl_folders.field_series
     - taxonomy.vocabulary.kl_folders
   module:
-    - feeds_log
     - taxonomy
 third_party_settings:
   feeds_log:
-    status: true
-    operations:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: Folders
 id: folders
 description: ''

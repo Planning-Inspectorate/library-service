@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - feeds.feed_type.kl_import_authors
     - field.storage.taxonomy_term.feeds_item
     - taxonomy.vocabulary.kl_authors
   module:
@@ -21,8 +20,7 @@ default_value_callback: ''
 settings:
   handler: 'default:feeds_feed'
   handler_settings:
-    target_bundles:
-      kl_import_authors: kl_import_authors
+    target_bundles: {  }
     sort:
       field: _none
       direction: ASC

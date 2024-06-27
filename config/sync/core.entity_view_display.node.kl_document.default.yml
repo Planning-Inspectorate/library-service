@@ -43,6 +43,7 @@ dependencies:
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
+    - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
@@ -98,8 +99,8 @@ third_party_settings:
         - field_kl_archived
         - field_kl_archived_date
         - field_kl_doc_folder
-        - field_links
         - field_kl_doc_compound_folder
+        - field_links
         - field_kl_classification
         - field_kl_authors
         - field_kl_reading_lists
@@ -110,6 +111,9 @@ third_party_settings:
         - field_other_date
         - field_long_text
         - field_number_decimal
+        - field_version_id
+        - field_filemd5
+        - field_search_exclude
   field_group:
     group_migration_report:
       children:
@@ -160,7 +164,35 @@ content:
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 0
     region: ds_content
   field_date:
@@ -180,7 +212,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 35
-    region: content
+    region: ds_content
   field_kl_archived:
     type: boolean
     label: inline
@@ -381,9 +413,9 @@ content:
           id: expert
           settings:
             lb: ''
-            lbw: false
+            lbw: true
             lbw-el: ''
-            lbw-cl: ''
+            lbw-cl: ' govuk-heading-s '
             lbw-at: ''
             lb-col: false
             ow: false
@@ -1115,7 +1147,7 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 36
-    region: content
+    region: ds_content
   field_security_classification:
     type: entity_reference_label
     label: above
@@ -1124,6 +1156,15 @@ content:
     third_party_settings: {  }
     weight: 28
     region: ds_content
+  field_vernum:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 37
+    region: content
   field_version_id:
     type: string
     label: above
@@ -1131,7 +1172,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 34
-    region: content
+    region: ds_content
   field_weight:
     type: default_weight
     label: inline

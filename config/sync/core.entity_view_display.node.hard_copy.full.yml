@@ -42,32 +42,31 @@ dependencies:
     - field.field.node.hard_copy.field_weight
     - node.type.hard_copy
   module:
-    - barcodes
     - datetime
     - ds
     - entity_reference_revisions
     - taxonomy
     - text
     - user
-    - weight
 third_party_settings:
   ds:
     layout:
       id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
         label: ''
-        disable_css: false
-        entity_classes: all_classes
     regions:
-      content:
+      ds_content:
         - field_alternative_title
         - field_date
         - body
@@ -102,24 +101,43 @@ content:
           settings:
             lb: ''
     weight: 2
-    region: content
+    region: ds_content
   field_alternative_title:
-    type: barcode
+    type: string
     label: above
     settings:
-      type: QRCODE
-      color: '#000000'
-      height: 100
-      width: 100
-      padding_top: 0
-      padding_right: 0
-      padding_bottom: 0
-      padding_left: 0
-      show_value: false
-      format: SVG
-    third_party_settings: {  }
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: alternative-title-field-label-inline
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 0
-    region: content
+    region: ds_content
   field_archive:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -133,7 +151,7 @@ content:
           settings:
             lb: ''
     weight: 7
-    region: content
+    region: ds_content
   field_content_reference:
     type: string
     label: inline
@@ -169,7 +187,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 14
-    region: content
+    region: ds_content
   field_date:
     type: datetime_default
     label: inline
@@ -206,7 +224,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 1
-    region: content
+    region: ds_content
   field_edition_number:
     type: string
     label: inline
@@ -242,7 +260,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 5
-    region: content
+    region: ds_content
   field_individual_copy:
     type: entity_reference_revisions_entity_view
     label: above
@@ -280,7 +298,7 @@ content:
             prefix: '<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">'
             suffix: ''
     weight: 17
-    region: content
+    region: ds_content
   field_isbn:
     type: string
     label: inline
@@ -316,7 +334,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 3
-    region: content
+    region: ds_content
   field_kl_authors:
     type: entity_reference_label
     label: above
@@ -353,7 +371,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 8
-    region: content
+    region: ds_content
   field_kl_classification:
     type: entity_reference_rss_category
     label: above
@@ -389,7 +407,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 12
-    region: content
+    region: ds_content
   field_kl_doc_folder:
     type: entity_reference_label
     label: above
@@ -426,14 +444,6 @@ content:
             prefix: ''
             suffix: ''
     weight: 9
-    region: content
-  field_kl_doc_id:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 10
     region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -471,7 +481,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 11
-    region: content
+    region: ds_content
   field_kl_series:
     type: entity_reference_label
     label: above
@@ -508,7 +518,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 10
-    region: content
+    region: ds_content
   field_locations:
     type: entity_reference_label
     label: above
@@ -545,7 +555,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 6
-    region: content
+    region: ds_content
   field_security_classification:
     type: entity_reference_label
     label: inline
@@ -581,7 +591,7 @@ content:
             prefix: ''
             suffix: ''
     weight: 13
-    region: content
+    region: ds_content
   field_volume:
     type: string
     label: inline
@@ -617,52 +627,17 @@ content:
             prefix: ''
             suffix: ''
     weight: 4
-    region: content
-  field_weight:
-    type: default_weight
-    label: inline
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: 'weight field-label-inline'
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: field-value
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 3
-    region: content
+    region: ds_content
   flag_bookmark:
     settings: {  }
     third_party_settings: {  }
     weight: 15
-    region: content
+    region: ds_content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 16
-    region: content
+    region: ds_content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -670,6 +645,7 @@ hidden:
   feeds_item: true
   field_author: true
   field_initial_stock_level: true
+  field_kl_doc_id: true
   field_kl_doc_origindataid: true
   field_kl_doc_parent_subtype: true
   field_kl_doc_parentid: true
@@ -685,5 +661,6 @@ hidden:
   field_series: true
   field_stock_level: true
   field_tags: true
+  field_weight: true
   langcode: true
   search_api_excerpt: true
