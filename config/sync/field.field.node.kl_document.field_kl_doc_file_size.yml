@@ -1,0 +1,23 @@
+uuid: a95e0bbe-0f6e-44a7-a41a-9f9312ba4285
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_file_size
+    - node.type.kl_document
+id: node.kl_document.field_kl_doc_file_size
+field_name: field_kl_doc_file_size
+entity_type: node
+bundle: kl_document
+label: 'Doc File Size'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
