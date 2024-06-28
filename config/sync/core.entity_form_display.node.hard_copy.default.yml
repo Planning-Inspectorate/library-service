@@ -41,6 +41,7 @@ dependencies:
     - field.field.node.hard_copy.field_weight
     - node.type.hard_copy
   module:
+    - cshs
     - datetime
     - paragraphs
     - path
@@ -125,34 +126,29 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_kl_authors:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 11
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_classification:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 6
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_doc_folder:
-    type: entity_reference_autocomplete
+    type: cshs
     weight: 5
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      save_lineage: false
+      force_deepest: false
+      parent: ''
+      level_labels: ''
+      hierarchy_depth: 0
+      required_depth: 0
+      none_label: '- Please select -'
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
@@ -203,24 +199,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_kl_reading_lists:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 7
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_series:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 8
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_locations:
     type: options_buttons
