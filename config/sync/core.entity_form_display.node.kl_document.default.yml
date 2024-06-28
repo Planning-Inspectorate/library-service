@@ -80,6 +80,7 @@ third_party_settings:
         - field_kl_doc_unique_id
         - field_kl_doc_filename
         - field_kl_doc_file_path
+        - field_kl_doc_file_size
         - field_kl_doc_mime_type
         - field_kl_doc_version
         - field_kl_vernum
@@ -91,6 +92,9 @@ third_party_settings:
         - field_kl_vermdate
         - field_kl_filecdate
         - field_kl_filemdate
+        - field_filemd5
+        - field_vernum
+        - field_version_id
       label: 'Legacy  Data'
       region: content
       parent_name: group_tabs
@@ -145,7 +149,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 2
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -181,7 +185,7 @@ content:
     third_party_settings: {  }
   field_filemd5:
     type: string_textfield
-    weight: 42
+    weight: 41
     region: content
     settings:
       size: 60
@@ -217,24 +221,16 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_kl_authors:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 21
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_classification:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 27
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_doc_file:
     type: file_generic
@@ -253,7 +249,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_size:
     type: number
-    weight: 45
+    weight: 29
     region: content
     settings:
       placeholder: ''
@@ -356,24 +352,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_kl_reading_lists:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 26
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_series:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 23
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
@@ -426,7 +414,7 @@ content:
     third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox
-    weight: 43
+    weight: 11
     region: content
     settings:
       display_label: true
@@ -439,14 +427,14 @@ content:
     third_party_settings: {  }
   field_vernum:
     type: number
-    weight: 44
+    weight: 42
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_version_id:
     type: string_textfield
-    weight: 41
+    weight: 43
     region: content
     settings:
       size: 60
@@ -462,27 +450,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
-    type: boolean_checkbox
-    weight: 4
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  status:
     type: boolean_checkbox
     weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -497,7 +485,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
