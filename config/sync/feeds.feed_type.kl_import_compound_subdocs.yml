@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.kl_document.field_kl_authors
     - field.field.node.kl_document.field_kl_classification
     - field.field.node.kl_document.field_kl_doc_compound_folder
+    - field.field.node.kl_document.field_kl_doc_file_size
     - field.field.node.kl_document.field_kl_doc_filename
     - field.field.node.kl_document.field_kl_doc_folder
     - field.field.node.kl_document.field_kl_doc_id
@@ -410,6 +411,11 @@ custom_sources:
     label: PublicationDate
     machine_name: publicationdate
     type: csv
+  datasize:
+    value: DataSize
+    label: DataSize
+    machine_name: datasize
+    type: csv
 mappings:
   -
     target: title
@@ -612,3 +618,10 @@ mappings:
     settings:
       language: null
       timezone: UTC
+  -
+    target: field_kl_doc_file_size
+    map:
+      value: datasize
+    settings:
+      language: null
+    unique: {  }

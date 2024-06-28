@@ -24,8 +24,10 @@ dependencies:
     - taxonomy.vocabulary.kl_authors
     - taxonomy.vocabulary.kl_classification
     - taxonomy.vocabulary.kl_folders
+    - taxonomy.vocabulary.kl_publications
     - taxonomy.vocabulary.kl_reading_lists
     - taxonomy.vocabulary.kl_series
+    - taxonomy.vocabulary.kl_topics
     - taxonomy.vocabulary.locations
     - taxonomy.vocabulary.reading_lists
     - taxonomy.vocabulary.series
@@ -111,8 +113,10 @@ permissions:
   - 'delete terms in kl_authors'
   - 'delete terms in kl_classification'
   - 'delete terms in kl_folders'
+  - 'delete terms in kl_publications'
   - 'delete terms in kl_reading_lists'
   - 'delete terms in kl_series'
+  - 'delete terms in kl_topics'
   - 'delete terms in locations'
   - 'delete terms in reading_lists'
   - 'delete terms in series'

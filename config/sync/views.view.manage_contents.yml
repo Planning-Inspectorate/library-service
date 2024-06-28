@@ -12,6 +12,7 @@ dependencies:
     - node.type.article
     - node.type.hard_copy
     - node.type.hard_copy_loan
+    - node.type.kl_compound_document
     - node.type.kl_document
     - node.type.pdf
     - system.menu.admin
@@ -1291,6 +1292,7 @@ display:
           operator: in
           value:
             article: article
+            kl_compound_document: kl_compound_document
             kl_document: kl_document
             hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
@@ -1884,6 +1886,7 @@ display:
           operator: in
           value:
             article: article
+            kl_compound_document: kl_compound_document
             kl_document: kl_document
             hard_copy: hard_copy
             hard_copy_loan: hard_copy_loan
