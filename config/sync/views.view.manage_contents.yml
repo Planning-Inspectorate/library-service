@@ -28,6 +28,7 @@ dependencies:
     - datetime
     - file
     - node
+    - pins
     - taxonomy
     - user
     - views_bulk_operations
@@ -701,10 +702,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: file_size
+          type: file_size_formatter
           settings:
-            thousand_separator: ''
-            prefix_suffix: 1
+            decimal_places: '2'
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -912,7 +912,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'Updated Date'
+          label: 'Horizon Last Modified'
           exclude: false
           alter:
             alter_text: false
@@ -1086,7 +1086,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: dd_mn_yy
+            date_format: short
             custom_date_format: ''
             timezone: ''
             tooltip:
@@ -1643,8 +1643,8 @@ display:
             group_items: {  }
           reduce_duplicates: false
           vid: kl_reading_lists
-          type: textfield
-          hierarchy: false
+          type: select
+          hierarchy: true
           limit: true
           error_message: true
           save_lineage: false
@@ -2270,6 +2270,15 @@ display:
           admin_label: author
           plugin_id: standard
           required: true
+        field_kl_doc_file_target_id:
+          id: field_kl_doc_file_target_id
+          table: node__field_kl_doc_file
+          field: field_kl_doc_file_target_id
+          relationship: none
+          group_type: group
+          admin_label: 'file from field_kl_doc_file'
+          plugin_id: standard
+          required: false
       show_admin_links: false
       display_extenders: {  }
     cache_metadata:
