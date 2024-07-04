@@ -430,6 +430,15 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
           }
         }
 
+        if ($field_classifications = $term->get('field_kl_classification')->getValue()) {
+          $id_classifications = [];
+          if (is_array($field_classifications)) {
+            foreach ($field_classifications as $item) {
+              $id_classifications[] = $item['target_id']; 
+            }
+          }
+        }
+
         if (count($id_list) > 0) {
             foreach ($query->where as &$condition_group) {
               foreach ($condition_group['conditions'] as &$condition) {
@@ -443,6 +452,18 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
                   }
                }
             }
+        }
+        if (count($id_classifications) > 0) {
+          $definition = [
+            'table' => 'node__field_kl_classification',
+            'field' => 'entity_id',
+            'left_table' => 'node_field_data',
+            'left_field' => 'nid',
+            'type' => 'LEFT',
+          ];
+          $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+          $query->addRelationship('node__field_kl_classification', $join, 'node_field_data');
+          $query->addWhere('AND', 'node__field_kl_classification.field_kl_classification_target_id', $id_classifications, 'IN');
         }
       }
     }
