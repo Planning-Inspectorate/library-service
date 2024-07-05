@@ -453,7 +453,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
                }
             }
         }
-        if (count($id_classifications) > 0) {
+        if (is_array($id_classifications) && count($id_classifications) > 0) {
           $definition = [
             'table' => 'node__field_kl_classification',
             'field' => 'entity_id',
