@@ -5,259 +5,102 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Entity\EntityInterface;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
 
 /**
  * Implements hook_form_alter().
  */
-
-function pins_folder_hs_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  global $base_url;
-
+function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_document_edit_form') {
-      $form['#prefix'] = '<div id="form-term-wrapper">';
-      $form['#suffix'] = '</div>';
-      $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
-        'callback' => 'pins_folder_hs_ajaxcallback',
-        'event' => 'change',
-        'wrapper' => 'form-term-wrapper',
-      ];
-      if ($form_state->getValue('field_kl_doc_folder')) {
-        $field_selectedValue =  $form_state->getValue('field_kl_doc_folder');
-        foreach ($field_selectedValue as $field_selectedVal) {
-          if($field_selectedVal) {
-            $selectedValue = $field_selectedVal['target_id'];
-            if ($selectedValue) {
-              $parent_tid_lists = [];
-              $selected_authors_list = [];
-              $selected_series_list = [];
-              $selected_classification_list = [];
+        $form['#prefix'] = '<div id="form-term-wrapper">';
+        $form['#suffix'] = '</div>';
+        $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
+            'callback' => 'pins_folder_hs_ajaxcallback',
+            'event' => 'change',
+            'wrapper' => 'form-term-wrapper',
+        ];
+        if ($form_state->getValue('field_kl_doc_folder')) {
+            $field_selectedValue = $form_state->getValue('field_kl_doc_folder');
+            foreach ($field_selectedValue as $field_selectedVal) {
+                if ($selectedValue = $field_selectedVal['target_id']) {
+                    $selected_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($selectedValue);
+                    if ($selected_term instanceof TermInterface) {
+                        $term_ids = pins_folder_hs_get_parent_term_ids($selectedValue);
+                        $author_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_authors');
+                        $series_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_series');
+                        $classification_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_classification');
 
-              $term_ids = []; 
-              $selected_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($selectedValue);
-              if($selected_term instanceof TermInterface) {
+                        $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
+                        $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
+                        $selected_classification_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_classification');
 
-                $selected_authors = $selected_term->get('field_kl_authors')->referencedEntities();
-                foreach($selected_authors as $selected_author) {
-                  $selected_authors_list[] = $selected_author->getName() . ' (' . $selected_author->id() . ')';
+                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_authors', array_merge($author_details, $selected_authors_list));
+                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', array_merge($series_details, $selected_series_list));
+                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', array_merge($classification_details, $selected_classification_list));
+                    }
+                } else {
+                    pins_folder_hs_clear_form_fields($form, 'field_kl_authors');
+                    pins_folder_hs_clear_form_fields($form, 'field_kl_series');
+                    pins_folder_hs_clear_form_fields($form, 'field_kl_classification');
                 }
-
-                $selected_series_values = $selected_term->get('field_kl_series')->referencedEntities();
-                foreach($selected_series_values as $selected_series) {
-                  $selected_series_list[] = $selected_series->getName() . ' (' . $selected_series->id() . ')';
-                }
-
-                $selected_classifications = $selected_term->get('field_kl_classification')->referencedEntities();
-                foreach($selected_classifications as $selected_classification) {
-                  $selected_classification_list[] = $selected_classification->getName() . ' (' . $selected_classification->id() . ')';
-                }
-              }
-              $parent_tids = pins_folder_hs_get_parent_term_ids($selectedValue);
-              
-              if (!empty($parent_tids)) {
-                $parent_tid_lists = $parent_tids;
-              } 
-              foreach ($parent_tid_lists as $parent_tid_list) {
-                if ($parent_tid_list){
-                  $term_ids[] = $parent_tid_list;
-                }
-              }
-
-              $author_details = pins_folder_hs_get_author_details($term_ids);
-              $total_author_list = array_merge($author_details, $selected_authors_list);
-              $new_authors = array_filter(array_unique($total_author_list));
-              $author_count = count($new_authors);
-
-              $authorIndex = 0;
-              $authorItem = $form['field_kl_authors']['widget'][0];
-              foreach($new_authors as $new_author) {
-                $form['field_kl_authors']['widget'][$authorIndex] = $authorItem;
-                $form['field_kl_authors']['widget'][$authorIndex]['target_id']['#value'] = $new_author;
-                $authorIndex++;
-              }
-
-              $form_state->getStorage()['field_storage']['#parents']['#fields']['field_kl_authors']['items_count'] = $authorIndex;
-              $get_author_values = [];
-              foreach ($form['field_kl_authors']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_author_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_author_count =  count($get_author_values);
-              for($i=$author_count; $i<$clear_author_count; $i++) {
-                $form['field_kl_authors']['widget'][$i]['target_id']['#value'] = '';
-              }
-
-
-              $series_details = pins_folder_hs_get_series_details($term_ids);
-              $total_series_list = array_merge($series_details, $selected_series_list);
-              $new_seriess = array_filter(array_unique($total_series_list));
-              $series_count = count($new_seriess);
-
-              $seriesIndex = 0;
-              $seriesItem = $form['field_kl_series']['widget'][0];
-              foreach($new_seriess as $new_series) {
-                $form['field_kl_series']['widget'][$seriesIndex] = $seriesItem;
-                $form['field_kl_series']['widget'][$seriesIndex]['target_id']['#value'] = $new_series;
-                $seriesIndex++;
-              }
-              $form_state->getStorage()['field_storage']['#parents']['#fields']['field_kl_series']['items_count'] = $seriesIndex;
-              $get_series_values = [];
-              foreach ($form['field_kl_series']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_series_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_series_count =  count($get_series_values);
-              for($i=$series_count; $i<$clear_series_count; $i++) {
-                $form['field_kl_series']['widget'][$i]['target_id']['#value'] = '';
-              }
-
-
-              $classification_details = pins_folder_hs_get_classification_details($term_ids);
-              $total_classification_list = array_merge($classification_details, $selected_classification_list);
-              $new_classification = array_filter(array_unique($total_classification_list));
-              $classification_count = count($new_classification);
-
-              $classificationIndex = 0;
-              $classificationItem = $form['field_kl_classification']['widget'][0];
-              foreach($new_classification as $new_classification) {
-                $form['field_kl_classification']['widget'][$classificationIndex] = $classificationItem;
-                $form['field_kl_classification']['widget'][$classificationIndex]['target_id']['#value'] = $new_classification;
-                $classificationIndex++;
-              }
-
-              $form_state->getStorage()['field_storage']['#parents']['#fields']['field_kl_classification']['items_count'] = $classificationIndex;
-              $get_classification_values = [];
-              foreach ($form['field_kl_classification']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_classification_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_classification_count =  count($get_classification_values);
-              for($i=$classification_count; $i<$clear_classification_count; $i++) {
-                $form['field_kl_classification']['widget'][$i]['target_id']['#value'] = '';
-              }
-              
             }
-            else {
-              $get_clear_series_values = [];
-              foreach ($form['field_kl_series']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_clear_series_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_series_count = count($get_clear_series_values);
-              for($i=0; $i<$clear_series_count; $i++) {
-                $form['field_kl_series']['widget'][$i]['target_id']['#value'] = '';
-              }
 
-
-              $get_clear_author_values = [];
-              foreach ($form['field_kl_authors']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_clear_author_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_author_count = count($get_clear_author_values);
-              for($i=0; $i<$clear_author_count; $i++) {
-                $form['field_kl_authors']['widget'][$i]['target_id']['#value'] = '';
-              }
-
-
-              $get_clear_classification_values = [];
-              foreach ($form['field_kl_classification']['widget'] as $key => $value) {
-                if (isset($value['target_id'])) {
-                  $get_clear_classification_values[$key] = $value['target_id'];
-                }
-              }
-              $clear_classification_count = count($get_clear_classification_values);
-              for($i=0; $i<$clear_classification_count; $i++) {
-                $form['field_kl_classification']['widget'][$i]['target_id']['#value'] = '';
-              }
-
-            }
-          }
         }
-      }
+        $form_state->setCached(FALSE);
+        $form_state->setRebuild(TRUE);
     }
+
 }
 
-/**
- * {@inheritdoc}
- */
-function pins_folder_hs_ajaxcallback(array &$form, FormStateInterface $form_state, $form_id) {
-  return $form;
+function pins_folder_hs_ajaxcallback(&$form, FormStateInterface $form_state) {
+    return $form;
 }
 
 function pins_folder_hs_get_parent_term_ids($term_id, &$parent_tids = []) {
-  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-  if ($term) {
-    $parents = $term->parent->referencedEntities();
-    foreach ($parents as $parent) {
-      $parent_tid = $parent->id();
-      $parent_tids[] = $parent_tid;
-      pins_folder_hs_get_parent_term_ids($parent_tid, $parent_tids);
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+    if ($term) {
+        $parents = $term->parent->referencedEntities();
+        foreach ($parents as $parent) {
+            $parent_tid = $parent->id();
+            $parent_tids[] = $parent_tid;
+            pins_folder_hs_get_parent_term_ids($parent_tid, $parent_tids);
+        }
     }
-  }
-  return $parent_tids;
+    return $parent_tids;
 }
 
-function pins_folder_hs_get_series_details($term_ids, &$series_details = []) {
-  foreach($term_ids as $tid) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-    if($term instanceof TermInterface) {
-      $seriess = $term->get('field_kl_series')->referencedEntities();
-      foreach($seriess as $series) {
-        $series_detail = $series->getName() . ' (' . $series->id() . ')';
-        $series_details[] = $series_detail;
-        pins_folder_hs_get_series_details($series_detail, $series_details);
-      }
+function pins_folder_hs_get_field_values($term_ids, $fieldname) {
+    $field_values = [];
+    foreach ($term_ids as $tid) {
+        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+        if ($term instanceof TermInterface) {
+            $entities = $term->get($fieldname)->referencedEntities();
+            foreach ($entities as $entity) {
+                $field_values[] = $entity->id();
+            }
+        }
     }
-  }
-  return $series_details;
+    return array_unique($field_values);
 }
 
-function pins_folder_hs_get_author_details($term_ids, &$author_details = []) {
-  foreach($term_ids as $tid) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-    if($term instanceof TermInterface) {
-      $authors = $term->get('field_kl_authors')->referencedEntities();
-      foreach($authors as $author) {
-        $author_detail = $author->getName() . ' (' . $author->id() . ')';
-        $author_details[] = $author_detail;
-        pins_folder_hs_get_author_details($author_detail, $author_details);
-      }
+function pins_folder_hs_get_referenced_entities(TermInterface $term, $fieldname) {
+    $entities_list = [];
+    $entities = $term->get($fieldname)->referencedEntities();
+    foreach ($entities as $entity) {
+        $entities_list[] =  $entity->id();
     }
-  }
-  return $author_details;
+    return $entities_list;
 }
 
-function pins_folder_hs_get_classification_details($term_ids, &$classification_details = []) {
-  foreach($term_ids as $tid) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-    if($term instanceof TermInterface) {
-      $classifications = $term->get('field_kl_classification')->referencedEntities();
-      foreach($classifications as $classification) {
-        $classification_detail = $classification->getName() . ' (' . $classification->id() . ')';
-        $classification_details[] = $classification_detail;
-        pins_folder_hs_get_classification_details($classification_detail, $classification_details);
-      }
-    }
-  }
-  return $classification_details;
+function pins_folder_hs_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
+    $form[$field_name]['widget']['#value'] = $new_values;
 }
 
-function pins_folder_hs_get_field_values(&$field_values, $term_ids, $fieldname) {
-  foreach($term_ids as $tid) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-    if($term instanceof TermInterface) {
-      $entities = $term->get($fieldname)->referencedEntities();
-      foreach($entities as $entity) {
-        $field_value = $entity->getName() . ' (' . $entity->id() . ')';
-        $field_values[] = $field_value;
-        pins_folder_hs_get_field_values($field_value, $field_values);
-      }
+function pins_folder_hs_clear_form_fields(&$form, $field_name) {
+    foreach ($form[$field_name]['widget'] as $key => $value) {
+        if (isset($value['target_id'])) {
+            $form[$field_name]['widget'][$key]['target_id']['#value'] = '';
+        }
     }
-  }
-  return $field_values;
 }
