@@ -14,7 +14,7 @@ dependencies:
     - taxonomy
     - user
 id: data_maintainence
-label: 'Data Maintainence'
+label: 'Data Maintenance'
 module: views
 description: ''
 tag: ''
@@ -27,7 +27,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Data Maintainence'
+      title: 'Data Maintenance'
       fields:
         name:
           id: name
@@ -354,7 +354,7 @@ display:
           exposed: true
           expose:
             operator_id: tid_op
-            label: 'Folder Name'
+            label: 'Author Name'
             description: ''
             use_operator: false
             operator: tid_op
@@ -363,7 +363,7 @@ display:
             identifier: tid_kl_authors
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -593,7 +593,7 @@ display:
           exposed: true
           expose:
             operator_id: tid_4_op
-            label: 'ReadingList Name'
+            label: 'Reading Lists Name'
             description: ''
             use_operator: false
             operator: tid_4_op
@@ -711,7 +711,7 @@ display:
           exposed: true
           expose:
             operator_id: tid_6_op
-            label: 'Topic Name'
+            label: 'Topics Name'
             description: ''
             use_operator: false
             operator: tid_6_op
@@ -792,7 +792,7 @@ display:
     display_options:
       exposed_block: false
       display_extenders: {  }
-      path: admin/data-maintainence
+      path: admin/data-maintenance
     cache_metadata:
       max-age: -1
       contexts:
