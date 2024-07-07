@@ -2174,19 +2174,25 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            node_bulk_form: node_bulk_form
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             title: title
             field_alternative_title: field_alternative_title
             type: type
+            field_kl_authors: field_kl_authors
             name: name
             status: status
+            created: created
+            field_kl_doc_file_size: field_kl_doc_file_size
+            field_kl_doc_file: field_kl_doc_file
+            field_kl_doc_folder: field_kl_doc_folder
+            field_kl_reading_lists: field_kl_reading_lists
+            field_kl_vermdate: field_kl_vermdate
+            field_date: field_date
             changed: changed
             operations: operations
-            created: created
-            field_publication_date: field_publication_date
           default: changed
           info:
-            node_bulk_form:
+            views_bulk_operations_bulk_form:
               align: ''
               separator: ''
               empty_column: false
@@ -2212,6 +2218,11 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            field_kl_authors:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             name:
               sortable: true
               default_sort_order: asc
@@ -2226,6 +2237,53 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            created:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_file_size:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_file:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_doc_folder:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_reading_lists:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_kl_vermdate:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_date:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             changed:
               sortable: true
               default_sort_order: desc
@@ -2234,20 +2292,6 @@ display:
               empty_column: false
               responsive: priority-low
             operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            created:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_publication_date:
-              sortable: true
-              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false

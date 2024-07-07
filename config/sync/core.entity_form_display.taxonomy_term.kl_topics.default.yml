@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.kl_topics.field_kl_classification
     - field.field.taxonomy_term.kl_topics.field_reading_list
     - taxonomy.vocabulary.kl_topics
   module:
@@ -19,6 +20,16 @@ content:
     region: content
     settings:
       rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_classification:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_reading_list:
