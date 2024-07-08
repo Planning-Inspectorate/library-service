@@ -125,7 +125,40 @@
       //   });
       // }
 
+      const items = [
+        'kl-authors',
+        'kl-classification',
+        'kl-folders',
+        'kl-publications',
+        'kl-reading-lists',
+        'kl-series',
+        'kl-topics'
+    ];
 
+    function hideAllItems() {
+        items.forEach(item => {
+            jQuery(`.form-item--tid-${item}`).hide();
+            jQuery(`#edit-tid-${item}`).val('All');
+        });
+    }
+
+    function filterChange() {
+      $(context).find(`#edit_tid_kl_topics_chosen`).each(function () {
+        hideAllItems(); 
+      });
+    
+      $('#edit-vid').change(function() {
+          const selectedValue = $(this).val();
+          console.log(selectedValue,'ss')
+          hideAllItems(); // Hide all items and reset values on change
+          if (selectedValue) {
+              const identifier = selectedValue.replace(/_/g, '-');
+              jQuery(`.form-item--tid-${identifier}`).show();
+          }
+      });
+    }
+    
+    filterChange();
 
     }
   }
