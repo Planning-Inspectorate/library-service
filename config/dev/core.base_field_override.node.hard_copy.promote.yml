@@ -1,0 +1,22 @@
+uuid: f3ec981e-2785-4ab4-9194-f371f8e7bf2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.hard_copy
+id: node.hard_copy.promote
+field_name: promote
+entity_type: node
+bundle: hard_copy
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

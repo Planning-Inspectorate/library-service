@@ -1,0 +1,10 @@
+uuid: c2c2facf-07d1-4f1d-b578-b3d750393379
+langcode: en
+status: true
+dependencies: {  }
+id: archive
+label: Archive
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

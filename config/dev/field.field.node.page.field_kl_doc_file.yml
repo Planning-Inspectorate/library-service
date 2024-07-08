@@ -1,0 +1,27 @@
+uuid: 7de9988a-93ef-486f-9fc6-f90bc379e707
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_file
+    - node.type.page
+  module:
+    - file
+id: node.page.field_kl_doc_file
+field_name: field_kl_doc_file
+entity_type: node
+bundle: page
+label: 'Choose file to add'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'lib-mig/[date:custom:Y]/[date:custom:m]'
+  file_extensions: 'txt csv docx pdf doc xlsx pptx ppt jpg jpeg'
+  max_filesize: ''
+  description_field: true
+field_type: file

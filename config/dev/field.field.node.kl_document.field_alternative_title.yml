@@ -1,0 +1,19 @@
+uuid: e7d20f43-421b-4681-9d67-42eddc273eea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alternative_title
+    - node.type.kl_document
+id: node.kl_document.field_alternative_title
+field_name: field_alternative_title
+entity_type: node
+bundle: kl_document
+label: 'Alternative Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

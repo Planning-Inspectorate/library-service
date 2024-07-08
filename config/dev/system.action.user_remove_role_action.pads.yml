@@ -1,0 +1,14 @@
+uuid: ed84b20a-76ad-45f1-9ec9-e2bdde02aaf8
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.pads
+  module:
+    - user
+id: user_remove_role_action.pads
+label: 'Remove the pads role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: pads

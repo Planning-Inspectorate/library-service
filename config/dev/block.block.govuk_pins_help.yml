@@ -1,0 +1,20 @@
+uuid: 8e774f44-2fa1-4d48-8668-4fed472bbdba
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - govuk_pins
+id: govuk_pins_help
+theme: govuk_pins
+region: help
+weight: -11
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

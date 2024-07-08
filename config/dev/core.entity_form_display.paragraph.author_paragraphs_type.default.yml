@@ -1,0 +1,25 @@
+uuid: cd05e902-3427-4fe7-8ce0-ee77c3d7293f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.author_paragraphs_type.field_author_name
+    - paragraphs.paragraphs_type.author_paragraphs_type
+id: paragraph.author_paragraphs_type.default
+targetEntityType: paragraph
+bundle: author_paragraphs_type
+mode: default
+content:
+  field_author_name:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

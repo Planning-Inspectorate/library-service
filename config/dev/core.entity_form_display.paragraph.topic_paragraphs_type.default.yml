@@ -1,0 +1,25 @@
+uuid: f6db901c-37a1-45a1-9caf-f726a34fa0dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.topic_paragraphs_type.field_topic
+    - paragraphs.paragraphs_type.topic_paragraphs_type
+id: paragraph.topic_paragraphs_type.default
+targetEntityType: paragraph
+bundle: topic_paragraphs_type
+mode: default
+content:
+  field_topic:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

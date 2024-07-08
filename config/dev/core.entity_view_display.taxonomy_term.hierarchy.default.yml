@@ -1,0 +1,53 @@
+uuid: 72bb5ec3-50f6-4915-857b-eb73181bad6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.hierarchy.field_kl_authors
+    - field.field.taxonomy_term.hierarchy.field_kl_classification
+    - field.field.taxonomy_term.hierarchy.field_kl_series
+    - taxonomy.vocabulary.hierarchy
+  module:
+    - text
+id: taxonomy_term.hierarchy.default
+targetEntityType: taxonomy_term
+bundle: hierarchy
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_kl_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: ds_content
+  field_kl_classification:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: ds_content
+  field_kl_series:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

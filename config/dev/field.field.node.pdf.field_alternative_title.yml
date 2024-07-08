@@ -1,0 +1,19 @@
+uuid: 137bdce9-5a0c-465e-af3e-46c098835020
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alternative_title
+    - node.type.pdf
+id: node.pdf.field_alternative_title
+field_name: field_alternative_title
+entity_type: node
+bundle: pdf
+label: 'Alternative Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

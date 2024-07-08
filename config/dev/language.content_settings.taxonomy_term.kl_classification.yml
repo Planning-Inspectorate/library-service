@@ -1,0 +1,11 @@
+uuid: 26a5a3ea-6e80-4b29-81c0-11e612cc03e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.kl_classification
+id: taxonomy_term.kl_classification
+target_entity_type_id: taxonomy_term
+target_bundle: kl_classification
+default_langcode: site_default
+language_alterable: false

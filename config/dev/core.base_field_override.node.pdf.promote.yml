@@ -1,0 +1,22 @@
+uuid: 7686792d-7342-4f59-bf29-0c7a96606fa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.pdf
+id: node.pdf.promote
+field_name: promote
+entity_type: node
+bundle: pdf
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

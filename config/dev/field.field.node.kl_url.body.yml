@@ -1,0 +1,24 @@
+uuid: c8e0702a-6eae-4ea4-a17d-2d8980e1ed2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.kl_url
+  module:
+    - text
+id: node.kl_url.body
+field_name: body
+entity_type: node
+bundle: kl_url
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

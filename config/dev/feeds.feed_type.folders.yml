@@ -1,0 +1,106 @@
+uuid: ecae93d9-15c7-44b6-9400-822b04348c97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_folders.field_authors
+    - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
+    - field.field.taxonomy_term.kl_folders.field_series
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - taxonomy
+third_party_settings:
+  feeds_log:
+    operations: {  }
+    items: {  }
+label: Folders
+id: folders
+description: ''
+help: ''
+import_period: 3600
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:taxonomy_term'
+processor_configuration:
+  values:
+    vid: kl_folders
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: false
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  folders:
+    value: Folders
+    label: Folders
+    machine_name: folders
+    type: csv
+  series:
+    value: Series
+    label: Series
+    machine_name: series
+    type: csv
+  authors:
+    value: Authors
+    label: Authors
+    machine_name: authors
+    type: csv
+  versionid:
+    value: VersionID
+    label: VersionID
+    machine_name: versionid
+    type: csv
+  classifications:
+    value: Classifications
+    label: Classifications
+    machine_name: classifications
+    type: csv
+mappings:
+  -
+    target: temporary_target
+    map:
+      temporary: folders
+  -
+    target: field_series
+    map:
+      target_id: series
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: 1
+      autocreate_bundle: kl_series
+  -
+    target: field_authors
+    map:
+      target_id: authors
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: 1
+      autocreate_bundle: kl_authors
+  -
+    target: field_kl_term_unique_id
+    map:
+      value: versionid
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: temporary_target
+    map:
+      temporary: classifications

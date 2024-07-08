@@ -1,0 +1,33 @@
+uuid: e2fdb5e2-789a-4590-bdc6-a359669bc31a
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.publication_date
+  module:
+    - collapsiblock
+    - facets
+    - system
+  theme:
+    - govuk_pins
+third_party_settings:
+  collapsiblock:
+    collapse_action: 3
+id: govuk_pins_publicationdate
+theme: govuk_pins
+region: sidebar_first
+weight: -13
+provider: null
+plugin: 'facet_block:publication_date'
+settings:
+  id: 'facet_block:publication_date'
+  label: 'Publication Date'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_publicationdate
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search-library\r\n/search-library/*"

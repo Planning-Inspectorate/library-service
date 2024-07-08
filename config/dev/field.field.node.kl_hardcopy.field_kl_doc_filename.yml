@@ -1,0 +1,19 @@
+uuid: 6f94189f-d6c6-45d0-8737-1b9f4017a678
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_filename
+    - node.type.kl_hardcopy
+id: node.kl_hardcopy.field_kl_doc_filename
+field_name: field_kl_doc_filename
+entity_type: node
+bundle: kl_hardcopy
+label: 'Doc Filename'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

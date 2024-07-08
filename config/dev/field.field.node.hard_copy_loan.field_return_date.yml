@@ -1,0 +1,24 @@
+uuid: 6d689c95-1442-410b-8325-06db1e896d3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_return_date
+    - node.type.hard_copy_loan
+  module:
+    - datetime
+id: node.hard_copy_loan.field_return_date
+field_name: field_return_date
+entity_type: node
+bundle: hard_copy_loan
+label: 'Return date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+28 days'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,29 @@
+uuid: d84f2dc6-ce5b-444d-9e38-f3c530b3d717
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_borrowed_by
+    - node.type.hard_copy_loan
+id: node.hard_copy_loan.field_borrowed_by
+field_name: field_borrowed_by
+entity_type: node
+bundle: hard_copy_loan
+label: 'Borrowed by'
+description: 'Enter Email address'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

@@ -1,0 +1,29 @@
+uuid: 2c669131-a5e7-470a-b17e-22f59ddb5b74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_folder_reference
+    - node.type.kl_virtual_folder
+    - taxonomy.vocabulary.kl_folders
+id: node.kl_virtual_folder.field_kl_doc_folder_reference
+field_name: field_kl_doc_folder_reference
+entity_type: node
+bundle: kl_virtual_folder
+label: 'Doc Folder Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_folders: kl_folders
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

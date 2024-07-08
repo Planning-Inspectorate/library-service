@@ -1,0 +1,8 @@
+uuid: 3c615b11-bb63-4803-b9ea-984066123781
+langcode: en
+status: true
+dependencies: {  }
+name: 'KL Publications'
+vid: kl_publications
+description: 'Vocabulary for publication (grouping of reading list)'
+weight: 0

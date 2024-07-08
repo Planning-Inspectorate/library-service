@@ -1,0 +1,8 @@
+uuid: 699f9152-2d51-45bc-8621-5cbdafdaf8e3
+langcode: en
+status: true
+dependencies: {  }
+name: 'Security classifications'
+vid: security_classifications
+description: ''
+weight: 0

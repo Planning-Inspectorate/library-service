@@ -1,0 +1,33 @@
+uuid: ee4504e1-bff7-4006-8b07-b50f67cef4d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_shortcut_target_content
+    - node.type.kl_compound_document
+    - node.type.kl_document
+    - node.type.kl_hardcopy
+    - node.type.kl_shortcut
+id: node.kl_shortcut.field_kl_shortcut_target_content
+field_name: field_kl_shortcut_target_content
+entity_type: node
+bundle: kl_shortcut
+label: 'KL Shortcut Target Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      kl_compound_document: kl_compound_document
+      kl_document: kl_document
+      kl_hardcopy: kl_hardcopy
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: kl_document
+field_type: entity_reference

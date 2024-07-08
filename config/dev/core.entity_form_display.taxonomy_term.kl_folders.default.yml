@@ -1,0 +1,141 @@
+uuid: 77d0f407-b40c-4362-a910-862b1f3474d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_folders.feeds_item
+    - field.field.taxonomy_term.kl_folders.field_authors
+    - field.field.taxonomy_term.kl_folders.field_kl_admin_only
+    - field.field.taxonomy_term.kl_folders.field_kl_authors
+    - field.field.taxonomy_term.kl_folders.field_kl_classification
+    - field.field.taxonomy_term.kl_folders.field_kl_folder_type
+    - field.field.taxonomy_term.kl_folders.field_kl_reading_lists
+    - field.field.taxonomy_term.kl_folders.field_kl_series
+    - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
+    - field.field.taxonomy_term.kl_folders.field_reading_lists
+    - field.field.taxonomy_term.kl_folders.field_series
+    - taxonomy.vocabulary.kl_folders
+  module:
+    - field_group
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children: {  }
+      label: Tabs
+      region: hidden
+      parent_name: ''
+      weight: 17
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        description: ''
+        required_fields: true
+        direction: vertical
+        width_breakpoint: 640
+    group_legacy_migration_data:
+      children: {  }
+      label: 'Legacy Migration Data'
+      region: hidden
+      parent_name: ''
+      weight: 9
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        description: ''
+        required_fields: true
+        formatter: closed
+id: taxonomy_term.kl_folders.default
+targetEntityType: taxonomy_term
+bundle: kl_folders
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_admin_only:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_kl_authors:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_classification:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_reading_lists:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_series:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  feeds_item: true
+  field_authors: true
+  field_kl_folder_type: true
+  field_kl_term_unique_id: true
+  field_reading_lists: true
+  field_series: true
+  langcode: true

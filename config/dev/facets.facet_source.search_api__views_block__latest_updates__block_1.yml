@@ -1,0 +1,12 @@
+uuid: f617869c-ba8f-40d5-8192-1e72f1778a76
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_block__latest_updates__block_1
+name: 'search_api:views_block__latest_updates__block_1'
+filter_key: ''
+url_processor: query_string
+breadcrumb:
+  active: false
+  before: true
+  group: false

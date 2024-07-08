@@ -1,0 +1,19 @@
+uuid: 03516c4d-8288-4098-bf84-e2dfdd69a3b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_archived_note
+    - node.type.kl_document
+id: node.kl_document.field_archived_note
+field_name: field_archived_note
+entity_type: node
+bundle: kl_document
+label: 'Archived note'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
