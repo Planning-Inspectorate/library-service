@@ -1,0 +1,10 @@
+uuid: 78815e55-c517-4bc0-a652-a9523813a580
+langcode: en
+status: true
+dependencies: {  }
+id: topic_paragraphs_type
+label: Topic
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,33 @@
+uuid: 669ddff0-38c8-4730-84b0-68053fd1c20d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publications
+    - node.type.hard_copy
+    - taxonomy.vocabulary.publications
+  content:
+    - 'taxonomy_term:publications:e67dd8e2-6936-4cbe-9256-1bceb5b65a62'
+id: node.hard_copy.field_publications
+field_name: field_publications
+entity_type: node
+bundle: hard_copy
+label: Publications
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: e67dd8e2-6936-4cbe-9256-1bceb5b65a62
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      publications: publications
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

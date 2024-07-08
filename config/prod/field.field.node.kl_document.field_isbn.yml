@@ -1,0 +1,19 @@
+uuid: d9ca70a9-a787-4392-b8fe-fb58e203dd90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_isbn
+    - node.type.kl_document
+id: node.kl_document.field_isbn
+field_name: field_isbn
+entity_type: node
+bundle: kl_document
+label: ISBN
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

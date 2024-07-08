@@ -1,0 +1,25 @@
+uuid: addcee90-34fc-4658-bcfd-817f579adb84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.category_paragraphs_type.field_category
+    - paragraphs.paragraphs_type.category_paragraphs_type
+id: paragraph.category_paragraphs_type.default
+targetEntityType: paragraph
+bundle: category_paragraphs_type
+mode: default
+content:
+  field_category:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

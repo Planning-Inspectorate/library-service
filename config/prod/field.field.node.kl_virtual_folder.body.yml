@@ -1,0 +1,26 @@
+uuid: 73d838db-2ddf-47b4-88a0-512467cf6ce9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - filter.format.plain_text
+    - node.type.kl_virtual_folder
+  module:
+    - text
+id: node.kl_virtual_folder.body
+field_name: body
+entity_type: node
+bundle: kl_virtual_folder
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - plain_text
+field_type: text_with_summary

@@ -1,0 +1,123 @@
+uuid: d538594f-e670-404e-a327-7b56f909e067
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.kl_document.body
+    - field.field.node.kl_document.feeds_item
+    - field.field.node.kl_document.field_alternative_title
+    - field.field.node.kl_document.field_archived_note
+    - field.field.node.kl_document.field_content_reference
+    - field.field.node.kl_document.field_date
+    - field.field.node.kl_document.field_edition_number
+    - field.field.node.kl_document.field_filemd5
+    - field.field.node.kl_document.field_general_notes
+    - field.field.node.kl_document.field_isbn
+    - field.field.node.kl_document.field_kl_archived
+    - field.field.node.kl_document.field_kl_archived_date
+    - field.field.node.kl_document.field_kl_authors
+    - field.field.node.kl_document.field_kl_classification
+    - field.field.node.kl_document.field_kl_doc_compound_folder
+    - field.field.node.kl_document.field_kl_doc_file
+    - field.field.node.kl_document.field_kl_doc_file_path
+    - field.field.node.kl_document.field_kl_doc_file_size
+    - field.field.node.kl_document.field_kl_doc_filename
+    - field.field.node.kl_document.field_kl_doc_folder
+    - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_mime_type
+    - field.field.node.kl_document.field_kl_doc_origindataid
+    - field.field.node.kl_document.field_kl_doc_parent_subtype
+    - field.field.node.kl_document.field_kl_doc_parentid
+    - field.field.node.kl_document.field_kl_doc_unique_id
+    - field.field.node.kl_document.field_kl_doc_version
+    - field.field.node.kl_document.field_kl_filecdate
+    - field.field.node.kl_document.field_kl_filemdate
+    - field.field.node.kl_document.field_kl_filetype
+    - field.field.node.kl_document.field_kl_reading_lists
+    - field.field.node.kl_document.field_kl_series
+    - field.field.node.kl_document.field_kl_vercdate
+    - field.field.node.kl_document.field_kl_vermdate
+    - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_links
+    - field.field.node.kl_document.field_long_text
+    - field.field.node.kl_document.field_number_decimal
+    - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_search_exclude
+    - field.field.node.kl_document.field_security_classification
+    - field.field.node.kl_document.field_vernum
+    - field.field.node.kl_document.field_version_id
+    - field.field.node.kl_document.field_volume
+    - field.field.node.kl_document.field_weight
+    - node.type.kl_document
+  module:
+    - text
+    - user
+id: node.kl_document.teaser
+targetEntityType: node
+bundle: kl_document
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  field_alternative_title: true
+  field_archived_note: true
+  field_content_reference: true
+  field_date: true
+  field_edition_number: true
+  field_filemd5: true
+  field_general_notes: true
+  field_isbn: true
+  field_kl_archived: true
+  field_kl_archived_date: true
+  field_kl_authors: true
+  field_kl_classification: true
+  field_kl_doc_compound_folder: true
+  field_kl_doc_file: true
+  field_kl_doc_file_path: true
+  field_kl_doc_file_size: true
+  field_kl_doc_filename: true
+  field_kl_doc_folder: true
+  field_kl_doc_id: true
+  field_kl_doc_mime_type: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
+  field_kl_filecdate: true
+  field_kl_filemdate: true
+  field_kl_filetype: true
+  field_kl_reading_lists: true
+  field_kl_series: true
+  field_kl_vercdate: true
+  field_kl_vermdate: true
+  field_kl_vernum: true
+  field_links: true
+  field_long_text: true
+  field_number_decimal: true
+  field_other_date: true
+  field_search_exclude: true
+  field_security_classification: true
+  field_vernum: true
+  field_version_id: true
+  field_volume: true
+  field_weight: true
+  langcode: true
+  search_api_excerpt: true

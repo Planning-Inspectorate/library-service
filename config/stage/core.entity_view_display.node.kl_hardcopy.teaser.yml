@@ -1,0 +1,75 @@
+uuid: 03e69f63-1451-4c6e-b151-61303307e82c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.kl_hardcopy.body
+    - field.field.node.kl_hardcopy.feeds_item
+    - field.field.node.kl_hardcopy.field_kl_archived
+    - field.field.node.kl_hardcopy.field_kl_archived_date
+    - field.field.node.kl_hardcopy.field_kl_authors
+    - field.field.node.kl_hardcopy.field_kl_classification
+    - field.field.node.kl_hardcopy.field_kl_doc_file
+    - field.field.node.kl_hardcopy.field_kl_doc_file_path
+    - field.field.node.kl_hardcopy.field_kl_doc_filename
+    - field.field.node.kl_hardcopy.field_kl_doc_folder
+    - field.field.node.kl_hardcopy.field_kl_doc_id
+    - field.field.node.kl_hardcopy.field_kl_doc_mime_type
+    - field.field.node.kl_hardcopy.field_kl_doc_origindataid
+    - field.field.node.kl_hardcopy.field_kl_doc_parent_subtype
+    - field.field.node.kl_hardcopy.field_kl_doc_parentid
+    - field.field.node.kl_hardcopy.field_kl_doc_unique_id
+    - field.field.node.kl_hardcopy.field_kl_doc_version
+    - field.field.node.kl_hardcopy.field_kl_reading_lists
+    - field.field.node.kl_hardcopy.field_kl_series
+    - field.field.node.kl_hardcopy.field_security_classification
+    - field.field.node.kl_hardcopy.field_weight
+    - node.type.kl_hardcopy
+  module:
+    - text
+    - user
+id: node.kl_hardcopy.teaser
+targetEntityType: node
+bundle: kl_hardcopy
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  field_kl_archived: true
+  field_kl_archived_date: true
+  field_kl_authors: true
+  field_kl_classification: true
+  field_kl_doc_file: true
+  field_kl_doc_file_path: true
+  field_kl_doc_filename: true
+  field_kl_doc_folder: true
+  field_kl_doc_id: true
+  field_kl_doc_mime_type: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
+  field_kl_reading_lists: true
+  field_kl_series: true
+  field_security_classification: true
+  field_weight: true
+  langcode: true
+  search_api_excerpt: true

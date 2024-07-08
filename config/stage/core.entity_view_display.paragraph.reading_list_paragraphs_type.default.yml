@@ -1,0 +1,51 @@
+uuid: 961edbb7-0931-4add-ac5d-22c8ce34be96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reading_list_paragraphs_type.field_reading_list
+    - paragraphs.paragraphs_type.reading_list_paragraphs_type
+  module:
+    - ds
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - field_reading_list
+id: paragraph.reading_list_paragraphs_type.default
+targetEntityType: paragraph
+bundle: reading_list_paragraphs_type
+mode: default
+content:
+  field_reading_list:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

@@ -1,0 +1,20 @@
+uuid: 332de396-bb9a-4078-8f58-9869b981e492
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk
+id: govuk_messages_2
+theme: govuk
+region: highlighted
+weight: -12
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

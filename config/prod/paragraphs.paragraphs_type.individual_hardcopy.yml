@@ -1,0 +1,10 @@
+uuid: 1cf2b8a2-f49d-4fa2-b300-4031b4d2ad3a
+langcode: en
+status: true
+dependencies: {  }
+id: individual_hardcopy
+label: 'Individual hardcopy'
+icon_uuid: null
+icon_default: null
+description: 'Used for creating copy of hard copy item'
+behavior_plugins: {  }

@@ -1,0 +1,14 @@
+uuid: 16698e93-7b33-4afe-87ec-06cd825189b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.pads
+  module:
+    - user
+id: user_add_role_action.pads
+label: 'Add the pads role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: pads

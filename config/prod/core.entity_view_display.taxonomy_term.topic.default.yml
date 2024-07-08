@@ -1,0 +1,30 @@
+uuid: df2e8f61-cd8f-4d5c-a16c-653faaf396b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.topic.field_publications
+    - field.field.taxonomy_term.topic.field_topic_areas
+    - taxonomy.vocabulary.topic
+  module:
+    - text
+id: taxonomy_term.topic.default
+targetEntityType: taxonomy_term
+bundle: topic
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_publications: true
+  field_topic_areas: true
+  langcode: true
+  search_api_excerpt: true

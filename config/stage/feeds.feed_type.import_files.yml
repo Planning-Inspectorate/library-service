@@ -1,0 +1,199 @@
+uuid: ca328f36-fb9e-446a-8005-0cb94e72f0c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.kl_document.field_filemd5
+    - field.field.node.kl_document.field_kl_doc_file
+    - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_unique_id
+    - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_vernum
+    - node.type.kl_document
+  module:
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    operations: {  }
+    items: {  }
+  feeds_tamper:
+    tampers:
+      8313591b-eeec-41f4-a454-cba61d3e1787:
+        find: \\knowledgelibrarydevblob.file.core.windows.net\library-documents\
+        replace: ''
+        case_sensitive: false
+        word_boundaries: false
+        whole: false
+        uuid: 8313591b-eeec-41f4-a454-cba61d3e1787
+        plugin: find_replace
+        source: documenturi
+        weight: 0
+        label: 'Find replace'
+      2209be0c-c032-4788-b655-adaeff094511:
+        find: 'horizontest:'
+        replace: ''
+        case_sensitive: false
+        word_boundaries: false
+        whole: false
+        uuid: 2209be0c-c032-4788-b655-adaeff094511
+        plugin: find_replace
+        source: documentid
+        weight: 0
+        label: 'Find replace'
+      813641c5-262c-481a-9a9d-586d71e0490d:
+        find: ' '
+        replace: 'View document'
+        case_sensitive: false
+        word_boundaries: false
+        whole: false
+        uuid: 813641c5-262c-481a-9a9d-586d71e0490d
+        plugin: find_replace
+        source: view
+        weight: -9
+        label: 'Find replace'
+      ad633ad8-f81c-40a6-a136-2760a583b201:
+        default_value: ' '
+        only_if_empty: true
+        uuid: ad633ad8-f81c-40a6-a136-2760a583b201
+        plugin: default_value
+        source: view
+        weight: -10
+        label: 'Set value or default value'
+      fe5c8dc2-956b-4833-944c-946915dcb232:
+        text: '[documentid]-[version]'
+        uuid: fe5c8dc2-956b-4833-944c-946915dcb232
+        plugin: rewrite
+        source: computedvalue
+        weight: 0
+        label: Rewrite
+label: 'import files'
+id: import_files
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: kl_document
+  langcode: en
+  insert_new: 0
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 14
+custom_sources:
+  documentid:
+    value: documentId
+    label: documentId
+    machine_name: documentid
+    type: csv
+  filename:
+    value: filename
+    label: filename
+    machine_name: filename
+    type: csv
+  documenturi:
+    value: documentURI
+    label: documentURI
+    machine_name: documenturi
+    type: csv
+  path:
+    value: path
+    label: path
+    machine_name: path
+    type: csv
+  filemd5:
+    value: fileMD5
+    label: fileMD5
+    machine_name: filemd5
+    type: csv
+  view:
+    value: View
+    label: View
+    machine_name: view
+    type: blank
+  version:
+    value: version
+    label: version
+    machine_name: version
+    type: csv
+  computedvalue:
+    value: ComputedValue
+    label: ComputedValue
+    machine_name: computedvalue
+    type: blank
+mappings:
+  -
+    target: field_kl_doc_id
+    map:
+      value: documentid
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: temporary_target
+    map:
+      temporary: filename
+  -
+    target: temporary_target
+    map:
+      temporary: documenturi
+  -
+    target: temporary_target
+    map:
+      temporary: path
+  -
+    target: field_filemd5
+    map:
+      value: filemd5
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_file
+    map:
+      target_id: documenturi
+      description: view
+    settings:
+      language: ''
+      reference_by: fid
+      feeds_item: guid
+      autocreate: 0
+      existing: '1'
+      autocreate_bundle: false
+  -
+    target: field_kl_doc_unique_id
+    map:
+      value: computedvalue
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_kl_vernum
+    map:
+      value: version
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_vernum
+    map:
+      value: version
+    settings:
+      language: null
+    unique: {  }

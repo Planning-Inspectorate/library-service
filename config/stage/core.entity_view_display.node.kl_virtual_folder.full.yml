@@ -1,0 +1,99 @@
+uuid: 6c486554-e1e9-42c3-b5a7-3ae68bc7b90b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.kl_virtual_folder.body
+    - field.field.node.kl_virtual_folder.feeds_item
+    - field.field.node.kl_virtual_folder.field_date
+    - field.field.node.kl_virtual_folder.field_kl_authors
+    - field.field.node.kl_virtual_folder.field_kl_classification
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder
+    - field.field.node.kl_virtual_folder.field_kl_doc_folder_reference
+    - field.field.node.kl_virtual_folder.field_kl_doc_id
+    - field.field.node.kl_virtual_folder.field_kl_doc_origindataid
+    - field.field.node.kl_virtual_folder.field_kl_doc_parent_subtype
+    - field.field.node.kl_virtual_folder.field_kl_doc_parentid
+    - field.field.node.kl_virtual_folder.field_kl_doc_unique_id
+    - field.field.node.kl_virtual_folder.field_kl_doc_version
+    - field.field.node.kl_virtual_folder.field_kl_extended_data
+    - field.field.node.kl_virtual_folder.field_kl_reading_lists
+    - field.field.node.kl_virtual_folder.field_kl_series
+    - field.field.node.kl_virtual_folder.field_security_classification
+    - field.field.node.kl_virtual_folder.field_weight
+    - node.type.kl_virtual_folder
+  module:
+    - datetime
+    - ds
+    - user
+id: node.kl_virtual_folder.full
+targetEntityType: node
+bundle: kl_virtual_folder
+mode: full
+content:
+  field_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: dd_mn_yy
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: 'time-date field-label-inline'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: time
+            fis-cl: field-value
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  field_kl_authors: true
+  field_kl_classification: true
+  field_kl_doc_folder: true
+  field_kl_doc_folder_reference: true
+  field_kl_doc_id: true
+  field_kl_doc_origindataid: true
+  field_kl_doc_parent_subtype: true
+  field_kl_doc_parentid: true
+  field_kl_doc_unique_id: true
+  field_kl_doc_version: true
+  field_kl_extended_data: true
+  field_kl_reading_lists: true
+  field_kl_series: true
+  field_security_classification: true
+  field_weight: true
+  langcode: true
+  search_api_excerpt: true

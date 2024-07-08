@@ -1,0 +1,11 @@
+uuid: 442b0790-37eb-4fd2-acce-e03e8b211a7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.kl_folders
+id: taxonomy_term.kl_folders
+target_entity_type_id: taxonomy_term
+target_bundle: kl_folders
+default_langcode: site_default
+language_alterable: false

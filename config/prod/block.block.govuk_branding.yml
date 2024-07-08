@@ -1,0 +1,25 @@
+uuid: 9beb7f7f-caa6-4c6e-a21d-e6ef66497e2e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk
+_core:
+  default_config_hash: yS4dgf_qV4PXRWfwViJEi2r0iPJGR6tQFTyWL6BXreU
+id: govuk_branding
+theme: govuk
+region: header
+weight: -3
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

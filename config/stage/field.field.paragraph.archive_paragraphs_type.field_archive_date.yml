@@ -1,0 +1,21 @@
+uuid: ada609b5-a229-45ad-b8f5-86e9d23119ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_archive_date
+    - paragraphs.paragraphs_type.archive_paragraphs_type
+  module:
+    - datetime
+id: paragraph.archive_paragraphs_type.field_archive_date
+field_name: field_archive_date
+entity_type: paragraph
+bundle: archive_paragraphs_type
+label: 'Archive date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

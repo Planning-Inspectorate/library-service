@@ -1,0 +1,19 @@
+uuid: ea71809b-3c0f-4d7e-ae60-6673a457c924
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_unique_id
+    - node.type.kl_compound_document
+id: node.kl_compound_document.field_kl_doc_unique_id
+field_name: field_kl_doc_unique_id
+entity_type: node
+bundle: kl_compound_document
+label: 'Doc Unique id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

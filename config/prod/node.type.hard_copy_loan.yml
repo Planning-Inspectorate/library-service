@@ -1,0 +1,18 @@
+uuid: 829a22cf-2115-4539-9988-0b4eb06c8de5
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Hard copy Loan'
+type: hard_copy_loan
+description: 'Used for creating a physical circulation document'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

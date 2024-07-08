@@ -1,0 +1,29 @@
+uuid: 9ece1964-4308-45e2-aff0-2c1e23f60207
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_reading_list
+    - paragraphs.paragraphs_type.reading_list_paragraphs_type
+    - taxonomy.vocabulary.reading_lists
+id: paragraph.reading_list_paragraphs_type.field_reading_list
+field_name: field_reading_list
+entity_type: paragraph
+bundle: reading_list_paragraphs_type
+label: 'Reading list'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      reading_lists: reading_lists
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

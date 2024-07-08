@@ -1,0 +1,19 @@
+uuid: c84b82d4-cc79-4f2c-ae6b-200465e771f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_unique_id
+    - node.type.hard_copy
+id: node.hard_copy.field_kl_doc_unique_id
+field_name: field_kl_doc_unique_id
+entity_type: node
+bundle: hard_copy
+label: 'Doc Unique id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,8 @@
+uuid: 4c57c666-e96e-4577-b662-10c39d848770
+langcode: en
+status: true
+dependencies: {  }
+id: editor-s-choice
+label: "Editor's choice"
+description: ''
+locked: false

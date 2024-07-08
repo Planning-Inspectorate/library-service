@@ -1,0 +1,22 @@
+uuid: 520de2d6-e42e-4a88-b86e-4264600060fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.hard_copy.field_stock_level
+    - paragraphs.paragraphs_type.hard_copy
+id: paragraph.hard_copy.default
+targetEntityType: paragraph
+bundle: hard_copy
+mode: default
+content:
+  field_stock_level:
+    type: number
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,23 @@
+uuid: c46fe784-c9e1-4b84-b4ee-099ee2e8cb98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_archive
+    - paragraphs.paragraphs_type.archive_paragraphs_type
+id: paragraph.archive_paragraphs_type.field_archive
+field_name: field_archive
+entity_type: paragraph
+bundle: archive_paragraphs_type
+label: Archive
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

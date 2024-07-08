@@ -1,0 +1,21 @@
+uuid: ac661b3f-9444-48e5-8cfe-be8b6d519f0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_publications
+    - taxonomy.vocabulary.series
+id: taxonomy_term.series.field_publications
+field_name: field_publications
+entity_type: taxonomy_term
+bundle: series
+label: Publications
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

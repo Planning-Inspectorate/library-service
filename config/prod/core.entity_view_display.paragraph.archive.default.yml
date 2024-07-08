@@ -1,0 +1,27 @@
+uuid: 37e145c4-9bb9-4383-bb17-46b2e9938bbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.archive.field_archive
+    - paragraphs.paragraphs_type.archive
+id: paragraph.archive.default
+targetEntityType: paragraph
+bundle: archive
+mode: default
+content:
+  field_archive:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

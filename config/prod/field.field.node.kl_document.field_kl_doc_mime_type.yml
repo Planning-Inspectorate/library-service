@@ -1,0 +1,19 @@
+uuid: b30213b9-1e68-4fe7-bc7d-b0d88a7178c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_mime_type
+    - node.type.kl_document
+id: node.kl_document.field_kl_doc_mime_type
+field_name: field_kl_doc_mime_type
+entity_type: node
+bundle: kl_document
+label: 'Doc Mime Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,30 @@
+uuid: 2f59be35-cb72-4017-94c8-b565a2a50868
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.reading_lists.field_publications
+    - field.field.taxonomy_term.reading_lists.field_topic_areas
+    - taxonomy.vocabulary.reading_lists
+  module:
+    - text
+id: taxonomy_term.reading_lists.default
+targetEntityType: taxonomy_term
+bundle: reading_lists
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_publications: true
+  field_topic_areas: true
+  langcode: true
+  search_api_excerpt: true

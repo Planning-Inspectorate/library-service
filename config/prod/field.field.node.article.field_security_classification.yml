@@ -1,0 +1,33 @@
+uuid: 6d4f9a80-754b-4fca-a1f2-6d97f2c0aca3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_security_classification
+    - node.type.article
+    - taxonomy.vocabulary.security_classifications
+  content:
+    - 'taxonomy_term:security_classifications:c90b50fa-aaa1-43f1-b624-91d08c8276d5'
+id: node.article.field_security_classification
+field_name: field_security_classification
+entity_type: node
+bundle: article
+label: 'Security classification'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: c90b50fa-aaa1-43f1-b624-91d08c8276d5
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      security_classifications: security_classifications
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

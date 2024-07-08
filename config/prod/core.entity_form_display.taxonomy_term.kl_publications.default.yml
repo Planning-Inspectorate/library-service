@@ -1,0 +1,62 @@
+uuid: ecf6bbeb-b37e-40eb-b9f9-f2c6e3527335
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_publications.field_reading_list
+    - taxonomy.vocabulary.kl_publications
+  module:
+    - path
+    - text
+id: taxonomy_term.kl_publications.default
+targetEntityType: taxonomy_term
+bundle: kl_publications
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_reading_list:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }

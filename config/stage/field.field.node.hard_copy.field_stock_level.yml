@@ -1,0 +1,23 @@
+uuid: 8985f2d8-c303-4fbd-aa06-82fe56927743
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_stock_level
+    - node.type.hard_copy
+id: node.hard_copy.field_stock_level
+field_name: field_stock_level
+entity_type: node
+bundle: hard_copy
+label: 'Number of available copies (Stock level)'
+description: 'Automated field'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

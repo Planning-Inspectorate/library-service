@@ -1,0 +1,19 @@
+uuid: de50a69e-a3d6-4b06-86e6-ad8ea9a8cbe8
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+_core:
+  default_config_hash: AeW1SEDgb1OTQACAWGhzvMknMYAJlcZu0jljfeU3oso
+name: Article
+type: article
+description: 'Used for creating convertible pdf documents'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

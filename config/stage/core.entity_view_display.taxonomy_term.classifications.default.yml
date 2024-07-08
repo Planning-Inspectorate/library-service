@@ -1,0 +1,30 @@
+uuid: e81122b3-d4fe-4a39-9f08-ffcae1cf593d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.classifications.field_publications
+    - field.field.taxonomy_term.classifications.field_topic_areas
+    - taxonomy.vocabulary.classifications
+  module:
+    - text
+id: taxonomy_term.classifications.default
+targetEntityType: taxonomy_term
+bundle: classifications
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_publications: true
+  field_topic_areas: true
+  langcode: true
+  search_api_excerpt: true

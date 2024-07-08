@@ -1,0 +1,42 @@
+login:
+  authenticated:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  content_editor:
+    redirect_url: '<front>'
+    allow_destination: false
+    weight: 0
+  administrator:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  pads:
+    redirect_url: '<front>'
+    allow_destination: false
+    weight: 0
+  library_admin:
+    redirect_url: '<front>'
+    allow_destination: false
+    weight: 0
+logout:
+  authenticated:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  content_editor:
+    redirect_url: '<front>'
+    allow_destination: false
+    weight: 0
+  administrator:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  pads:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  library_admin:
+    redirect_url: '<front>'
+    allow_destination: false
+    weight: 0

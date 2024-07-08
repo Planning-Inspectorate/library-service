@@ -1,0 +1,19 @@
+uuid: 478be884-3ae2-4a14-955d-cb112b598e08
+langcode: en
+status: '1'
+dependencies: {  }
+cluster_id: pins_elasticsearch_cluster
+name: 'PINS Elasticsearch Cluster'
+url: 'http://elasticsearch:9200'
+options:
+  multiple_nodes_connection: false
+  use_authentication: false
+  authentication_type: Basic
+  username: ''
+  password: ''
+  timeout: 3
+  rewrite:
+    rewrite_index: false
+    index:
+      prefix: ''
+      suffix: ''

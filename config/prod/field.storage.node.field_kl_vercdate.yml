@@ -1,0 +1,20 @@
+uuid: ce8177dd-22af-4bc5-9b1f-effa528f46ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_kl_vercdate
+field_name: field_kl_vercdate
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

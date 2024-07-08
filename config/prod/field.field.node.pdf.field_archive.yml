@@ -1,0 +1,52 @@
+uuid: fdca6462-60cb-4ab5-892f-e033f5c273ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_archive
+    - node.type.pdf
+    - paragraphs.paragraphs_type.archive_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.pdf.field_archive
+field_name: field_archive
+entity_type: node
+bundle: pdf
+label: Archive
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      archive_paragraphs_type: archive_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 9
+        enabled: false
+      archive_paragraphs_type:
+        weight: 10
+        enabled: true
+      author_paragraphs_type:
+        weight: 11
+        enabled: false
+      category_paragraphs_type:
+        weight: 12
+        enabled: false
+      reading_list_paragraphs_type:
+        weight: 13
+        enabled: false
+      series_paragraphs_type:
+        weight: 14
+        enabled: false
+      tags_paragraphs_type:
+        weight: 15
+        enabled: false
+      topic_paragraphs_type:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

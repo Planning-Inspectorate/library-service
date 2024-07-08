@@ -1,0 +1,22 @@
+uuid: f24629e8-4d20-430c-8234-957ba60e45ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - govuk
+_core:
+  default_config_hash: uP2s35aw1fY-5vkSpGZvm1uCQORWvnHvS3uF-129yxc
+id: govuk_content
+theme: govuk
+region: content
+weight: -12
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

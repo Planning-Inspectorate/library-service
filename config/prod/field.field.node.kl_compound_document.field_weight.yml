@@ -1,0 +1,24 @@
+uuid: 776c5235-8dba-4a05-94ba-0d39e68784a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.kl_compound_document
+  module:
+    - weight
+id: node.kl_compound_document.field_weight
+field_name: field_weight
+entity_type: node
+bundle: kl_compound_document
+label: Weight
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings:
+  range: '50'
+field_type: weight

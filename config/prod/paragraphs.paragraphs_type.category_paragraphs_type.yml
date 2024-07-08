@@ -1,0 +1,10 @@
+uuid: 09e0d3d7-8429-4208-9bc3-50741db3c45e
+langcode: en
+status: true
+dependencies: {  }
+id: category_paragraphs_type
+label: Category
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

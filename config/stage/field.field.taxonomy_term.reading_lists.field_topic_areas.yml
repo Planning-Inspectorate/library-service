@@ -1,0 +1,21 @@
+uuid: 2cb541a0-3c52-4b27-9965-5f9a30b0de51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_topic_areas
+    - taxonomy.vocabulary.reading_lists
+id: taxonomy_term.reading_lists.field_topic_areas
+field_name: field_topic_areas
+entity_type: taxonomy_term
+bundle: reading_lists
+label: 'Topic Areas'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

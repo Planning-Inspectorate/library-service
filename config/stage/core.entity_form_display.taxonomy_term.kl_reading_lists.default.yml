@@ -1,0 +1,139 @@
+uuid: e7528b78-7d62-483f-8be0-a3f8c5851551
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.kl_reading_lists.feeds_item
+    - field.field.taxonomy_term.kl_reading_lists.field_display_name
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_display_order
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_filter
+    - field.field.taxonomy_term.kl_reading_lists.field_kl_term_unique_id
+    - field.field.taxonomy_term.kl_reading_lists.field_publications
+    - field.field.taxonomy_term.kl_reading_lists.field_topic_areas
+    - taxonomy.vocabulary.kl_reading_lists
+  module:
+    - field_group
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_l
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        direction: vertical
+        width_breakpoint: 640
+    group_l:
+      children:
+        - field_kl_term_unique_id
+        - field_kl_term_display_order
+        - field_kl_term_filter
+      label: 'Legacy Migration Data'
+      region: content
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: taxonomy_term.kl_reading_lists.default
+targetEntityType: taxonomy_term
+bundle: kl_reading_lists
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_display_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_term_display_order:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_term_filter:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_kl_term_unique_id:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_publications:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_topic_areas:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  feeds_item: true

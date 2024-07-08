@@ -1,0 +1,17 @@
+uuid: c8b3a057-8555-4d16-8c77-4de34db7d0c7
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - file
+    - system
+id: pads
+label: pads
+weight: 4
+is_admin: null
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'delete own files'
+  - 'post comments'

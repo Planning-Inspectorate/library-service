@@ -1,0 +1,19 @@
+uuid: 35e15335-3039-4e4b-b551-c52940d613a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_origindataid
+    - node.type.kl_shortcut
+id: node.kl_shortcut.field_kl_doc_origindataid
+field_name: field_kl_doc_origindataid
+entity_type: node
+bundle: kl_shortcut
+label: 'KL Doc OriginDataID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: 139b7912-a26b-4af6-b5ed-e10728d3c2fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_mime_type
+    - node.type.kl_hardcopy
+id: node.kl_hardcopy.field_kl_doc_mime_type
+field_name: field_kl_doc_mime_type
+entity_type: node
+bundle: kl_hardcopy
+label: 'Doc Mime Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

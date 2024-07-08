@@ -1,0 +1,21 @@
+uuid: 11b16800-ce05-49ab-9d2a-efee05a28c00
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_barcode
+field_name: field_barcode
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

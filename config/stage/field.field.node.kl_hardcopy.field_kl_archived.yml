@@ -1,0 +1,23 @@
+uuid: 1eddb5c9-a2bb-42ab-a8de-4abe08a11c51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_archived
+    - node.type.kl_hardcopy
+id: node.kl_hardcopy.field_kl_archived
+field_name: field_kl_archived
+entity_type: node
+bundle: kl_hardcopy
+label: Archived
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

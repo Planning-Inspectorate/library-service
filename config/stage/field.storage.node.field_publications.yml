@@ -1,0 +1,20 @@
+uuid: c2f6e557-7880-4e72-abe0-7c44e0e8cdc7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_publications
+field_name: field_publications
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

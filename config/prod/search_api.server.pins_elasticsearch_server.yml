@@ -1,0 +1,15 @@
+uuid: 1cc381b3-98b6-440f-bb6d-f89d4a0c8d46
+langcode: en
+status: true
+dependencies:
+  module:
+    - elasticsearch_connector
+id: pins_elasticsearch_server
+name: 'PINS Elasticsearch Server'
+description: ''
+backend: elasticsearch
+backend_config:
+  cluster_settings:
+    cluster: pins_elasticsearch_cluster
+  fuzziness: auto
+  server_description: ''

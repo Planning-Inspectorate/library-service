@@ -1,0 +1,46 @@
+uuid: ec56050b-fb78-4823-8366-514043148171
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.article
+    - paragraphs.paragraphs_type.category_paragraphs_type
+  module:
+    - entity_reference_revisions
+id: node.article.field_category
+field_name: field_category
+entity_type: node
+bundle: article
+label: Category
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      category_paragraphs_type: category_paragraphs_type
+    negate: 0
+    target_bundles_drag_drop:
+      author_paragraphs_type:
+        weight: 7
+        enabled: false
+      category_paragraphs_type:
+        weight: 8
+        enabled: true
+      reading_list_paragraphs_type:
+        weight: 9
+        enabled: false
+      series_paragraphs_type:
+        weight: 10
+        enabled: false
+      tags_paragraphs_type:
+        weight: 11
+        enabled: false
+      topic_paragraphs_type:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

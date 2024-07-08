@@ -1,0 +1,80 @@
+uuid: 295a9eb2-5216-4fcf-b0ff-0ee83c302feb
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pdf.body
+    - field.field.node.pdf.comment
+    - field.field.node.pdf.field_alternative_title
+    - field.field.node.pdf.field_archive
+    - field.field.node.pdf.field_author
+    - field.field.node.pdf.field_category
+    - field.field.node.pdf.field_content_reference
+    - field.field.node.pdf.field_date
+    - field.field.node.pdf.field_isbn
+    - field.field.node.pdf.field_links
+    - field.field.node.pdf.field_note
+    - field.field.node.pdf.field_pdf
+    - field.field.node.pdf.field_pdf_media
+    - field.field.node.pdf.field_publication_date
+    - field.field.node.pdf.field_publications
+    - field.field.node.pdf.field_reading_lists
+    - field.field.node.pdf.field_security_classification
+    - field.field.node.pdf.field_series
+    - field.field.node.pdf.field_tags
+    - field.field.node.pdf.field_topics
+    - field.field.node.pdf.field_volume
+    - node.type.pdf
+  module:
+    - text
+    - user
+id: node.pdf.teaser
+targetEntityType: node
+bundle: pdf
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  flag_bookmark:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  comment: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_alternative_title: true
+  field_archive: true
+  field_author: true
+  field_category: true
+  field_content_reference: true
+  field_date: true
+  field_isbn: true
+  field_links: true
+  field_note: true
+  field_pdf: true
+  field_pdf_media: true
+  field_publication_date: true
+  field_publications: true
+  field_reading_lists: true
+  field_security_classification: true
+  field_series: true
+  field_tags: true
+  field_topics: true
+  field_volume: true
+  langcode: true
+  search_api_excerpt: true

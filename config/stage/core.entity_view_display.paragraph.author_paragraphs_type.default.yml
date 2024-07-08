@@ -1,0 +1,51 @@
+uuid: 9411c41a-5db4-43ed-84b8-efa9d8597219
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.author_paragraphs_type.field_author_name
+    - paragraphs.paragraphs_type.author_paragraphs_type
+  module:
+    - ds
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - field_author_name
+id: paragraph.author_paragraphs_type.default
+targetEntityType: paragraph
+bundle: author_paragraphs_type
+mode: default
+content:
+  field_author_name:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

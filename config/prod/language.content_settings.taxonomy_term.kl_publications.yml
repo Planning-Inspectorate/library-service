@@ -1,0 +1,11 @@
+uuid: 95f39c6f-7ad6-45ee-bc72-8b2ba8891ac4
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.kl_publications
+id: taxonomy_term.kl_publications
+target_entity_type_id: taxonomy_term
+target_bundle: kl_publications
+default_langcode: site_default
+language_alterable: false

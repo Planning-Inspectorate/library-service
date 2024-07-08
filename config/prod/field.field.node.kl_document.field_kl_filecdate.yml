@@ -1,0 +1,21 @@
+uuid: 35d66851-607f-494a-8089-6bbe485c5e7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_filecdate
+    - node.type.kl_document
+  module:
+    - datetime
+id: node.kl_document.field_kl_filecdate
+field_name: field_kl_filecdate
+entity_type: node
+bundle: kl_document
+label: FileCDate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

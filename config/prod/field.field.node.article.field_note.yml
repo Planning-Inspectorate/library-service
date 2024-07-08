@@ -1,0 +1,55 @@
+uuid: 918a73d3-7a48-4564-8e21-13800c3aac7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_note
+    - node.type.article
+    - paragraphs.paragraphs_type.note
+  module:
+    - entity_reference_revisions
+id: node.article.field_note
+field_name: field_note
+entity_type: node
+bundle: article
+label: Note
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      note: note
+    negate: 0
+    target_bundles_drag_drop:
+      archive:
+        weight: 10
+        enabled: false
+      archive_paragraphs_type:
+        weight: 11
+        enabled: false
+      author_paragraphs_type:
+        weight: 12
+        enabled: false
+      category_paragraphs_type:
+        weight: 13
+        enabled: false
+      note:
+        weight: 14
+        enabled: true
+      reading_list_paragraphs_type:
+        weight: 15
+        enabled: false
+      series_paragraphs_type:
+        weight: 16
+        enabled: false
+      tags_paragraphs_type:
+        weight: 17
+        enabled: false
+      topic_paragraphs_type:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

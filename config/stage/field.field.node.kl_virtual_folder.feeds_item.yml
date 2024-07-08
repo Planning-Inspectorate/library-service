@@ -1,0 +1,23 @@
+uuid: bddca4f1-3a87-412d-a696-5b4213af07d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.feeds_item
+    - node.type.kl_virtual_folder
+  module:
+    - feeds
+id: node.kl_virtual_folder.feeds_item
+field_name: feeds_item
+entity_type: node
+bundle: kl_virtual_folder
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item

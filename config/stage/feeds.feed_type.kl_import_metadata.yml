@@ -1,0 +1,730 @@
+uuid: 9b9f96d9-e1d5-4926-ad81-0d4193c41679
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.kl_document.body
+    - field.field.node.kl_document.field_alternative_title
+    - field.field.node.kl_document.field_date
+    - field.field.node.kl_document.field_kl_archived_date
+    - field.field.node.kl_document.field_kl_authors
+    - field.field.node.kl_document.field_kl_classification
+    - field.field.node.kl_document.field_kl_doc_file
+    - field.field.node.kl_document.field_kl_doc_file_size
+    - field.field.node.kl_document.field_kl_doc_filename
+    - field.field.node.kl_document.field_kl_doc_folder
+    - field.field.node.kl_document.field_kl_doc_id
+    - field.field.node.kl_document.field_kl_doc_mime_type
+    - field.field.node.kl_document.field_kl_doc_origindataid
+    - field.field.node.kl_document.field_kl_doc_parent_subtype
+    - field.field.node.kl_document.field_kl_doc_parentid
+    - field.field.node.kl_document.field_kl_doc_unique_id
+    - field.field.node.kl_document.field_kl_doc_version
+    - field.field.node.kl_document.field_kl_filecdate
+    - field.field.node.kl_document.field_kl_filemdate
+    - field.field.node.kl_document.field_kl_filetype
+    - field.field.node.kl_document.field_kl_reading_lists
+    - field.field.node.kl_document.field_kl_series
+    - field.field.node.kl_document.field_kl_vercdate
+    - field.field.node.kl_document.field_kl_vermdate
+    - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_vernum
+    - field.field.node.kl_document.field_version_id
+    - field.field.node.kl_document.field_weight
+    - node.type.kl_document
+  module:
+    - feeds_tamper
+    - node
+    - weight
+third_party_settings:
+  feeds_tamper:
+    tampers:
+      cd205b2d-085c-4d5a-a3a6-27c4f403a073:
+        uuid: cd205b2d-085c-4d5a-a3a6-27c4f403a073
+        plugin: import_term_hierarchy
+        source: folders
+        weight: -7
+        label: 'Import Taxonomy Terms Hierarchy'
+        delimiter: '|'
+        vocabulary: kl_folders
+      1cd496a6-fb87-47f6-96ea-746324474f07:
+        text: '[dataid]-[vernum]'
+        uuid: 1cd496a6-fb87-47f6-96ea-746324474f07
+        plugin: rewrite
+        source: computed1
+        weight: -9
+        label: Rewrite
+      2c94c039-d819-4a99-9566-c4d5661743bf:
+        default_value: '1'
+        only_if_empty: true
+        uuid: 2c94c039-d819-4a99-9566-c4d5661743bf
+        plugin: default_value
+        source: versionnum
+        weight: -10
+        label: 'Set value or default value'
+      a589b81e-aa72-4b08-a2b6-5cf12bc3e248:
+        character: ''
+        side: trim
+        uuid: a589b81e-aa72-4b08-a2b6-5cf12bc3e248
+        plugin: trim
+        source: versionnum
+        weight: -9
+        label: 'Characters to trim'
+      edd8c5de-e350-419b-8703-3c5b6191b79b:
+        character: ''
+        side: trim
+        uuid: edd8c5de-e350-419b-8703-3c5b6191b79b
+        plugin: trim
+        source: name
+        weight: -9
+        label: 'Characters to trim'
+      73d3cca8-39ab-4fc9-923a-c18fdb8b29a0:
+        character: ''
+        side: trim
+        uuid: 73d3cca8-39ab-4fc9-923a-c18fdb8b29a0
+        plugin: trim
+        source: dataid
+        weight: -9
+        label: 'Characters to trim'
+      de375624-170e-47ce-9729-9b9ab5a1a413:
+        separator: ^
+        limit: null
+        uuid: de375624-170e-47ce-9729-9b9ab5a1a413
+        plugin: explode
+        source: classifications
+        weight: -9
+        label: Explode
+      e7ff2233-2e44-4513-8d87-52b926b35163:
+        uuid: e7ff2233-2e44-4513-8d87-52b926b35163
+        plugin: import_term_hierarchy
+        source: classifications
+        weight: -8
+        label: 'Import Taxonomy Terms Hierarchy'
+        delimiter: '|'
+        vocabulary: kl_classification
+      25c7c223-f797-48f8-99fa-fba8585b8f48:
+        character: ''
+        side: trim
+        uuid: 25c7c223-f797-48f8-99fa-fba8585b8f48
+        plugin: trim
+        source: folders
+        weight: -9
+        label: 'Characters to trim'
+      aba722b6-bd4d-4b09-a2ba-54044d54f729:
+        character: '|'
+        side: rtrim
+        uuid: aba722b6-bd4d-4b09-a2ba-54044d54f729
+        plugin: trim
+        source: folders
+        weight: -8
+        label: 'Characters to trim'
+      04e39c98-085b-423c-80cf-37e114f2c906:
+        default_value: ''
+        only_if_empty: true
+        uuid: 04e39c98-085b-423c-80cf-37e114f2c906
+        plugin: default_value
+        source: computed2
+        weight: 0
+        label: 'Set value or default value'
+      22d3a624-1cc8-406a-95da-b2a536c285f9:
+        default_value: 'none '
+        only_if_empty: true
+        uuid: 22d3a624-1cc8-406a-95da-b2a536c285f9
+        plugin: default_value
+        source: folders
+        weight: -10
+        label: 'Set value or default value'
+      e21e2dc4-35ae-442c-9122-1a50b7033161:
+        default_value: ' '
+        only_if_empty: true
+        uuid: e21e2dc4-35ae-442c-9122-1a50b7033161
+        plugin: default_value
+        source: name
+        weight: -10
+        label: 'Set value or default value'
+      808d3219-6a34-4521-b5bd-8565b8972606:
+        default_value: ' '
+        only_if_empty: true
+        uuid: 808d3219-6a34-4521-b5bd-8565b8972606
+        plugin: default_value
+        source: dataid
+        weight: -10
+        label: 'Set value or default value'
+      d25a3cf7-6869-4090-86f4-b7c8868b64a5:
+        default_value: ' '
+        only_if_empty: false
+        uuid: d25a3cf7-6869-4090-86f4-b7c8868b64a5
+        plugin: default_value
+        source: computed1
+        weight: -10
+        label: 'Set value or default value'
+      4d16d805-44ec-48da-9637-84ece82d3b7a:
+        default_value: ' '
+        only_if_empty: true
+        uuid: 4d16d805-44ec-48da-9637-84ece82d3b7a
+        plugin: default_value
+        source: readinglists
+        weight: -10
+        label: 'Set value or default value'
+      7a0d1bfc-db74-4c24-9778-bce2cd8847f8:
+        default_value: ' '
+        only_if_empty: true
+        uuid: 7a0d1bfc-db74-4c24-9778-bce2cd8847f8
+        plugin: default_value
+        source: authors
+        weight: -10
+        label: 'Set value or default value'
+      59dfc954-04bd-4f88-bf87-a4009600499a:
+        default_value: ' '
+        only_if_empty: true
+        uuid: 59dfc954-04bd-4f88-bf87-a4009600499a
+        plugin: default_value
+        source: series
+        weight: -10
+        label: 'Set value or default value'
+      fd68cddb-50ab-4cf9-ab9b-c253cb439559:
+        default_value: none
+        only_if_empty: true
+        uuid: fd68cddb-50ab-4cf9-ab9b-c253cb439559
+        plugin: default_value
+        source: classifications
+        weight: -10
+        label: 'Set value or default value'
+      3f5fd49a-1d26-4344-87ab-9ea3ad67c822:
+        character: ''
+        side: trim
+        uuid: 3f5fd49a-1d26-4344-87ab-9ea3ad67c822
+        plugin: trim
+        source: readinglists
+        weight: -9
+        label: 'Characters to trim'
+      c0d8b416-d5a5-4f7c-8056-b43c6e39a9d3:
+        separator: '|'
+        limit: null
+        uuid: c0d8b416-d5a5-4f7c-8056-b43c6e39a9d3
+        plugin: explode
+        source: series
+        weight: -8
+        label: Explode
+      ab52c1f9-d312-40f7-9f34-2e4b78f11d28:
+        separator: '|'
+        limit: null
+        uuid: ab52c1f9-d312-40f7-9f34-2e4b78f11d28
+        plugin: explode
+        source: readinglists
+        weight: -8
+        label: Explode
+      9075ab78-f7d9-4767-959f-22f664ed805a:
+        separator: '|'
+        limit: null
+        uuid: 9075ab78-f7d9-4767-959f-22f664ed805a
+        plugin: explode
+        source: authors
+        weight: -8
+        label: Explode
+      a36c7f1c-b9c6-4929-8c86-503b1f7ca041:
+        character: ''
+        side: trim
+        uuid: a36c7f1c-b9c6-4929-8c86-503b1f7ca041
+        plugin: trim
+        source: authors
+        weight: -9
+        label: 'Characters to trim'
+      357bcb1a-ed68-43ff-9fb4-b66c62582d92:
+        character: ''
+        side: trim
+        uuid: 357bcb1a-ed68-43ff-9fb4-b66c62582d92
+        plugin: trim
+        source: series
+        weight: -9
+        label: 'Characters to trim'
+      6f2a3acc-93b5-4645-a4c9-4596c868167b:
+        uuid: 6f2a3acc-93b5-4645-a4c9-4596c868167b
+        plugin: html_entity_decode
+        source: name
+        weight: -7
+        label: 'HTML entity decode'
+      b3791462-4c0c-4528-b9a2-cb0b1e01673a:
+        uuid: b3791462-4c0c-4528-b9a2-cb0b1e01673a
+        plugin: html_entity_decode
+        source: notes
+        weight: 1
+        label: 'HTML entity decode'
+      f506348c-22b2-460c-9c2f-573159e9105d:
+        uuid: f506348c-22b2-460c-9c2f-573159e9105d
+        plugin: html_entity_decode
+        source: computed2
+        weight: 1
+        label: 'HTML entity decode'
+  feeds_log:
+    operations: {  }
+    items: {  }
+label: 'KL Import Metadata'
+id: kl_import_metadata
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: csv
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: kl_document
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 14
+custom_sources:
+  name:
+    value: Name
+    label: Name
+    machine_name: name
+    type: csv
+  folders:
+    value: Folders
+    label: Folders
+    machine_name: folders
+    type: csv
+  dataid:
+    value: DataID
+    label: DataID
+    machine_name: dataid
+    type: csv
+  versionnum:
+    value: VersionNum
+    label: VersionNum
+    machine_name: versionnum
+    type: csv
+  computed1:
+    value: Computed1
+    label: Computed1
+    machine_name: computed1
+    type: blank
+  readinglists:
+    value: ReadingLists
+    label: ReadingLists
+    machine_name: readinglists
+    type: csv
+  authors:
+    value: Authors
+    label: Authors
+    machine_name: authors
+    type: csv
+  series:
+    value: Series
+    label: Series
+    machine_name: series
+    type: csv
+  classifications:
+    value: Classifications
+    label: Classifications
+    machine_name: classifications
+    type: csv
+  nameb:
+    value: NameB
+    label: NameB
+    machine_name: nameb
+    type: csv
+  foldersb:
+    value: FoldersB
+    label: FoldersB
+    machine_name: foldersb
+    type: csv
+  classificationsb:
+    value: ClassificationsB
+    label: ClassificationsB
+    machine_name: classificationsb
+    type: csv
+  readinglistsb:
+    value: ReadingListsB
+    label: ReadingListsB
+    machine_name: readinglistsb
+    type: csv
+  seriesb:
+    value: SeriesB
+    label: SeriesB
+    machine_name: seriesb
+    type: csv
+  authorsb:
+    value: AuthorsB
+    label: AuthorsB
+    machine_name: authorsb
+    type: csv
+  namec:
+    value: NameC
+    label: NameC
+    machine_name: namec
+    type: csv
+  foldersc:
+    value: FoldersC
+    label: FoldersC
+    machine_name: foldersc
+    type: csv
+  classificationsc:
+    value: ClassificationsC
+    label: ClassificationsC
+    machine_name: classificationsc
+    type: csv
+  readinglistsc:
+    value: ReadingListsC
+    label: ReadingListsC
+    machine_name: readinglistsc
+    type: csv
+  authorsc:
+    value: AuthorsC
+    label: AuthorsC
+    machine_name: authorsc
+    type: csv
+  seriesc:
+    value: SeriesC
+    label: SeriesC
+    machine_name: seriesc
+    type: csv
+  parentid:
+    value: ParentID
+    label: ParentID
+    machine_name: parentid
+    type: csv
+  parentsubtype:
+    value: ParentSubType
+    label: ParentSubType
+    machine_name: parentsubtype
+    type: csv
+  origindataid:
+    value: OriginDataID
+    label: OriginDataID
+    machine_name: origindataid
+    type: csv
+  ordering:
+    value: Ordering
+    label: Ordering
+    machine_name: ordering
+    type: csv
+  notes:
+    value: Notes
+    label: Notes
+    machine_name: notes
+    type: csv
+  computed2:
+    value: Computed2
+    label: Computed2
+    machine_name: computed2
+    type: blank
+  filetype:
+    value: FileType
+    label: FileType
+    machine_name: filetype
+    type: csv
+  filecdate:
+    value: FileCDate
+    label: FileCDate
+    machine_name: filecdate
+    type: csv
+  filemdate:
+    value: FileMDate
+    label: FileMDate
+    machine_name: filemdate
+    type: csv
+  vercdate:
+    value: VerCDate
+    label: VerCDate
+    machine_name: vercdate
+    type: csv
+  vermdate:
+    value: VerMDate
+    label: VerMDate
+    machine_name: vermdate
+    type: csv
+  filename:
+    value: Filename
+    label: Filename
+    machine_name: filename
+    type: csv
+  mimetype:
+    value: MimeType
+    label: MimeType
+    machine_name: mimetype
+    type: csv
+  vernum:
+    value: VerNum
+    label: VerNum
+    machine_name: vernum
+    type: csv
+  alttitle:
+    value: AltTitle
+    label: AltTitle
+    machine_name: alttitle
+    type: csv
+  computed_5:
+    value: 'Computed 5'
+    label: 'Computed 5'
+    machine_name: computed_5
+    type: blank
+  pubdate:
+    value: PubDate
+    label: PubDate
+    machine_name: pubdate
+    type: csv
+  versionid:
+    value: VersionID
+    label: VersionID
+    machine_name: versionid
+    type: csv
+  archiveddate:
+    value: ArchivedDate
+    label: ArchivedDate
+    machine_name: archiveddate
+    type: csv
+  publicationdate:
+    value: PublicationDate
+    label: PublicationDate
+    machine_name: publicationdate
+    type: csv
+  datasize:
+    value: DataSize
+    label: DataSize
+    machine_name: datasize
+    type: csv
+mappings:
+  -
+    target: title
+    map:
+      value: name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_folder
+    map:
+      target_id: folders
+    settings:
+      language: ''
+      reference_by: tid
+      feeds_item: guid
+      autocreate: 0
+      autocreate_bundle: kl_folders
+  -
+    target: field_kl_doc_id
+    map:
+      value: dataid
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_version
+    map:
+      value: versionnum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_unique_id
+    map:
+      value: computed1
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_reading_lists
+    map:
+      target_id: readinglists
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: 1
+      autocreate_bundle: kl_reading_lists
+  -
+    target: field_kl_authors
+    map:
+      target_id: authors
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: 1
+      autocreate_bundle: kl_authors
+  -
+    target: field_kl_series
+    map:
+      target_id: series
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: 1
+      autocreate_bundle: kl_series
+  -
+    target: field_kl_classification
+    map:
+      target_id: classifications
+    settings:
+      language: ''
+      reference_by: tid
+      feeds_item: guid
+      autocreate: 0
+      autocreate_bundle: kl_classification
+  -
+    target: field_kl_doc_parentid
+    map:
+      value: parentid
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_parent_subtype
+    map:
+      value: parentsubtype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_origindataid
+    map:
+      value: origindataid
+    settings:
+      language: ''
+    unique: {  }
+  -
+    target: field_weight
+    map:
+      value: ordering
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: notes
+      summary: computed2
+    settings:
+      language: ''
+      format: plain_text
+  -
+    target: field_kl_filetype
+    map:
+      value: filetype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_filecdate
+    map:
+      value: filecdate
+    settings:
+      language: ''
+      timezone: Europe/London
+  -
+    target: field_kl_filemdate
+    map:
+      value: filemdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_vercdate
+    map:
+      value: vercdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_vermdate
+    map:
+      value: vermdate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_doc_filename
+    map:
+      value: filename
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_mime_type
+    map:
+      value: mimetype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_vernum
+    map:
+      value: vernum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_doc_file
+    map:
+      target_id: ''
+      description: computed_5
+    settings:
+      language: ''
+      reference_by: fid
+      feeds_item: guid
+      autocreate: 0
+      existing: '2'
+      autocreate_bundle: false
+  -
+    target: field_date
+    map:
+      value: publicationdate
+    settings:
+      language: ''
+      timezone: Europe/London
+  -
+    target: field_alternative_title
+    map:
+      value: alttitle
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_version_id
+    map:
+      value: versionid
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: temporary_target
+    map:
+      temporary: ''
+  -
+    target: field_vernum
+    map:
+      value: vernum
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_kl_archived_date
+    map:
+      value: archiveddate
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_kl_doc_file_size
+    map:
+      value: datasize
+    settings:
+      language: null
+    unique: {  }

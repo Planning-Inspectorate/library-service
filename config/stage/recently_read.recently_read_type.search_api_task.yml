@@ -1,0 +1,7 @@
+uuid: 89a51eed-648e-4f84-872d-31efdb0ab368
+langcode: en
+status: true
+dependencies: {  }
+id: search_api_task
+label: 'Search task'
+types: {  }

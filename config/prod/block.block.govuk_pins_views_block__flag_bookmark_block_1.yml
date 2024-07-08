@@ -1,0 +1,29 @@
+uuid: 966e9d4c-df40-4dbd-84b9-2ffb8c73ef0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.flag_bookmark
+  module:
+    - system
+    - views
+  theme:
+    - govuk_pins
+id: govuk_pins_views_block__flag_bookmark_block_1
+theme: govuk_pins
+region: sidebar_first
+weight: -18
+provider: null
+plugin: 'views_block:flag_bookmark-block_1'
+settings:
+  id: 'views_block:flag_bookmark-block_1'
+  label: Favourites
+  label_display: visible
+  provider: views
+  views_label: Favourites
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /disabled

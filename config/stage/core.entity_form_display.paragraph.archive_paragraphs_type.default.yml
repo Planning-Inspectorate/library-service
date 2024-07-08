@@ -1,0 +1,31 @@
+uuid: 435c813b-bdba-42e3-b6b0-8c5962ad3d24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.archive_paragraphs_type.field_archive
+    - field.field.paragraph.archive_paragraphs_type.field_archive_date
+    - paragraphs.paragraphs_type.archive_paragraphs_type
+  module:
+    - datetime
+id: paragraph.archive_paragraphs_type.default
+targetEntityType: paragraph
+bundle: archive_paragraphs_type
+mode: default
+content:
+  field_archive:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_archive_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

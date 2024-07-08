@@ -1,0 +1,19 @@
+uuid: ff298966-376e-4aef-ad2c-07078f4bd5b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_parent_subtype
+    - node.type.kl_hardcopy
+id: node.kl_hardcopy.field_kl_doc_parent_subtype
+field_name: field_kl_doc_parent_subtype
+entity_type: node
+bundle: kl_hardcopy
+label: 'Doc Parent SubType'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

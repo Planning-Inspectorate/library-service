@@ -1,0 +1,20 @@
+uuid: 2c15dc4c-9e49-4936-a8de-2f4afd0089af
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_security_classification
+field_name: field_security_classification
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

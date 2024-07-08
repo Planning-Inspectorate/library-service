@@ -1,0 +1,8 @@
+uuid: 65e6fdde-34a0-4994-84e9-432f1b49f381
+langcode: en
+status: true
+dependencies: {  }
+name: 'KL Topics'
+vid: kl_topics
+description: 'Vocabulary for topics (grouping of reading list)'
+weight: 0

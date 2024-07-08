@@ -1,0 +1,7 @@
+uuid: 02233889-860d-4c9a-9c02-4b9f821e2308
+langcode: en
+status: false
+dependencies: {  }
+formId: node_hard_copy_form
+captchaType: default
+label: node_hard_copy_form

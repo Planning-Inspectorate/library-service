@@ -1,0 +1,29 @@
+uuid: d27ebddd-577b-45d1-bc86-aaaab178369b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_authors
+    - node.type.kl_document
+    - taxonomy.vocabulary.kl_authors
+id: node.kl_document.field_kl_authors
+field_name: field_kl_authors
+entity_type: node
+bundle: kl_document
+label: Authors
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kl_authors: kl_authors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

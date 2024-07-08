@@ -1,0 +1,27 @@
+uuid: 48b1bf08-f3b8-4f23-8441-ff04c7ac2512
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kl_doc_file
+    - node.type.kl_hardcopy
+  module:
+    - file
+id: node.kl_hardcopy.field_kl_doc_file
+field_name: field_kl_doc_file
+entity_type: node
+bundle: kl_hardcopy
+label: 'Doc File'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'lib-mig/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt csv docx pdf doc xlsx pptx ppt jpg jpeg'
+  max_filesize: ''
+  description_field: false
+field_type: file

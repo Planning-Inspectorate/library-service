@@ -1,0 +1,22 @@
+uuid: 5a0e8ce9-c5a3-417f-93cc-74c55cf443d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: hard_copy_loan
+label: 'Hard copy loan'
+type: 'canonical_entities:node'
+pattern: 'hard-copy/loan/[node:title]'
+selection_criteria:
+  db82d99e-5342-4670-9ecc-c0b7b6f8434d:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: db82d99e-5342-4670-9ecc-c0b7b6f8434d
+    context_mapping:
+      node: node
+    bundles:
+      issued_hard_copy: issued_hard_copy
+selection_logic: and
+weight: -5
+relationships: {  }
