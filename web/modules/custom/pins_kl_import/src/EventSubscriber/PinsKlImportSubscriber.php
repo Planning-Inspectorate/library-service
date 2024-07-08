@@ -70,19 +70,19 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
             \Drupal::logger('pins_kl_import')->notice($message);
           }
           else {
-            $file = File::create([
-              'filename' => $filename,
-              'uri' => 'public://' . $basename,
-              'status' => 1,
-              'uid' => 1,
-            ]);
-            $file->save();
+            // $file = File::create([
+            //   'filename' => $filename,
+            //   'uri' => 'public://' . $basename,
+            //   'status' => 1,
+            //   'uid' => 1,
+            // ]);
+            // $file->save();
             $message = 'inside entity_ids else';
             \Drupal::logger('pins_kl_import')->notice($message);
           }
-          $fid = $file->id();
+          // $fid = $file->id();
        
-          $item->set('documenturi', $fid);
+          // $item->set('documenturi', $fid);
         }
       break;
     }
