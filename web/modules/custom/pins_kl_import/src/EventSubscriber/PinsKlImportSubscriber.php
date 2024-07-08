@@ -57,12 +57,17 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
           $filepath = 'public://' . $documenturi;
           $basename = basename($filepath);
 
+          $message = $filepath  . '$filepath '. $documenturi. 'documenturi'. $basename. 'basename';
+          \Drupal::logger('pins_kl_import')->notice($message);
+
           $query = \Drupal::entityQuery('file');
           $query->condition('uri', 'public://' . $basename);
           $query->accessCheck(FALSE);
           $entity_ids = $query->execute();
           if ($entity_ids) {
             $file = File::load(reset($entity_ids));
+            $message = 'inside entity_ids';
+            \Drupal::logger('pins_kl_import')->notice($message);
           }
           else {
             $file = File::create([
@@ -72,6 +77,8 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
               'uid' => 1,
             ]);
             $file->save();
+            $message = 'inside entity_ids else';
+            \Drupal::logger('pins_kl_import')->notice($message);
           }
           $fid = $file->id();
        
