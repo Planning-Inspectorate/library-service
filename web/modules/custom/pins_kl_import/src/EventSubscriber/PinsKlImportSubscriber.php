@@ -65,7 +65,7 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
           $query->accessCheck(FALSE);
           $entity_ids = $query->execute();
           if ($entity_ids) {
-            $file = File::load(reset($entity_ids));
+            // $file = File::load(reset($entity_ids));
             $message = 'inside entity_ids';
             \Drupal::logger('pins_kl_import')->notice($message);
           }
