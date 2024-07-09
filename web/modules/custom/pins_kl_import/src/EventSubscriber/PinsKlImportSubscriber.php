@@ -65,7 +65,7 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
           $query->accessCheck(FALSE);
           $entity_ids = $query->execute();
           if ($entity_ids) {
-            // $file = File::load(reset($entity_ids));
+            $file = File::load(reset($entity_ids));
             $message = 'inside entity_ids';
             \Drupal::logger('pins_kl_import')->notice($message);
           }
@@ -80,9 +80,9 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
             $message = 'inside entity_ids else';
             \Drupal::logger('pins_kl_import')->notice($message);
           }
-          // $fid = $file->id();
+          $fid = $file->id();
        
-          // $item->set('documenturi', $fid);
+          $item->set('documenturi', $fid);
         }
       break;
     }
