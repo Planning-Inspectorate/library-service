@@ -49,27 +49,27 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
 
       case 'import_files':
         foreach ($parser_result as $item) {
-          $filename = $item->get('filename');
-          $documenturi = $item->get('documenturi');
-          $path = $item->get('path');
+          // $filename = $item->get('filename');
           // $documenturi = $item->get('documenturi');
+          // $path = $item->get('path');
+          // // $documenturi = $item->get('documenturi');
 
-          $filepath = 'public://' . $documenturi;
-          $basename = basename($filepath);
+          // $filepath = 'public://' . $documenturi;
+          // $basename = basename($filepath);
 
-          $message = $filepath  . '$filepath \n'. $documenturi. 'documenturi \n'. $basename. 'basename \n';
-          \Drupal::logger('pins_kl_import')->notice($message);
+          // $message = $filepath  . '$filepath \n'. $documenturi. 'documenturi \n'. $basename. 'basename \n';
+          // \Drupal::logger('pins_kl_import')->notice($message);
 
-          $query = \Drupal::entityQuery('file');
-          $query->condition('uri', 'public://' . $basename);
-          $query->accessCheck(FALSE);
-          $entity_ids = $query->execute();
-          if ($entity_ids) {
+          // $query = \Drupal::entityQuery('file');
+          // $query->condition('uri', 'public://' . $basename);
+          // $query->accessCheck(FALSE);
+          // $entity_ids = $query->execute();
+          // if ($entity_ids) {
             // $file = File::load(reset($entity_ids));
-            $message = 'inside entity_ids';
-            \Drupal::logger('pins_kl_import')->notice($message);
-          }
-          else {
+            // $message = 'inside entity_ids';
+            // \Drupal::logger('pins_kl_import')->notice($message);
+          // }
+          // else {
             // $file = File::create([
             //   'filename' => $filename,
             //   'uri' => 'public://' . $basename,
@@ -77,9 +77,9 @@ class PinsKlImportSubscriber implements EventSubscriberInterface {
             //   'uid' => 1,
             // ]);
             // $file->save();
-            $message = 'inside entity_ids else';
-            \Drupal::logger('pins_kl_import')->notice($message);
-          }
+            // $message = 'inside entity_ids else';
+            // \Drupal::logger('pins_kl_import')->notice($message);
+          // }
           // $fid = $file->id();
        
           // $item->set('documenturi', $fid);
