@@ -8,6 +8,7 @@ dependencies:
     - field.field.taxonomy_term.kl_authors.field_kl_term_unique_id
     - taxonomy.vocabulary.kl_authors
   module:
+    - feeds_log
     - feeds_tamper
     - taxonomy
 third_party_settings:
@@ -46,8 +47,21 @@ third_party_settings:
         weight: 2
         label: 'Set value or default value'
   feeds_log:
-    operations: {  }
-    items: {  }
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
 label: 'KL Import Authors'
 id: kl_import_authors
 description: ''

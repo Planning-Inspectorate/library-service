@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
+    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -130,8 +131,17 @@ third_party_settings:
         weight: -8
         label: 'Characters to trim'
   feeds_log:
-    operations: {  }
-    items: {  }
+    status: true
+    operations:
+      created: created
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      skipped: skipped
+      failed: failed
+    source: true
 label: 'KL Import Compound Documents'
 id: kl_import_compoundfolders
 description: ''
