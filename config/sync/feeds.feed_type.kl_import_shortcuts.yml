@@ -139,6 +139,7 @@ third_party_settings:
     status: true
     operations:
       created: created
+      updated: updated
       skipped: skipped
       failed: failed
       cleaned: cleaned

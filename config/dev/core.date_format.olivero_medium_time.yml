@@ -1,0 +1,8 @@
+uuid: 9f15be21-c59f-4679-824b-f0dd2c7bc628
+langcode: en
+status: true
+dependencies: {  }
+id: olivero_medium_time
+label: 'Olivero Medium Time'
+locked: false
+pattern: 'j  F,  Y - H:i'
