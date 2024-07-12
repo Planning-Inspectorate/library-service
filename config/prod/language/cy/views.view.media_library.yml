@@ -1,0 +1,77 @@
+display:
+  default:
+    display_title: Diofyn
+    display_options:
+      title: Cyfryngau
+      pager:
+        options:
+          tags:
+            next: '>>'
+            previous: '<<'
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      exposed_form:
+        options:
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      filters:
+        status:
+          group_info:
+            label: 'Wedi ei gyhoeddi'
+            group_items:
+              1:
+                title: 'Wedi ei gyhoeddi'
+        name:
+          expose:
+            label: Enw
+        langcode:
+          expose:
+            label: Iaith
+  page:
+    display_title: Tudalen
+    display_options:
+      fields:
+        edit_media:
+          text: Golygu
+        delete_media:
+          text: Dileu
+  widget:
+    display_options:
+      arguments:
+        bundle:
+          exception:
+            title: 'I gyd'
+      filters:
+        name:
+          expose:
+            label: Enw
+      header:
+        display_link_grid:
+          label: Grid
+        display_link_table:
+          label: Tabl
+  widget_table:
+    display_options:
+      fields:
+        thumbnail__target_id:
+          label: 'Disgrifiad Cryno'
+        name:
+          label: Enw
+        uid:
+          label: Awdur
+        changed:
+          label: Newidwyd
+      arguments:
+        bundle:
+          exception:
+            title: 'I gyd'
+      filters:
+        name:
+          expose:
+            label: Enw
+      header:
+        display_link_grid:
+          label: Grid
+        display_link_table:
+          label: Tabl

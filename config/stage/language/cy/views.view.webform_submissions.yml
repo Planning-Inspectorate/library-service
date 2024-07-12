@@ -1,0 +1,78 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          tags:
+            previous: '<<'
+            next: '>>'
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        sid:
+          label: '#'
+        created:
+          label: 'Wedi ei greu'
+        view_webform_submission:
+          label: Gweithrediad
+          text: gweld
+      arguments:
+        in_draft:
+          exception:
+            title: 'I gyd'
+  embed_administer:
+    display_options:
+      fields:
+        sid:
+          label: '#'
+        sticky:
+          label: Gludiog
+        created:
+          label: 'Wedi ei greu'
+        operations:
+          label: Gweithrediad
+      filters:
+        sticky:
+          expose:
+            label: Gludiog
+  embed_manage:
+    display_options:
+      fields:
+        sid:
+          label: '#'
+        sticky:
+          label: Gludiog
+        created:
+          label: 'Wedi ei greu'
+        view_webform_submission:
+          label: Gweithrediad
+          text: gweld
+        edit_webform_submission:
+          label: Gweithrediad
+          text: golygu
+      filters:
+        sticky:
+          expose:
+            label: Gludiog
+  embed_review:
+    display_options:
+      fields:
+        sid:
+          label: '#'
+        sticky:
+          label: Gludiog
+        created:
+          label: 'Wedi ei greu'
+        view_webform_submission:
+          label: Gweithrediad
+          text: gweld
+      filters:
+        sticky:
+          expose:
+            label: Gludiog

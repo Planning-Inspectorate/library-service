@@ -1,0 +1,19 @@
+display:
+  default:
+    display_title: Diofyn
+    display_options:
+      title: 'Pwy sydd ar-lein'
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      filters:
+        access:
+          expose:
+            label: 'Mynediad diwethaf'
+            description: 'Mae defnyddiwr yn cael ei gysidro ar-lein am hyn o maser ar ôl iddynt weld tudlaen.'
+  who_s_online_block:
+    display_title: 'Pwy sydd ar-lein'
+    display_options:
+      block_description: 'Pwy sydd ar-lein'

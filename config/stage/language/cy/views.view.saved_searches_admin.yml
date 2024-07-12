@@ -1,0 +1,34 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+      pager:
+        options:
+          tags:
+            previous: '<<'
+            next: '>>'
+          expose:
+            items_per_page_label: 'Eitemau pob tudalen'
+            offset_label: Ongli
+      fields:
+        label:
+          label: Label
+        type:
+          label: Math
+        created:
+          label: 'Wedi ei greu'
+        operations:
+          label: Gweithrediad
+      filters:
+        label:
+          expose:
+            label: Label
+        type:
+          expose:
+            label: Math
+  page:
+    display_title: Tudalen
