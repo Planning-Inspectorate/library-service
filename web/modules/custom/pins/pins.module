@@ -19,6 +19,7 @@ use Drupal\views\ViewExecutable;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\Markup;
+use Drupal\file\Entity\File;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
@@ -132,6 +133,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             $reference_id = $entity->id();
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
+          pins_entity_set_file_size_on_presave($entity)
           break;
         case 'individual_hardcopy':
           // Use nid and paragraph Id as a unique content reference ID
@@ -574,6 +576,25 @@ function pins_preprocess_views_view_table(&$variables) {
       $custom_row = $variables['rows'][0];
       $custom_row['columns']['name']['content'][0]['field_output']['#markup'] = $link_markup;
       $variables['rows'][] = $custom_row;
+    }
+  }
+}
+
+/**
+  *  
+  *function pins_entity_set_file_size_on_presave
+  * Used for setting file size for uploaded file.
+  *
+*/
+
+function pins_entity_set_file_size_on_presave(&$entity){
+
+  if($entity->hasField('field_kl_doc_file')){
+    $fileField = $entity->get('field_kl_doc_file')->entity;
+    if ($fileField) {
+      $fileSize = $fileField->getSize();
+      if ($fileSize > 0)
+          $entity->set('field_kl_doc_file_size', $fileSize);
     }
   }
 }
