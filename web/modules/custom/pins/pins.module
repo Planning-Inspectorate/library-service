@@ -133,7 +133,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             $reference_id = $entity->id();
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
-          pins_entity_set_file_size_on_presave($entity)
+          pins_entity_set_file_size_on_presave($entity);
           break;
         case 'individual_hardcopy':
           // Use nid and paragraph Id as a unique content reference ID
