@@ -1,8 +1,0 @@
-uuid: 30cad9f8-a375-4bef-ae29-72fe595d53ba
-langcode: en
-status: true
-dependencies: {  }
-name: 'KL Reading Lists'
-vid: kl_reading_lists
-description: ''
-weight: 0

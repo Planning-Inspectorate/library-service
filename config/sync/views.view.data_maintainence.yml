@@ -266,7 +266,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access content'
+          perm: 'administer taxonomy'
       cache:
         type: tag
         options: {  }

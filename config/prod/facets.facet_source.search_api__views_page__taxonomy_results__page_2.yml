@@ -1,9 +1,0 @@
-uuid: bc927238-cc25-4c01-bc2f-c651967d4be5
-langcode: en
-status: true
-dependencies: {  }
-id: search_api__views_page__taxonomy_results__page_2
-name: 'search_api:views_page__taxonomy_results__page_2'
-filter_key: null
-url_processor: query_string
-breadcrumb: {  }

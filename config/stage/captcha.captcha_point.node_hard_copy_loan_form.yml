@@ -1,7 +1,0 @@
-uuid: be690492-453d-4d4f-9483-67e7d9a3fad1
-langcode: en
-status: false
-dependencies: {  }
-formId: node_hard_copy_loan_form
-captchaType: default
-label: node_hard_copy_loan_form

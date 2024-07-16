@@ -33,7 +33,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: Title
           exclude: false
           alter:
             alter_text: false
@@ -244,7 +244,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: Title
+            label: 'Search Title'
             description: ''
             use_operator: false
             operator: title_op

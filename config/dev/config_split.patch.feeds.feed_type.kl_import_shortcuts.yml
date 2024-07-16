@@ -1,0 +1,19 @@
+adding:
+  dependencies:
+    module:
+      - feeds_log
+  third_party_settings:
+    feeds_log:
+      status: true
+      operations:
+        created: created
+        updated: updated
+        skipped: skipped
+        failed: failed
+        cleaned: cleaned
+      items:
+        created: created
+        skipped: skipped
+        failed: failed
+      source: true
+removing: {  }

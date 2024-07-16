@@ -1,8 +1,0 @@
-uuid: 0b9fe03f-e999-40bf-99c6-7e4390675005
-langcode: en
-status: true
-dependencies: {  }
-id: dd_mn_yy
-label: dd/mn/yy
-locked: false
-pattern: d/m/Y

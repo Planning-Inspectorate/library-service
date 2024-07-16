@@ -1,8 +1,0 @@
-uuid: b68a9282-3b73-4bea-b529-25a196b6b4fc
-langcode: en
-status: true
-dependencies: {  }
-id: editors
-label: Editors
-description: Editor
-locked: false

@@ -1,8 +1,0 @@
-uuid: 7d564226-748d-4435-b86a-698049f91064
-langcode: en
-status: true
-dependencies: {  }
-id: top-sub-nav
-label: 'Top sub nav'
-description: ''
-locked: false

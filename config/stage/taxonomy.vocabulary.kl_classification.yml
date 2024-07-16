@@ -1,8 +1,0 @@
-uuid: b6396d1b-e937-468c-992c-6dafcde3b3c7
-langcode: en
-status: true
-dependencies: {  }
-name: 'KL Classification'
-vid: kl_classification
-description: ''
-weight: 0
