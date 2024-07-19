@@ -32,17 +32,17 @@ definitions:
     expanded: false
     enabled: false
   user__logout:
+    weight: -43
+    menu_name: account
+    parent: ''
+    expanded: false
     enabled: false
-    menu_name: account
-    parent: ''
-    expanded: false
-    weight: -44
   user__page:
-    enabled: true
+    weight: -44
     menu_name: account
     parent: ''
     expanded: false
-    weight: -45
+    enabled: true
   'admin_toolbar_tools__extra_links:user__logout':
     weight: 4
     parent: 'admin_toolbar_tools.extra_links:entity.menu.edit_form.main'

@@ -42,6 +42,7 @@ dependencies:
     - field.field.node.kl_document.field_long_text
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_physical_description
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_vernum
@@ -93,6 +94,7 @@ third_party_settings:
         - field_kl_filecdate
         - field_kl_filemdate
         - field_filemd5
+        - field_physical_description
         - field_vernum
         - field_version_id
       label: 'Legacy  Data'
@@ -149,7 +151,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -163,7 +165,7 @@ content:
     third_party_settings: {  }
   field_archived_note:
     type: string_textarea
-    weight: 36
+    weight: 37
     region: content
     settings:
       rows: 5
@@ -185,7 +187,7 @@ content:
     third_party_settings: {  }
   field_filemd5:
     type: string_textfield
-    weight: 41
+    weight: 52
     region: content
     settings:
       size: 60
@@ -216,7 +218,7 @@ content:
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 35
+    weight: 36
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -241,7 +243,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 28
+    weight: 39
     region: content
     settings:
       size: 60
@@ -249,14 +251,14 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_size:
     type: number
-    weight: 29
+    weight: 40
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 27
+    weight: 38
     region: content
     settings:
       size: 60
@@ -277,7 +279,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
-    weight: 25
+    weight: 36
     region: content
     settings:
       size: 60
@@ -285,7 +287,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 30
+    weight: 41
     region: content
     settings:
       size: 60
@@ -293,7 +295,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 35
+    weight: 46
     region: content
     settings:
       size: 60
@@ -301,7 +303,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 34
+    weight: 45
     region: content
     settings:
       size: 60
@@ -309,7 +311,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 33
+    weight: 44
     region: content
     settings:
       size: 60
@@ -317,7 +319,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 26
+    weight: 37
     region: content
     settings:
       size: 60
@@ -325,7 +327,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 31
+    weight: 42
     region: content
     settings:
       size: 60
@@ -333,19 +335,19 @@ content:
     third_party_settings: {  }
   field_kl_filecdate:
     type: datetime_default
-    weight: 39
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filemdate:
     type: datetime_default
-    weight: 40
+    weight: 51
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filetype:
     type: string_textfield
-    weight: 36
+    weight: 47
     region: content
     settings:
       size: 60
@@ -365,19 +367,19 @@ content:
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
-    weight: 37
+    weight: 48
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vermdate:
     type: datetime_default
-    weight: 38
+    weight: 49
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vernum:
     type: string_textfield
-    weight: 32
+    weight: 43
     region: content
     settings:
       size: 60
@@ -412,29 +414,37 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_physical_description:
+    type: string_textfield
+    weight: 53
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox
-    weight: 11
+    weight: 8
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_security_classification:
     type: options_select
-    weight: 37
+    weight: 38
     region: content
     settings: {  }
     third_party_settings: {  }
   field_vernum:
     type: number
-    weight: 42
+    weight: 54
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_version_id:
     type: string_textfield
-    weight: 43
+    weight: 55
     region: content
     settings:
       size: 60
@@ -450,27 +460,27 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 7
+    weight: 3
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 8
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -485,7 +495,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS

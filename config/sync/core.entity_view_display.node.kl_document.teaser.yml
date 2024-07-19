@@ -43,6 +43,7 @@ dependencies:
     - field.field.node.kl_document.field_long_text
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_physical_description
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_vernum
@@ -113,6 +114,7 @@ hidden:
   field_long_text: true
   field_number_decimal: true
   field_other_date: true
+  field_physical_description: true
   field_search_exclude: true
   field_security_classification: true
   field_vernum: true

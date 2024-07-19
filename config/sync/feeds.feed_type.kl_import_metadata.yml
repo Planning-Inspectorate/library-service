@@ -28,6 +28,7 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_physical_description
     - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_weight
@@ -508,6 +509,11 @@ custom_sources:
     label: DataSize
     machine_name: datasize
     type: csv
+  physicaldescription:
+    value: PhysicalDescription
+    label: PhysicalDescription
+    machine_name: physicaldescription
+    type: csv
 mappings:
   -
     target: title
@@ -735,6 +741,13 @@ mappings:
     target: field_kl_doc_file_size
     map:
       value: datasize
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_physical_description
+    map:
+      value: physicaldescription
     settings:
       language: null
     unique: {  }

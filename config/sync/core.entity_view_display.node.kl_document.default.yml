@@ -42,6 +42,7 @@ dependencies:
     - field.field.node.kl_document.field_long_text
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
+    - field.field.node.kl_document.field_physical_description
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_vernum
@@ -1148,6 +1149,14 @@ content:
     third_party_settings: {  }
     weight: 30
     region: ds_content
+  field_physical_description:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 39
+    region: content
   field_search_exclude:
     type: boolean
     label: above
