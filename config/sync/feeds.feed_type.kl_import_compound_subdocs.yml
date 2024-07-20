@@ -26,12 +26,12 @@ dependencies:
     - field.field.node.kl_document.field_kl_vercdate
     - field.field.node.kl_document.field_kl_vermdate
     - field.field.node.kl_document.field_kl_vernum
+    - field.field.node.kl_document.field_physical_description
     - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
     - weight
@@ -39,7 +39,7 @@ third_party_settings:
   feeds_tamper:
     tampers:
       1cd496a6-fb87-47f6-96ea-746324474f07:
-        text: '[dataid]-[versionnum]'
+        text: '[dataid]-[vernum]'
         uuid: 1cd496a6-fb87-47f6-96ea-746324474f07
         plugin: rewrite
         source: computed1
@@ -196,17 +196,8 @@ third_party_settings:
         weight: -10
         label: 'Set value or default value'
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
 label: 'KL Import Compound SubDocs'
 id: kl_import_compound_subdocs
 description: ''
@@ -426,6 +417,11 @@ custom_sources:
     label: DataSize
     machine_name: datasize
     type: csv
+  physicaldescription:
+    value: PhysicalDescription
+    label: PhysicalDescription
+    machine_name: physicaldescription
+    type: csv
 mappings:
   -
     target: title
@@ -632,6 +628,13 @@ mappings:
     target: field_kl_doc_file_size
     map:
       value: datasize
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_physical_description
+    map:
+      value: physicaldescription
     settings:
       language: null
     unique: {  }
