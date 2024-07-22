@@ -439,3 +439,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .govuk-table-spacing {
   margin-top: 15px;
 }
+
+/* Added for facet design changes*/
+.facet-item {
+  list-style:none;
+}
