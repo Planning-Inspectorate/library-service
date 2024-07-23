@@ -58,23 +58,34 @@
 {% endif %}
 <header class="govuk-header " role="banner" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
-    {{ govuk_header }}
-    {% if page.navigation %}
-      <div class="hamburger icon" onclick="toggleMobileMenu();">
-        <i class="fa fa-bars"></i>
-      </div>
-      {{ page.navigation }}
-    {% endif %}
-    {% if search_box %}
-      {{ search_box }}
-    {% endif %}
+    {{ govuk_pins_header }}
+    <div class="govuk-header___content govuk-grid-column-three-quarters">      
+      <a href={{ path('<front>') }} rel="Organisation brand" title={{ 'PINS Library'|t }} class="govuk-header__link govuk-header__service-name">  
+         {{ 'PINS Library'|t }}
+      </a>
+      {% if page.navigation %}
+        <div class="hamburger icon" onclick="toggleMobileMenu();">
+          <i class="fa fa-bars"></i>
+        </div>
+      {% endif %}
+      {% if search_library_box %}
+          {{ search_library_box }}
+      {% endif %}
+      {% if page.navigation %}
+          {{ page.navigation }}
+      {% endif %}
+    </div>
   </div>
   <div id="mobile-menu"></div>
 </header>
+
 <div class="govuk-width-container">
-  {% if govuk_phase_banner %}
-    {{  govuk_phase_banner }}
-  {% endif %}
+{% if govuk_pins_phase_banner %}
+    
+    {{  govuk_pins_phase_banner }}
+ 
+{% endif %}
+
   {% if page.breadcrumb and show_breadcrumb %}
     {{ page.breadcrumb }}
   {% endif %}
