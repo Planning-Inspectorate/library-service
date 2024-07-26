@@ -445,10 +445,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   list-style:none;
 } */
 
-.mailto a:link {
-  color: #ffffff !important;
-  text-decoration: none;
-}
-.mailto a:visited ,.mailto a:active{
-  color: #ffffff !important;
+.box-link__bottom  a:link {
+  color: #fff;
 }
