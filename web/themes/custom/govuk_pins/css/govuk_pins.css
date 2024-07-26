@@ -447,4 +447,5 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 .mailto a:link,.mailto a:visited ,.mailto a:active{
   color: #ffffff !important;
+  text-decoration: none;
 }
