@@ -78,15 +78,47 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     case 'node_hard_copy_form':  
       $form['field_content_reference']['#access'] = false;
+      $form['#validate'][] = 'unique_title_node_form_validate';
     break;
  
     case 'views_form_manage_contents_manage_contents':  
     case 'views_exposed_form': 
       $form['#attached']['library'][] = 'pins/pins_js';
     break;
+
+    case 'node_kl_document_form':
+      case 'node_kl_document_edit_form':
+      case 'node_kl_compound_document_form':
+      case 'node_kl_compound_document_edit_form':
+      case 'node_hard_copy_edit_form':
+        $form['#validate'][] = 'unique_title_node_form_validate';
   }
 }
 
+/**
+ * Custom validation handler to ensure unique node titles.
+ */
+function unique_title_node_form_validate($form, FormStateInterface $form_state) {
+  $node_title = $form_state->getValue('title')[0]['value'];
+  $node_type = $form_state->getFormObject()->getEntity()->bundle();
+  $current_node_id = $form_state->getFormObject()->getEntity()->id();
+
+  // Query to check for existing nodes with the same title.
+  $query = \Drupal::entityQuery('node')
+    ->condition('title', $node_title)
+    ->condition('type', $node_type);
+
+  // Exclude the current node from the check if it's an edit operation.
+  if ($current_node_id) {
+    $query->condition('nid', $current_node_id, '<>');
+  }
+
+  $nids = $query->execute();
+
+  if (!empty($nids)) {
+    $form_state->setErrorByName('title', t('The title "%title" is already in use. Please choose a different title.', ['%title' => $node_title]));
+  }
+}
 
 /**
   *  
