@@ -158,7 +158,7 @@ aside .editorschoice-menu.govuk-list ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-small);
+  /* padding: var(--spacing-small);*/
   /* padding: var(--spacing-medium); */
   border-top-left-radius: var(--border-radius-alt);
   border-top-right-radius: var(--border-radius-alt);
