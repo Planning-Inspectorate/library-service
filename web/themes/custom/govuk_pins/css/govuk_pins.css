@@ -441,9 +441,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* Added for facet design changes*/
-/* .facet-item {
+.facet-item {
   list-style:none;
-} */
+}
 
 .box-link__bottom  a:link {
   color: #fff;
