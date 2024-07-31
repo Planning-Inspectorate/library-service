@@ -106,16 +106,18 @@ third_party_settings:
         - field_kl_classification
         - field_kl_authors
         - field_kl_reading_lists
-        - field_kl_series
         - field_weight
+        - field_kl_series
         - links
         - field_security_classification
         - field_other_date
         - field_long_text
-        - field_number_decimal
+        - field_physical_description
         - field_version_id
         - field_filemd5
         - field_search_exclude
+        - field_vernum
+        - field_kl_doc_file_size
   field_group:
     group_migration_report:
       children:
@@ -123,7 +125,7 @@ third_party_settings:
       label: 'Migration report'
       parent_name: ''
       region: hidden
-      weight: 29
+      weight: 60
       format_type: accordion
       format_settings:
         classes: ''
@@ -213,7 +215,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 35
+    weight: 34
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -325,7 +327,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 24
+    weight: 25
     region: ds_content
   field_kl_classification:
     type: cshs_flexible_hierarchy
@@ -365,7 +367,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 23
+    weight: 24
     region: ds_content
   field_kl_doc_compound_folder:
     type: entity_reference_label
@@ -483,8 +485,8 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 38
-    region: content
+    weight: 37
+    region: ds_content
   field_kl_doc_filename:
     type: string
     label: inline
@@ -961,7 +963,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 25
+    weight: 26
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -998,7 +1000,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 26
+    weight: 27
     region: ds_content
   field_kl_vercdate:
     type: datetime_default
@@ -1120,25 +1122,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 22
+    weight: 23
     region: ds_content
   field_long_text:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 32
-    region: ds_content
-  field_number_decimal:
-    type: number_decimal
-    label: above
-    settings:
-      thousand_separator: ''
-      decimal_separator: .
-      scale: 2
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 33
+    weight: 31
     region: ds_content
   field_other_date:
     type: datetime_default
@@ -1155,8 +1146,8 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 39
-    region: content
+    weight: 32
+    region: ds_content
   field_search_exclude:
     type: boolean
     label: above
@@ -1165,7 +1156,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 36
+    weight: 35
     region: ds_content
   field_security_classification:
     type: entity_reference_label
@@ -1173,7 +1164,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 28
+    weight: 29
     region: ds_content
   field_vernum:
     type: number_integer
@@ -1182,15 +1173,15 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 37
-    region: content
+    weight: 36
+    region: ds_content
   field_version_id:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 34
+    weight: 33
     region: ds_content
   field_weight:
     type: default_weight
@@ -1230,7 +1221,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 27
+    weight: 28
     region: ds_content
 hidden:
   entity_print_view_epub: true
@@ -1242,6 +1233,7 @@ hidden:
   field_edition_number: true
   field_general_notes: true
   field_isbn: true
+  field_number_decimal: true
   field_volume: true
   langcode: true
   search_api_excerpt: true

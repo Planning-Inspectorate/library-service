@@ -94,7 +94,6 @@ third_party_settings:
         - field_kl_filecdate
         - field_kl_filemdate
         - field_filemd5
-        - field_physical_description
         - field_vernum
         - field_version_id
       label: 'Legacy  Data'
@@ -119,10 +118,10 @@ third_party_settings:
         - field_date
         - field_kl_series
         - field_volume
-        - field_number_decimal
         - field_kl_reading_lists
         - field_kl_classification
         - field_links
+        - field_physical_description
         - field_edition_number
         - field_general_notes
         - field_isbn
@@ -165,7 +164,7 @@ content:
     third_party_settings: {  }
   field_archived_note:
     type: string_textarea
-    weight: 37
+    weight: 36
     region: content
     settings:
       rows: 5
@@ -187,7 +186,7 @@ content:
     third_party_settings: {  }
   field_filemd5:
     type: string_textfield
-    weight: 52
+    weight: 53
     region: content
     settings:
       size: 60
@@ -218,7 +217,7 @@ content:
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 36
+    weight: 35
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -230,7 +229,7 @@ content:
     third_party_settings: {  }
   field_kl_classification:
     type: options_select
-    weight: 27
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -355,7 +354,7 @@ content:
     third_party_settings: {  }
   field_kl_reading_lists:
     type: options_select
-    weight: 26
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -387,7 +386,7 @@ content:
     third_party_settings: {  }
   field_links:
     type: link_default
-    weight: 28
+    weight: 27
     region: content
     settings:
       placeholder_url: ''
@@ -401,13 +400,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_number_decimal:
-    type: number
-    weight: 25
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_other_date:
     type: datetime_default
     weight: 32
@@ -416,7 +408,7 @@ content:
     third_party_settings: {  }
   field_physical_description:
     type: string_textfield
-    weight: 53
+    weight: 28
     region: content
     settings:
       size: 60
@@ -424,7 +416,7 @@ content:
     third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox
-    weight: 8
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -460,7 +452,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -473,14 +465,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
@@ -508,5 +500,6 @@ hidden:
   feeds_item: true
   field_content_reference: true
   field_kl_doc_compound_folder: true
+  field_number_decimal: true
   field_weight: true
   langcode: true

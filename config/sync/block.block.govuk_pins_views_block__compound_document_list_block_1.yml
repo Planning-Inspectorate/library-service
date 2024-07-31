@@ -5,7 +5,6 @@ dependencies:
   config:
     - views.view.compound_document_list
   module:
-    - block_class
     - collapsiblock
     - node
     - views

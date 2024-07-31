@@ -11,26 +11,12 @@ dependencies:
     - field.field.node.kl_document.field_vernum
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
 third_party_settings:
   feeds_log:
-    status: true
-    operations:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
-    items:
-      created: created
-      updated: updated
-      deleted: deleted
-      skipped: skipped
-      failed: failed
-    source: true
+    operations: {  }
+    items: {  }
   feeds_tamper:
     tampers:
       8313591b-eeec-41f4-a454-cba61d3e1787:

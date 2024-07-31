@@ -1,0 +1,10 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Ceisio
+          reset_button_label: Ailosod
+          exposed_sorts_label: 'Dosbarthu drwy'
+  block_1:
+    display_title: Bloc
