@@ -86,12 +86,12 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       $form['#attached']['library'][] = 'pins/pins_js';
     break;
 
-    case 'node_kl_document_form':
-      case 'node_kl_document_edit_form':
-      case 'node_kl_compound_document_form':
-      case 'node_kl_compound_document_edit_form':
-      case 'node_hard_copy_edit_form':
-        $form['#validate'][] = 'unique_title_node_form_validate';
+    // case 'node_kl_document_form':
+    //   case 'node_kl_document_edit_form':
+    //   case 'node_kl_compound_document_form':
+    //   case 'node_kl_compound_document_edit_form':
+    //   case 'node_hard_copy_edit_form':
+    //     $form['#validate'][] = 'unique_title_node_form_validate';
   }
 }
 
