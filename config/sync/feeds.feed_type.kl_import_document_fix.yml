@@ -1,0 +1,113 @@
+uuid: fe6b54c4-5c3f-40c5-a5d9-2cf8cdaceb4e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.kl_document.body
+    - field.field.node.kl_document.field_alternative_title
+    - field.field.node.kl_document.field_version_id
+    - node.type.kl_document
+  module:
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    operations: {  }
+    items: {  }
+  feeds_tamper:
+    tampers:
+      e1174155-7fd6-4f39-9250-896bc9340234:
+        uuid: e1174155-7fd6-4f39-9250-896bc9340234
+        plugin: html_entity_decode
+        source: notes
+        weight: 0
+        label: 'HTML entity decode'
+      e841f35c-eb74-46a7-b00d-49d9d919409e:
+        default_value: ''
+        only_if_empty: true
+        uuid: e841f35c-eb74-46a7-b00d-49d9d919409e
+        plugin: default_value
+        source: computed6
+        weight: 0
+        label: 'Set value or default value'
+      d4b49a65-3133-45ec-970b-cb411a3283ee:
+        uuid: d4b49a65-3133-45ec-970b-cb411a3283ee
+        plugin: html_entity_decode
+        source: computed6
+        weight: 1
+        label: 'HTML entity decode'
+label: 'KL Import Document Fix'
+id: kl_import_document_fix
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: csv
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: kl_document
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  alttitle:
+    value: AltTitle
+    label: AltTitle
+    machine_name: alttitle
+    type: csv
+  versionid:
+    value: VersionID
+    label: VersionID
+    machine_name: versionid
+    type: csv
+  notes:
+    value: Notes
+    label: Notes
+    machine_name: notes
+    type: csv
+  computed6:
+    value: Computed6
+    label: Computed6
+    machine_name: computed6
+    type: blank
+mappings:
+  -
+    target: field_alternative_title
+    map:
+      value: alttitle
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_version_id
+    map:
+      value: versionid
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: body
+    map:
+      value: notes
+      summary: computed6
+    settings:
+      language: null
+      format: plain_text

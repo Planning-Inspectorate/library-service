@@ -169,7 +169,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 30
+          items_per_page: 200
       exposed_form:
         type: basic
         options:

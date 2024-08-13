@@ -521,7 +521,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 24
+          items_per_page: 200
           total_pages: null
           id: 0
           tags:
@@ -886,20 +886,7 @@ display:
           contextual_filters_or: false
       relationships: {  }
       group_by: true
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: 'Total Rows: [view:total-rows]'
-            format: full_html
-          tokenize: false
+      header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
