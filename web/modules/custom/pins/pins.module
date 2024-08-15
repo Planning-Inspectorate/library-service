@@ -103,6 +103,7 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
   $node_type = $form_state->getFormObject()->getEntity()->bundle();
   $current_node_id = $form_state->getFormObject()->getEntity()->id();
   $current_vernum = $form_state->getValue('field_vernum')[0]['value'];
+  $current_doc_id = $form_state->getValue('field_kl_doc_id')[0]['value'];
 
   // Query to check for existing nodes with the same title and version.
   $query = \Drupal::entityQuery('node')
@@ -112,6 +113,9 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
   $or = $query->orConditionGroup();
   $or->condition('field_vernum', $current_vernum, '='); // Explicitly specify the operator
   $or->condition('field_vernum', NULL, 'IS NULL');
+  if ($current_doc_id) {
+      $or->condition('field_kl_doc_id', $current_doc_id, '<>'); 
+  }
   $query->condition($or);
 
   // Exclude the current node from the check if it's an edit operation.
