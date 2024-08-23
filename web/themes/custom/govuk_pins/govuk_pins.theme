@@ -456,8 +456,8 @@ function govuk_pins_preprocess(&$variables) {
 }
 
 
-function govuk_pins_preprocess_govuk_pins_cookie(&$variables) {
-  if (isset($_COOKIE['cookie_type'])) {
-    $variables['cookie'] = $_COOKIE['cookie_type'];
-  }
-}
+// function govuk_pins_preprocess_govuk_pins_cookie(&$variables) {
+//   if (isset($_COOKIE['cookie_type'])) {
+//     $variables['cookie'] = $_COOKIE['cookie_type'];
+//   }
+// }
