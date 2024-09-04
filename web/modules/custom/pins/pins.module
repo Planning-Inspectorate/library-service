@@ -92,8 +92,22 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       case 'node_kl_compound_document_edit_form':
       case 'node_hard_copy_edit_form':
         $form['#validate'][] = 'unique_title_node_form_validate';
+        setDateTimeElement($form, 'field_kl_archived_date');
+        setDateTimeElement($form, 'field_other_date');
+        setDateTimeElement($form, 'field_date');
   }
 }
+
+/**
+ * Custom method to hide the time element from form controls.
+ */
+function setDateTimeElement(&$form, $field_name) {
+  if (isset($form[$field_name]['widget'][0]['value'])) {
+    $form[$field_name]['widget'][0]['value']['#date_time_element'] = 'none';
+    $form[$field_name]['widget'][0]['value']['#date_time_format'] = '';
+  }
+}
+
 
 /**
  * Custom validation handler to ensure unique node titles.
