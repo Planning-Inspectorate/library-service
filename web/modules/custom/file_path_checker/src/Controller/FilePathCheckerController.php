@@ -58,13 +58,21 @@ class FilePathCheckerController extends ControllerBase {
         $altered_file_url = str_replace('\\', '/', basename($public_path));
         $symlink_path = '/mnt/library-documents/' . $altered_file_url;
         $cache_key = 'file_existence:' . $nid;
+    
+        // Debugging statements
+        \Drupal::logger('custom_module')->debug('Public path: @public_path', ['@public_path' => $public_path]);
+        \Drupal::logger('custom_module')->debug('Symlink path: @symlink_path', ['@symlink_path' => $symlink_path]);
+    
         if ($cached = \Drupal::cache()->get($cache_key)) {
           $file_exists = $cached->data;
         } else {
           $file_exists = file_exists($public_path) || (file_exists($symlink_path) && is_link($symlink_path) && file_exists(readlink($symlink_path)));
           \Drupal::cache()->set($cache_key, $file_exists);
         }
-
+    
+        // More debugging statements
+        \Drupal::logger('custom_module')->debug('File exists: @file_exists', ['@file_exists' => $file_exists ? 'true' : 'false']);
+    
         $context['results'][] = [
           'nid' => $nid,
           'file_uri' => $file_uri,
