@@ -23,7 +23,8 @@ class FilePathCheckerController extends ControllerBase {
     // Load node IDs
     $query = \Drupal::entityQuery('node')
       ->condition('type', $content_type)
-      ->exists($field_name);
+      ->exists($field_name)
+      ->range(0,100);
 
     $nids = $query->execute();
 
@@ -53,12 +54,14 @@ class FilePathCheckerController extends ControllerBase {
       $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
       if ($node && isset($node->{$field_name}) && !empty($node->{$field_name})) {
         $file_uri = $node->{$field_name}->entity->getFileUri();
+        $public_path = \Drupal::service('file_system')->realpath($file_uri);
+        $symlink_path = '/mnt/library-documents/' . basename($public_path);
         $cache_key = 'file_existence:' . $nid;
 
         if ($cached = \Drupal::cache()->get($cache_key)) {
           $file_exists = $cached->data;
         } else {
-          $file_exists = file_exists($file_uri);
+          $file_exists = file_exists($public_path) || file_exists($symlink_path);
           \Drupal::cache()->set($cache_key, $file_exists);
         }
 
@@ -69,7 +72,6 @@ class FilePathCheckerController extends ControllerBase {
         ];
       }
     }
-
     // Update progress
     $context['sandbox']['progress'] += count($nids_chunk);
     $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
