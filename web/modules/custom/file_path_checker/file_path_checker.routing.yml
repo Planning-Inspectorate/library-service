@@ -1,0 +1,15 @@
+file_path_checker.content:
+  path: '/file-path-checker'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FilePathCheckerController::content'
+    _title: 'File Path Checker'
+  requirements:
+    _permission: 'access content'
+
+file_path_checker.results:
+  path: '/file-path-checker/results'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FilePathCheckerController::resultsPage'
+    _title: 'File Path Checker Results'
+  requirements:
+    _permission: 'access content'

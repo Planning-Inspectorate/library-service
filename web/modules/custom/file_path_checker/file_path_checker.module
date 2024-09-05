@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * File Path Checker module used for extending site functionalities.
+ *
+*/
+
+function file_path_checker_page() {
+  // Get the content type and field name
+  $content_type = 'your_content_type';
+  $field_name = 'your_file_field';
+
+  // Load the node entity
+  $node = \Drupal::entityTypeManager()->getStorage('node')->load(1); // Replace 1 with the node ID
+
+  // Check if the field exists on the node
+  if (isset($node->{$field_name})) {
+    $file_uri = $node->{$field_name}[0]['uri']; // Assuming the field is a file field
+
+    // Check if the file path exists
+    if (file_exists($file_uri)) {
+      $message = 'File path exists: ' . $file_uri;
+    } else {
+      $message = 'File path does not exist: ' . $file_uri;
+    }
+  } else {
+    $message = 'Field does not exist on the node.';
+  }
+
+  return [
+    '#type' => 'markup',
+    '#markup' => $message,
+  ];
+}

@@ -1,0 +1,7 @@
+name: 'File Path Checker'
+type: module
+description: 'A custom module to check file paths in nodes.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - drupal:node
