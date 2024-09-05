@@ -23,7 +23,8 @@ class FilePathCheckerController extends ControllerBase {
     // Load node IDs
     $query = \Drupal::entityQuery('node')
       ->condition('type', $content_type)
-      ->exists($field_name);
+      ->exists($field_name)
+      ->range(0,400);
 
     $nids = $query->execute();
 
