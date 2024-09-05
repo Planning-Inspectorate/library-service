@@ -24,7 +24,7 @@ class FilePathCheckerController extends ControllerBase {
     $query = \Drupal::entityQuery('node')
       ->condition('type', $content_type)
       ->exists($field_name)
-      ->range(0,100);
+      ->range(0,24);
 
     $nids = $query->execute();
 
@@ -68,10 +68,13 @@ class FilePathCheckerController extends ControllerBase {
         $context['results'][] = [
           'nid' => $nid,
           'file_uri' => $file_uri,
+          'public_path' => $public_path,
+          'symlink_path' => $symlink_path,
           'exists' => $file_exists,
         ];
       }
     }
+
     // Update progress
     $context['sandbox']['progress'] += count($nids_chunk);
     $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
@@ -99,6 +102,8 @@ class FilePathCheckerController extends ControllerBase {
       $this->t('SL No.'),
       $this->t('Node ID'),
       $this->t('File URI'),
+      $this->t('Public Path'),
+      $this->t('symlink Path'),
       $this->t('Exists'),
     ];
   
@@ -111,6 +116,8 @@ class FilePathCheckerController extends ControllerBase {
             $index + 1, // Serial number
             $result['nid'],
             $result['file_uri'],
+            $result['public_path'],
+            $result['symlink_path'],
             $result['exists'] ? $this->t('Yes') : $this->t('No'),
           ],
         ];
