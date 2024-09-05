@@ -66,11 +66,21 @@ class FilePathCheckerController extends ControllerBase {
         if ($cached = \Drupal::cache()->get($cache_key)) {
           $file_exists = $cached->data;
         } else {
-          $file_exists = file_exists($public_path) || (file_exists($symlink_path) && is_link($symlink_path) && file_exists(readlink($symlink_path)));
+          $public_path_exists = file_exists($public_path);
+          $symlink_exists = file_exists($symlink_path);
+          $is_symlink = is_link($symlink_path);
+          $symlink_target_exists = $is_symlink ? file_exists(readlink($symlink_path)) : false;
+    
+          // More debugging statements
+          \Drupal::logger('custom_module')->debug('Public path exists: @public_path_exists', ['@public_path_exists' => $public_path_exists ? 'true' : 'false']);
+          \Drupal::logger('custom_module')->debug('Symlink exists: @symlink_exists', ['@symlink_exists' => $symlink_exists ? 'true' : 'false']);
+          \Drupal::logger('custom_module')->debug('Is symlink: @is_symlink', ['@is_symlink' => $is_symlink ? 'true' : 'false']);
+          \Drupal::logger('custom_module')->debug('Symlink target exists: @symlink_target_exists', ['@symlink_target_exists' => $symlink_target_exists ? 'true' : 'false']);
+    
+          $file_exists = $public_path_exists || ($symlink_exists && $is_symlink && $symlink_target_exists);
           \Drupal::cache()->set($cache_key, $file_exists);
         }
     
-        // More debugging statements
         \Drupal::logger('custom_module')->debug('File exists: @file_exists', ['@file_exists' => $file_exists ? 'true' : 'false']);
     
         $context['results'][] = [
@@ -82,6 +92,7 @@ class FilePathCheckerController extends ControllerBase {
         ];
       }
     }
+    
 
     // Update progress
     $context['sandbox']['progress'] += count($nids_chunk);
