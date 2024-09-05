@@ -55,9 +55,9 @@ class FilePathCheckerController extends ControllerBase {
       if ($node && isset($node->{$field_name}) && !empty($node->{$field_name})) {
         $file_uri = $node->{$field_name}->entity->getFileUri();
         $public_path = \Drupal::service('file_system')->realpath($file_uri);
-        $symlink_path = '/mnt/library-documents/' . basename($public_path);
+        $altered_file_url = str_replace('\\', '/', basename($public_path));
+        $symlink_path = '/mnt/library-documents/' . $altered_file_url;
         $cache_key = 'file_existence:' . $nid;
-
         if ($cached = \Drupal::cache()->get($cache_key)) {
           $file_exists = $cached->data;
         } else {
