@@ -61,7 +61,7 @@ class FilePathCheckerController extends ControllerBase {
         if ($cached = \Drupal::cache()->get($cache_key)) {
           $file_exists = $cached->data;
         } else {
-          $file_exists = file_exists($public_path) || file_exists($symlink_path);
+          $file_exists = file_exists($public_path) || (file_exists($symlink_path) && is_link($symlink_path) && file_exists(readlink($symlink_path)));
           \Drupal::cache()->set($cache_key, $file_exists);
         }
 
