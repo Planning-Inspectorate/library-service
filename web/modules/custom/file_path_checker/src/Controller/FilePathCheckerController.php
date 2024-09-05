@@ -110,7 +110,7 @@ class FilePathCheckerController extends ControllerBase {
     $count = 0;
     foreach ($results as $index => $result) {
       if (!$result['exists']) {
-        $count++
+        $count++;
         $rows[] = [
           'data' => [
             $count, // Serial number
