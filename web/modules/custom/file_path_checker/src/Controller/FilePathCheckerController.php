@@ -106,11 +106,13 @@ class FilePathCheckerController extends ControllerBase {
   
     // Define the rows for the table
     $rows = [];
+    $count = 0;
     foreach ($results as $index => $result) {
       if (!$result['exists']) {
+        $count++
         $rows[] = [
           'data' => [
-            $index + 1, // Serial number
+            $count, // Serial number
             $result['nid'],
             $result['file_uri'],
             $result['public_path'],
