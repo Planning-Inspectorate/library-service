@@ -5,6 +5,9 @@ namespace Drupal\file_path_checker\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Batch\BatchBuilder;
 
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
 class FilePathCheckerController extends ControllerBase {
 
   public function content() {
@@ -100,23 +103,25 @@ class FilePathCheckerController extends ControllerBase {
       $this->t('SL No.'),
       $this->t('Node ID'),
       $this->t('File URI'),
-      $this->t('Public Path'),
       $this->t('Exists'),
+      $this->t('View')
     ];
-  
+
     // Define the rows for the table
     $rows = [];
     $count = 0;
     foreach ($results as $index => $result) {
       if (!$result['exists']) {
         $count++;
+        $url = Url::fromRoute('entity.node.edit_form', ['node' => $result['nid']]);
+        $link = Link::fromTextAndUrl('edit', $url)->toRenderable();
         $rows[] = [
           'data' => [
             $count, // Serial number
             $result['nid'],
             $result['file_uri'],
-            $result['public_path'],
             $result['exists'] ? $this->t('Yes') : $this->t('No'),
+            \Drupal::service('renderer')->render($link), // Use the renderer service
           ],
         ];
       }
