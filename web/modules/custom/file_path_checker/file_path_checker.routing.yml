@@ -13,3 +13,21 @@ file_path_checker.results:
     _title: 'File Path Checker Results'
   requirements:
     _permission: 'access content'
+
+
+
+file_path_checker.duplicates:
+  path: '/duplicates'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FindDuplicatesController::duplicates'
+    _title: 'Check Duplicate Results'
+  requirements:
+    _permission: 'access content'
+  
+file_path_checker.dresults:
+  path: '/duplicates/results'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FindDuplicatesController::resultsPage'
+    _title: 'File Path Checker Results'
+  requirements:
+    _permission: 'access content'
