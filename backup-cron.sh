@@ -11,9 +11,9 @@ sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql /ho
 tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
 
 # Remove created db backup from mysql container and db backup folder
-sudo docker exec -it -u 0 pins_mariadb bash -c "rm /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql" 
+#sudo docker exec -it -u 0 pins_mariadb bash -c "rm /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql" 
 
 # Remove created db backup from db backup folder.
-rm -f /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
+#rm -f /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
 
 # End of script
