@@ -50,5 +50,3 @@ sleep 20
 # Remove the backup files from both the container and the host
 execute_command pins_mariadb "rm $backup_file"
 rm -f "$backup_file"
-
-# End of script
