@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Function to execute a command within a Docker container and handle potential errors
