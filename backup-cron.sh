@@ -11,7 +11,7 @@ sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql /ho
 tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
 
 # Sleep for 20 seconds
-sleep 20
+sleep 60
 
 # Remove created db backup from mysql container and db backup folder
 sudo docker exec -it -u 0 pins_mariadb bash -c "rm /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql" 
@@ -35,18 +35,18 @@ function execute_command {
 }
 
 # Clear watchdog messages and rebuild cache in the Drupal container
-execute_command pins_php "drush watchdog:delete all --yes && drush cr"
+#execute_command pins_php "drush watchdog:delete all --yes && drush cr"
 
 # Dump the MySQL database and save the backup to the host
-backup_file="/home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql"
-execute_command pins_mariadb "mysqldump -u root -ppins_9001 kl_drupal > $backup_file"
+#backup_file="/home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql"
+#execute_command pins_mariadb "mysqldump -u root -ppins_9001 kl_drupal > $backup_file"
 
 # Compress the backup file
-tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz "$backup_file"
+#tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz "$backup_file"
 
 # Sleep for 20 seconds
-sleep 20
+#sleep 20
 
 # Remove the backup files from both the container and the host
-execute_command pins_mariadb "rm $backup_file"
-rm -f "$backup_file"
+#execute_command pins_mariadb "rm $backup_file"
+#rm -f "$backup_file"
