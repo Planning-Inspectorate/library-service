@@ -8,10 +8,10 @@ sudo docker exec -it -u 0 pins_mariadb bash -c "mysqldump -u root -ppins_9001 kl
 sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
 
 # Compress the SQL files
-tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
+sudo tar -zcvf /home/KnowledgeDevAdmin/cron-db-backups/backup_pins-$(date +%Y-%m-%d).tar.gz /home/KnowledgeDevAdmin/db-backup/backup_pins-$(date +%Y-%m-%d).sql
 
-# Sleep for 120 seconds
-sleep 120
+# Sleep for 80 seconds
+sleep 80
 
 # Remove created db backup from mysql container and db backup folder
 sudo docker exec -it -u 0 pins_mariadb bash -c "rm /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql" 
