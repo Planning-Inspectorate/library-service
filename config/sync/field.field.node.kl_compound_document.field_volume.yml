@@ -1,0 +1,19 @@
+uuid: 02e1cb81-2ee1-4016-b516-22fb90145b93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volume
+    - node.type.kl_compound_document
+id: node.kl_compound_document.field_volume
+field_name: field_volume
+entity_type: node
+bundle: kl_compound_document
+label: Volume
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

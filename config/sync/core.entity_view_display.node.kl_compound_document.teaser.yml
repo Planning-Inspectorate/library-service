@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
     - field.field.node.kl_compound_document.field_security_classification
+    - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -74,6 +75,7 @@ hidden:
   field_kl_reading_lists: true
   field_kl_series: true
   field_security_classification: true
+  field_volume: true
   field_weight: true
   langcode: true
   search_api_excerpt: true
