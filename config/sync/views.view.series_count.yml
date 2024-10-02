@@ -1,14 +1,14 @@
-uuid: 452f0c20-7c2b-4a51-860e-cc5c916f5e0e
+uuid: 4e3fc916-54d8-4dc0-9c15-25bcf5f9a51e
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.kl_classification
+    - taxonomy.vocabulary.kl_series
   module:
     - taxonomy
     - user
-id: kl_classification_terms
-label: 'KL Classification Terms'
+id: series_count
+label: 'Series Count'
 module: views
 description: ''
 tag: ''
@@ -21,6 +21,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: 'Series Count'
       fields:
         name:
           id: name
@@ -32,7 +33,7 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: term_name
-          label: ''
+          label: Name
           exclude: false
           alter:
             alter_text: false
@@ -74,7 +75,7 @@ display:
         type: mini
         options:
           offset: 0
-          items_per_page: 10
+          items_per_page: 200
           total_pages: null
           id: 0
           tags:
@@ -106,37 +107,7 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts:
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: taxonomy_term
-          entity_field: name
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        weight:
-          id: weight
-          table: taxonomy_term_field_data
-          field: weight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: taxonomy_term
-          entity_field: weight
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
+      sorts: {  }
       arguments: {  }
       filters:
         status:
@@ -154,58 +125,15 @@ display:
           id: vid
           table: taxonomy_term_field_data
           field: vid
-          relationship: none
-          group_type: group
-          admin_label: ''
           entity_type: taxonomy_term
           entity_field: vid
           plugin_id: bundle
-          operator: in
           value:
-            kl_classification: kl_classification
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            kl_series: kl_series
       style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          uses_fields: false
+        type: table
       row:
         type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
       query:
         type: views_query
         options:
@@ -216,7 +144,20 @@ display:
           query_tags: {  }
           contextual_filters_or: false
       relationships: {  }
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '[view:total-rows] '
+            format: full_html
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -227,26 +168,19 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-  entity_reference_1:
-    id: entity_reference_1
-    display_title: 'Entity Reference'
-    display_plugin: entity_reference
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      pager:
-        type: none
-        options:
-          offset: 0
-      style:
-        type: entity_reference
-        options:
-          search_fields:
-            name: name
       display_extenders: {  }
+      path: series-count
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url.query_args
         - user.permissions
       tags: {  }

@@ -25,7 +25,6 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
     - field.field.node.kl_compound_document.field_security_classification
-    - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -638,42 +637,6 @@ content:
     third_party_settings: {  }
     weight: 9
     region: ds_content
-  field_volume:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: volume-wrapperfield-label-inline
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: true
-            fis-el: span
-            fis-cl: 'volume field-value'
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 4
-    region: content
   field_weight:
     type: default_weight
     label: inline

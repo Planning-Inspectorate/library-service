@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.storage.node.field_volume
-    - node.type.hard_copy
     - node.type.kl_compound_document
     - node.type.kl_document
   module:
@@ -74,81 +72,16 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_volume:
-          id: field_volume
-          table: node__field_volume
-          field: field_volume
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Volume
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
       pager:
-        type: full
+        type: mini
         options:
           offset: 0
-          items_per_page: 100
+          items_per_page: 10
           total_pages: null
           id: 0
           tags:
             next: ››
             previous: ‹‹
-            first: '« First'
-            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -157,7 +90,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -220,29 +152,23 @@ display:
           value:
             kl_compound_document: kl_compound_document
             kl_document: kl_document
-            hard_copy: hard_copy
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: type_op
-            label: 'Content type'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: type_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: type
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              pads: '0'
-              library_admin: '0'
-            reduce: true
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -352,12 +278,10 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_volume'
+      tags: {  }
   page_1:
     id: page_1
     display_title: Page
@@ -371,9 +295,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_volume'
+      tags: {  }

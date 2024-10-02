@@ -874,19 +874,10 @@ content:
     weight: 13
     region: ds_content
   field_volume:
-    type: barcode
+    type: string
     label: above
     settings:
-      type: QRCODE
-      color: '#000000'
-      height: 100
-      width: 100
-      padding_top: 0
-      padding_right: 0
-      padding_bottom: 0
-      padding_left: 0
-      show_value: false
-      format: SVG
+      link_to_entity: false
     third_party_settings:
       ds:
         ds_limit: ''
