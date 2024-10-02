@@ -1,0 +1,25 @@
+uuid: a7054d04-4f7a-4907-9c2c-70575aeac5f6
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:d04ed079-ca6b-4606-a2a0-cb5d5e068a70'
+  module:
+    - block_content
+  theme:
+    - govuk_pins
+id: govuk_pins_externalsources
+theme: govuk_pins
+region: sidebar_first
+weight: -8
+provider: null
+plugin: 'block_content:d04ed079-ca6b-4606-a2a0-cb5d5e068a70'
+settings:
+  id: 'block_content:d04ed079-ca6b-4606-a2a0-cb5d5e068a70'
+  label: 'External sources'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

@@ -25,7 +25,6 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
     - field.field.node.kl_compound_document.field_security_classification
-    - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
     - node.type.kl_compound_document
   module:
@@ -260,14 +259,6 @@ content:
     weight: 30
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_volume:
-    type: string_textfield
-    weight: 9
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

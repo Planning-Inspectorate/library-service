@@ -1,0 +1,27 @@
+uuid: bd777238-10dd-48ba-bbe6-426e414575d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - govuk
+_core:
+  default_config_hash: gA7fQZXY62qkcquMe3jilgAq8Br2H555sB-5ELd8kiU
+id: mainnavigation
+theme: govuk
+region: navigation
+weight: -3
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

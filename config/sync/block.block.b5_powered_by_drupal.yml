@@ -1,0 +1,22 @@
+uuid: cc6b5b5b-4faf-4038-ae0f-9bc5fe514d24
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - b5
+_core:
+  default_config_hash: ONKC1Kf0vg4OWPqgVFl81z5O_2MHQlZQWg1q2M8JCSE
+id: b5_powered_by_drupal
+theme: b5
+region: footer
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

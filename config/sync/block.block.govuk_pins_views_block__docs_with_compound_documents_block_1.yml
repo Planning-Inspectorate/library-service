@@ -1,0 +1,37 @@
+uuid: 8885ea8a-0dd2-4104-a062-5bef50218f8b
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.docs_with_compound_documents
+  module:
+    - collapsiblock
+    - node
+    - views
+  theme:
+    - govuk_pins
+third_party_settings:
+  collapsiblock:
+    collapse_action: 0
+id: govuk_pins_views_block__docs_with_compound_documents_block_1
+theme: govuk_pins
+region: content
+weight: -11
+provider: null
+plugin: 'views_block:docs_with_compound_documents-block_1'
+settings:
+  id: 'views_block:docs_with_compound_documents-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      kl_compound_document: kl_compound_document

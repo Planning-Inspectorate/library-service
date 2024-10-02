@@ -1,0 +1,40 @@
+uuid: 99b06944-cc0d-4308-ae9a-0ea961cc0a96
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.editor-s-choice
+  module:
+    - block_class
+    - menu_block
+    - system
+  theme:
+    - govuk_pins
+third_party_settings:
+  block_class:
+    classes: 'govuk-list govuk-list--spaced'
+id: govuk_pins_editorschoice
+theme: govuk_pins
+region: content
+weight: -20
+provider: null
+plugin: 'menu_block:editor-s-choice'
+settings:
+  id: 'menu_block:editor-s-choice'
+  label: "Editor's choice"
+  label_display: '0'
+  provider: menu_block
+  follow: false
+  follow_parent: child
+  label_link: false
+  label_type: block
+  level: 1
+  depth: 1
+  expand_all_items: true
+  parent: 'editor-s-choice:'
+  suggestion: editor_choice
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/disabled\r\n/editors-choice"
