@@ -8,10 +8,8 @@ dependencies:
     - field.storage.node.field_date
     - field.storage.node.field_kl_authors
     - field.storage.node.field_kl_doc_file
-    - node.type.hard_copy
     - node.type.kl_compound_document
     - node.type.kl_document
-    - node.type.pdf
   module:
     - datetime
     - file
@@ -227,7 +225,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if type  ==  'Document' %}\r\n  <a href={{ view_node }} target=\"_blank\"><div class=\"govuk-icon govuk-icon-open\"></div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   <div class=\"govuk-icon govuk-icon-compound-folder\"></div>\r\n{% endif %}"
+            text: "{% if type  ==  'Document' %}\r\n  <a href={{ view_node }} target=\"_blank\"><div class=\"govuk-icon govuk-icon-open\"></div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   <a href={{ view_node }} target=\"_blank\"><div class=\"govuk-icon govuk-icon-compound-folder\"></div></a>\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -278,7 +276,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '  <a href={{ field_kl_doc_file }} target="_blank">{{ title }} </div></a>'
+            text: "\r\n\r\n{% if type  ==  'Document' %}\r\n   <a href={{ field_kl_doc_file }} target=\"_blank\">{{ title }} </div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   {{ title }}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -523,7 +521,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 200
+          items_per_page: 24
           total_pages: 0
           id: 0
           tags:
@@ -797,48 +795,6 @@ display:
     display_options:
       enabled: true
       filters:
-        langcode:
-          id: langcode
-          table: node_field_data
-          field: langcode
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: langcode
-          plugin_id: language
-          operator: in
-          value:
-            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         status:
           id: status
           table: taxonomy_index
@@ -891,8 +847,6 @@ display:
           value:
             kl_compound_document: kl_compound_document
             kl_document: kl_document
-            hard_copy: hard_copy
-            pdf: pdf
           group: 1
           exposed: false
           expose:
@@ -935,7 +889,51 @@ display:
             min: ''
             max: ''
             value: ''
-          group: 1
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_documents_target_id:
+          id: field_documents_target_id
+          table: node__field_documents
+          field: field_documents_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -970,6 +968,7 @@ display:
         operator: AND
         groups:
           1: AND
+          2: OR
       style:
         type: table
         options:
