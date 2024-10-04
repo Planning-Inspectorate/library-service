@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.kl_document.feeds_item
     - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_archived_note
+    - field.field.node.kl_document.field_best_bet
     - field.field.node.kl_document.field_content_reference
     - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
@@ -80,6 +81,7 @@ third_party_settings:
     regions:
       ds_content:
         - field_alternative_title
+        - field_best_bet
         - body
         - field_kl_doc_file
         - field_kl_doc_filename
@@ -105,8 +107,8 @@ third_party_settings:
         - field_links
         - field_kl_classification
         - field_kl_authors
-        - field_kl_reading_lists
         - field_weight
+        - field_kl_reading_lists
         - field_kl_series
         - links
         - field_security_classification
@@ -125,7 +127,7 @@ third_party_settings:
       label: 'Migration report'
       parent_name: ''
       region: hidden
-      weight: 60
+      weight: 61
       format_type: accordion
       format_settings:
         classes: ''
@@ -161,7 +163,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 1
+    weight: 2
     region: ds_content
   field_alternative_title:
     type: string
@@ -199,6 +201,14 @@ content:
             suffix: ''
     weight: 0
     region: ds_content
+  field_best_bet:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: ds_content
   field_date:
     type: datetime_time_ago
     label: above
@@ -207,7 +217,7 @@ content:
       past_format: '@interval ago'
       granularity: 2
     third_party_settings: {  }
-    weight: 14
+    weight: 15
     region: ds_content
   field_filemd5:
     type: string
@@ -215,7 +225,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 34
+    weight: 35
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -253,7 +263,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 19
+    weight: 20
     region: ds_content
   field_kl_archived_date:
     type: datetime_default
@@ -290,7 +300,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 20
+    weight: 21
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
@@ -327,7 +337,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 25
+    weight: 26
     region: ds_content
   field_kl_classification:
     type: cshs_flexible_hierarchy
@@ -367,7 +377,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 24
+    weight: 25
     region: ds_content
   field_kl_doc_compound_folder:
     type: entity_reference_label
@@ -404,7 +414,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 22
+    weight: 23
     region: ds_content
   field_kl_doc_file:
     type: file_default
@@ -440,7 +450,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 2
+    weight: 3
     region: ds_content
   field_kl_doc_file_path:
     type: string
@@ -476,7 +486,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 7
     region: ds_content
   field_kl_doc_file_size:
     type: number_integer
@@ -485,7 +495,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 37
+    weight: 38
     region: ds_content
   field_kl_doc_filename:
     type: string
@@ -521,7 +531,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: ds_content
   field_kl_doc_folder:
     type: cshs_full_hierarchy
@@ -560,7 +570,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 21
+    weight: 22
     region: ds_content
   field_kl_doc_id:
     type: string
@@ -596,7 +606,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 8
     region: ds_content
   field_kl_doc_mime_type:
     type: string
@@ -632,7 +642,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 6
     region: ds_content
   field_kl_doc_origindataid:
     type: string
@@ -668,7 +678,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
+    weight: 12
     region: ds_content
   field_kl_doc_parent_subtype:
     type: string
@@ -704,7 +714,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
+    weight: 11
     region: ds_content
   field_kl_doc_parentid:
     type: string
@@ -740,7 +750,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 10
     region: ds_content
   field_kl_doc_unique_id:
     type: string
@@ -776,7 +786,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 9
     region: ds_content
   field_kl_doc_version:
     type: string
@@ -812,7 +822,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 13
     region: ds_content
   field_kl_filecdate:
     type: datetime_default
@@ -849,7 +859,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 16
+    weight: 17
     region: ds_content
   field_kl_filemdate:
     type: datetime_default
@@ -886,7 +896,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 18
+    weight: 19
     region: ds_content
   field_kl_filetype:
     type: string
@@ -922,7 +932,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: ds_content
   field_kl_reading_lists:
     type: cshs_group_by_root
@@ -963,7 +973,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 26
+    weight: 27
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -1000,7 +1010,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 27
+    weight: 28
     region: ds_content
   field_kl_vercdate:
     type: datetime_default
@@ -1037,7 +1047,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 13
+    weight: 14
     region: ds_content
   field_kl_vermdate:
     type: datetime_default
@@ -1074,7 +1084,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 15
+    weight: 16
     region: ds_content
   field_kl_vernum:
     type: string
@@ -1110,7 +1120,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 17
+    weight: 18
     region: ds_content
   field_links:
     type: link
@@ -1122,14 +1132,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 23
+    weight: 24
     region: ds_content
   field_long_text:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 31
+    weight: 32
     region: ds_content
   field_other_date:
     type: datetime_default
@@ -1138,7 +1148,7 @@ content:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 30
+    weight: 31
     region: ds_content
   field_physical_description:
     type: string
@@ -1146,7 +1156,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 32
+    weight: 33
     region: ds_content
   field_search_exclude:
     type: boolean
@@ -1156,7 +1166,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 35
+    weight: 36
     region: ds_content
   field_security_classification:
     type: entity_reference_label
@@ -1164,7 +1174,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 29
+    weight: 30
     region: ds_content
   field_vernum:
     type: number_integer
@@ -1173,7 +1183,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 36
+    weight: 37
     region: ds_content
   field_version_id:
     type: string
@@ -1181,7 +1191,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 33
+    weight: 34
     region: ds_content
   field_weight:
     type: default_weight
@@ -1221,7 +1231,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 28
+    weight: 29
     region: ds_content
 hidden:
   entity_print_view_epub: true

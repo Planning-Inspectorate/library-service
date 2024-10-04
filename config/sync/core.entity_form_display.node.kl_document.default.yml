@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.kl_document.feeds_item
     - field.field.node.kl_document.field_alternative_title
     - field.field.node.kl_document.field_archived_note
+    - field.field.node.kl_document.field_best_bet
     - field.field.node.kl_document.field_content_reference
     - field.field.node.kl_document.field_date
     - field.field.node.kl_document.field_edition_number
@@ -114,6 +115,7 @@ third_party_settings:
         - field_kl_doc_file
         - title
         - field_alternative_title
+        - field_best_bet
         - field_kl_authors
         - field_date
         - field_kl_series
@@ -164,21 +166,29 @@ content:
     third_party_settings: {  }
   field_archived_note:
     type: string_textarea
-    weight: 36
+    weight: 37
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_best_bet:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_date:
     type: datetime_default
-    weight: 22
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   field_edition_number:
     type: string_textfield
-    weight: 29
+    weight: 30
     region: content
     settings:
       size: 60
@@ -194,7 +204,7 @@ content:
     third_party_settings: {  }
   field_general_notes:
     type: string_textarea
-    weight: 30
+    weight: 31
     region: content
     settings:
       rows: 5
@@ -202,7 +212,7 @@ content:
     third_party_settings: {  }
   field_isbn:
     type: string_textfield
-    weight: 31
+    weight: 32
     region: content
     settings:
       size: 60
@@ -210,26 +220,26 @@ content:
     third_party_settings: {  }
   field_kl_archived:
     type: boolean_checkbox
-    weight: 34
+    weight: 35
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 35
+    weight: 36
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_authors:
     type: options_select
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_classification:
     type: options_select
-    weight: 26
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -242,7 +252,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 39
+    weight: 40
     region: content
     settings:
       size: 60
@@ -250,14 +260,14 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_size:
     type: number
-    weight: 40
+    weight: 41
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 38
+    weight: 39
     region: content
     settings:
       size: 60
@@ -286,7 +296,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 41
+    weight: 42
     region: content
     settings:
       size: 60
@@ -294,7 +304,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 46
+    weight: 47
     region: content
     settings:
       size: 60
@@ -302,7 +312,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 45
+    weight: 46
     region: content
     settings:
       size: 60
@@ -310,7 +320,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 44
+    weight: 45
     region: content
     settings:
       size: 60
@@ -318,7 +328,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 37
+    weight: 38
     region: content
     settings:
       size: 60
@@ -326,7 +336,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 42
+    weight: 43
     region: content
     settings:
       size: 60
@@ -334,19 +344,19 @@ content:
     third_party_settings: {  }
   field_kl_filecdate:
     type: datetime_default
-    weight: 50
+    weight: 51
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filemdate:
     type: datetime_default
-    weight: 51
+    weight: 52
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filetype:
     type: string_textfield
-    weight: 47
+    weight: 48
     region: content
     settings:
       size: 60
@@ -354,31 +364,31 @@ content:
     third_party_settings: {  }
   field_kl_reading_lists:
     type: options_select
-    weight: 25
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_series:
     type: options_select
-    weight: 23
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
-    weight: 48
+    weight: 49
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vermdate:
     type: datetime_default
-    weight: 49
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vernum:
     type: string_textfield
-    weight: 43
+    weight: 44
     region: content
     settings:
       size: 60
@@ -386,7 +396,7 @@ content:
     third_party_settings: {  }
   field_links:
     type: link_default
-    weight: 27
+    weight: 28
     region: content
     settings:
       placeholder_url: ''
@@ -394,7 +404,7 @@ content:
     third_party_settings: {  }
   field_long_text:
     type: text_textarea
-    weight: 33
+    weight: 34
     region: content
     settings:
       rows: 5
@@ -402,13 +412,13 @@ content:
     third_party_settings: {  }
   field_other_date:
     type: datetime_default
-    weight: 32
+    weight: 33
     region: content
     settings: {  }
     third_party_settings: {  }
   field_physical_description:
     type: string_textfield
-    weight: 28
+    weight: 29
     region: content
     settings:
       size: 60
@@ -416,7 +426,7 @@ content:
     third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox
-    weight: 7
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -444,7 +454,7 @@ content:
     third_party_settings: {  }
   field_volume:
     type: string_textfield
-    weight: 24
+    weight: 25
     region: content
     settings:
       size: 60
@@ -452,7 +462,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -465,14 +475,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
