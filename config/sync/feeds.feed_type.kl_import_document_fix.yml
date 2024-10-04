@@ -14,19 +14,12 @@ dependencies:
     - field.field.node.kl_document.field_volume
     - node.type.kl_document
   module:
-    - feeds_log
     - feeds_tamper
     - node
 third_party_settings:
   feeds_log:
-    status: true
-    operations:
-      created: created
-      skipped: skipped
-      failed: failed
-      cleaned: cleaned
+    operations: {  }
     items: {  }
-    source: true
   feeds_tamper:
     tampers:
       e1174155-7fd6-4f39-9250-896bc9340234:
@@ -200,6 +193,8 @@ processor_configuration:
   update_existing: 2
   update_non_existent: _keep
   skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
   authorize: true
   revision: false
   expire: -1

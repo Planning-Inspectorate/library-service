@@ -21,7 +21,6 @@ dependencies:
     - node.type.page
     - node.type.pdf
     - node.type.webform
-    - taxonomy.vocabulary.authors
     - taxonomy.vocabulary.kl_authors
     - taxonomy.vocabulary.kl_classification
     - taxonomy.vocabulary.kl_folders
@@ -29,8 +28,6 @@ dependencies:
     - taxonomy.vocabulary.kl_reading_lists
     - taxonomy.vocabulary.kl_series
     - taxonomy.vocabulary.kl_topics
-    - taxonomy.vocabulary.locations
-    - taxonomy.vocabulary.reading_lists
   module:
     - file
     - filter
@@ -42,7 +39,6 @@ dependencies:
     - shortcut
     - system
     - taxonomy
-    - taxonomy_manager
     - toolbar
     - views_bulk_edit
     - views_send
@@ -57,7 +53,6 @@ permissions:
   - 'access help pages'
   - 'access media overview'
   - 'access shortcuts'
-  - 'access taxonomy manager list'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
@@ -89,19 +84,16 @@ permissions:
   - 'create terms in kl_series'
   - 'create terms in kl_topics'
   - 'delete all revisions'
-  - 'delete any article content'
   - 'delete any document media'
   - 'delete any hard_copy content'
   - 'delete any hard_copy_loan content'
   - 'delete any image media'
-  - 'delete any kl_classification_shortcut content'
   - 'delete any kl_compound_document content'
   - 'delete any kl_document content'
   - 'delete any kl_hardcopy content'
   - 'delete any kl_shortcut content'
   - 'delete any kl_url content'
   - 'delete any kl_virtual_folder content'
-  - 'delete any page content'
   - 'delete any pdf content'
   - 'delete any pdf media'
   - 'delete article revisions'
@@ -120,16 +112,6 @@ permissions:
   - 'delete own pdf media'
   - 'delete page revisions'
   - 'delete pdf revisions'
-  - 'delete terms in authors'
-  - 'delete terms in kl_authors'
-  - 'delete terms in kl_classification'
-  - 'delete terms in kl_folders'
-  - 'delete terms in kl_publications'
-  - 'delete terms in kl_reading_lists'
-  - 'delete terms in kl_series'
-  - 'delete terms in kl_topics'
-  - 'delete terms in locations'
-  - 'delete terms in reading_lists'
   - 'edit any article content'
   - 'edit any document media'
   - 'edit any hard_copy content'

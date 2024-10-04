@@ -44,7 +44,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: hidden
-      weight: 34
+      weight: 33
       format_type: fieldset
       format_settings:
         classes: ''
@@ -55,8 +55,8 @@ third_party_settings:
     group_legacy_migration_data:
       children:
         - field_kl_doc_origindataid
-        - field_kl_doc_parentid
         - field_kl_doc_parent_subtype
+        - field_kl_doc_parentid
         - field_kl_doc_unique_id
         - field_kl_doc_version
       label: 'Legacy Migration Data'
@@ -112,7 +112,6 @@ third_party_settings:
         - field_kl_archived
         - field_kl_archived_date
         - field_security_classification
-        - field_volume
 id: node.kl_compound_document.full
 targetEntityType: node
 bundle: kl_compound_document
@@ -526,7 +525,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
+    weight: 4
     region: ds_content
 hidden:
   entity_print_view_epub: true

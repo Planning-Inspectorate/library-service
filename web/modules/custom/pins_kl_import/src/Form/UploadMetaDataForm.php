@@ -56,7 +56,10 @@ class UploadMetaDataForm extends FormBase {
         'kl_import_compoundfolders' => t('Import KL Compound Documents (subtype 136)'),
         'kl_import_compound_subdocs' => t('Import KL Compound Sub Documents (subtype 144)'),
         'kl_import_urls' => t('Import KL Urls (subtype 140)'),
-        'kl_import_document_fix' => t('Import KL Metadata Fix')
+        'kl_import_document_fix' => t('Import KL Metadata Fix'),
+        'kl_import_document_with_volume' => t('Import KL Metadata with volume'),
+        'kl_import_cmdfolders_with_volume' => t('Import KL Compound folders with volume'),
+        'import_hardcopy_with_volume' => t('Import Hardcopy with volume')
       ],
       '#required' => TRUE,
       '#description' => t('Select the import process to apply to each item in your file.'),
