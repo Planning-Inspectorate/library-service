@@ -12,6 +12,7 @@ dependencies:
     - field.storage.node.field_kl_archived
     - field.storage.node.field_kl_archived_date
     - field.storage.node.field_kl_authors
+    - field.storage.node.field_best_bet
     - field.storage.node.body
     - field.storage.node.field_borrowed_by
     - field.storage.node.field_borrowed_date
@@ -110,6 +111,15 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_archive
+  field_best_bet:
+    label: 'Best Bet'
+    datasource_id: 'entity:node'
+    property_path: field_best_bet
+    type: text
+    boost: 21.0
+    dependencies:
+      config:
+        - field.storage.node.field_best_bet
   field_borrowed_by:
     label: 'Borrowed by'
     datasource_id: 'entity:node'
