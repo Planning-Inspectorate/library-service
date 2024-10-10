@@ -49,7 +49,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: body
     type: text
-    boost: 5.0
+    boost: 0.0
     dependencies:
       config:
         - field.storage.node.body
@@ -100,6 +100,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_alternative_title
     type: text
+    boost: 0.1
     dependencies:
       config:
         - field.storage.node.field_alternative_title
@@ -116,7 +117,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_best_bet
     type: text
-    boost: 21.0
+    boost: 5.0
     dependencies:
       config:
         - field.storage.node.field_best_bet
@@ -141,6 +142,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_content_reference
     type: text
+    boost: 0.0
     dependencies:
       config:
         - field.storage.node.field_content_reference
@@ -261,6 +263,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_long_text
     type: text
+    boost: 0.0
     dependencies:
       config:
         - field.storage.node.field_long_text
@@ -359,7 +362,7 @@ field_settings:
     label: 'Search api attachments: PDF'
     property_path: saa_field_pdf
     type: text
-    boost: 5.0
+    boost: 0.0
   tid:
     label: 'Term ID'
     datasource_id: 'entity:taxonomy_term'
@@ -373,7 +376,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
-    boost: 13.0
+    boost: 0.1
     dependencies:
       module:
         - node
