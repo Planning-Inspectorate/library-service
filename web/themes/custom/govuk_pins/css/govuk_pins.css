@@ -448,3 +448,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .box-link__bottom  a:link {
   color: #fff;
 }
+
+.bestbet-ribbon {
+  width:20%;
+  font-size: 12px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: #19615B;
+  text-transform: lowercase;
+  color: white;
+}

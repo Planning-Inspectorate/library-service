@@ -125,7 +125,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: ' <span class="ribbon">Best Bet - {{ field_best_bet__value }} </span>'
+            text: ' <div class="bestbet-ribbon">Best Bet - {{ field_best_bet__value }} </div>'
             make_link: false
             path: ''
             absolute: false
