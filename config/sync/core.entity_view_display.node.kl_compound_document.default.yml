@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.kl_compound_document.feeds_item
     - field.field.node.kl_compound_document.field_alternative_title
     - field.field.node.kl_compound_document.field_archived_note
+    - field.field.node.kl_compound_document.field_best_bet
     - field.field.node.kl_compound_document.field_content_reference
     - field.field.node.kl_compound_document.field_date
     - field.field.node.kl_compound_document.field_documents
@@ -144,6 +145,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_best_bet:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: ds_content
   field_date:
     type: datetime_time_ago
     label: above

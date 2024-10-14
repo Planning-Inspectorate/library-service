@@ -122,10 +122,10 @@ display:
           admin_label: ''
           plugin_id: search_api_field
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: ' <div class="bestbet-ribbon">Best Bet - {{ field_best_bet__value }} </div>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -2088,7 +2088,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"sub-listing-data\">\r\n<div class=\"row\">\r\n    <div class=\"col\">Authors: {{ field_kl_authors_1 }} </div>\r\n</div>\r\n{% if field_alternative_title %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Alternative Title: {{ field_alternative_title }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_kl_reading_lists %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Reading List: {{ field_kl_reading_lists }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_kl_series %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Series: {{ field_kl_series }}</div>\r\n</div>\r\n{% endif %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Published: {{ field_date_1 }}</div>\r\n</div>\r\n</div>"
+            text: "<div class=\"sub-listing-data\">\r\n{% if field_best_bet %}\r\n <div class=\"bestbet-ribbon\">Best Bet - {{ field_best_bet  }} </div>\r\n{% endif %}\r\n{% if field_kl_authors_1 %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Authors: {{ field_kl_authors_1 }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_alternative_title %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Alternative Title: {{ field_alternative_title }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_kl_reading_lists %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Reading List: {{ field_kl_reading_lists }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_kl_series %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Series: {{ field_kl_series }}</div>\r\n</div>\r\n{% endif %}\r\n{% if field_date_1 %}\r\n<div class=\"row\">\r\n    <div class=\"col\">Published: {{ field_date_1 }}</div>\r\n</div>\r\n{% endif %}\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -2125,63 +2125,6 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_pins_content_index
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: numeric
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
       pager:
         type: full
         options:
