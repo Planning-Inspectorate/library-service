@@ -85,7 +85,7 @@ display:
           click_sort_column: target_id
           type: file_url_plain
           settings: {  }
-          group_column: ''
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -276,7 +276,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\r\n\r\n{% if type  ==  'Document' %}\r\n   <a href={{ field_kl_doc_file }} target=\"_blank\">{{ title }} </div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   {{ title }}\r\n{% endif %}"
+            text: "{% if type  ==  'Document' %}\r\n  <a href={{ field_kl_doc_file }} target=\"_blank\">{{ title }} </div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   <a href={{ view_node }}>{{ title }} </div></a>\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -521,7 +521,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 24
+          items_per_page: 200
           total_pages: 0
           id: 0
           tags:
@@ -724,7 +724,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      group_by: false
+      group_by: true
       link_display: page_1
       link_url: ''
       header: {  }

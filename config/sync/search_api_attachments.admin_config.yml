@@ -1,9 +1,9 @@
 _core:
   default_config_hash: iEqfsY3NCYdxBTF8YdyhDbgPo9BC6xaHaMoXOU0dQBk
-extraction_method: tika_server_extractor
+extraction_method: tika_extractor
 tika_extractor_configuration:
-  java_path: java
-  tika_path: ''
+  java_path: /usr/bin/java
+  tika_path: /var/www/html/tika-server/tika-server.jar
 tika_server_extractor_configuration:
   scheme: http
   host: library-test.planninginspectorate.gov.uk
