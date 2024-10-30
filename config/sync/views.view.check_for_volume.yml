@@ -37,16 +37,34 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: ''
+          label: Title
           exclude: false
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
             word_boundary: false
             ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
@@ -342,7 +360,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '[view:total-rows]'
+            value: "<div class=\"govuk-phase-banner\">\r\n  <p class=\"govuk-phase-banner__content\">\r\n    <strong class=\"govuk-tag govuk-phase-banner__content__tag\">\r\n      Total Rows\r\n    </strong>\r\n    <span class=\"govuk-phase-banner__text\">\r\n      [view:total-rows]\r\n    </span>\r\n  </p>\r\n</div>"
             format: full_html
           tokenize: false
       footer: {  }
