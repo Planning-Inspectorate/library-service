@@ -54,4 +54,12 @@ function add_blank_target_to_pdf_link() {
     $href.append(' (opens in new tab)<span class="fa-ext extlink"><span class="fa fa-external-link" aria-label="(link is external)"></span></span>');
   }
 }
+
+function bef_datepicker_format_change() {
+  jQuery('.bef-datepicker').each(function () {
+    jQuery(this).datepicker({ dateFormat: 'dd-mm-yy' }); 
+  });
+}
+
+bef_datepicker_format_change();
 add_blank_target_to_pdf_link();
