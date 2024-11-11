@@ -459,3 +459,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-transform: lowercase;
   color: white;
 }
+/* Added for setting dimensions for svg provided without dimension with respect to old svg dimensions*/
+.govuk-header__logotype-organisation-fallback-image{
+  width: 107px;
+  height: 67px;
+} 
