@@ -23,6 +23,7 @@ dependencies:
     - field.storage.node.field_long_text
     - field.storage.node.field_kl_doc_folder
     - field.storage.node.field_edition_number
+    - field.storage.node.field_links
     - field.storage.node.field_isbn
     - field.storage.node.field_locations
     - field.storage.node.field_other_date
@@ -250,6 +251,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_kl_series
+  field_links:
+    label: 'External links'
+    datasource_id: 'entity:node'
+    property_path: field_links
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_links
   field_locations:
     label: Locations
     datasource_id: 'entity:node'

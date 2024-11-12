@@ -3357,7 +3357,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      title: 'Legislation, guidance and caselaw'
+      title: Publications
       fields:
         nothing:
           id: nothing
@@ -3690,7 +3690,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      title: 'Curated topic reading lists'
+      title: 'Topic areas'
       fields:
         nothing:
           id: nothing

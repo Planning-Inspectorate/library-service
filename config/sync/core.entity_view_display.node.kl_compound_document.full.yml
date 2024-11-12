@@ -45,7 +45,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: hidden
-      weight: 33
+      weight: 35
       format_type: fieldset
       format_settings:
         classes: ''
@@ -106,6 +106,7 @@ third_party_settings:
         - field_alternative_title
         - field_kl_classification
         - field_kl_series
+        - field_volume
         - field_kl_reading_lists
         - field_kl_authors
         - field_kl_doc_folder
@@ -161,42 +162,6 @@ content:
             suffix: ''
     weight: 1
     region: ds_content
-  field_best_bet:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 5
-    region: ds_content
   field_content_reference:
     type: string
     label: inline
@@ -231,7 +196,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 8
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -269,7 +234,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 9
     region: ds_content
   field_kl_archived_date:
     type: datetime_default
@@ -306,7 +271,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 10
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
@@ -343,7 +308,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 6
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
@@ -416,7 +381,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 7
     region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -453,7 +418,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -526,11 +491,11 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
+    weight: 11
     region: ds_content
   field_volume:
     type: string
-    label: inline
+    label: above
     settings:
       link_to_entity: false
     third_party_settings:
@@ -570,6 +535,7 @@ hidden:
   entity_print_view_word_docx: true
   feeds_item: true
   field_archived_note: true
+  field_best_bet: true
   field_date: true
   field_documents: true
   field_general_notes: true

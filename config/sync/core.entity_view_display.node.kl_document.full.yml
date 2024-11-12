@@ -59,6 +59,7 @@ dependencies:
     - ds
     - field_group
     - file
+    - link
     - text
     - user
 third_party_settings:
@@ -81,6 +82,7 @@ third_party_settings:
     regions:
       ds_content:
         - field_alternative_title
+        - field_links
         - field_kl_doc_file
         - field_kl_doc_folder
         - field_kl_authors
@@ -119,14 +121,14 @@ third_party_settings:
         width_breakpoint: 640
     group_migration_report_items:
       children:
+        - field_kl_doc_filename
         - field_kl_doc_file_path
         - field_kl_doc_file_size
-        - field_kl_doc_filename
         - field_kl_doc_id
         - field_kl_doc_mime_type
         - field_kl_doc_origindataid
-        - field_kl_doc_parent_subtype
         - field_kl_doc_parentid
+        - field_kl_doc_parent_subtype
         - field_kl_doc_unique_id
         - field_kl_doc_version
         - field_kl_filecdate
@@ -161,7 +163,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 21
+    weight: 22
     region: ds_content
   field_alternative_title:
     type: string
@@ -233,7 +235,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 18
+    weight: 19
     region: ds_content
   field_best_bet:
     type: string
@@ -269,7 +271,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 6
     region: ds_content
   field_content_reference:
     type: string
@@ -305,7 +307,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 20
+    weight: 21
     region: ds_content
   field_date:
     type: datetime_default
@@ -342,7 +344,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: ds_content
   field_edition_number:
     type: string
@@ -379,7 +381,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
+    weight: 12
     region: ds_content
   field_general_notes:
     type: basic_string
@@ -415,7 +417,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 13
     region: ds_content
   field_isbn:
     type: barcode
@@ -461,7 +463,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 13
+    weight: 14
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -499,7 +501,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 16
+    weight: 17
     region: ds_content
   field_kl_archived_date:
     type: datetime_default
@@ -536,7 +538,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 17
+    weight: 18
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
@@ -573,7 +575,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
@@ -610,7 +612,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
+    weight: 11
     region: ds_content
   field_kl_doc_compound_folder:
     type: entity_reference_label
@@ -647,7 +649,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 19
+    weight: 20
     region: ds_content
   field_kl_doc_file:
     type: file_default
@@ -683,7 +685,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 2
     region: ds_content
   field_kl_doc_folder:
     type: cshs_full_hierarchy
@@ -721,7 +723,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 2
+    weight: 3
     region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -758,7 +760,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 10
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -795,7 +797,48 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 7
+    region: ds_content
+  field_links:
+    type: link_separate
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: ds_content
   field_long_text:
     type: text_default
@@ -831,7 +874,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 15
+    weight: 16
     region: ds_content
   field_number_decimal:
     type: number_decimal
@@ -871,7 +914,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 9
     region: ds_content
   field_other_date:
     type: datetime_default
@@ -909,7 +952,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 14
+    weight: 15
     region: ds_content
   field_volume:
     type: string
@@ -946,7 +989,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 8
     region: ds_content
 hidden:
   entity_print_view_epub: true
@@ -970,7 +1013,6 @@ hidden:
   field_kl_vercdate: true
   field_kl_vermdate: true
   field_kl_vernum: true
-  field_links: true
   field_physical_description: true
   field_search_exclude: true
   field_security_classification: true
