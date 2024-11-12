@@ -189,6 +189,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           pins_entity_set_file_size_on_presave($entity);
+          pins_entity_check_archived_on_presave($entity);
+          
           break;
         case 'individual_hardcopy':
           // Use nid and paragraph Id as a unique content reference ID
@@ -650,6 +652,32 @@ function pins_entity_set_file_size_on_presave(&$entity){
       $fileSize = $fileField->getSize();
       if ($fileSize > 0)
           $entity->set('field_kl_doc_file_size', $fileSize);
+    }
+  }
+}
+
+
+/**
+  *  
+  * function pins_entity_check_archived_on_presave
+  * Used for reset/setting archived date, note based on archived flag value.
+  *
+*/
+
+function pins_entity_check_archived_on_presave(&$entity){
+  if ($entity->hasField('field_kl_archived') && isset($entity->field_kl_archived->value)) {
+    $archived_value = $entity->field_kl_archived->value;
+    // If the entity is not archived, reset the dates and notes
+    if (!$archived_value) {
+      // Reset the archive date
+      $entity->set('field_kl_archived_date', NULL);
+      // Reset the archive note
+      $entity->set('field_archived_note', NULL);
+    } else {
+      // If the entity is being archived, ensure the date is set
+      if ($entity->hasField('field_kl_archived_date') && !isset($entity->field_kl_archived_date->value)) {
+        $entity->set('field_kl_archived_date', date('Y-m-d\TH:i:s'));
+      }
     }
   }
 }

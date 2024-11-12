@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_form_alter().
@@ -20,44 +21,73 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
             'event' => 'change',
             'wrapper' => 'form-term-wrapper',
         ];
-        if ($form_state->getValue('field_kl_doc_folder')) {
-            $field_selectedValue = $form_state->getValue('field_kl_doc_folder');
-            foreach ($field_selectedValue as $field_selectedVal) {
-                if ($selectedValue = $field_selectedVal['target_id']) {
-                    $selected_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($selectedValue);
-                    if ($selected_term instanceof TermInterface) {
-                        $term_ids = pins_folder_hs_get_parent_term_ids($selectedValue);
-                        $author_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_authors');
-                        $series_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_series');
-                        $classification_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_classification');
-                        $readinglist_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_reading_lists');
-
-                        $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
-                        $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
-                        $selected_classification_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_classification');
-                        $selected_readinglist_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_reading_lists');
-
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_authors', array_merge($author_details, $selected_authors_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', array_merge($series_details, $selected_series_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', array_merge($classification_details, $selected_classification_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_reading_lists', array_merge($readinglist_details, $selected_readinglist_list));
-                    }
-                } else {
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_authors');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_series');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_classification');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_reading_lists');
-                }
-            }
-
+ 
+        $form['field_kl_archived']['widget']['value']['#ajax'] = [
+            'callback' => 'pins_archived_hs_ajaxcallback',
+            'event' => 'change',
+            'wrapper' => 'form-term-wrapper'
+        ];  
+  
+        // Need to hide archive date as archive flag is false by default.
+        $form['field_kl_archived_date']["#access"] = FALSE;
+        // need to show date on edit form when formstate is not available.
+        if($form['field_kl_archived']['widget']['value']['#default_value'] && $form['field_kl_archived_date']['widget'][0]['value']['#default_value']){
+           $form['field_kl_archived_date']["#access"] = TRUE;
+        } 
+        //Need to hide archived date on changing archived value to false.
+        if ((count($form_state->getValues()) > 0) &&  !$form_state->getValue('field_kl_archived')['value']) {
+            $form['field_kl_archived_date']["#access"] = FALSE;
         }
-        $form_state->setCached(FALSE);
-        $form_state->setRebuild(TRUE);
+        //Need to set todays date if no archived date is set and archive is set to true.
+        if ($form_state->getValue('field_kl_archived')['value'] && !$form_state->getValue('field_kl_archived_date')[0]['value']) {
+            $form['field_kl_archived_date']["#access"] = TRUE;
+            $datetime = new DrupalDateTime('now', new \DateTimeZone('UTC'));
+            $form['field_kl_archived_date']['widget'][0]['value']['#default_value'] = $datetime;
+        } 
     }
 
 }
 
 function pins_folder_hs_ajaxcallback(&$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('field_kl_doc_folder')) {
+        $field_selectedValue = $form_state->getValue('field_kl_doc_folder');
+        foreach ($field_selectedValue as $field_selectedVal) {
+            if ($selectedValue = $field_selectedVal['target_id']) {
+                $selected_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($selectedValue);
+                if ($selected_term instanceof TermInterface) {
+                    $term_ids = pins_folder_hs_get_parent_term_ids($selectedValue);
+                    $author_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_authors');
+                    $series_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_series');
+                    $classification_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_classification');
+                    $readinglist_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_reading_lists');
+
+                    $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
+                    $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
+                    $selected_classification_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_classification');
+                    $selected_readinglist_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_reading_lists');
+
+                    pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_authors', array_merge($author_details, $selected_authors_list));
+                    pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', array_merge($series_details, $selected_series_list));
+                    pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', array_merge($classification_details, $selected_classification_list));
+                    pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_reading_lists', array_merge($readinglist_details, $selected_readinglist_list));
+                }
+            } else {
+                pins_folder_hs_clear_form_fields($form, 'field_kl_authors');
+                pins_folder_hs_clear_form_fields($form, 'field_kl_series');
+                pins_folder_hs_clear_form_fields($form, 'field_kl_classification');
+                pins_folder_hs_clear_form_fields($form, 'field_kl_reading_lists');
+            }
+        }
+
+    }
+    $form_state->setCached(FALSE);
+    $form_state->setRebuild(TRUE);
+    return $form;
+}
+
+function pins_archived_hs_ajaxcallback(&$form, FormStateInterface $form_state) { 
+    $form_state->setCached(FALSE);
+    $form_state->setRebuild(TRUE);
     return $form;
 }
 
