@@ -87,14 +87,15 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     break;
 
     case 'node_kl_document_form':
-      case 'node_kl_document_edit_form':
-      case 'node_kl_compound_document_form':
-      case 'node_kl_compound_document_edit_form':
-      case 'node_hard_copy_edit_form':
-        setDateTimeElement($form, 'field_kl_archived_date');
-        setDateTimeElement($form, 'field_other_date');
-        setDateTimeElement($form, 'field_date');
-        //$form['#validate'][] = 'unique_title_node_form_validate';
+    case 'node_kl_document_edit_form':
+    case 'node_kl_compound_document_form':
+    case 'node_kl_compound_document_edit_form':
+    case 'node_hard_copy_edit_form':
+      setDateTimeElement($form, 'field_kl_archived_date');
+      setDateTimeElement($form, 'field_other_date');
+      setDateTimeElement($form, 'field_date');
+      //$form['#validate'][] = 'unique_title_node_form_validate';
+      $form['#validate'][] = 'archived_data_node_form_validate';
 
   }
 }
@@ -109,6 +110,19 @@ function setDateTimeElement(&$form, $field_name) {
   }
 }
 
+/**
+ * Custom validation handler to ensure unique node titles.
+ */
+function archived_data_node_form_validate($form, FormStateInterface $form_state) {
+  $field_kl_archived = $form_state->getValue('field_kl_archived')['value'];
+  $field_kl_archived_date = $form_state->getValue('field_kl_archived_date')[0]['value'];
+
+  $node_title = $form_state->getValue('title')[0]['value'];
+
+  if ($field_kl_archived && empty($field_kl_archived_date)) {
+    $form_state->setErrorByName('field_kl_archived_date', t('Please enter a valid archived date.'));
+  }
+}
 
 /**
  * Custom validation handler to ensure unique node titles.
