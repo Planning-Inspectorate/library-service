@@ -7,14 +7,13 @@ dependencies:
     - field.storage.node.field_date
     - field.storage.node.field_kl_authors
     - field.storage.node.field_kl_doc_file
-    - field.storage.node.field_links
     - node.type.hard_copy
     - node.type.kl_compound_document
     - node.type.kl_document
+    - node.type.pdf
   module:
     - datetime
     - file
-    - link
     - node
     - taxonomy
     - user
@@ -263,73 +262,6 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
-        field_links:
-          id: field_links
-          table: node__field_links
-          field: field_links
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: uri
-          type: link
-          settings:
-            trim_length: 80
-            url_only: true
-            url_plain: true
-            rel: '0'
-            target: '0'
-          group_column: entity_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 1
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -344,7 +276,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if type  ==  'Document' %}\r\n   {% set href = field_kl_doc_file ? field_kl_doc_file : field_links %}\r\n  <a href={{ href }} target=\"_blank\">{{ title }} </div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   <a href={{ view_node }}>{{ title }} </div></a>\r\n{% endif %}"
+            text: "{% if type  ==  'Document' %}\r\n  <a href={{ field_kl_doc_file }} target=\"_blank\">{{ title }} </div></a>\r\n{% endif %}\r\n{% if type  ==  'Compound Document' %}\r\n   <a href={{ view_node }}>{{ title }} </div></a>\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -708,6 +640,7 @@ display:
             kl_compound_document: kl_compound_document
             kl_document: kl_document
             hard_copy: hard_copy
+            pdf: pdf
           group: 1
           exposed: false
           expose:
@@ -725,83 +658,6 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_kl_archived_value:
-          id: field_kl_archived_value
-          table: node__field_kl_archived
-          field: field_kl_archived_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: boolean
-          operator: '='
-          value: '0'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_links_uri:
-          id: field_links_uri
-          table: node__field_links
-          field: field_links_uri
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: 'not empty'
-          value: ''
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -890,6 +746,44 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_kl_archived_value:
+          id: field_kl_archived_value
+          table: node__field_kl_archived
+          field: field_kl_archived_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
           is_grouped: false
           group_info:
             label: ''
@@ -1009,7 +903,6 @@ display:
         - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_kl_authors'
         - 'config:field.storage.node.field_kl_doc_file'
-        - 'config:field.storage.node.field_links'
   block_1:
     id: block_1
     display_title: 'Content Related to ReadingList'
@@ -1032,7 +925,6 @@ display:
         - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_kl_authors'
         - 'config:field.storage.node.field_kl_doc_file'
-        - 'config:field.storage.node.field_links'
   page_1:
     id: page_1
     display_title: Page
@@ -1055,4 +947,3 @@ display:
         - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_kl_authors'
         - 'config:field.storage.node.field_kl_doc_file'
-        - 'config:field.storage.node.field_links'
