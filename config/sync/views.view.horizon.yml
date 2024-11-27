@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_kl_vercdate
     - field.storage.node.field_kl_vernum
     - node.type.kl_document
+    - user.role.administrator
+    - user.role.library_admin
   module:
     - datetime
     - node
@@ -314,9 +316,11 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            administrator: administrator
+            library_admin: library_admin
       cache:
         type: tag
         options: {  }
@@ -572,7 +576,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_kl_vercdate'
         - 'config:field.storage.node.field_kl_vernum'
@@ -593,7 +597,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_kl_vercdate'
         - 'config:field.storage.node.field_kl_vernum'
