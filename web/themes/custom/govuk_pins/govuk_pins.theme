@@ -461,3 +461,19 @@ function govuk_pins_preprocess_govuk_pins_cookie(&$variables) {
     $variables['cookie'] = $_COOKIE['cookie_type'];
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for file_link theme hook.
+ */
+function govuk_pins_preprocess_file_link(&$variables) {
+  // Ensure we have a valid file entity.
+  if (!isset($variables['file']) || !$variables['file'] instanceof \Drupal\file\FileInterface) {
+    return;
+  }
+
+  // Generate the absolute file URL.
+  $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($variables['file']->getFileUri());
+
+  // Add the generated URL to the variables array.
+  $variables['file_url'] = $file_url;
+}

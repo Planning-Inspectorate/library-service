@@ -464,3 +464,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 107px;
   height: 67px;
 } 
+.appeal-details .govuk-summary-list__key,
+.appeal-details .govuk-summary-list__value,
+.appeal-details .govuk-summary-list__actions {
+  padding-top: .2rem;
+  padding-bottom: 0;
+}

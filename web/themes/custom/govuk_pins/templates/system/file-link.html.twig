@@ -13,7 +13,12 @@
  * @ingroup themeable
  */
 #}
-<span{{ attributes.addClass('govuk-file-link') }}>{{ link }}</span>
+{# <span{{ attributes.addClass('govuk-file-link') }}>{{ link }}</span>
 {% if file_size %}
   <span>({{ file_size }})</span>
-{% endif %}
+{% endif %} #}
+
+<div class="govuk-button-group">
+<a href="{{ file_url }}" download role="button" draggable="false" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">Download document</a>
+<a href="{{ file_url }}" target="_blank"  role="button" draggable="false" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">Open document</a>
+</div>
