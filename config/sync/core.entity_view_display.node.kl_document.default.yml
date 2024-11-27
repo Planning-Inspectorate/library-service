@@ -417,12 +417,13 @@ content:
     weight: 23
     region: ds_content
   field_kl_doc_file:
-    type: file_default
+    type: file_table
     label: inline
     settings:
       use_description_as_link_text: true
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:

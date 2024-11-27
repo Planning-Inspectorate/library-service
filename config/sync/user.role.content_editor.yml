@@ -16,6 +16,7 @@ dependencies:
     - node.type.kl_virtual_folder
     - node.type.pdf
   module:
+    - field_permissions
     - file
     - filter
     - flag
@@ -75,6 +76,7 @@ permissions:
   - 'use text format full_html'
   - 'use views bulk edit'
   - 'view all revisions'
+  - 'view field_general_notes'
   - 'view hard_copy revisions'
   - 'view hard_copy_loan revisions'
   - 'view kl_classification_shortcut revisions'

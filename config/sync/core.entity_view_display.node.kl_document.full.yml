@@ -53,7 +53,6 @@ dependencies:
     - field.field.node.kl_document.field_weight
     - node.type.kl_document
   module:
-    - barcodes
     - cshs
     - datetime
     - ds
@@ -81,18 +80,17 @@ third_party_settings:
         label: ''
     regions:
       ds_content:
-        - field_alternative_title
-        - field_links
         - field_kl_doc_file
+        - group_section
+        - field_links
         - field_kl_doc_folder
-        - field_kl_authors
+        - group_section_end
+        - field_alternative_title
+        - group_break
         - field_date
-        - field_best_bet
-        - field_kl_series
         - field_volume
+        - field_best_bet
         - field_number_decimal
-        - field_kl_reading_lists
-        - field_kl_classification
         - field_edition_number
         - field_general_notes
         - field_isbn
@@ -102,8 +100,11 @@ third_party_settings:
         - field_kl_archived_date
         - field_archived_note
         - field_kl_doc_compound_folder
+        - field_kl_authors
         - field_content_reference
-        - body
+        - field_kl_series
+        - field_kl_reading_lists
+        - field_kl_classification
   field_group:
     group_accordion_group:
       children:
@@ -111,7 +112,7 @@ third_party_settings:
       label: 'Accordion group'
       parent_name: ''
       region: hidden
-      weight: 46
+      weight: 28
       format_type: tabs
       format_settings:
         classes: ''
@@ -148,23 +149,86 @@ third_party_settings:
         id: ''
         formatter: closed
         description: ''
+    group_section:
+      children:
+        - field_links
+        - field_kl_doc_folder
+        - field_alternative_title
+        - field_date
+        - field_volume
+        - field_best_bet
+        - field_number_decimal
+        - field_edition_number
+        - field_general_notes
+        - field_isbn
+        - field_other_date
+        - field_long_text
+        - field_kl_archived
+        - field_kl_archived_date
+        - field_archived_note
+        - field_kl_doc_compound_folder
+        - field_content_reference
+      label: 'Singular Attribute Section'
+      parent_name: ''
+      region: ds_content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: 'govuk-summary-list appeal-details govuk-summary-list--no-border  govuk-margin-top-6'
+        show_empty_fields: false
+        id: ''
+        element: dl
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_section_end:
+      children: {  }
+      label: 'Singular Attribute Section End'
+      parent_name: ''
+      region: ds_content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: '</dl>'
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_break:
+      children:
+        - field_kl_authors
+        - field_kl_series
+        - field_kl_reading_lists
+        - field_kl_classification
+      label: Break
+      parent_name: ''
+      region: ds_content
+      weight: 3
+      format_type: html_element
+      format_settings:
+        classes: 'govuk-section-break govuk-section-break--l govuk-section-break--visible'
+        show_empty_fields: false
+        id: ''
+        element: hr
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: node.kl_document.full
 targetEntityType: node
 bundle: kl_document
 mode: full
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 22
-    region: ds_content
   field_alternative_title:
     type: string
     label: inline
@@ -172,18 +236,19 @@ content:
       link_to_entity: false
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
-            lb-col: true
+            lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -193,13 +258,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 0
+    weight: 3
     region: ds_content
   field_archived_note:
     type: basic_string
@@ -213,13 +278,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -229,13 +294,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 19
+    weight: 15
     region: ds_content
   field_best_bet:
     type: string
@@ -248,24 +313,24 @@ content:
           id: expert
           settings:
             lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw: false
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: ''
+            lb-col: false
+            ow: false
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
+            fi-el: li
             fi-cl: ''
             fi-at: ''
             fi-def-at: false
@@ -280,18 +345,19 @@ content:
       link_to_entity: false
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: true
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -301,13 +367,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 21
+    weight: 17
     region: ds_content
   field_date:
     type: datetime_default
@@ -317,18 +383,19 @@ content:
       format_type: olivero_medium
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
-            lb-col: true
+            lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -338,13 +405,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: ds_content
   field_edition_number:
     type: string
@@ -359,13 +426,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -375,13 +442,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 8
     region: ds_content
   field_general_notes:
     type: basic_string
@@ -395,13 +462,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -411,28 +478,19 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 13
+    weight: 9
     region: ds_content
   field_isbn:
-    type: barcode
+    type: string
     label: above
     settings:
-      type: QRCODE
-      color: '#000000'
-      height: 100
-      width: 100
-      padding_top: 0
-      padding_right: 0
-      padding_bottom: 0
-      padding_left: 0
-      show_value: false
-      format: SVG
+      link_to_entity: false
     third_party_settings:
       ds:
         ds_limit: ''
@@ -441,13 +499,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -457,13 +515,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 14
+    weight: 10
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -474,18 +532,19 @@ content:
       format_custom_true: ''
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: true
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -495,13 +554,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 17
+    weight: 13
     region: ds_content
   field_kl_archived_date:
     type: datetime_default
@@ -511,18 +570,19 @@ content:
       format_type: dd_mn_yy
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'ovuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: true
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -532,13 +592,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 18
+    weight: 14
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
@@ -547,17 +607,16 @@ content:
       link: true
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
+            lbw-el: h2
+            lbw-cl: govuk-heading-m
             lbw-at: ''
             lb-col: false
-            ow: true
+            ow: false
             ow-el: p
             ow-cl: 'list-wrapper  field-label-above'
             ow-at: ''
@@ -575,7 +634,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 16
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
@@ -584,17 +643,16 @@ content:
       link: true
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
+            lbw-el: h2
+            lbw-cl: govuk-heading-m
             lbw-at: ''
             lb-col: false
-            ow: true
+            ow: false
             ow-el: p
             ow-cl: 'classification-wrapper  field-label-above'
             ow-at: ''
@@ -612,13 +670,49 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 11
+    weight: 19
     region: ds_content
   field_kl_doc_compound_folder:
     type: entity_reference_label
     label: above
     settings:
       link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: div
+            ow-cl: govuk-summary-list__row
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 16
+    region: ds_content
+  field_kl_doc_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
     third_party_settings:
       ds:
         ds_limit: ''
@@ -648,44 +742,8 @@ content:
             fi-at: ''
             fi-def-at: false
             prefix: ''
-            suffix: ''
-    weight: 20
-    region: ds_content
-  field_kl_doc_file:
-    type: file_default
-    label: inline
-    settings:
-      use_description_as_link_text: true
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
-            lbw-at: ''
-            lb-col: true
-            ow: true
-            ow-el: p
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 2
+            suffix: '<div>[file:size]</div>'
+    weight: 0
     region: ds_content
   field_kl_doc_folder:
     type: cshs_full_hierarchy
@@ -696,18 +754,19 @@ content:
       reverse: 0
     third_party_settings:
       ds:
+        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
-            lb-col: true
+            lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -717,13 +776,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 2
     region: ds_content
   field_kl_reading_lists:
     type: entity_reference_label
@@ -732,17 +791,16 @@ content:
       link: true
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
+            lbw-el: h2
+            lbw-cl: govuk-heading-m
             lbw-at: ''
             lb-col: false
-            ow: true
+            ow: false
             ow-el: p
             ow-cl: 'list-wrapper  field-label-above'
             ow-at: ''
@@ -760,7 +818,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 10
+    weight: 18
     region: ds_content
   field_kl_series:
     type: entity_reference_label
@@ -769,17 +827,16 @@ content:
       link: true
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
             lbw: true
-            lbw-el: h3
-            lbw-cl: govuk-heading-s
+            lbw-el: h2
+            lbw-cl: govuk-heading-m
             lbw-at: ''
             lb-col: false
-            ow: true
+            ow: false
             ow-el: p
             ow-cl: 'list-wrapper  field-label-above'
             ow-at: ''
@@ -797,11 +854,11 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 17
     region: ds_content
   field_links:
     type: link_separate
-    label: above
+    label: inline
     settings:
       trim_length: 80
       url_only: false
@@ -810,30 +867,29 @@ content:
       target: '0'
     third_party_settings:
       ds:
-        ds_limit: ''
         ft:
           id: expert
           settings:
             lb: ''
-            lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw: false
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
-            ow: true
-            ow-el: p
-            ow-cl: ''
+            ow: false
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
+            fis: true
+            fis-el: ul
+            fis-cl: govuk-list
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: li
+            fi-cl: list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
@@ -852,13 +908,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
-            lb-col: true
+            lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -868,13 +924,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 16
+    weight: 12
     region: ds_content
   field_number_decimal:
     type: number_decimal
@@ -892,13 +948,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -908,13 +964,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 7
     region: ds_content
   field_other_date:
     type: datetime_default
@@ -930,13 +986,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: true
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -946,13 +1002,13 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 15
+    weight: 11
     region: ds_content
   field_volume:
     type: string
@@ -967,13 +1023,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: strong
-            lbw-cl: label
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
             ow: true
-            ow-el: p
-            ow-cl: ''
+            ow-el: div
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -983,15 +1039,16 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: true
-            fi-el: span
-            fi-cl: ''
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
             fi-at: ''
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 8
+    weight: 5
     region: ds_content
 hidden:
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
