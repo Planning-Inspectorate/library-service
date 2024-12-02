@@ -2663,7 +2663,7 @@ ol + .govuk-heading-s {
   display: inline-block;
   min-width: 125px;
   padding-top: 112px;
-  background-image: url("../assets/images/govuk-crest.png");
+  background-image: url("../assets/images/coat_of_arms.svg");
   background-repeat: no-repeat;
   background-position: 50% 0%;
   background-size: 125px 102px;
@@ -2671,7 +2671,7 @@ ol + .govuk-heading-s {
   white-space: nowrap; }
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     .govuk-footer__copyright-logo {
-      background-image: url("../assets/images/govuk-crest-2x.png"); } }
+      background-image: url("../assets/images/coat_of_arms.svg"); } }
 
 .govuk-footer__inline-list {
   margin-top: 0;
