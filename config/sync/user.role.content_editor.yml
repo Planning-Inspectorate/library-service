@@ -77,6 +77,7 @@ permissions:
   - 'use views bulk edit'
   - 'view all revisions'
   - 'view field_general_notes'
+  - 'view field_kl_authors'
   - 'view hard_copy revisions'
   - 'view hard_copy_loan revisions'
   - 'view kl_classification_shortcut revisions'

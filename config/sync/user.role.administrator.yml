@@ -1,18 +1,11 @@
 uuid: 37325280-9384-4d05-bc1f-6f71d751e306
 langcode: en
 status: true
-dependencies:
-  module:
-    - field_permissions
+dependencies: {  }
 _core:
   default_config_hash: OeKGIkmZA_c-t6QLH81WNQx8gDCc1MRmxaTuQgxBByU
 id: administrator
 label: Administrator
 weight: 3
 is_admin: true
-permissions:
-  - 'create field_general_notes'
-  - 'edit field_general_notes'
-  - 'edit own field_general_notes'
-  - 'view field_general_notes'
-  - 'view own field_general_notes'
+permissions: {  }

@@ -17,4 +17,5 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'view field_general_notes'
+  - 'view field_kl_authors'
   - 'view media'
