@@ -100,9 +100,9 @@ third_party_settings:
         - field_kl_archived_date
         - field_archived_note
         - field_kl_doc_compound_folder
-        - field_kl_authors
         - field_content_reference
         - field_kl_series
+        - field_kl_authors
         - field_kl_reading_lists
         - field_kl_classification
   field_group:
@@ -122,14 +122,14 @@ third_party_settings:
         width_breakpoint: 640
     group_migration_report_items:
       children:
-        - field_kl_doc_filename
         - field_kl_doc_file_path
         - field_kl_doc_file_size
+        - field_kl_doc_filename
         - field_kl_doc_id
         - field_kl_doc_mime_type
         - field_kl_doc_origindataid
-        - field_kl_doc_parentid
         - field_kl_doc_parent_subtype
+        - field_kl_doc_parentid
         - field_kl_doc_unique_id
         - field_kl_doc_version
         - field_kl_filecdate
@@ -168,6 +168,7 @@ third_party_settings:
         - field_archived_note
         - field_kl_doc_compound_folder
         - field_content_reference
+        - field_kl_authors
       label: 'Singular Attribute Section'
       parent_name: ''
       region: ds_content
@@ -204,7 +205,6 @@ third_party_settings:
         speed: fast
     group_break:
       children:
-        - field_kl_authors
         - field_kl_series
         - field_kl_reading_lists
         - field_kl_classification
@@ -602,7 +602,7 @@ content:
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings:
@@ -612,13 +612,13 @@ content:
           settings:
             lb: ''
             lbw: true
-            lbw-el: h2
-            lbw-cl: govuk-heading-m
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
             lbw-at: ''
             lb-col: false
-            ow: false
-            ow-el: p
-            ow-cl: 'list-wrapper  field-label-above'
+            ow: true
+            ow-el: 'div '
+            ow-cl: govuk-summary-list__row
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -634,7 +634,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 16
+    weight: 18
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
