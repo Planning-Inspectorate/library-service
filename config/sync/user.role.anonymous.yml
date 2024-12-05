@@ -18,4 +18,7 @@ permissions:
   - 'access site-wide contact form'
   - 'view field_general_notes'
   - 'view field_kl_authors'
+  - 'view field_kl_classification'
+  - 'view field_kl_reading_lists'
+  - 'view field_kl_series'
   - 'view media'
