@@ -20,6 +20,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\Markup;
 use Drupal\file\Entity\File;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
@@ -694,4 +695,40 @@ function pins_entity_check_archived_on_presave(&$entity){
       }
     }
   }
+}
+
+
+
+/**
+ * Implements hook_token_info().
+ */
+function pins_token_info() {
+  $info = [];
+
+  $info['tokens']['file']['parent_node_title'] = [
+    'name' => t('Parent Node Title'),
+    'description' => t('The title of the parent node associated with the file.'),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function pins_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'file' && !empty($data['file'])) {
+    $file = $data['file'];
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'parent_node_title':
+          $replacements[$original] = \Drupal::service('pins.token.parent_node_title')->replace(['file' => $file], $options);
+          break;
+      }
+    }
+  }
+
+  return $replacements;
 }

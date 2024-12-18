@@ -1,0 +1,4 @@
+services:
+  pins.token.parent_node_title:
+    class: Drupal\pins\Token\ParentNodeTitleTokenService
+    arguments: ['@string_translation']
