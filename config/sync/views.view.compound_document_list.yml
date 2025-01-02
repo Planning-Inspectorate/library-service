@@ -620,6 +620,19 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
+        delta:
+          id: delta
+          table: node__field_documents
+          field: delta
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments:
         nid:
           id: nid
