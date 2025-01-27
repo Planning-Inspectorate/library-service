@@ -252,7 +252,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 40
+    weight: 39
     region: content
     settings:
       size: 60
@@ -260,14 +260,14 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_size:
     type: number
-    weight: 41
+    weight: 40
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 39
+    weight: 38
     region: content
     settings:
       size: 60
@@ -296,7 +296,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 42
+    weight: 41
     region: content
     settings:
       size: 60
@@ -304,7 +304,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 47
+    weight: 46
     region: content
     settings:
       size: 60
@@ -312,7 +312,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 46
+    weight: 45
     region: content
     settings:
       size: 60
@@ -320,7 +320,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 45
+    weight: 44
     region: content
     settings:
       size: 60
@@ -328,7 +328,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 38
+    weight: 37
     region: content
     settings:
       size: 60
@@ -336,7 +336,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 43
+    weight: 42
     region: content
     settings:
       size: 60
@@ -344,19 +344,19 @@ content:
     third_party_settings: {  }
   field_kl_filecdate:
     type: datetime_default
-    weight: 51
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filemdate:
     type: datetime_default
-    weight: 52
+    weight: 51
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filetype:
     type: string_textfield
-    weight: 48
+    weight: 47
     region: content
     settings:
       size: 60
@@ -376,19 +376,19 @@ content:
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
-    weight: 49
+    weight: 48
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vermdate:
     type: datetime_default
-    weight: 50
+    weight: 49
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vernum:
     type: string_textfield
-    weight: 44
+    weight: 43
     region: content
     settings:
       size: 60
@@ -410,6 +410,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_number_decimal:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_other_date:
     type: datetime_default
     weight: 33
@@ -426,7 +433,7 @@ content:
     third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox
-    weight: 8
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -462,7 +469,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -475,14 +482,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
@@ -510,6 +517,5 @@ hidden:
   feeds_item: true
   field_content_reference: true
   field_kl_doc_compound_folder: true
-  field_number_decimal: true
   field_weight: true
   langcode: true
