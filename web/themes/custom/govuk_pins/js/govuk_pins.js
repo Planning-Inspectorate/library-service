@@ -13,11 +13,13 @@ function toggleMobileMenu() {
 }
 
 function acceptCookiePolicy () {
+  console.log('acceptCookiePolicy');
   jQuery('.govuk-cookie-banner').slideUp();
   setCookie('cookie_type', 'accept', 90);
 }
 
 function rejectCookiePolicy () {
+  console.log('rejectCookiePolicy');
   jQuery('.govuk-cookie-banner').slideUp();
   setCookie('cookie_type', 'reject', 90);
 }
