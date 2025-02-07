@@ -39,15 +39,15 @@ function govuk_pins_theme() {
       ],
       'template' => 'components/search-library',
     ],
-    // 'govuk_pins_cookie' => [
-    //   'variables' => [
-    //     'title' => "Cookies for {$config->get('name')}",
-    //     'cookie_name' => _govuk_pins_theme_get_setting('govuk_pins_cookie_name'),
-    //     'cookie_policy' => array_filter(_govuk_pins_theme_get_setting('govuk_pins_cookie_policy')),
-    //     'cookie' => NULL,
-    //   ],
-    //   'template' => 'components/cookie',
-    // ],
+    'govuk_cookie' => [
+      'variables' => [
+        'title' => "Cookies for {$config->get('name')}",
+        'cookie_name' => _govuk_pins_theme_get_setting('govuk_pins_cookie_name'),
+        'cookie_policy' => array_filter(_govuk_pins_theme_get_setting('govuk_pins_cookie_policy')),
+        'cookie' => NULL,
+      ],
+      'template' => 'components/cookie',
+    ],
     'govuk_pins_header' => [
       'variables' => [
         'site_name' => $config->get('name'),
