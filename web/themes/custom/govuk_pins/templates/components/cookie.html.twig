@@ -13,6 +13,9 @@
  * @ingroup themeable
  */
 #}
+{{ dump(cookie_policy) }}
+{{ dump(cookie) }}
+{{ dump(type) }}
 {% if cookie_policy|length >= 1 %}
   {% set type = (cookie_policy|length == 1) and (cookie_policy|first == 'analytics') ? 'analytics' : 'additional' %}
 {% endif %}
