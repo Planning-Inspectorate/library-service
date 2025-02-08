@@ -15,13 +15,11 @@ function toggleMobileMenu() {
 function acceptCookiePolicy () {
   jQuery('.govuk-cookie-banner').slideUp();
   setCookie('cookie_type', 'accept', 90);
-  console.log('acceptCookiePolicy - end');
 }
 
 function rejectCookiePolicy () {
   jQuery('.govuk-cookie-banner').slideUp();
   setCookie('cookie_type', 'reject', 90);
-  console.log('rejectCookiePolicy - end');
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -30,7 +28,6 @@ function setCookie(cname, cvalue, exdays) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    console.log(document.cookie);
   } catch (error) {
     console.error("Error setting cookie:", error);
   }

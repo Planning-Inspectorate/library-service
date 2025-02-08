@@ -459,7 +459,6 @@ function govuk_pins_preprocess(&$variables) {
 function govuk_pins_preprocess_govuk_cookie(&$variables) {
   if (isset($_COOKIE['cookie_type'])) {
     $variables['cookie'] = $_COOKIE['cookie_type'];
-    Drupal::logger('cookie')->notice($variables['cookie']);
   }
 }
 
