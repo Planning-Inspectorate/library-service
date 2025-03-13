@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.kl_folders.feeds_item
+    - field.field.taxonomy_term.kl_folders.field_alternative_title
     - field.field.taxonomy_term.kl_folders.field_authors
     - field.field.taxonomy_term.kl_folders.field_kl_admin_only
     - field.field.taxonomy_term.kl_folders.field_kl_authors
@@ -26,6 +27,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -34,7 +36,6 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - description
@@ -55,6 +56,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: ds_content
+  field_alternative_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_kl_admin_only:
     type: boolean
     label: inline

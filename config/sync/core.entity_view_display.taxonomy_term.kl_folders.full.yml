@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
     - field.field.taxonomy_term.kl_folders.feeds_item
+    - field.field.taxonomy_term.kl_folders.field_alternative_title
     - field.field.taxonomy_term.kl_folders.field_authors
     - field.field.taxonomy_term.kl_folders.field_kl_admin_only
     - field.field.taxonomy_term.kl_folders.field_kl_authors
@@ -27,6 +28,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -35,7 +37,6 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - taxonomy_term_title
@@ -223,6 +224,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   feeds_item: true
+  field_alternative_title: true
   field_authors: true
   field_kl_admin_only: true
   field_kl_folder_type: true
