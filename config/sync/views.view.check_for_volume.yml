@@ -4,12 +4,15 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.storage.node.field_kl_series
     - field.storage.node.field_volume
     - node.type.hard_copy
     - node.type.kl_compound_document
     - node.type.kl_document
+    - taxonomy.vocabulary.kl_series
   module:
     - node
+    - taxonomy
     - user
 id: check_for_volume
 label: 'Check for Volume'
@@ -155,10 +158,74 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_kl_series:
+          id: field_kl_series
+          table: node__field_kl_series
+          field: field_kl_series
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Series
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 100
           total_pages: null
           id: 0
@@ -284,21 +351,28 @@ display:
           operator: 'not empty'
           value: ''
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: field_volume_value_op
+            label: Volume
             description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
+            use_operator: true
+            operator: field_volume_value_op
+            operator_limit_selection: true
+            operator_list:
+              empty: empty
+              'not empty': 'not empty'
+            identifier: field_volume_value
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -312,6 +386,66 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_kl_series_target_id:
+          id: field_kl_series_target_id
+          table: node__field_kl_series
+          field: field_kl_series_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_kl_series_target_id_op
+            label: Series
+            description: ''
+            use_operator: true
+            operator: field_kl_series_target_id_op
+            operator_limit_selection: true
+            operator_list:
+              or: or
+              empty: empty
+              'not empty': 'not empty'
+            identifier: field_kl_series_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: kl_series
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
       style:
         type: table
         options:
@@ -375,6 +509,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_kl_series'
         - 'config:field.storage.node.field_volume'
   page_1:
     id: page_1
@@ -394,4 +529,5 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_kl_series'
         - 'config:field.storage.node.field_volume'
