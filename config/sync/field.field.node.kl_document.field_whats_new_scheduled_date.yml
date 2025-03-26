@@ -1,0 +1,21 @@
+uuid: 2986334f-9235-4296-9656-3489dfd07efb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_whats_new_scheduled_date
+    - node.type.kl_document
+  module:
+    - datetime
+id: node.kl_document.field_whats_new_scheduled_date
+field_name: field_whats_new_scheduled_date
+entity_type: node
+bundle: kl_document
+label: 'Whats New Scheduled Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

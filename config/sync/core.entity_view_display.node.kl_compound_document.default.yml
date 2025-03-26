@@ -28,6 +28,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
+    - field.field.node.kl_compound_document.field_whats_new_scheduled_date
     - node.type.kl_compound_document
   module:
     - datetime
@@ -45,7 +46,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: hidden
-      weight: 4
+      weight: 29
       format_type: accordion
       format_settings:
         classes: ''
@@ -97,6 +98,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -105,26 +107,28 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - body
-        - field_weight
+        - field_alternative_title
         - field_kl_doc_id
-        - field_kl_archived
+        - field_weight
         - field_kl_doc_unique_id
-        - field_kl_archived_date
+        - field_kl_archived
         - field_kl_doc_folder
         - field_kl_doc_version
+        - field_kl_archived_date
         - field_kl_classification
         - field_kl_doc_parentid
+        - field_volume
         - field_kl_reading_lists
         - field_kl_doc_parent_subtype
+        - field_date
         - field_kl_authors
         - field_kl_doc_origindataid
+        - field_whats_new_scheduled_date
         - field_kl_series
         - field_security_classification
-        - field_date
 id: node.kl_compound_document.default
 targetEntityType: node
 bundle: kl_compound_document
@@ -143,14 +147,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
-    region: content
-  field_best_bet:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
     weight: 1
     region: ds_content
   field_date:
@@ -161,7 +157,7 @@ content:
       past_format: '@interval ago'
       granularity: 2
     third_party_settings: {  }
-    weight: 14
+    weight: 6
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -199,7 +195,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 2
+    weight: 3
     region: ds_content
   field_kl_archived_date:
     type: datetime_default
@@ -236,7 +232,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 3
+    weight: 4
     region: ds_content
   field_kl_authors:
     type: entity_reference_label
@@ -681,8 +677,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
-    region: content
+    weight: 5
+    region: ds_content
   field_weight:
     type: default_weight
     label: inline
@@ -716,7 +712,44 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 1
+    weight: 2
+    region: ds_content
+  field_whats_new_scheduled_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: fallback
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 7
     region: ds_content
 hidden:
   entity_print_view_epub: true
@@ -724,6 +757,7 @@ hidden:
   entity_print_view_word_docx: true
   feeds_item: true
   field_archived_note: true
+  field_best_bet: true
   field_content_reference: true
   field_documents: true
   field_general_notes: true

@@ -50,6 +50,7 @@ dependencies:
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
+    - field.field.node.kl_document.field_whats_new_scheduled_date
     - node.type.kl_document
   module:
     - cshs
@@ -69,6 +70,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -77,7 +79,6 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - field_alternative_title
@@ -114,6 +115,7 @@ third_party_settings:
         - field_security_classification
         - field_other_date
         - field_long_text
+        - field_whats_new_scheduled_date
         - field_physical_description
         - field_version_id
         - field_filemd5
@@ -127,7 +129,7 @@ third_party_settings:
       label: 'Migration report'
       parent_name: ''
       region: hidden
-      weight: 61
+      weight: 62
       format_type: accordion
       format_settings:
         classes: ''
@@ -225,7 +227,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 35
+    weight: 36
     region: ds_content
   field_kl_archived:
     type: boolean
@@ -495,7 +497,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 38
+    weight: 39
     region: ds_content
   field_kl_doc_filename:
     type: string
@@ -1156,7 +1158,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 33
+    weight: 34
     region: ds_content
   field_search_exclude:
     type: boolean
@@ -1166,7 +1168,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 36
+    weight: 37
     region: ds_content
   field_security_classification:
     type: entity_reference_label
@@ -1183,7 +1185,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 37
+    weight: 38
     region: ds_content
   field_version_id:
     type: string
@@ -1191,7 +1193,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 34
+    weight: 35
     region: ds_content
   field_weight:
     type: default_weight
@@ -1227,6 +1229,43 @@ content:
             prefix: ''
             suffix: ''
     weight: 27
+    region: ds_content
+  field_whats_new_scheduled_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: fallback
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: strong
+            lbw-cl: label
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: p
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 33
     region: ds_content
   links:
     settings: {  }

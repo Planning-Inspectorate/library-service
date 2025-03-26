@@ -51,6 +51,7 @@ dependencies:
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
+    - field.field.node.kl_document.field_whats_new_scheduled_date
     - node.type.kl_document
   module:
     - cshs
@@ -69,6 +70,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -77,7 +79,6 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - field_kl_doc_file
@@ -1035,6 +1036,7 @@ hidden:
   field_vernum: true
   field_version_id: true
   field_weight: true
+  field_whats_new_scheduled_date: true
   langcode: true
   links: true
   search_api_excerpt: true

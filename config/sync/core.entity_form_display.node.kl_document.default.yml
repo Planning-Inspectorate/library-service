@@ -50,6 +50,7 @@ dependencies:
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
+    - field.field.node.kl_document.field_whats_new_scheduled_date
     - node.type.kl_document
   module:
     - cshs
@@ -129,6 +130,7 @@ third_party_settings:
         - field_isbn
         - field_other_date
         - field_long_text
+        - field_whats_new_scheduled_date
         - field_kl_archived
         - field_kl_archived_date
         - field_archived_note
@@ -166,7 +168,7 @@ content:
     third_party_settings: {  }
   field_archived_note:
     type: string_textarea
-    weight: 37
+    weight: 38
     region: content
     settings:
       rows: 5
@@ -196,7 +198,7 @@ content:
     third_party_settings: {  }
   field_filemd5:
     type: string_textfield
-    weight: 53
+    weight: 58
     region: content
     settings:
       size: 60
@@ -220,14 +222,14 @@ content:
     third_party_settings: {  }
   field_kl_archived:
     type: boolean_checkbox
-    weight: 35
+    weight: 36
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_kl_archived_date:
     type: datetime_default
-    weight: 36
+    weight: 37
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -252,7 +254,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_path:
     type: string_textfield
-    weight: 39
+    weight: 45
     region: content
     settings:
       size: 60
@@ -260,14 +262,14 @@ content:
     third_party_settings: {  }
   field_kl_doc_file_size:
     type: number
-    weight: 40
+    weight: 46
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_kl_doc_filename:
     type: string_textfield
-    weight: 38
+    weight: 44
     region: content
     settings:
       size: 60
@@ -288,7 +290,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_id:
     type: string_textfield
-    weight: 36
+    weight: 42
     region: content
     settings:
       size: 60
@@ -296,7 +298,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_mime_type:
     type: string_textfield
-    weight: 41
+    weight: 47
     region: content
     settings:
       size: 60
@@ -304,7 +306,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_origindataid:
     type: string_textfield
-    weight: 46
+    weight: 52
     region: content
     settings:
       size: 60
@@ -312,7 +314,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parent_subtype:
     type: string_textfield
-    weight: 45
+    weight: 51
     region: content
     settings:
       size: 60
@@ -320,7 +322,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_parentid:
     type: string_textfield
-    weight: 44
+    weight: 50
     region: content
     settings:
       size: 60
@@ -328,7 +330,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_unique_id:
     type: string_textfield
-    weight: 37
+    weight: 43
     region: content
     settings:
       size: 60
@@ -336,7 +338,7 @@ content:
     third_party_settings: {  }
   field_kl_doc_version:
     type: string_textfield
-    weight: 42
+    weight: 48
     region: content
     settings:
       size: 60
@@ -344,19 +346,19 @@ content:
     third_party_settings: {  }
   field_kl_filecdate:
     type: datetime_default
-    weight: 50
+    weight: 56
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filemdate:
     type: datetime_default
-    weight: 51
+    weight: 57
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_filetype:
     type: string_textfield
-    weight: 47
+    weight: 53
     region: content
     settings:
       size: 60
@@ -376,19 +378,19 @@ content:
     third_party_settings: {  }
   field_kl_vercdate:
     type: datetime_default
-    weight: 48
+    weight: 54
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vermdate:
     type: datetime_default
-    weight: 49
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }
   field_kl_vernum:
     type: string_textfield
-    weight: 43
+    weight: 49
     region: content
     settings:
       size: 60
@@ -408,13 +410,6 @@ content:
     region: content
     settings:
       rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  field_number_decimal:
-    type: number
-    weight: 11
-    region: content
-    settings:
       placeholder: ''
     third_party_settings: {  }
   field_other_date:
@@ -440,20 +435,20 @@ content:
     third_party_settings: {  }
   field_security_classification:
     type: options_select
-    weight: 38
+    weight: 39
     region: content
     settings: {  }
     third_party_settings: {  }
   field_vernum:
     type: number
-    weight: 54
+    weight: 59
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_version_id:
     type: string_textfield
-    weight: 55
+    weight: 60
     region: content
     settings:
       size: 60
@@ -466,6 +461,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_whats_new_scheduled_date:
+    type: datetime_default
+    weight: 35
+    region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -517,5 +518,6 @@ hidden:
   feeds_item: true
   field_content_reference: true
   field_kl_doc_compound_folder: true
+  field_number_decimal: true
   field_weight: true
   langcode: true

@@ -29,6 +29,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
+    - field.field.node.kl_compound_document.field_whats_new_scheduled_date
     - node.type.kl_compound_document
   module:
     - datetime
@@ -45,7 +46,7 @@ third_party_settings:
       label: Accordion
       parent_name: ''
       region: hidden
-      weight: 35
+      weight: 36
       format_type: fieldset
       format_settings:
         classes: ''
@@ -91,6 +92,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
+        label: ''
         classes:
           layout_class: {  }
         wrappers:
@@ -99,7 +101,6 @@ third_party_settings:
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
     regions:
       ds_content:
         - body
@@ -546,6 +547,7 @@ hidden:
   field_kl_doc_unique_id: true
   field_kl_doc_version: true
   field_weight: true
+  field_whats_new_scheduled_date: true
   langcode: true
   links: true
   search_api_excerpt: true
