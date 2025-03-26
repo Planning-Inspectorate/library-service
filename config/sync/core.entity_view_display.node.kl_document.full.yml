@@ -101,8 +101,9 @@ third_party_settings:
         - field_archived_note
         - field_kl_doc_compound_folder
         - field_content_reference
-        - field_kl_series
         - field_kl_authors
+        - field_kl_series
+        - field_whats_new_scheduled_date
         - field_kl_reading_lists
         - field_kl_classification
   field_group:
@@ -112,7 +113,7 @@ third_party_settings:
       label: 'Accordion group'
       parent_name: ''
       region: hidden
-      weight: 29
+      weight: 30
       format_type: tabs
       format_settings:
         classes: ''
@@ -168,6 +169,7 @@ third_party_settings:
         - field_kl_doc_compound_folder
         - field_content_reference
         - field_kl_authors
+        - field_whats_new_scheduled_date
       label: 'Singular Attribute Section'
       parent_name: ''
       region: ds_content
@@ -633,7 +635,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 18
+    weight: 17
     region: ds_content
   field_kl_classification:
     type: entity_reference_label
@@ -1006,6 +1008,43 @@ content:
             suffix: ''
     weight: 5
     region: ds_content
+  field_whats_new_scheduled_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: olivero_medium
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: dt
+            lbw-cl: 'govuk-summary-list__key govuk-!-width-one-third'
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: govuk-summary-list__row
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: dd
+            fi-cl: govuk-summary-list__value
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 18
+    region: ds_content
 hidden:
   body: true
   entity_print_view_epub: true
@@ -1036,7 +1075,6 @@ hidden:
   field_vernum: true
   field_version_id: true
   field_weight: true
-  field_whats_new_scheduled_date: true
   langcode: true
   links: true
   search_api_excerpt: true
