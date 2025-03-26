@@ -95,6 +95,7 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       setDateTimeElement($form, 'field_kl_archived_date');
       setDateTimeElement($form, 'field_other_date');
       setDateTimeElement($form, 'field_date');
+      setDateTimeElement($form, 'field_whats_new_scheduled_date');
       //$form['#validate'][] = 'unique_title_node_form_validate';
       $form['#validate'][] = 'archived_data_node_form_validate';
 
