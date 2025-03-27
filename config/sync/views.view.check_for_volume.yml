@@ -30,7 +30,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Check for Volume'
+      title: 'Volume Management'
       fields:
         views_bulk_operations_bulk_form:
           id: views_bulk_operations_bulk_form
