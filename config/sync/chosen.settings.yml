@@ -6,16 +6,17 @@ disable_search_threshold: 0
 minimum_width: 0
 max_shown_results: null
 use_relative_width: false
-jquery_selector: "select#edit-field-kl-authors,\r\nselect#edit-field-kl-classification,\r\nselect#edit-field-kl-reading-lists,\r\nselect#edit-field-kl-series,\r\nselect#edit-field-kl-doc-folder-target-id,\r\nselect#edit-series,\r\nselect#edit-readinglist,\r\nselect#edit-field-kl-authors-target-id,\r\n.form-item--field-kl-series select,\r\n.form-item--field-kl-authors select,\r\n.form-item--field-kl-reading-lists select,\r\n.form-item--field-kl-classification select,\r\n.form-item--tid-kl-authors select,\r\n.form-item--tid-kl-classification select,\r\n.form-item--tid-kl-folders select,\r\n.form-item--tid-kl-publications select,\r\n.form-item--tid-kl-reading-lists select,\r\n.form-item--tid-kl-series select,\r\n.form-item--tid-kl-topics select,\r\n.form-item--module select,\r\n.form-item--complete-picker select,\r\n.form-item--partial-picker select"
+jquery_selector: "select#edit-field-kl-authors,\r\nselect#edit-field-kl-classification,\r\nselect#edit-field-kl-reading-lists,\r\nselect#edit-field-kl-series,\r\nselect#edit-field-kl-doc-folder-target-id,\r\nselect#edit-series,\r\nselect#edit-readinglist,\r\nselect#edit-field-kl-authors-target-id,\r\nselect#edit-field-kl-classification-target-id,\r\n.form-item--field-kl-series select,\r\n.form-item--field-kl-authors select,\r\n.form-item--field-kl-reading-lists select,\r\n.form-item--field-kl-classification select,\r\n.form-item--tid-kl-authors select,\r\n.form-item--tid-kl-classification select,\r\n.form-item--tid-kl-folders select,\r\n.form-item--tid-kl-publications select,\r\n.form-item--tid-kl-reading-lists select,\r\n.form-item--tid-kl-series select,\r\n.form-item--tid-kl-topics select,\r\n.form-item--module select,\r\n.form-item--complete-picker select,\r\n.form-item--partial-picker select"
 search_contains: false
 disable_search: false
 allow_single_deselect: false
+add_helper_buttons: false
 disabled_themes:
-  claro: '0'
   olivero: '0'
+  claro: '0'
   bootstrap5: '0'
-  govuk: '0'
   b5: '0'
+  govuk: '0'
   govuk_pins: '0'
 chosen_include: 2
 placeholder_text_multiple: 'Choose some options'

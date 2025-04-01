@@ -21,10 +21,10 @@ dependencies:
     - node.type.pdf
     - system.menu.admin
     - taxonomy.vocabulary.kl_authors
+    - taxonomy.vocabulary.kl_classification
     - taxonomy.vocabulary.kl_folders
     - taxonomy.vocabulary.kl_reading_lists
     - taxonomy.vocabulary.kl_series
-    - taxonomy.vocabulary.tags
   module:
     - better_exposed_filters
     - datetime
@@ -1291,6 +1291,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 300
           total_pages: null
           id: 0
@@ -1839,30 +1840,30 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
-        tid_3:
-          id: tid_3
-          table: taxonomy_index
-          field: tid
+        field_kl_classification_target_id:
+          id: field_kl_classification_target_id
+          table: node__field_kl_classification
+          field: field_kl_classification_target_id
           relationship: none
           group_type: group
-          admin_label: Tags
+          admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: tid_3_op
-            label: Tags
+            operator_id: field_kl_classification_target_id_op
+            label: Classifications
             description: ''
             use_operator: false
-            operator: tid_3_op
+            operator: field_kl_classification_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: tag
+            identifier: field_kl_classification_target_id
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1883,12 +1884,19 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: true
-          vid: tags
-          type: textfield
-          hierarchy: false
+          reduce_duplicates: false
+          vid: kl_classification
+          type: select
+          hierarchy: true
           limit: true
           error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
         field_kl_doc_id_value:
           id: field_kl_doc_id_value
           table: node__field_kl_doc_id
