@@ -120,8 +120,8 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
                 $field_selectedValue = NULL;
             }
         }
-        // $form_state->setCached(FALSE);
-        // $form_state->setRebuild(TRUE);
+        $form_state->setCached(FALSE);
+        $form_state->setRebuild(TRUE);
     }
 
 }
