@@ -178,6 +178,7 @@ function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
           //Use nid as a unique value
           $reference_id = $entity->id();
           pins_entity_insert_unique_reference_id($entity, $reference_id);    
+          pins_entity_attach_to_compound_folder_on_postsave($entity);   
           break;
       }
       break;
@@ -668,6 +669,36 @@ function pins_entity_set_file_size_on_presave(&$entity){
       $fileSize = $fileField->getSize();
       if ($fileSize > 0)
           $entity->set('field_kl_doc_file_size', $fileSize);
+    }
+  }
+}
+/**
+ * Implements hook_entity_update().
+ */
+function pins_entity_update(\Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() === 'node') {
+    pins_entity_attach_to_compound_folder_on_postsave($entity);
+  }
+}
+
+/**
+ * Attaches the node as a field_documents reference of the compound folder.
+ */
+function pins_entity_attach_to_compound_folder_on_postsave(&$entity) {
+  if ($entity->hasField('field_kl_doc_compound_folder')) {
+    $compound_folder_entities = $entity->get('field_kl_doc_compound_folder')->referencedEntities();
+    if (!empty($compound_folder_entities)) {
+      foreach ($compound_folder_entities as $compound_folder) {
+        if ($compound_folder && $compound_folder->hasField('field_documents')) {
+          $current_references = $compound_folder->get('field_documents')->getValue();
+          $current_ids = array_column($current_references, 'target_id');
+          if (!in_array($entity->id(), $current_ids)) {
+            $current_ids[] = $entity->id();
+            $compound_folder->set('field_documents', $current_ids);
+            $compound_folder->save();
+          }
+        }
+      }
     }
   }
 }
