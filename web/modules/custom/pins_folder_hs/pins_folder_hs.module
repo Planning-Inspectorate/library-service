@@ -3,7 +3,6 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Entity\EntityInterface;
 
 use Drupal\Core\Ajax\AjaxResponse;
@@ -14,31 +13,14 @@ use Drupal\Core\Ajax\ReplaceCommand;
  * Implements hook_form_alter().
  */
 function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-    switch ($form_id) {
-        case 'node_kl_compound_document_form':
-            $form['#attached']['library'][] = 'pins_folder_hs/pins_folder_hs_js_lib';
-        }
-        if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_document_edit_form' || $form_id == 'node_kl_compound_document_form') {
+    if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_document_edit_form' || $form_id == 'node_kl_compound_document_form') {
         $form['#prefix'] = '<div id="form-term-wrapper">';
         $form['#suffix'] = '</div>';
         $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
             'callback' => 'pins_folder_hs_ajaxcallback',
             'event' => 'change',
             'wrapper' => 'form-term-wrapper',
-        ];    
-        $field_name = 'field_kl_doc_compound_folder';
-
-        if (isset($form[$field_name]['widget']) && is_array($form[$field_name]['widget'])) {
-          foreach ($form[$field_name]['widget'] as $delta => &$item) {
-            if (isset($item['target_id']) && is_array($item['target_id'])) {
-              $item['target_id']['#ajax'] = [
-                'callback' => 'pins_folder_hs_ajaxcallback',
-                'event' => 'change',
-                'wrapper' => 'form-term-wrapper',
-              ];
-            }
-          }
-        }
+        ];
         if ($form_state->getValue('field_kl_doc_folder')) {
             $field_selectedValue = $form_state->getValue('field_kl_doc_folder');
             foreach ($field_selectedValue as $field_selectedVal) {
@@ -72,56 +54,12 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
             }
 
         }
-        if ($form_state->getValue('field_kl_doc_compound_folder')) {
-   
-            if (!empty($form_state->getValue('field_kl_doc_compound_folder')) && isset($form_state->getValue('field_kl_doc_compound_folder')[0]['target_id'])) {
-                $all_alternative_titles = [];
-                $all_authors = [];
-                $all_series = [];
-                $all_classifications = [];
-                $all_reading_lists = [];
-                
-                $field_selectedValues = $form_state->getValue('field_kl_doc_compound_folder');
-                foreach ($field_selectedValues as $item) {
-                 
-                    if (is_array($item) && isset($item['target_id']) && !empty($item['target_id'])) {
-                        $field_selectedValue = $item['target_id'];
-                        $selected_node = \Drupal::entityTypeManager()->getStorage('node')->load($field_selectedValue);
-                        if ($selected_node instanceof NodeInterface) {
-                            $alternative_title = pins_folder_hs_get_entity_field_value($selected_node, 'field_alternative_title');
-                            $author_details = pins_folder_hs_get_entity_field_value($selected_node, 'field_kl_authors');
-                            $series_details = pins_folder_hs_get_entity_field_value($selected_node, 'field_kl_series');
-                            $classification_details = pins_folder_hs_get_entity_field_value($selected_node, 'field_kl_classification');
-                            $readinglist_details = pins_folder_hs_get_entity_field_value($selected_node, 'field_kl_reading_lists');
-                            if (!empty($alternative_title)) {
-                                $all_alternative_titles[] = reset($alternative_title); 
-                            }
-                            if (!empty($author_details)) {
-                                $all_authors = array_merge($all_authors, $author_details); 
-                            }
-                            if (!empty($series_details)) {
-                                $all_series = array_merge($all_series, $series_details); 
-                            }
-                            if (!empty($classification_details)) {
-                                $all_classifications = array_merge($all_classifications, $classification_details); 
-                            }
-                            if (!empty($readinglist_details)) {
-                                $all_reading_lists = array_merge($all_reading_lists, $readinglist_details); 
-                            }
-                            pins_folder_hs_update_form_fields($form, $form_state, 'field_alternative_title', reset($all_alternative_titles));
-                            pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_authors', $all_authors); 
-                            pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', $all_series);
-                            pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', $all_classifications);
-                            pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
-                        }
-                    }
-                }
-            } else {
-                $field_selectedValue = NULL;
-            }
-        }
         $form_state->setCached(FALSE);
         $form_state->setRebuild(TRUE);
+    }
+
+    if ($form_id == 'node_kl_compound_document_form') {
+        $form['#attached']['library'][] = 'pins_folder_hs/pins_folder_hs_js_lib';
     }
 
 }
@@ -272,33 +210,5 @@ function pins_folder_hs_clear_form_fields(&$form, $field_name) {
         if (isset($value['target_id'])) {
             $form[$field_name]['widget'][$key]['target_id']['#value'] = '';
         }
-    }
-}
-function pins_folder_hs_get_entity_field_value(EntityInterface $entity, $fieldname) {
-    try {
-        if (!$entity->hasField($fieldname)) {
-            return null;
-        }
-
-        $field_values = $entity->get($fieldname)->getValue();
-        
-        if (empty($field_values)) {
-            return null;
-        }
-
-        $result = [];
-        
-        foreach ($field_values as $field_value) {
-            if (isset($field_value['value'])) {
-                $result[] = $field_value['value'];
-            } elseif (isset($field_value['target_id'])) {
-                $result[] = $field_value['target_id'];
-            }
-        }
-
-        return array_unique($result);
-    } catch (\Exception $e) {
-        \Drupal::logger('pins_folder_hs')->error('Error retrieving field values: @message', ['@message' => $e->getMessage()]);
-        return null;
     }
 }
