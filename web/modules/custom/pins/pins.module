@@ -64,29 +64,29 @@ function pins_load_all_folders(){
 /**
   * Implements hook_form_alter().  
 */
- 
 function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  switch ($form_id) {
-    case 'node_issued_hard_copy_edit_form':
-    case 'node_hard_copy_loan_edit_form':
-      $form['#attached']['library'][] = 'pins/pins_js';
-      break;
-       
-    case 'node_hard_copy_loan_form':  
-      $form['#attached']['library'][] = 'pins/pins_js';
-      $form['title']['widget'][0]['#required'] = false;
-      $form['title']['widget']['#required'] = false;
-    break;
+  // Attach the pins_js library to relevant forms.
+  $forms_with_pins_js = [
+    'node_issued_hard_copy_edit_form',
+    'node_hard_copy_loan_edit_form',
+    'node_hard_copy_loan_form',
+    'views_form_manage_contents_manage_contents',
+    'views_exposed_form',
+  ];
+  if (in_array($form_id, $forms_with_pins_js, TRUE)) {
+    $form['#attached']['library'][] = 'pins/pins_js';
+  }
 
-    case 'node_hard_copy_form':  
-      $form['field_content_reference']['#access'] = false;
+  switch ($form_id) {
+    case 'node_hard_copy_loan_form':
+      $form['title']['widget'][0]['#required'] = FALSE;
+      $form['title']['widget']['#required'] = FALSE;
+      break;
+
+    case 'node_hard_copy_form':
+      $form['field_content_reference']['#access'] = FALSE;
       $form['#validate'][] = 'unique_title_node_form_validate';
-    break;
- 
-    case 'views_form_manage_contents_manage_contents':  
-    case 'views_exposed_form': 
-      $form['#attached']['library'][] = 'pins/pins_js';
-    break;
+      break;
 
     case 'node_kl_document_form':
     case 'node_kl_document_edit_form':
@@ -97,72 +97,69 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       setDateTimeElement($form, 'field_other_date');
       setDateTimeElement($form, 'field_date');
       setDateTimeElement($form, 'field_whats_new_scheduled_date');
-      //$form['#validate'][] = 'unique_title_node_form_validate';
       $form['#validate'][] = 'archived_data_node_form_validate';
+      break;
   }
 
-  if($form_id == 'node_kl_compound_document_edit_form' || $form_id == 'node_kl_compound_document_form'){
-    // Add link button only if the form is in edit mode
+  // Add "Create Document" link to compound document edit/add forms.
+  if (in_array($form_id, ['node_kl_compound_document_edit_form', 'node_kl_compound_document_form'], TRUE)) {
     $node = $form_state->getFormObject()->getEntity();
     if (!$node->isNew()) {
-      // Construct the URL using the node ID
       $url = Url::fromRoute('node.add', ['node_type' => 'kl_document'], ['query' => ['compound_doc_nid' => $node->id()]]);
       $form['actions']['link_to_kl_document'] = [
         '#type' => 'markup',
         '#markup' => '<a href="' . $url->toString() . '" class="button">Create Document</a>',
-        '#weight' => 101, // Adjust weight as needed
+        '#weight' => 101,
       ];
     }
   }
 
-  if($form_id == 'node_kl_document_form' || $form_id == 'node_kl_document_edit_form'){
-    // Add link button only if the form is in edit mode
+  // Logic for pre-populating KL Document form from Compound Document.
+  if (in_array($form_id, ['node_kl_document_form', 'node_kl_document_edit_form'], TRUE)) {
     $request = \Drupal::request();
     $compound_doc_nid = $request->query->get('compound_doc_nid');
-    if($compound_doc_nid != null) {
-      $all_alternative_titles = [];
-      $all_authors = [];
-      $all_series = [];
-      $all_classifications = [];
-      $all_reading_lists = [];
+    $form['field_kl_doc_compound_folder']['#access'] = FALSE;
+
+    if ($compound_doc_nid) {
       $selected_node = \Drupal::entityTypeManager()->getStorage('node')->load($compound_doc_nid);
       if ($selected_node instanceof NodeInterface) {
-          $form['field_kl_doc_folder']['#access'] = FALSE;
-          $form['field_kl_doc_compound_folder']['widget']['#default_value'] = [$compound_doc_nid];
-          $form['field_kl_doc_compound_folder']['#access'] = FALSE;
-          $alternative_title = pins_get_entity_field_value($selected_node, 'field_alternative_title');
-          $author_details = pins_get_entity_field_value($selected_node, 'field_kl_authors');
-          $series_details = pins_get_entity_field_value($selected_node, 'field_kl_series');
-          $classification_details = pins_get_entity_field_value($selected_node, 'field_kl_classification');
-          $readinglist_details = pins_get_entity_field_value($selected_node, 'field_kl_reading_lists');
-          if (!empty($alternative_title)) {
-              $all_alternative_titles[] = reset($alternative_title); 
-          }
-          if (!empty($author_details)) {
-              $all_authors = array_merge($all_authors, $author_details); 
-          }
-          if (!empty($series_details)) {
-              $all_series = array_merge($all_series, $series_details); 
-          }
-          if (!empty($classification_details)) {
-              $all_classifications = array_merge($all_classifications, $classification_details); 
-          }
-          if (!empty($readinglist_details)) {
-              $all_reading_lists = array_merge($all_reading_lists, $readinglist_details); 
-          }
+        $form['field_kl_doc_folder']['#access'] = FALSE;
+        $form['field_kl_doc_compound_folder']['widget']['#default_value'] = [$compound_doc_nid];
 
-          pins_update_form_fields($form, $form_state, 'field_alternative_title', reset($all_alternative_titles));
-          pins_update_form_fields($form, $form_state, 'field_kl_authors', $all_authors); 
-          pins_update_form_fields($form, $form_state, 'field_kl_series', $all_series);
-          pins_update_form_fields($form, $form_state, 'field_kl_classification', $all_classifications);
-          pins_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
-          pins_update_form_fields($form, $form_state, 'field_kl_doc_compound_folder', $compound_doc_nid);
+        $all_alternative_titles = [];
+        $all_authors = [];
+        $all_series = [];
+        $all_classifications = [];
+        $all_reading_lists = [];
 
-          $form['actions']['submit']['#submit'][] = function (&$form, \Drupal\Core\Form\FormStateInterface $form_state) use ($compound_doc_nid) {
-            $form_state->setRedirect('entity.node.edit_form', ['node' => $compound_doc_nid]);
-          };       
+        if ($alternative_title = pins_get_entity_field_value($selected_node, 'field_alternative_title')) {
+          $all_alternative_titles[] = reset($alternative_title);
+        }
+        if ($author_details = pins_get_entity_field_value($selected_node, 'field_kl_authors')) {
+          $all_authors = array_merge($all_authors, $author_details);
+        }
+        if ($series_details = pins_get_entity_field_value($selected_node, 'field_kl_series')) {
+          $all_series = array_merge($all_series, $series_details);
+        }
+        if ($classification_details = pins_get_entity_field_value($selected_node, 'field_kl_classification')) {
+          $all_classifications = array_merge($all_classifications, $classification_details);
+        }
+        if ($readinglist_details = pins_get_entity_field_value($selected_node, 'field_kl_reading_lists')) {
+          $all_reading_lists = array_merge($all_reading_lists, $readinglist_details);
+        }
+
+        pins_update_form_fields($form, $form_state, 'field_alternative_title', reset($all_alternative_titles));
+        pins_update_form_fields($form, $form_state, 'field_kl_authors', $all_authors);
+        pins_update_form_fields($form, $form_state, 'field_kl_series', $all_series);
+        pins_update_form_fields($form, $form_state, 'field_kl_classification', $all_classifications);
+        pins_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
+        pins_update_form_fields($form, $form_state, 'field_kl_doc_compound_folder', $compound_doc_nid);
+
+        $form['actions']['submit']['#submit'][] = function (&$form, FormStateInterface $form_state) use ($compound_doc_nid) {
+          $form_state->setRedirect('entity.node.edit_form', ['node' => $compound_doc_nid]);
+        };
       }
-    }    
+    }
   }
 }
 
@@ -185,14 +182,12 @@ function pins_get_entity_field_value(EntityInterface $entity, $fieldname) {
           return null;
       }
 
-      $field_values = $entity->get($fieldname)->getValue();
-      
+      $field_values = $entity->get($fieldname)->getValue();      
       if (empty($field_values)) {
           return null;
       }
 
-      $result = [];
-      
+      $result = [];      
       foreach ($field_values as $field_value) {
           if (isset($field_value['value'])) {
               $result[] = $field_value['value'];
@@ -269,7 +264,6 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
   *function hook_ENTITY_TYPE_insert
   *
 */
-
 function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {  
   switch ( $entity->getEntityTypeId()) {
     case 'node':
