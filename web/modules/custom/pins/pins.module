@@ -22,7 +22,7 @@ use Drupal\Core\Render\Markup;
 use Drupal\file\Entity\File;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Url;
-
+use Drupal\Core\Link;
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
  */
@@ -862,4 +862,93 @@ function pins_tokens($type, $tokens, array $data, array $options, BubbleableMeta
   }
 
   return $replacements;
+}
+
+function pins_preprocess_views_view_field(&$variables) {
+  $view = $variables['view'];
+  $field = $variables['field'];
+  $display_id = $view->getDisplay()->display['id'];
+  // Handle the file node reference ID field
+  if (($view->id() === 'lib_search' || $view->id() === 'lib_search_attachment') && $display_id === 'page_1') {
+      if($field->field == 'custom_value') {
+        $html = $variables['output'];
+        if (strpos($html, '::') !== false) {
+          // Extract nid and title from the custom_value
+          list($nid, $title) = explode('::', $html, 2);
+          if (is_numeric($nid) && (int)$nid > 0) {
+            // Create a URL to the node
+            $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
+            // Create an anchor tag
+            $link = Link::fromTextAndUrl($title, $node_url)->toString();
+            // Replace the original output with the anchor tag
+            $variables['output'] = $link;
+          }
+        }
+      }
+   }
+}
+
+
+/**
+ * @file
+ * The method to create database for saving failed file while indexing
+ * */
+
+ function pins_update_8003(&$sandbox) {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  if (!$schema->tableExists('saa_indexing_log')) {
+    $table_schema = [
+      'description' => 'Stores indexing log data.',
+      'fields' => [
+        'id' => [
+          'type' => 'serial',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'description' => 'Primary key.',
+        ],
+        'fid' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'description' => 'File ID.',
+        ],
+        'file_name' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'description' => 'File name.',
+        ],
+        'file_uri' => [
+          'type' => 'varchar',
+          'length' => 2048,
+          'not null' => TRUE,
+          'description' => 'File URI.',
+        ],
+        'file_size' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'description' => 'File size (bytes).',
+        ],
+        'status' => [
+          'type' => 'varchar',
+          'length' => 50,
+          'not null' => TRUE,
+          'description' => 'Indexing status (e.g., success, ignored, error).',
+        ],
+        'message' => [
+          'type' => 'text',
+          'not null' => FALSE,
+          'description' => 'Detailed message or error.',
+        ],
+        'created' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'description' => 'Timestamp of log entry.',
+        ],
+      ],
+      'primary key' => ['id'],
+    ];
+
+    $schema->createTable('saa_indexing_log', $table_schema);
+  }
 }

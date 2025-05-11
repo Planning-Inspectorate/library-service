@@ -1,0 +1,33 @@
+<form method="GET">
+    <label for="status">Filter by Status:</label>
+    <select name="status" id="status" onchange="this.form.submit()">
+        {% for key, value in status_options %}
+            <option value="{{ key }}" {% if selected_status == key %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+    </select>
+</form>
+{{count}} results found.
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">FID</th>
+            <th scope="col" class="govuk-table__header">File Name</th>
+            <th scope="col" class="govuk-table__header">Status</th>
+            {# <th scope="col" class="govuk-table__header">Message</th> #}
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        {% for result in results %}
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ result.fid }}</td>
+                <td class="govuk-table__cell">
+                    <a href="{{ result.file_uri }}" target="_blank" class="govuk-link">
+                        {{ result.file_name }}
+                    </a>
+                </td>
+                <td class="govuk-table__cell">{{ result.status }}</td>
+                {# <td class="govuk-table__cell">{{ result.message }}</td> #}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

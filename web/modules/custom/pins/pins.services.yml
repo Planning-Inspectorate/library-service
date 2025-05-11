@@ -1,4 +1,8 @@
 services:
   pins.token.parent_node_title:
     class: Drupal\pins\Token\ParentNodeTitleTokenService
-    arguments: ['@string_translation']
+    arguments: ['@string_translation', '@pins.indexing_log']
+
+  pins.indexing_log:
+    class: Drupal\pins\Services\IndexingLogService
+    arguments: ['@database']

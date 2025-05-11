@@ -33,3 +33,21 @@ function file_path_checker_page() {
     '#markup' => $message,
   ];
 }
+
+
+/**
+ * Implements hook_theme().
+ */
+function file_path_checker_theme($existing, $type, $theme, $path) {
+  return [
+    'file-path-checker-indexing-log' => [
+      'variables' => [
+        'results' => NULL,
+        'count' => NULL,
+        'status_options' => NULL,
+        'selected_status' => NULL,
+      ],
+      'template' => 'file-path-checker-indexing-log',
+    ],
+  ];
+}

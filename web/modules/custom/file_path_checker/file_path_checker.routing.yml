@@ -31,3 +31,12 @@ file_path_checker.dresults:
     _title: 'File Path Checker Results'
   requirements:
     _permission: 'access content'
+
+
+file_path_checker.indexing_log:
+  path: '/indexing-log'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\IndexingLogController::displayIndexingLog'
+    _title: 'Indexing Log'
+  requirements:
+    _permission: 'access content'
