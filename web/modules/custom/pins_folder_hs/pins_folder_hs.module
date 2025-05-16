@@ -54,7 +54,7 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
             }
 
         }
-        $form_state->setCached(FALSE);
+        // $form_state->setCached(FALSE);
         $form_state->setRebuild(TRUE);
     }
 
