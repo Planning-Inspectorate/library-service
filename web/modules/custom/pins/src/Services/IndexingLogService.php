@@ -66,9 +66,21 @@ class IndexingLogService {
               $status = 'error';          
               $message = 'File does not exist after URI correction - [size: @fileSize, fid: @fid, name: @fileName, uri: @fileUri]'; 
               break;
+            case 'file_path_updated':
+                $status = 'warning';          
+                $message = 'File path updated - [uri: @fileUri]'; 
+                break;              
             case 'file_not_found':
               $status = 'error';          
               $message = 'File does not exist - [size: @fileSize, fid: @fid, name: @fileName, uri: @fileUri]'; 
+              break;
+            case 'file_path_exists':
+              $status = 'error';          
+              $message = 'File exist without path alteration - [size: @fileSize, fid: @fid, name: @fileName, uri: @fileUri]'; 
+              break;
+            case 'file_indexed':
+              $status = 'error';          
+              $message = 'File indexed - [size: @fileSize, fid: @fid, name: @fileName, uri: @fileUri]'; 
               break;
             default:
               $status = 'error';          

@@ -193,6 +193,7 @@ class CustomFilesExtractor extends ProcessorPluginBase implements PluginFormInte
     $files = [];
     $config = $this->configFactory->get(static::CONFIGNAME);
     $extractor_plugin_id = $config->get('extraction_method');
+
     // Get the config option to read text files directly.
     $this->configuration['read_text_files_directly'] = $config->get('read_text_files_directly');
     if ($extractor_plugin_id != '') {
@@ -263,17 +264,20 @@ class CustomFilesExtractor extends ProcessorPluginBase implements PluginFormInte
               if (!file_exists($file_uri)) {
                 // Attempt to correct the path if it matches a specific pattern.
                 if (strpos($file_uri, 'documents\\Library') !== false) {                    
-                $updatedUri = str_replace('\\', '/', $file_uri);              
+                  $updatedUri = str_replace('\\', '/', $file_uri);              
                   if (file_exists($updatedUri)) {
                     $file->setFileUri($updatedUri);
-                    $file->save();
+                    $this->indexingLogService->IndexLog($file, 'CustomFilesExtractor', 'file_path_updated');                    
                   } else {
                     $this->indexingLogService->IndexLog($file, 'CustomFilesExtractor', 'file_not_found_after_url_update');
                   }
                 }
-              } 
+              } else {
+                $this->indexingLogService->IndexLog($file, 'CustomFilesExtractor', 'file_path_exists');
+              }
               if ($this->isFileIndexable($file, $item, $field_name)) {
                 $extraction .= $this->extractOrGetFromCache($entity, $file, $extractor_plugin);
+                $this->indexingLogService->IndexLog($file, 'CustomFilesExtractor', 'file_indexed');
               }
             }
             $field->addValue($extraction);
