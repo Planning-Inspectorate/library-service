@@ -40,3 +40,45 @@ file_path_checker.indexing_log:
     _title: 'Indexing Log'
   requirements:
     _permission: 'access content'
+
+
+file_path_checker.file_content:
+  path: '/file-checker'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FileCheckerController::content'
+    _title: 'File Checker'
+  requirements:
+    _permission: 'access content'
+
+file_path_checker.cresults:
+  path: '/file-checker/results'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FileCheckerController::resultsPage'
+    _title: 'File Checker Results'
+  requirements:
+    _permission: 'access content'
+
+file_path_checker.indexing_log_export:
+  path: '/indexing-log/csv'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\IndexingLogController::exportCsv'
+    _title: 'Export Indexing Log (CSV)'
+  requirements:
+    _permission: 'access content'
+
+file_path_checker.file_reference_checker:
+  path: '/file-reference-checker'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FileReferenceController::content'
+    _title: 'File Reference Checker'
+  requirements:
+    _permission: 'access content'
+
+file_path_checker.rresults:
+  path: '/file-reference-checker/results'
+  defaults:
+    _controller: '\Drupal\file_path_checker\Controller\FileReferenceController::resultsPage'
+    _title: 'File Reference Checker Results'
+  requirements:
+    _permission: 'administer files'
+

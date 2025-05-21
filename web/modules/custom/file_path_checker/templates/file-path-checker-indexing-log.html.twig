@@ -12,7 +12,8 @@
         <tr class="govuk-table__row">
             <th scope="col" class="govuk-table__header">FID</th>
             <th scope="col" class="govuk-table__header">File Name</th>
-            <th scope="col" class="govuk-table__header">Status</th>
+            <th scope="col" class="govuk-table__header">File Url</th>
+            {# <th scope="col" class="govuk-table__header">Status</th> #}
             {# <th scope="col" class="govuk-table__header">Message</th> #}
         </tr>
     </thead>
@@ -25,7 +26,8 @@
                         {{ result.file_name }}
                     </a>
                 </td>
-                <td class="govuk-table__cell">{{ result.status }}</td>
+                <td class="govuk-table__cell">{{ result.file_uri }}</td>
+                {# <td class="govuk-table__cell">{{ result.status }}</td> #}
                 {# <td class="govuk-table__cell">{{ result.message }}</td> #}
             </tr>
         {% endfor %}

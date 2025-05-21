@@ -51,3 +51,63 @@ function file_path_checker_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+
+
+
+
+
+/**
+ * @file
+ * The method to create database for saving failed file while indexing
+ * */
+
+ function file_path_checker_update_8006(&$sandbox) {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  if (!$schema->tableExists('fpc_node_reference')) {
+    $table_schema = [
+      'description' => 'Stores references between files and nodes.',
+      'fields' => [
+        'id' => [
+          'type' => 'serial', // This makes the 'id' field auto-incrementing
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'fid' => [
+          'type' => 'int',
+          'not null' => TRUE,
+        ],
+        'file_uri' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+        ],
+        'nid' => [
+          'type' => 'int',
+          'not null' => FALSE, // Allow NULL values
+        ],
+        'node_title' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+        ],
+        'file_exists' => [ // New column
+          'type' => 'int',
+          'size' => 'tiny',
+          'not null' => TRUE,
+          'default' => 0, // Default to 0 (false)
+          'description' => 'Indicates whether the file exists (1 = true, 0 = false)',
+        ],
+        'created' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'description' => 'Timestamp of the entry',
+        ],
+      ],
+      'primary key' => ['id']    
+    ];
+
+    $schema->createTable('fpc_node_reference', $table_schema);
+  }
+}
