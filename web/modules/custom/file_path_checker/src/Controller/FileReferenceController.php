@@ -16,7 +16,7 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 class FileReferenceController extends ControllerBase {
   use DependencySerializationTrait;
 
-
+  private $tableExists = NULL;
   /**
    * The database connection.
    *
@@ -38,7 +38,18 @@ class FileReferenceController extends ControllerBase {
     $this->database = $database;
     $this->fileSystem = $file_system;
   }
-
+  /**
+   * Checks if the saa_indexing_log table exists.
+   *
+   * @return bool
+   * TRUE if the table exists, FALSE otherwise.
+   */
+  private function checkTableExists(): bool {
+    if ($this->tableExists === NULL) { // Check if the property is still unset
+      $this->tableExists = $this->database->schema()->tableExists('fpc_node_reference');
+    }
+    return $this->tableExists;
+  }
   /**
    * {@inheritdoc}
    */
@@ -118,7 +129,8 @@ class FileReferenceController extends ControllerBase {
   
       if (empty($referenced_nodes)) {
         // Insert files **without references** into the database
-        $this->database->insert('fpc_node_reference')
+        if ($this->checkTableExists()) {
+          $this->database->insert('fpc_node_reference')
           //->key(['fid' => $fid])
           ->fields([
             'fid' => $fid,
@@ -129,20 +141,25 @@ class FileReferenceController extends ControllerBase {
             'created' => \Drupal::time()->getRequestTime(),
           ])
           ->execute();
+        }
+
       } else {
         foreach ($referenced_nodes as $nid => $title) {
-          // Insert files **with references** into the database
+          if ($this->checkTableExists()) {
+                   // Insert files **with references** into the database
           $this->database->insert('fpc_node_reference')
-            //->key(['fid' => $fid, 'nid' => $nid])
-            ->fields([
-              'fid' => $fid,
-              'file_uri' => $uri,
-              'nid' => $nid,
-              'node_title' => $title,
-              'file_exists' => $file_exists,
-              'created' => \Drupal::time()->getRequestTime(),
-            ])
-            ->execute();
+          //->key(['fid' => $fid, 'nid' => $nid])
+          ->fields([
+            'fid' => $fid,
+            'file_uri' => $uri,
+            'nid' => $nid,
+            'node_title' => $title,
+            'file_exists' => $file_exists,
+            'created' => \Drupal::time()->getRequestTime(),
+          ])
+          ->execute();
+          }
+   
         }
       }
   
