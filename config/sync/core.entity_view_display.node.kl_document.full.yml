@@ -856,7 +856,7 @@ content:
     weight: 17
     region: ds_content
   field_links:
-    type: link_separate
+    type: link
     label: inline
     settings:
       trim_length: 80
