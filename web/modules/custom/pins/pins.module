@@ -155,13 +155,26 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
         pins_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
         pins_update_form_fields($form, $form_state, 'field_kl_doc_compound_folder', $compound_doc_nid);
 
-        $form['actions']['submit']['#submit'][] = function (&$form, FormStateInterface $form_state) use ($compound_doc_nid) {
-          $form_state->setRedirect('entity.node.edit_form', ['node' => $compound_doc_nid]);
-        };
+        $form['actions']['submit']['#submit'][] = 'pins_cf_redirect_submit_handler';
       }
     }
   }
 }
+
+/**
+ * Custom submit handler for redirection.
+ *
+ * @param array $form
+ * An associative array containing the structure of the form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * The current state of the form.
+ */
+function pins_cf_redirect_submit_handler(array &$form, FormStateInterface $form_state) {
+  // Retrieve the $compound_doc_nid from the form's custom property.
+  $compound_doc_nid = $form['field_kl_doc_compound_folder']['widget']['#default_value'][0] ?? NULL;
+  $form_state->setRedirect('entity.node.edit_form', ['node' => $compound_doc_nid]);
+}
+
 
 
 function pins_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
