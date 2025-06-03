@@ -125,7 +125,11 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       if ($selected_node instanceof NodeInterface) {
         $form['field_kl_doc_folder']['#access'] = FALSE;
         $form['field_kl_doc_compound_folder']['widget']['#default_value'] = [$compound_doc_nid];
-
+        $field_date = pins_get_entity_field_value($selected_node, 'field_date');
+        if ($field_date) {
+          $specific_date = new DrupalDateTime(reset($field_date), 'UTC');
+          $form['field_date']['widget'][0]['value']['#default_value'] = $specific_date;
+        }
         $all_alternative_titles = [];
         $all_authors = [];
         $all_series = [];
@@ -180,10 +184,10 @@ function pins_cf_redirect_submit_handler(array &$form, FormStateInterface $form_
 function pins_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
   if (isset($form[$field_name]['widget'])) {
       if (is_array($new_values)) {
-          $form[$field_name]['widget']['#value'] = $new_values;
+          $form[$field_name]['widget']['#default_value'] = $new_values;
       } else {
           if (isset($form[$field_name]['widget'][0]['value'])) {
-              $form[$field_name]['widget'][0]['value']['#value'] = $new_values;
+              $form[$field_name]['widget'][0]['value']['#default_value'] = $new_values;
           }
       }
   }
