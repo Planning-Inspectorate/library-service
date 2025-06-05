@@ -470,3 +470,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding-top: .2rem;
   padding-bottom: 0;
 }
+
+.views-field-name a {
+  font-weight: bold;
+  text-decoration: none;
+}
