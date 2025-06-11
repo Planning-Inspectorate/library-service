@@ -440,6 +440,12 @@ function pins_get_target_ids($entity, $fieldname){
 */
 
 function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
+  // Check if the current user is authenticated and has permission to override document inheritance.
+  $current_user = \Drupal::currentUser();
+  if ($current_user->isAuthenticated() && $current_user->hasPermission('override document inheritance')) {
+    return; // Exit the function early.
+  }
+
   if($entity->hasField($field_name)){
     $referenced_entities = $entity->get($field_name)->referencedEntities();
     $authors = $classification = $doc_folder = $series = [];
