@@ -194,15 +194,25 @@ function pins_folder_hs_get_referenced_entities(TermInterface $term, $fieldname)
 }
 
 function pins_folder_hs_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
-    if (isset($form[$field_name]['widget'])) {
-        if (is_array($new_values)) {
-            $form[$field_name]['widget']['#value'] = $new_values;
-        } else {
-            if (isset($form[$field_name]['widget'][0]['value'])) {
-                $form[$field_name]['widget'][0]['value']['#value'] = $new_values;
-            }
-        }
+    // if (isset($form[$field_name]['widget'])) {
+    //     if (is_array($new_values)) {
+    //         $form[$field_name]['widget']['#value'] = $new_values;
+    //     } else {
+    //         if (isset($form[$field_name]['widget'][0]['value'])) {
+    //             $form[$field_name]['widget'][0]['value']['#value'] = $new_values;
+    //         }
+    //     }
+    // }
+    $form_state->setValue($field_name, $new_values);
+
+    $user_input = $form_state->getUserInput();
+    if (is_array($new_values)) {
+        $user_input[$field_name] = $new_values;
+    } else {
+        $user_input[$field_name][0]['value'] = $new_values;
     }
+    $form_state->setUserInput($user_input);
+    
 }
 
 function pins_folder_hs_clear_form_fields(&$form, $field_name) {
