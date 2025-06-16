@@ -316,7 +316,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'hard_copy':
         case 'pdf':
         case 'kl_document':
-          pins_set_inheritance($entity);
+          // Need to set inheritance for documents - commenting it for now.
+          // pins_set_inheritance($entity);
           //Use nid as a unique reference id
           if(!$entity->isNew()){
             $reference_id = $entity->id();
@@ -335,8 +336,9 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
-        case 'kl_compound_document':          
-          pins_set_inheritance($entity);
+        case 'kl_compound_document': 
+          // Need to set inheritance for compund documents - commenting it for now.         
+          // pins_set_inheritance($entity);
           //migrate compound docs once
           if($compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
             $fieldname = 'field_documents';
@@ -361,8 +363,9 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'kl_shortcut': 
         case 'kl_url':
         case 'kl_virtual_folder': 
-        case 'kl_classification_shortcut':        
-            pins_set_inheritance($entity);   
+        case 'kl_classification_shortcut':   
+            // Need to set inheritance for hard copy - commenting it for now.     
+            // pins_set_inheritance($entity);   
           break;
 
       }
@@ -440,7 +443,7 @@ function pins_get_target_ids($entity, $fieldname){
 */
 
 function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
-  
+
   if($entity->hasField($field_name)){
     $referenced_entities = $entity->get($field_name)->referencedEntities();
     $authors = $classification = $doc_folder = $series = [];
