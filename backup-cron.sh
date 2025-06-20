@@ -1,11 +1,10 @@
 #!/bin/bash
 
-echo $PWD
+echo "Current working directory: $PWD"
 
-if [ -f "$PWD/.env" ]; then  # Check if the file named ".env" exists
-    source "$PWD/.env"       # Source the file named ".env"
+if [ -f "$PWD/.env" ]; then # Check if the file named ".env" exists
+    . "$PWD/.env"          # Use the dot command instead of 'source'
 else
-    # Correct the error message to reflect what you're actually looking for
     echo "Error: Environment file ./.env not found in the current directory!"
     exit 1
 fi
