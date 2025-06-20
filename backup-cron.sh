@@ -1,6 +1,6 @@
 ENV="dev"
 
-if [ -f ".env.$ENV" ]; then
+if [ -f " /home/KnowledgeDevAdmin/pins/.env.$ENV" ]; then
     source ".env.$ENV"
 else
     echo "Error: Environment file .env.$ENV not found!"
