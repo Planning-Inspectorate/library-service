@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ENV="dev"
 
 if [ -f ".env.$ENV" ]; then
