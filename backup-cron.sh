@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV="dev"
+ENV="dev1"
 
 if [ -f ".env.$ENV" ]; then
     source ".env.$ENV"
