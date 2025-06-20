@@ -1,16 +1,12 @@
 #!/bin/bash
 
-ENV="dev1"
-
-if [ -f ".env.$ENV" ]; then
-    source ".env.$ENV"
+if [ -f "./.env" ]; then  # Check if the file named ".env" exists
+    source "./.env"       # Source the file named ".env"
 else
-    echo "Error: Environment file .env.$ENV not found!"
+    # Correct the error message to reflect what you're actually looking for
+    echo "Error: Environment file .env not found in the current directory!"
     exit 1
 fi
-
-echo "DEBUG: DB_NAME='$DB_NAME'"
-echo "DEBUG: DB_ROOT_PASSWORD='$DB_ROOT_PASSWORD'"
 
 if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     echo "Error: DB_NAME or DB_ROOT_PASSWORD not set or empty in .env.$ENV"
