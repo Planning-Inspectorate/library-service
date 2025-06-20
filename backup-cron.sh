@@ -1,7 +1,5 @@
-# Set this variable to 'dev', 'test', or 'prod' based on your current environment
 ENV="dev"
 
-# Load environment variables
 if [ -f ".env.$ENV" ]; then
     source ".env.$ENV"
 else
@@ -9,9 +7,11 @@ else
     exit 1
 fi
 
-# Ensure DB_NAME and DB_PASSWORD are set
+echo "DEBUG: DB_NAME='$DB_NAME'"
+echo "DEBUG: DB_ROOT_PASSWORD='$DB_ROOT_PASSWORD'"
+
 if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
-    echo "Error: DB_NAME or DB_ROOT_PASSWORD not set in .env.$ENV"
+    echo "Error: DB_NAME or DB_ROOT_PASSWORD not set or empty in .env.$ENV"
     exit 1
 fi
 
