@@ -2,8 +2,8 @@
 
 echo $PWD
 
-if [ -f "./.env" ]; then  # Check if the file named ".env" exists
-    source "./.env"       # Source the file named ".env"
+if [ -f "$PWD/.env" ]; then  # Check if the file named ".env" exists
+    source "$PWD/.env"       # Source the file named ".env"
 else
     # Correct the error message to reflect what you're actually looking for
     echo "Error: Environment file ./.env not found in the current directory!"
