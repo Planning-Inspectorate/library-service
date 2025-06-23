@@ -3,7 +3,7 @@
 if [ -f "$PWD/pins/.env" ]; then # Check if the file named ".env" exists
     . "$PWD/pins/.env"
 else
-    echo "Error: Environment file not found in the current directory!"
+    echo "Error: Environment file $PWD/pins/.env not found in the current directory!"
     exit 1
 fi
 
@@ -23,4 +23,5 @@ sudo docker exec -u 0 pins_mariadb bash -c "mysqldump -u root -p$DB_ROOT_PASSWOR
 # Copy the SQL file to db-backup folder in parent directory
 sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz $DB_BACKUP_DEST_DIR/backup_pins-$(date +%Y-%m-%d).sql.gz
 
+echo "Copied the SQL file to db-backup folder $DB_BACKUP_DEST_DIR"
 # End of script
