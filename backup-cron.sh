@@ -12,7 +12,7 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
-DB_BACKUP_DEST_DIR="$PWD/cron-db-backups"
+DB_BACKUP_DEST_DIR="$(dirname "$PWD")/cron-db-backups"
 
 # Login to PHP container
 sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush cr"
