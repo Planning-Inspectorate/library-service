@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "$OLDPWD/.env"
+echo "$PWD/.env"
 
-if [ -f "$OLDPWD/.env" ]; then # Check if the file named ".env" exists
-    . "$OLDPWD/.env"
+if [ -f "$PWD/.env" ]; then # Check if the file named ".env" exists
+    . "$PWD/.env"
 else
     echo "Error: Environment file not found in the current directory!"
     exit 1
@@ -14,7 +14,7 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
-PARENT_DIR="$(dirname "$OLDPWD")"
+PARENT_DIR="$(dirname "$PWD")"
 
 DB_BACKUP_DEST_DIR="$PARENT_DIR/cron-db-backups"
 
