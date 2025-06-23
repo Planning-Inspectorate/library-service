@@ -1,7 +1,9 @@
 #!/bin/bash
 
-if [ -f "/home/KnowledgeDevAdmin/pins/.env" ]; then # Check if the file named ".env" exists
-    . "/home/KnowledgeDevAdmin/pins/.env"
+echo "$OLDPWD/.env"
+
+if [ -f "$OLDPWD/.env" ]; then # Check if the file named ".env" exists
+    . "$OLDPWD/.env"
 else
     echo "Error: Environment file not found in the current directory!"
     exit 1
@@ -12,6 +14,11 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
+PARENT_DIR="$(dirname "$OLDPWD")"
+
+DB_BACKUP_DEST_DIR="$PARENT_DIR/cron-db-backups"
+
+
 # Login to PHP container
 sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush cr"
 
@@ -19,6 +26,6 @@ sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush
 sudo docker exec -u 0 pins_mariadb bash -c "mysqldump -u root -p$DB_ROOT_PASSWORD $DB_NAME | gzip  > /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz"
 
 # Copy the SQL file to db-backup folder in parent directory
-sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz ../cron-db-backups/backup_pins-$(date +%Y-%m-%d).sql.gz
+sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz $DB_BACKUP_DEST_DIR/backup_pins-$(date +%Y-%m-%d).sql.gz
 
 # End of script
