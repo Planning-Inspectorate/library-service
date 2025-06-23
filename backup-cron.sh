@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "$PWD/.env"
-
 if [ -f ".env" ]; then # Check if the file named ".env" exists
     . ".env"
 else
@@ -14,11 +12,6 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
-PARENT_DIR="$(dirname "$PWD")"
-
-DB_BACKUP_DEST_DIR="$PARENT_DIR/cron-db-backups"
-
-
 # Login to PHP container
 sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush cr"
 
@@ -26,6 +19,6 @@ sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush
 sudo docker exec -u 0 pins_mariadb bash -c "mysqldump -u root -p$DB_ROOT_PASSWORD $DB_NAME | gzip  > /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz"
 
 # Copy the SQL file to db-backup folder in parent directory
-sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz $DB_BACKUP_DEST_DIR/backup_pins-$(date +%Y-%m-%d).sql.gz
+sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz ../cron-db-backups/backup_pins-$(date +%Y-%m-%d).sql.gz
 
 # End of script
