@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f "home/KnowledgeDevAdmin/pins/.env" ]; then # Check if the file named ".env" exists
-    . "home/KnowledgeDevAdmin/pins/.env"
+if [ -f "/home/KnowledgeDevAdmin/pins/.env" ]; then # Check if the file named ".env" exists
+    . "/home/KnowledgeDevAdmin/pins/.env"
 else
     echo "Error: Environment file not found in the current directory!"
     exit 1
