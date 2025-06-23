@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "$PWD/pins/.env"
+
 if [ -f "$PWD/pins/.env" ]; then # Check if the file named ".env" exists
     . "$PWD/pins/.env"
 else
