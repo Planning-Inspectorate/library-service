@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "$PWD/.env"
-
 if [ -f "$PWD/pins/.env" ]; then # Check if the file named ".env" exists
     . "$PWD/pins/.env"
 else
@@ -15,7 +13,6 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
 fi
 
 DB_BACKUP_DEST_DIR="$PWD/cron-db-backups"
-echo "$DB_BACKUP_DEST_DIR"
 
 # Login to PHP container
 sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush cr"
