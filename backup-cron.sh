@@ -24,6 +24,8 @@ sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush
 # Login to MariaDB container
 sudo docker exec -u 0 pins_mariadb bash -c "mysqldump -u root -p$DB_ROOT_PASSWORD $DB_NAME | gzip  > /var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz"
 
+echo "mysqldump -u root -p$DB_ROOT_PASSWORD $DB_NAME"
+
 # Copy the SQL file to db-backup folder in parent directory
 sudo docker cp pins_mariadb:/var/lib/mysql/backup_pins-$(date +%Y-%m-%d).sql.gz $DB_BACKUP_DEST_DIR/backup_pins-$(date +%Y-%m-%d).sql.gz
 
