@@ -2,8 +2,8 @@
 
 echo "$PWD/.env"
 
-if [ -f "$PWD/.env" ]; then # Check if the file named ".env" exists
-    . "$PWD/.env"
+if [ -f "$PWD/pins/.env" ]; then # Check if the file named ".env" exists
+    . "$PWD/pins/.env"
 else
     echo "Error: Environment file not found in the current directory!"
     exit 1
@@ -14,10 +14,8 @@ if [ -z "$DB_NAME" ] || [ -z "$DB_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
-PARENT_DIR="$(dirname "$PWD")"
-
-DB_BACKUP_DEST_DIR="$PARENT_DIR/cron-db-backups"
-
+DB_BACKUP_DEST_DIR="$PWD/cron-db-backups"
+echo "$DB_BACKUP_DEST_DIR"
 
 # Login to PHP container
 sudo docker exec -u 0 pins_php bash -c "drush watchdog:delete all --yes && drush cr"
