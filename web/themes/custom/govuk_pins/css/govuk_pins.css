@@ -149,7 +149,7 @@ aside .editorschoice-menu.govuk-list ul {
 @media only screen and (min-width: 1024px){
   
 .box-link__top {
-    height: 150px;
+    height: 120px;
   }
 }
 .box-link__top {
@@ -158,11 +158,15 @@ aside .editorschoice-menu.govuk-list ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* padding: var(--spacing-small);*/
+  padding: var(--spacing-small); /*Added for new design*/
   /* padding: var(--spacing-medium); */
   border-top-left-radius: var(--border-radius-alt);
   border-top-right-radius: var(--border-radius-alt);
   border: #19615B solid 2px;
+}
+
+.box-link__top:link, .box-link__top a:link, .box-link__top a:visited {
+  color: black; /*Added for new design*/
 }
 
 .box-link h3 {
@@ -187,6 +191,7 @@ aside .editorschoice-menu.govuk-list ul {
 .box-link:link, .box-link a:link {
   color: #19615B;
 }
+
 
 .box-link h3 a{
   font-weight: 900;;
