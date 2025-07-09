@@ -350,8 +350,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             }
           }
          
-          //process compound documents
-          pins_compound_document($entity);
+          //process compound documents - Metadata inheritance of reference document to compound document
+          // pins_compound_document($entity);
           
           //Use nid as a unique reference id
           if(!$entity->isNew()){
