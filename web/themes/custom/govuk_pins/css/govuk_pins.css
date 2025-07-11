@@ -178,6 +178,10 @@ aside .editorschoice-menu.govuk-list ul {
 .box-link__bottom {
   background: #19615B;
   padding: var(--space-sm);
+  /* Added for new design */
+  border-top-left-radius: var(--border-radius-alt);
+  border-top-right-radius: var(--border-radius-alt);
+  /* Added for new design */
   border-bottom-left-radius: var(--border-radius-alt);
   border-bottom-right-radius: var(--border-radius-alt);
 }
