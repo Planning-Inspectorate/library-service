@@ -613,12 +613,14 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   $user = \Drupal::currentUser();
-  // Added for KL Publication 
-  // ToDo need to remove once folder logic is implemented.
-  if ($view->id() === 'content_list_page') {
+  if ($view->id() === 'taxonomy_search') {
     $term_id = $view->args[0];
-    if ($term_id > 0) {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+    $vid_value = $term->get('vid')->getValue();
+    $target_id = $vid_value[0]['target_id'];
+    $include_vid = array('kl_publications', 'kl_topics');
+    if( $target_id && in_array($target_id, $include_vid)) {
+
       if ($term && $custom_field_value = $term->get('field_reading_list')->getValue()) {
         $id_list = [];
         if (is_array($custom_field_value)) {
@@ -628,46 +630,101 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
         }
 
         if (count($id_list) > 0) {
-            foreach ($query->where as &$condition_group) {
-              foreach ($condition_group['conditions'] as &$condition) {
-                  if ($condition['field'] == 'taxonomy_index.tid = :taxonomy_index_tid1') {
-                      $condition = [
-                          'field' => 'taxonomy_index.tid',
-                          'value' => $id_list,
-                          'operator' => 'IN',
-                      ];
-                    break; 
-                  }
-               }
-            }
-        }
-        
-        $vocabulary_id = $term->bundle();
-        if ($vocabulary_id == 'kl_topics') {
-          if ($field_classifications = $term->get('field_kl_classification')->getValue()) {
-            $id_classifications = [];
-            if (is_array($field_classifications)) {
-              foreach ($field_classifications as $item) {
-                $id_classifications[] = $item['target_id']; 
+          foreach ($query->where as &$condition_group) {
+            foreach ($condition_group['conditions'] as &$condition) {
+              if ($condition['field'] == 'taxonomy_index.tid = :taxonomy_index_tid') {
+                $condition = [
+                  'field' => 'taxonomy_index.tid',
+                  'value' => $id_list,
+                  'operator' => 'IN',
+                ];
+                break; 
               }
             }
           }
-          if (is_array($id_classifications) && count($id_classifications) > 0) {
-            $definition = [
-              'table' => 'node__field_kl_classification',
-              'field' => 'entity_id',
-              'left_table' => 'node_field_data',
-              'left_field' => 'nid',
-              'type' => 'LEFT',
-            ];
-            $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
-            $query->addRelationship('node__field_kl_classification', $join, 'node_field_data');
-            $query->addWhere('AND', 'node__field_kl_classification.field_kl_classification_target_id', $id_classifications, 'IN');
+        }
+      }
+
+      $vocabulary_id = $term->bundle();
+      if ($vocabulary_id == 'kl_topics') {
+        if ($field_classifications = $term->get('field_kl_classification')->getValue()) {
+          $id_classifications = [];
+          if (is_array($field_classifications)) {
+            foreach ($field_classifications as $item) {
+              $id_classifications[] = $item['target_id']; 
+            }
           }
+        }
+        if (is_array($id_classifications) && count($id_classifications) > 0) {
+          $definition = [
+            'table' => 'node__field_kl_classification',
+            'field' => 'entity_id',
+            'left_table' => 'node_field_data',
+            'left_field' => 'nid',
+            'type' => 'LEFT',
+          ];
+          $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+          $query->addRelationship('node__field_kl_classification', $join, 'node_field_data');
+          $query->addWhere('AND', 'node__field_kl_classification.field_kl_classification_target_id', $id_classifications, 'IN');
         }
       }
     }
   }
+  // Added for KL Publication 
+  // ToDo need to remove once folder logic is implemented.
+  // if ($view->id() === 'content_list_page') {
+  //   $term_id = $view->args[0];
+  //   if ($term_id > 0) {
+  //     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+  //     if ($term && $custom_field_value = $term->get('field_reading_list')->getValue()) {
+  //       $id_list = [];
+  //       if (is_array($custom_field_value)) {
+  //         foreach ($custom_field_value as $item) {
+  //           $id_list[] = $item['target_id']; 
+  //         }
+  //       }
+
+  //       if (count($id_list) > 0) {
+  //           foreach ($query->where as &$condition_group) {
+  //             foreach ($condition_group['conditions'] as &$condition) {
+  //                 if ($condition['field'] == 'taxonomy_index.tid = :taxonomy_index_tid1') {
+  //                     $condition = [
+  //                         'field' => 'taxonomy_index.tid',
+  //                         'value' => $id_list,
+  //                         'operator' => 'IN',
+  //                     ];
+  //                   break; 
+  //                 }
+  //              }
+  //           }
+  //       }
+        
+  //       $vocabulary_id = $term->bundle();
+  //       if ($vocabulary_id == 'kl_topics') {
+  //         if ($field_classifications = $term->get('field_kl_classification')->getValue()) {
+  //           $id_classifications = [];
+  //           if (is_array($field_classifications)) {
+  //             foreach ($field_classifications as $item) {
+  //               $id_classifications[] = $item['target_id']; 
+  //             }
+  //           }
+  //         }
+  //         if (is_array($id_classifications) && count($id_classifications) > 0) {
+  //           $definition = [
+  //             'table' => 'node__field_kl_classification',
+  //             'field' => 'entity_id',
+  //             'left_table' => 'node_field_data',
+  //             'left_field' => 'nid',
+  //             'type' => 'LEFT',
+  //           ];
+  //           $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+  //           $query->addRelationship('node__field_kl_classification', $join, 'node_field_data');
+  //           $query->addWhere('AND', 'node__field_kl_classification.field_kl_classification_target_id', $id_classifications, 'IN');
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
 
   if (($view->storage->get('id') == 'horizon') ) {
