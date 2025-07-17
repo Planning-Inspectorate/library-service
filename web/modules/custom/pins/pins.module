@@ -608,6 +608,21 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 }
 
 /**
+* Implements hook_views_pre_render().
+*/
+function pins_views_pre_render(ViewExecutable $view) {
+  // Target your specific View and Display.
+  if ($view->id() === 'taxonomy_search' && $view->current_display === 'page_2') {
+    // If there are no results AND no exposed input has been applied yet,
+    // then hide the exposed widgets.
+    if (empty($view->result) && empty($view->getExposedInput())) {
+      $view->exposed_widgets = NULL;
+    }
+  }
+}
+
+
+/**
 * Implements hook_views_query_alter().
 */
 
