@@ -29,7 +29,7 @@
         "drupal/bootstrap5": "4.0.0-alpha1",
         "drupal/captcha": "2.0.5",
         "drupal/chosen": "^4.0",
-        "drupal/clientside_validation": "4.0.2",
+        "drupal/clientside_validation": "^4.1",
         "drupal/coder": "^8.3",
         "drupal/collapsiblock": "^4.1",
         "drupal/config_entity_cloner": "^1.1@RC",
@@ -201,9 +201,6 @@
         "patches": {
             "drupal/elasticsearch_connector_views": {
                 "Ignore Elasticsearch system indexes from Views": "https://www.drupal.org/files/issues/2021-08-25/elasticsearch_connector-hide-system-indices-3229401.patch"
-            },
-            "drupal/clientside_validation": {
-                "URL validation to accept `public` and `private` urlscheme": "https://www.drupal.org/files/issues/2023-04-25/drupal-urlscheme-3356402-5.patch"
             },
             "drupal/core" : {
                 "access check error fix" : "https://www.drupal.org/files/issues/2023-12-08/core-patch.patch"
