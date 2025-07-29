@@ -794,7 +794,7 @@ display:
           group_type: group
           admin_label: 'field_documents: Content'
           plugin_id: standard
-          required: false
+          required: true
       header: {  }
       footer: {  }
       display_extenders: {  }
