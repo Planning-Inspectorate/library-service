@@ -26,7 +26,7 @@
         "drupal/better_exposed_filters": "6.0.3",
         "drupal/block_class": "^3.0",
         "drupal/bookmarks": "1.0.2",
-        "drupal/bootstrap5": "4.0.0-alpha1",
+        "drupal/bootstrap5": "^4.0",
         "drupal/captcha": "2.0.5",
         "drupal/chosen": "^4.0",
         "drupal/clientside_validation": "^4.1",
