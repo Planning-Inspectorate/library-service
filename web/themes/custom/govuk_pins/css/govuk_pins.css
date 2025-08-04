@@ -179,6 +179,7 @@ aside .editorschoice-menu.govuk-list ul {
   background: #19615B;
   padding: var(--space-sm);
   /* Added for new design */
+  padding: var( --space-lg);
   border-top-left-radius: var(--border-radius-alt);
   border-top-right-radius: var(--border-radius-alt);
   /* Added for new design */
@@ -412,6 +413,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   --space-xs: calc(var(--space)/3); 
   --space-sm: calc(var(--space)/2); 
   --space-md: calc(var(--space)*2); 
+  --space-lg: calc(var(--space)*1); 
   --color-primary: lightgray; 
   --color-accent: whitesmoke; 
   --color-dark: black; 
