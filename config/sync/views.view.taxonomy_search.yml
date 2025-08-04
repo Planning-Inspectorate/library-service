@@ -1268,6 +1268,7 @@ display:
             view_node: view_node
             nothing: nothing
             title: title
+            nothing_1: nothing_1
             field_alternative_title: field_alternative_title
             field_date: field_date
             field_kl_authors: field_kl_authors
@@ -1311,6 +1312,11 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            nothing_1:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             field_alternative_title:
               sortable: true
               default_sort_order: asc
@@ -1320,7 +1326,7 @@ display:
               responsive: ''
             field_date:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
