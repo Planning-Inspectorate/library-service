@@ -149,15 +149,15 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
         if ($classification_details = pins_get_entity_field_value($selected_node, 'field_kl_classification')) {
           $all_classifications = array_merge($all_classifications, $classification_details);
         }
-        if ($readinglist_details = pins_get_entity_field_value($selected_node, 'field_kl_reading_lists')) {
-          $all_reading_lists = array_merge($all_reading_lists, $readinglist_details);
-        }
+        // if ($readinglist_details = pins_get_entity_field_value($selected_node, 'field_kl_reading_lists')) {
+        //   $all_reading_lists = array_merge($all_reading_lists, $readinglist_details);
+        // }
 
         pins_update_form_fields($form, $form_state, 'field_alternative_title', reset($all_alternative_titles));
         pins_update_form_fields($form, $form_state, 'field_kl_authors', $all_authors);
         pins_update_form_fields($form, $form_state, 'field_kl_series', $all_series);
         pins_update_form_fields($form, $form_state, 'field_kl_classification', $all_classifications);
-        pins_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
+        // pins_update_form_fields($form, $form_state, 'field_kl_reading_lists', $all_reading_lists);
         pins_update_form_fields($form, $form_state, 'field_kl_doc_compound_folder', $compound_doc_nid);
 
         $form['actions']['submit']['#submit'][] = 'pins_cf_redirect_submit_handler';
