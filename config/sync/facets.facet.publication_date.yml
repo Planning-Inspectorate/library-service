@@ -61,7 +61,7 @@ processor_configs:
       build: 35
     settings:
       date_display: actual_date
-      granularity: 5
+      granularity: 6
       date_format: ''
       hierarchy: true
   display_value_widget_order:
