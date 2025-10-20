@@ -15,6 +15,7 @@ dependencies:
     - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
     - field.field.taxonomy_term.kl_folders.field_reading_lists
     - field.field.taxonomy_term.kl_folders.field_series
+    - field.field.taxonomy_term.kl_folders.field_volume
     - taxonomy.vocabulary.kl_folders
   module:
     - field_group
@@ -27,7 +28,7 @@ third_party_settings:
       label: Tabs
       region: hidden
       parent_name: ''
-      weight: 18
+      weight: 19
       format_type: fieldset
       format_settings:
         classes: ''
@@ -42,7 +43,7 @@ third_party_settings:
       label: 'Legacy Migration Data'
       region: hidden
       parent_name: ''
-      weight: 17
+      weight: 18
       format_type: fieldset
       format_settings:
         classes: ''
@@ -58,7 +59,7 @@ mode: default
 content:
   description:
     type: text_textarea
-    weight: 6
+    weight: 7
     region: content
     settings:
       rows: 5
@@ -74,7 +75,7 @@ content:
     third_party_settings: {  }
   field_kl_admin_only:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -103,6 +104,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_volume:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   name:
     type: string_textfield
     weight: 0
@@ -113,13 +122,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true

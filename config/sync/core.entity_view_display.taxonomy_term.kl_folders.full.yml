@@ -16,6 +16,7 @@ dependencies:
     - field.field.taxonomy_term.kl_folders.field_kl_term_unique_id
     - field.field.taxonomy_term.kl_folders.field_reading_lists
     - field.field.taxonomy_term.kl_folders.field_series
+    - field.field.taxonomy_term.kl_folders.field_volume
     - taxonomy.vocabulary.kl_folders
   module:
     - ds
@@ -231,5 +232,7 @@ hidden:
   field_kl_term_unique_id: true
   field_reading_lists: true
   field_series: true
+  field_volume: true
   langcode: true
+  search_api_attachments: true
   search_api_excerpt: true

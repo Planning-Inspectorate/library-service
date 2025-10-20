@@ -1,0 +1,19 @@
+uuid: 222385e1-71bc-400d-94f5-0611a70af68d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_volume
+    - taxonomy.vocabulary.kl_folders
+id: taxonomy_term.kl_folders.field_volume
+field_name: field_volume
+entity_type: taxonomy_term
+bundle: kl_folders
+label: Volume
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

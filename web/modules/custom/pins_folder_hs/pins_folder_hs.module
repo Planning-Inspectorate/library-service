@@ -33,6 +33,7 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
                         $series_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_series');
                         $classification_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_classification');
                         $readinglist_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_reading_lists');
+                        $volume = pins_folder_hs_get_field_value($selected_term, 'field_volume');
 
                         $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
                         $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
@@ -44,6 +45,7 @@ function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form
                         pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', array_merge($series_details, $selected_series_list));
                         pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', array_merge($classification_details, $selected_classification_list));
                         pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_reading_lists', array_merge($readinglist_details, $selected_readinglist_list));
+                        pins_folder_hs_update_form_fields($form, $form_state, 'field_volume', $volume);
                     }
                 } else {
                     pins_folder_hs_clear_form_fields($form, 'field_kl_authors');
