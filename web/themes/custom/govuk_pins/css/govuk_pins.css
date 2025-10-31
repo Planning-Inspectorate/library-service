@@ -486,3 +486,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   text-decoration: none;
 }
+
+/*Added for search box design changes for accomodating operators*/
+.views-exposed-form .form-item-search-api-fulltext-op,
+.views-exposed-form .form-item-search-api-fulltext {
+  display: inline-block;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+@media (min-width: 914px) {
+  .views-exposed-form .form-item-search-api-fulltext {
+    width: auto;
+    min-width: 640px;
+  }
+}
