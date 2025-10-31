@@ -136,6 +136,7 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
         $all_series = [];
         $all_classifications = [];
         $all_reading_lists = [];
+        $all_volumes = [];
 
         if ($alternative_title = pins_get_entity_field_value($selected_node, 'field_alternative_title')) {
           $all_alternative_titles[] = reset($alternative_title);
