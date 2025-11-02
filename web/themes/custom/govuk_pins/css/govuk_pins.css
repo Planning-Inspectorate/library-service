@@ -492,7 +492,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .views-exposed-form .form-item-search-api-fulltext {
   display: inline-block;
   margin-right: 0.5rem;
-  vertical-align: middle;
 }
 @media (min-width: 914px) {
   .views-exposed-form .form-item-search-api-fulltext {
