@@ -1051,3 +1051,37 @@ function pins_preprocess_views_view_field(&$variables) {
     $schema->createTable('saa_indexing_log', $table_schema);
   }
 }
+
+function pins_openid_connect_userinfo_save(\Drupal\user\UserInterface $account, array $userinfo, $client_name = NULL) {
+  // Load role mappings from configuration.
+  $role_mappings = \Drupal::config('openid_connect.settings')->get('role_mappings') ?? [];
+
+  // Get Azure group IDs from userinfo.
+  $azure_groups = !empty($userinfo['user_data']['roles']) && is_array($userinfo['user_data']['roles'])
+    ? $userinfo['user_data']['roles']
+    : [];
+
+  // Build a map of Azure group ID => Drupal role.
+  $group_role_map = [];
+  foreach ($role_mappings as $drupal_role => $group_ids) {
+    if (is_array($group_ids)) {
+      foreach ($group_ids as $group_id) {
+        $group_role_map[$group_id] = $drupal_role;
+      }
+    }
+  }
+
+  // Assign or remove roles based on Azure group membership.
+  foreach ($group_role_map as $azure_group_id => $drupal_role) {
+    if (in_array($azure_group_id, $azure_groups, true)) {
+      if (!$account->hasRole($drupal_role)) {
+        $account->addRole($drupal_role);
+      }
+    }
+    else {
+      if ($account->hasRole($drupal_role)) {
+        $account->removeRole($drupal_role);
+      }
+    }
+  }
+}
