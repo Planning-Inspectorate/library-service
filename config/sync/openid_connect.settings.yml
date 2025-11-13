@@ -6,8 +6,4 @@ user_login_display: below
 redirect_login: user/login
 redirect_logout: user/logout
 userinfo_mappings: {  }
-role_mappings:
-  content_editor:
-    - 8fd9b7ee-d600-4d94-8908-7b82f34d5e22
-  library_admin:
-    - d2c54d18-5c8a-4434-b81e-15b0f78cd2ee
+role_mappings: {  }

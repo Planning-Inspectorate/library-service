@@ -6,13 +6,13 @@ id: library_open_id
 label: 'Single Sign on'
 plugin: generic
 settings:
-  client_id: '""'
-  client_secret: '""'
+  client_id: " ''"
+  client_secret: " ''"
   iss_allowed_domains: ''
   issuer_url: ''
-  authorization_endpoint: 'https://login.microsoftonline.com/tenancy_id/oauth2/v2.0/authorize'
-  token_endpoint: 'https://login.microsoftonline.com/tenancy_id/oauth2/v2.0/token'
-  userinfo_endpoint: 'https://graph.microsoft.com/oidc/userinfo'
+  authorization_endpoint: ''
+  token_endpoint: ''
+  userinfo_endpoint: ''
   end_session_endpoint: ''
   scopes:
     - openid
