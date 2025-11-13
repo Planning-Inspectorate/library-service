@@ -1,0 +1,19 @@
+uuid: 7a048b37-d0b2-4dde-89b7-a30b7cd74469
+langcode: en
+status: true
+dependencies: {  }
+id: library_open_id
+label: 'Single Sign on'
+plugin: generic
+settings:
+  client_id: '""'
+  client_secret: '""'
+  iss_allowed_domains: ''
+  issuer_url: ''
+  authorization_endpoint: 'https://login.microsoftonline.com/tenancy_id/oauth2/v2.0/authorize'
+  token_endpoint: 'https://login.microsoftonline.com/tenancy_id/oauth2/v2.0/token'
+  userinfo_endpoint: 'https://graph.microsoft.com/oidc/userinfo'
+  end_session_endpoint: ''
+  scopes:
+    - openid
+    - email
