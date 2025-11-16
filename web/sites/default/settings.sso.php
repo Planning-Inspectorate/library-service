@@ -10,11 +10,11 @@
  * This file is managed by the project and should be updated as needed for SSO integration.
  */
 
-// 4. Override Role Mappings
 $openid_config_name = 'openid_connect.settings';
 
 $role_mappings_env = getenv('OIDC_ROLE_MAPPING');
 
+// 1. Override Role Mappings
 if ($role_mappings_env) {
    $new_mappings = [];
    $pairs = explode(',', $role_mappings_env);
@@ -32,6 +32,11 @@ if ($role_mappings_env) {
     $config[$openid_config_name]['role_mappings'] = array_merge($existing_mappings, $new_mappings);
    }  
  }
+$config[$openid_config_name]['user_login_display'] = 'below';
+$config[$openid_config_name]['redirect_login'] = 'user/login';
+$config[$openid_config_name]['redirect_logout'] = 'user/logout';
+$config[$openid_config_name]['connect_existing_users'] = TRUE;
+$config[$openid_config_name]['always_save_userinfo'] = TRUE;
 
 $openid_client_config_name = 'openid_connect.client.library_open_id';
 
@@ -54,4 +59,3 @@ if ($tenancy_id) {
   $config[$openid_client_config_name]['settings']['token_endpoint'] = 'https://login.microsoftonline.com/' . $tenancy_id . '/oauth2/v2.0/token';
   $config[$openid_client_config_name]['settings']['userinfo_endpoint'] = 'https://graph.microsoft.com/oidc/userinfo';
 }
-
