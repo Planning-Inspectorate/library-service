@@ -10,6 +10,9 @@
  * This file is managed by the project and should be updated as needed for SSO integration.
  */
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
 $openid_config_name = 'openid_connect.settings';
 
 $role_mappings_env = getenv('OIDC_ROLE_MAPPING');
