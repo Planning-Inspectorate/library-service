@@ -76,6 +76,7 @@
         "drupal/metatag": "^2.0",
         "drupal/miniorange_saml": "^3.0",
         "drupal/miniorange_saml_idp": "^3.0",
+        "drupal/openid_connect": "^3.0@alpha",
         "drupal/paragraphs": "^1.17",
         "drupal/pathauto": "1.12",
         "drupal/quick_node_clone": "^1.17",
