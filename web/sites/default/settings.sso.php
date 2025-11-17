@@ -11,13 +11,14 @@
  */
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+$dotenv->load();
 
+
+//Override openid settings
 $openid_config_name = 'openid_connect.settings';
 
-$role_mappings_env = getenv('OIDC_ROLE_MAPPING');
-
 // 1. Override Role Mappings
+$role_mappings_env  = $_ENV['OIDC_ROLE_MAPPING'] ? $_ENV['OIDC_ROLE_MAPPING']: getenv('OIDC_ROLE_MAPPING');
 if ($role_mappings_env) {
    $new_mappings = [];
    $pairs = explode(',', $role_mappings_env);
@@ -41,22 +42,24 @@ $config[$openid_config_name]['redirect_logout'] = 'user/logout';
 $config[$openid_config_name]['connect_existing_users'] = TRUE;
 $config[$openid_config_name]['always_save_userinfo'] = TRUE;
 
+//Override client settings
+
 $openid_client_config_name = 'openid_connect.client.library_open_id';
 
 // 1. Override Client ID
-$client_id = getenv('OIDC_CLIENT_ID');
+$client_id = $_ENV['OIDC_CLIENT_ID'] ? $_ENV['OIDC_CLIENT_ID'] : getenv('OIDC_CLIENT_ID');
 if ($client_id) {
   $config[$openid_client_config_name]['settings']['client_id'] = $client_id;
 }
 
 // 2. Override Client Secret
-$client_secret = getenv('OIDC_CLIENT_SECRET');
+$client_secret = $_ENV['OIDC_CLIENT_SECRET'] ? $_ENV['OIDC_CLIENT_SECRET'] : getenv('OIDC_CLIENT_SECRET');
 if ($client_secret) {
   $config[$openid_client_config_name]['settings']['client_secret'] = $client_secret;
 }
 
 // 3. Optional: Override other endpoints using environment variables
-$tenancy_id = getenv('OIDC_TENANCY_ID');
+$tenancy_id = $_ENV['OIDC_TENANCY_ID'] ? $_ENV['OIDC_TENANCY_ID'] : getenv('OIDC_TENANCY_ID');
 if ($tenancy_id) {
   $config[$openid_client_config_name]['settings']['authorization_endpoint'] = 'https://login.microsoftonline.com/' . $tenancy_id . '/oauth2/v2.0/authorize';
   $config[$openid_client_config_name]['settings']['token_endpoint'] = 'https://login.microsoftonline.com/' . $tenancy_id . '/oauth2/v2.0/token';
