@@ -1064,11 +1064,6 @@ function pins_preprocess_views_view_field(&$variables) {
  *   Additional context information, such as the provider and request details.
  */
 function pins_openid_connect_userinfo_alter(array &$userinfo, array $context) {
-  \Drupal::logger('pins_oidc_debug')
-    ->notice('<pre>@info</pre>', ['@info' => print_r($userinfo, true)]);
-
-  \Drupal::logger('pins_oidc_debug')
-    ->notice('<pre>@context</pre>', ['@context' => print_r($context, true)]);
   // Safely check if user_data exists in context then add to userinfo array.
   if (!empty($context['user_data']) && is_array($context['user_data'])) {
     if (!empty($context['user_data']['groups'])) {
