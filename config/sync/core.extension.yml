@@ -3,6 +3,7 @@ _core:
 module:
   webform_clientside_validation: -1
   admin_toolbar: 0
+  admin_toolbar_tools: 0
   automated_cron: 0
   barcodes: 0
   better_exposed_filters: 0
@@ -11,7 +12,6 @@ module:
   block_class: 0
   block_content: 0
   breakpoint: 0
-  captcha: 0
   chosen: 0
   chosen_lib: 0
   ckeditor5: 0
@@ -20,6 +20,7 @@ module:
   collapsiblock: 0
   comment: 0
   config: 0
+  config_entity_cloner: 0
   config_filter: 0
   config_ignore: 0
   config_split: 0
@@ -32,6 +33,10 @@ module:
   datetime: 0
   dblog: 0
   delete_all: 0
+  devel: 0
+  devel_generate: 0
+  devel_kint_extras: 0
+  diff: 0
   ds: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
@@ -53,13 +58,14 @@ module:
   feeds_tamper: 0
   field: 0
   field_group: 0
-  field_permissions: 1
+  field_permissions: 0
   field_ui: 0
   file: 0
   filter: 0
   flag: 0
   flag_bookmark: 0
   google_analytics: 0
+  govuk_cookies: 0
   help: 0
   history: 0
   image: 0
@@ -83,8 +89,8 @@ module:
   miniorange_saml_idp: 0
   mysql: 0
   node: 0
-  options: 0
   openid_connect: 0
+  options: 0
   page_cache: 0
   path: 0
   path_alias: 0
@@ -94,7 +100,6 @@ module:
   pins_kl_import: 0
   pins_tamper_term_hierarchy: 0
   quick_node_clone: 0
-  recaptcha: 0
   recently_read: 0
   rest: 0
   scan_code: 0
@@ -128,6 +133,7 @@ module:
   views_data_export: 0
   views_entity_form_field: 0
   views_send: 0
+  views_ui: 0
   webform: 0
   webform_access: 0
   webform_attachment: 0
@@ -136,6 +142,7 @@ module:
   webform_node: 0
   webform_scheduled_email: 0
   webform_submission_log: 0
+  webform_ui: 0
   weight: 0
   extlink: 1
   pathauto: 1
