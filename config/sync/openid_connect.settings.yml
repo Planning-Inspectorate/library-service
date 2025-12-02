@@ -1,9 +1,0 @@
-always_save_userinfo: true
-connect_existing_users: true
-override_registration_settings: false
-end_session_enabled: false
-user_login_display: below
-redirect_login: user/login
-redirect_logout: user/logout
-userinfo_mappings: {  }
-role_mappings: {  }

@@ -3,43 +3,43 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - field.storage.node.field_kl_doc_file
+    - field.storage.media.field_media_document
+    - field.storage.media.field_media_video_file
+    - field.storage.media.field_media_oembed_video
+    - field.storage.node.field_documents
     - field.storage.node.field_alternative_title
     - field.storage.node.field_archive
-    - field.storage.node.field_best_bet
-    - field.storage.node.field_borrowed_by
-    - field.storage.node.field_borrowed_date
-    - field.storage.node.field_content_reference
-    - field.storage.node.field_date
-    - field.storage.node.field_documents
-    - field.storage.node.field_edition_number
-    - field.storage.node.field_isbn
     - field.storage.node.field_kl_archived
     - field.storage.node.field_kl_archived_date
     - field.storage.node.field_kl_authors
+    - field.storage.node.field_best_bet
+    - field.storage.node.body
+    - field.storage.node.field_borrowed_by
+    - field.storage.node.field_borrowed_date
+    - field.storage.node.field_kl_doc_file
     - field.storage.node.field_kl_classification
     - field.storage.node.field_kl_classification_shortcut
+    - field.storage.node.field_content_reference
+    - field.storage.node.field_long_text
     - field.storage.node.field_kl_doc_folder
+    - field.storage.node.field_edition_number
+    - field.storage.node.field_links
+    - field.storage.node.field_isbn
+    - field.storage.node.field_locations
+    - field.storage.node.field_other_date
+    - field.storage.node.field_pdf
+    - field.storage.node.field_date
     - field.storage.node.field_kl_reading_lists
     - field.storage.node.field_kl_series
-    - field.storage.node.field_links
-    - field.storage.node.field_locations
-    - field.storage.node.field_long_text
-    - field.storage.media.field_media_document
-    - field.storage.node.field_pdf
-    - field.storage.media.field_media_oembed_video
-    - field.storage.media.field_media_video_file
-    - field.storage.node.field_other_date
     - field.storage.node.field_volume
     - search_api.server.pins_elasticsearch_server
   module:
+    - file
     - media
     - node
-    - file
     - taxonomy
     - search_api
-    - pins
+    - search_api_attachments
 id: pins_content_index
 name: 'PINS Content Index'
 description: ''
@@ -78,12 +78,6 @@ field_settings:
     dependencies:
       module:
         - node
-  custom_value:
-    label: 'Custom value'
-    property_path: custom_value
-    type: text
-    configuration:
-      value: '[file:parent_node_title]'
   fid:
     label: 'File ID'
     datasource_id: 'entity:file'
@@ -365,6 +359,14 @@ field_settings:
     dependencies:
       module:
         - media
+  saa_field_kl_doc_file:
+    label: 'Search api attachments: Doc File'
+    property_path: saa_field_kl_doc_file
+    type: string
+  saa_field_media_document:
+    label: 'Search api attachments: Document'
+    property_path: saa_field_media_document
+    type: string
   saa_field_pdf:
     label: 'Search api attachments: PDF'
     property_path: saa_field_pdf
@@ -446,15 +448,15 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
-  custom_file_attachments:
+  custom_value: {  }
+  entity_type: {  }
+  file_attachments:
     excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
-    number_indexed: '0'
+    number_indexed: 0
     number_first_bytes: '1 MB'
     max_filesize: '0'
     excluded_private: 1
     excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv'
-  custom_value: {  }
-  entity_type: {  }
   hierarchy:
     weights:
       preprocess_index: -45
@@ -484,7 +486,7 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  cron_limit: 10
+  cron_limit: 500
   index_directly: true
   track_changes_in_references: true
 server: pins_elasticsearch_server

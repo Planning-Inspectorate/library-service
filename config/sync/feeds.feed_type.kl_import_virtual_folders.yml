@@ -408,3 +408,4 @@ mappings:
       value: extendeddata
     settings:
       language: null
+import_period_per_feed: false

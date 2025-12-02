@@ -104,3 +104,4 @@ mappings:
     target: temporary_target
     map:
       temporary: classifications
+import_period_per_feed: false

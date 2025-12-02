@@ -6,6 +6,7 @@ dependencies:
     - filter.format.basic_html
     - filter.format.full_html
     - media.type.pdf
+    - node.type.article
     - node.type.hard_copy
     - node.type.hard_copy_loan
     - node.type.kl_classification_shortcut

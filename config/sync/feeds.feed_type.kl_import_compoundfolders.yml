@@ -434,3 +434,4 @@ mappings:
     settings:
       language: null
       timezone: UTC
+import_period_per_feed: false
