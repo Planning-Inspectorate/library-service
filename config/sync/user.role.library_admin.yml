@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.basic
     - filter.format.basic_html
     - filter.format.full_html
     - media.type.document
@@ -29,6 +30,7 @@ dependencies:
     - taxonomy.vocabulary.kl_series
     - taxonomy.vocabulary.kl_topics
   module:
+    - block_content
     - contextual
     - field_permissions
     - file
@@ -107,6 +109,7 @@ permissions:
   - 'delete any kl_document content'
   - 'delete own files'
   - 'edit any article content'
+  - 'edit any basic block content'
   - 'edit any document media'
   - 'edit any hard_copy content'
   - 'edit any hard_copy_loan content'

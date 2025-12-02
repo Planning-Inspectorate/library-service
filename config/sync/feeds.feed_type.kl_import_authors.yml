@@ -127,3 +127,4 @@ mappings:
     settings:
       language: null
     unique: {  }
+import_period_per_feed: false

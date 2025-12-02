@@ -1,11 +1,18 @@
 uuid: 37325280-9384-4d05-bc1f-6f71d751e306
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - field_permissions
 _core:
   default_config_hash: OeKGIkmZA_c-t6QLH81WNQx8gDCc1MRmxaTuQgxBByU
 id: administrator
 label: Administrator
 weight: 3
 is_admin: true
-permissions: {  }
+permissions:
+  - 'create field_whats_new_scheduled_date'
+  - 'edit field_whats_new_scheduled_date'
+  - 'edit own field_whats_new_scheduled_date'
+  - 'view field_whats_new_scheduled_date'
+  - 'view own field_whats_new_scheduled_date'

@@ -15,4 +15,5 @@ adding:
         skipped: skipped
         failed: failed
       source: true
-removing: {  }
+removing:
+  import_period_per_feed: false

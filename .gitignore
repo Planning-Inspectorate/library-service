@@ -56,3 +56,6 @@
 
 # Ignore azure blod directory
 /config/azure/
+
+# Ignore Windows Zone.Identifier metadata files
+*:Zone.Identifier
