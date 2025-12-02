@@ -12,4 +12,5 @@ adding:
         cleaned: cleaned
       items: {  }
       source: true
-removing: {  }
+removing:
+  import_period_per_feed: false

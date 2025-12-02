@@ -2131,7 +2131,6 @@ display:
         type: full
         options:
           offset: 0
-          pagination_heading_level: h4
           items_per_page: 25
           total_pages: null
           id: 0
@@ -2892,7 +2891,7 @@ display:
           expose:
             operator_id: search_api_fulltext_op
             label: 'Enter a document/article name or keywords'
-            description: '<a href="/search-library-attachments?search_api_fulltext=[current-page:query:search_api_fulltext]"> Search in Attached Files</a>'
+            description: ''
             use_operator: false
             operator: search_api_fulltext_op
             operator_limit_selection: false
