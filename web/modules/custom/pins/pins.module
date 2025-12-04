@@ -24,6 +24,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Datetime\DrupalDateTime; 
+use Drupal\search_api\Query\QueryInterface;
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
  */
