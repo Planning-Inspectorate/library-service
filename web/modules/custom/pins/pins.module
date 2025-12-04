@@ -1072,3 +1072,53 @@ function pins_openid_connect_userinfo_alter(array &$userinfo, array $context) {
     }
   }
 }
+
+/**
+ * Alters the Search API query before it is executed.
+ *
+ * This hook allows custom modifications to the Search API query object,
+ * such as adding conditions, sorting, or altering fields.
+ *
+ * @param \Drupal\search_api\Query\QueryInterface $query
+ *   The Search API query object to be altered.
+ */
+function pins_search_api_query_alter(QueryInterface $query) {
+  // Check if this is the index you want.
+  if ($query->getIndex()->id() !== 'pins_content_index') {
+    return;
+  }
+
+ 
+  // Check if the query originated from a specific View and display.
+  $query_options = $query->getOptions();
+  if (!isset($query_options['search_api_view'])) {
+    return;
+  }
+
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $query_options['search_api_view'];
+  if ($view->id() !== 'lib_search' || $view->current_display !== 'page_1') {
+    return;
+  }
+  $fuzziness = 'auto';
+  $options = \Drupal::request()->query->all();
+  if (!empty($options['fuzziness'])) {
+    switch ($options['fuzziness']) {
+      case 'All':
+        $fuzziness = 'auto';
+        break;
+      case '1':
+        $fuzziness = 0;
+        break;
+      default:
+        if (is_numeric($options['fuzziness'])) {
+          $fuzziness = max(0, (int)$options['fuzziness'] - 1);
+        } 
+        break;
+    }
+  } 
+  $server = $query->getIndex()->getServerInstance();
+  $backend_config = $server->getBackendConfig();
+  $backend_config['fuzziness'] = $fuzziness;
+  $server->setBackendConfig($backend_config);
+}
