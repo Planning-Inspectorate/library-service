@@ -2163,7 +2163,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: search_api_none
+        type: none
         options: {  }
       empty:
         area:
@@ -3550,7 +3550,7 @@ display:
           is_grouped: true
           group_info:
             label: Fuzziness
-            description: 'Auto for smart matching, 1 or 2 for specific character differences, or disabled for exact match.'
+            description: 'Auto for smart matching, 1 or 2 for specific character differences, or Disabled for exact match.'
             identifier: fuzziness
             optional: true
             widget: select
