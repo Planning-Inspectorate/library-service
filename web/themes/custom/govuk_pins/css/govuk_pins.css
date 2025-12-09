@@ -499,12 +499,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     min-width: 640px;
   }
 }
-.views-exposed-form .form-radios.form--inline {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+/* --- Match Type Radio Button Styles --- */
+fieldset[data-drupal-selector="edit-fuzziness"] .form-radios {
+  display: flex; 
+  gap: 20px; 
+  padding-bottom: 10px;
 }
-.views-exposed-form .form-radios.form--inline > .govuk-radios__item {
-  display: inline-flex;
+fieldset[data-drupal-selector="edit-fuzziness"] .govuk-radios__item {
+  display: flex; 
   margin-right: 0; 
+}
+fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
+  font-size: 1.5rem;
 }

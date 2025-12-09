@@ -2163,7 +2163,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: search_api_none
+        type: none
         options: {  }
       empty:
         area:
