@@ -2163,7 +2163,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: none
+        type: search_api_none
         options: {  }
       empty:
         area:
@@ -2819,7 +2819,6 @@ display:
               search_api_fulltext:
                 plugin_id: default
                 advanced:
-                  placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
                   collapsible: false
@@ -2877,13 +2876,16 @@ display:
                   collapsible: false
                   is_secondary: true
               combine:
-                plugin_id: default
+                plugin_id: bef
                 advanced:
                   placeholder_text: ''
                   rewrite:
-                    filter_rewrite_values: "- Any - |  Auto\r\nDisabled | Exact (Disabled)"
+                    filter_rewrite_values: "- Any - |  Smart \r\nDisabled | Exact "
                   collapsible: false
-                  is_secondary: true
+                  is_secondary: false
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -3549,8 +3551,8 @@ display:
             placeholder: null
           is_grouped: true
           group_info:
-            label: Fuzziness
-            description: 'Auto for smart matching, 1 or 2 for specific character differences, or Disabled for exact match.'
+            label: 'Match Type'
+            description: ''
             identifier: fuzziness
             optional: true
             widget: select
@@ -3563,26 +3565,6 @@ display:
                 title: Disabled
                 operator: '='
                 value: '0'
-              2:
-                title: '1'
-                operator: '='
-                value: '1'
-              3:
-                title: '2'
-                operator: '='
-                value: '2'
-              4:
-                title: '3'
-                operator: '='
-                value: '3'
-              5:
-                title: '4'
-                operator: '='
-                value: '4'
-              6:
-                title: '5'
-                operator: '='
-                value: '5'
           fields: {  }
       filter_groups:
         operator: AND
