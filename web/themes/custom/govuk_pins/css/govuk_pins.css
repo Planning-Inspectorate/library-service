@@ -499,3 +499,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     min-width: 640px;
   }
 }
+.views-exposed-form .form-radios.form--inline {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.views-exposed-form .form-radios.form--inline > .govuk-radios__item {
+  display: inline-flex;
+  margin-right: 0; 
+}
