@@ -85,6 +85,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 36
           total_pages: null
           id: 0
@@ -3690,7 +3691,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      title: 'Topic areas'
+      title: 'Topic Lists'
       fields:
         nothing:
           id: nothing
@@ -3811,6 +3812,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 100
           total_pages: null
           id: 0
