@@ -24,6 +24,7 @@
 # Ignore Drupal's file directory
 /web/sites/*/files
 /web/sites/*/files/
+/web/autoload.php*
 
 # Ignore SimpleTest multi-site environment
 /web/sites/simpletest
