@@ -2819,7 +2819,6 @@ display:
               search_api_fulltext:
                 plugin_id: default
                 advanced:
-                  placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
                   collapsible: false
@@ -2876,6 +2875,17 @@ display:
                   placeholder_text: ''
                   collapsible: false
                   is_secondary: true
+              combine:
+                plugin_id: bef
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: "- Any - |  Smart \r\nDisabled | Exact "
+                  collapsible: false
+                  is_secondary: false
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -2893,10 +2903,12 @@ display:
             operator_id: search_api_fulltext_op
             label: 'Enter a document/article name or keywords'
             description: '<a href="/search-library-attachments?search_api_fulltext=[current-page:query:search_api_fulltext]"> Search in Attached Files</a>'
-            use_operator: false
+            use_operator: true
             operator: search_api_fulltext_op
-            operator_limit_selection: false
-            operator_list: {  }
+            operator_limit_selection: true
+            operator_list:
+              and: and
+              or: or
             identifier: search_api_fulltext
             required: false
             remember: false
@@ -2912,6 +2924,7 @@ display:
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
             value_maxlength: 128
+            value_max_words: null
           is_grouped: false
           group_info:
             label: ''
@@ -3509,6 +3522,50 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Combine fields filter'
+            description: null
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: 'Match Type'
+            description: ''
+            identifier: fuzziness
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Disabled
+                operator: '='
+                value: '0'
+          fields: {  }
       filter_groups:
         operator: AND
         groups:
