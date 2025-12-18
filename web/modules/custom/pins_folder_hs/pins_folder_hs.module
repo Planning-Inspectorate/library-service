@@ -13,7 +13,7 @@ use Drupal\Core\Ajax\ReplaceCommand;
  * Implements hook_form_alter().
  */
 function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-    if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_document_edit_form' || $form_id == 'node_kl_compound_document_form') {
+    if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_compound_document_form') {
         $form['#prefix'] = '<div id="form-term-wrapper">';
         $form['#suffix'] = '</div>';
         $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
