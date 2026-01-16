@@ -19,7 +19,7 @@ field_identifier: field_kl_classification
 query_operator: and
 hard_limit: 0
 exclude: false
-use_hierarchy: true
+use_hierarchy: false
 keep_hierarchy_parents_active: false
 hierarchy:
   type: taxonomy
@@ -30,7 +30,7 @@ widget:
   type: checkbox
   config:
     show_numbers: true
-    soft_limit: 0
+    soft_limit: 5
     show_reset_link: false
     reset_text: 'Show all'
     hide_reset_when_no_selection: false
@@ -65,11 +65,6 @@ processor_configs:
     processor_id: hide_1_result_facet
     weights:
       build: 50
-    settings: {  }
-  hide_active_items_processor:
-    processor_id: hide_active_items_processor
-    weights:
-      build: 25
     settings: {  }
   hide_inactive_siblings_processor:
     processor_id: hide_inactive_siblings_processor
