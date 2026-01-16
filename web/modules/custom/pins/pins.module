@@ -1123,3 +1123,18 @@ function pins_search_api_query_alter(QueryInterface $query) {
   $backend_config['fuzziness'] = $fuzziness;
   $server->setBackendConfig($backend_config);
 }
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function pins_element_info_alter(array &$info) {
+  // Target the 'datetime' element (the HTML5 date picker)
+  if (isset($info['datetime'])) {
+    $info['datetime']['#date_year_range'] = '1800:+20'; // Change to your preferred range
+  }
+  
+  // Target the 'datelist' element (the dropdown select widget)
+  if (isset($info['datelist'])) {
+    $info['datelist']['#date_year_range'] = '1800:+20';
+  }
+}
