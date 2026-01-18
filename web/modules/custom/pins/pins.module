@@ -25,6 +25,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Datetime\DrupalDateTime; 
 use Drupal\search_api\Query\QueryInterface;
+use Drupal\pins\PinsConstants;
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
  */
@@ -1125,16 +1126,29 @@ function pins_search_api_query_alter(QueryInterface $query) {
 }
 
 /**
- * Implements hook_element_info_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function pins_element_info_alter(array &$info) {
-  // Target the 'datetime' element (the HTML5 date picker)
-  if (isset($info['datetime'])) {
-    $info['datetime']['#date_year_range'] = '1800:+20'; // Change to your preferred range
-  }
+function pins_field_widget_single_element_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $target_widgets = ['datetime_default', 'datetime_timestamp'];
   
-  // Target the 'datelist' element (the dropdown select widget)
-  if (isset($info['datelist'])) {
-    $info['datelist']['#date_year_range'] = '1800:+20';
+  if (in_array($context['widget']->getPluginId(), $target_widgets)) {
+    
+    // Check if 'value' exists to avoid errors
+    if (isset($element['value'])) {
+      
+      $start_year = PinsConstants::START_YEAR;
+      $end_year = (int) date('Y') + 10;
+      
+      // 1. Set the Drupal-specific range (affects the select list if used)
+      $element['value']['#date_year_range'] = "$start_year:$end_year";
+
+      // 2. Force HTML5 attributes on the actual input element
+      $element['value']['#attributes']['min'] = "$start_year-01-01";
+      $element['value']['#attributes']['max'] = "$end_year-12-31";
+
+      // 3. Hide time elements
+      $element['value']['#date_time_element'] = 'none';
+      $element['value']['#date_time_format'] = '';
+    }
   }
 }
