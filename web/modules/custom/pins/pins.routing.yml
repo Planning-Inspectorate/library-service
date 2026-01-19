@@ -1,0 +1,7 @@
+pins.settings:
+  path: '/admin/config/content/pins-settings'
+  defaults:
+    _form: '\Drupal\pins\Form\PinsSettingsForm'
+    _title: 'PINS Document Revision Settings'
+  requirements:
+    _permission: 'administer site configuration'

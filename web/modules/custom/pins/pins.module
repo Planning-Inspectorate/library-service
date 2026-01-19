@@ -1160,6 +1160,11 @@ function pins_field_widget_single_element_form_alter(&$element, \Drupal\Core\For
  * Implements hook_node_update().
  */
 function pins_node_update(NodeInterface $node) {
+  $config = \Drupal::config('pins.settings');
+  if (!$config->get('enable_archiving')) {
+    return;
+  }
+
   if ($node->bundle() !== 'kl_document' || !isset($node->original)) {
     return;
   }
