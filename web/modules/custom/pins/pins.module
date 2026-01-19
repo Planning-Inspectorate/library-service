@@ -1186,19 +1186,28 @@ function pins_node_update(NodeInterface $node) {
     if ($old_fid) {
       $old_file = File::load($old_fid);
       if ($old_file) {
-        $old_uri = $old_file->getFileUri();
-        
+        $old_uri = $old_file->getFileUri();        
         // Use the constant to check if it's already archived.
         if (strpos($old_uri, PinsConstants::PINS_REVISION_PATH) === FALSE) {
           $new_archive_uri = str_replace('public://', PinsConstants::PINS_REVISION_PATH, $old_uri);
 
           try {
             $directory = $file_system->dirname($new_archive_uri);
-            $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+            // Check if directory exists and is writable
+            if (!$file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS)) {
+              throw new \Exception("Directory '$directory' could not be prepared or is not writable.");
+            }
+
+            // Attempt to move the file
             $file_repository->move($old_file, $new_archive_uri);
-          } 
+          }
           catch (\Exception $e) {
-            $logger->error('Failed to archive file @uri: @message', ['@uri' => $old_uri, '@message' => $e->getMessage()]);
+            // Log detailed error
+            $logger->error('Failed to archive file @uri: @message', [
+              '@uri' => $old_uri,
+              '@message' => $e->getMessage(),
+            ]);
           }
         }
       }
