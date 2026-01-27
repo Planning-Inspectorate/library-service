@@ -25,6 +25,9 @@ use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Datetime\DrupalDateTime; 
 use Drupal\search_api\Query\QueryInterface;
+use Drupal\pins\PinsConstants;
+use Drupal\Core\File\FileSystemInterface;
+
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
  */
@@ -1125,16 +1128,113 @@ function pins_search_api_query_alter(QueryInterface $query) {
 }
 
 /**
- * Implements hook_element_info_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function pins_element_info_alter(array &$info) {
-  // Target the 'datetime' element (the HTML5 date picker)
-  if (isset($info['datetime'])) {
-    $info['datetime']['#date_year_range'] = '1800:+20'; // Change to your preferred range
-  }
+function pins_field_widget_single_element_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $target_widgets = ['datetime_default', 'datetime_timestamp'];
   
-  // Target the 'datelist' element (the dropdown select widget)
-  if (isset($info['datelist'])) {
-    $info['datelist']['#date_year_range'] = '1800:+20';
+  if (in_array($context['widget']->getPluginId(), $target_widgets)) {
+    
+    // Check if 'value' exists to avoid errors
+    if (isset($element['value'])) {
+      
+      $start_year = PinsConstants::START_YEAR;
+      $end_year = (int) date('Y') + 10;
+      
+      // 1. Set the Drupal-specific range (affects the select list if used)
+      $element['value']['#date_year_range'] = "$start_year:$end_year";
+
+      // 2. Force HTML5 attributes on the actual input element
+      $element['value']['#attributes']['min'] = "$start_year-01-01";
+      $element['value']['#attributes']['max'] = "$end_year-12-31";
+
+      // 3. Hide time elements
+      $element['value']['#date_time_element'] = 'none';
+      $element['value']['#date_time_format'] = '';
+    }
+  }
+}
+
+
+/**
+ * Implements hook_node_update().
+ */
+function pins_node_update(NodeInterface $node) {
+  $config = \Drupal::config('pins.settings');
+  if (!$config->get('enable_archiving')) {
+    return;
+  }
+
+  if ($node->bundle() !== 'kl_document' || !isset($node->original)) {
+    return;
+  }
+
+  $file_system = \Drupal::service('file_system');
+  $file_repository = \Drupal::service('file.repository');
+  $logger = \Drupal::logger('pins_revisions');
+  
+  $current_fid = ($node->hasField('field_kl_doc_file') && !$node->get('field_kl_doc_file')->isEmpty()) 
+    ? $node->get('field_kl_doc_file')->target_id : NULL;
+
+  $old_fid = ($node->original->hasField('field_kl_doc_file') && !$node->original->get('field_kl_doc_file')->isEmpty()) 
+    ? $node->original->get('field_kl_doc_file')->target_id : NULL;
+
+  // 3. Only act if the file link has changed (upload, removal, or revert).
+  if ($old_fid != $current_fid) {
+
+    // --- PART A: ADD THE OLD FILE TO REVISIONS ---
+    if ($old_fid) {
+      $old_file = File::load($old_fid);
+      if ($old_file) {
+        $old_uri = $old_file->getFileUri();        
+        // Use the constant to check if it's already archived.
+        if (strpos($old_uri, PinsConstants::PINS_REVISION_PATH) === FALSE) {
+          $new_archive_uri = str_replace('public://', PinsConstants::PINS_REVISION_PATH, $old_uri);
+
+          try {
+            $directory = $file_system->dirname($new_archive_uri);
+
+            // Check if directory exists and is writable
+            if (!$file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS)) {
+              throw new \Exception("Directory '$directory' could not be prepared or is not writable.");
+            }
+
+            // Attempt to move the file
+            $file_repository->move($old_file, $new_archive_uri);
+          }
+          catch (\Exception $e) {
+            // Log detailed error
+            $logger->error('Failed to archive file @uri: @message', [
+              '@uri' => $old_uri,
+              '@message' => $e->getMessage(),
+            ]);
+          }
+        }
+      }
+    }
+
+    // --- PART B: RESTORE THE NEW (CURRENT) FILE ---
+    if ($current_fid) {
+      $current_file = File::load($current_fid);
+      if ($current_file) {
+        $current_uri = $current_file->getFileUri();
+        
+        // Use the constant to check if the file needs to be restored.
+        if (strpos($current_uri, PinsConstants::PINS_REVISION_PATH) !== FALSE) {
+          $restored_uri = str_replace(PinsConstants::PINS_REVISION_PATH, 'public://', $current_uri);
+
+          try {
+            $directory = $file_system->dirname($restored_uri);
+            $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+            $file_repository->move($current_file, $restored_uri);
+            
+            \Drupal::messenger()->addStatus(t("Document restored: The file is now active at the public URL."));
+          } 
+          catch (\Exception $e) {
+            $logger->error('Failed to restore file @uri: @message', ['@uri' => $current_uri, '@message' => $e->getMessage()]);
+          }
+        }
+      }
+    }
   }
 }
