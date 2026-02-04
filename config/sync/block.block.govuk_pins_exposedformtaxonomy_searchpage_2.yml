@@ -1,0 +1,29 @@
+uuid: 732c49db-948b-4d8e-9bfa-daf1ed3e418c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.taxonomy_search
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - govuk_pins
+id: govuk_pins_exposedformtaxonomy_searchpage_2
+theme: govuk_pins
+region: content
+weight: -23
+provider: null
+plugin: 'views_exposed_filter_block:taxonomy_search-page_2'
+settings:
+  id: 'views_exposed_filter_block:taxonomy_search-page_2'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/kl-topics/*\r\n/kl-publications/*"
