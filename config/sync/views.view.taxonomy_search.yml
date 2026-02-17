@@ -1374,7 +1374,7 @@ display:
           expose:
             operator_id: field_kl_classification_target_id_op
             label: Classification
-            description: ''
+            description: 'Start typing to find a classification...'
             use_operator: false
             operator: field_kl_classification_target_id_op
             operator_limit_selection: false
@@ -1416,6 +1416,7 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+          allow_unpublished: false
       filter_groups:
         operator: AND
         groups:
