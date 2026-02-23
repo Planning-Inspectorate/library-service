@@ -512,3 +512,13 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-radios__item {
 fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   font-size: 1.5rem;
 }
+
+/* --- Match Chosen slect form to frontend form styles -- */
+#block-govuk-pins-exposedformtaxonomy-searchpage-2 .chosen-container {
+  padding: 0px;
+  border: none;
+}
+#block-govuk-pins-exposedformtaxonomy-searchpage-2  .chosen-choices {
+  border: 2px solid #0b0c0c;
+  border-radius: 0;
+}
