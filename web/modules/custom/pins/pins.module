@@ -23,7 +23,7 @@ use Drupal\file\Entity\File;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
-use Drupal\Core\Datetime\DrupalDateTime; 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\pins\PinsConstants;
 use Drupal\Core\File\FileSystemInterface;
@@ -67,7 +67,7 @@ function pins_load_all_folders(){
 }
 
 /**
-  * Implements hook_form_alter().  
+  * Implements hook_form_alter().
 */
 function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Attach the pins_js library to relevant forms.
@@ -209,12 +209,12 @@ function pins_get_entity_field_value(EntityInterface $entity, $fieldname) {
           return null;
       }
 
-      $field_values = $entity->get($fieldname)->getValue();      
+      $field_values = $entity->get($fieldname)->getValue();
       if (empty($field_values)) {
           return null;
       }
 
-      $result = [];      
+      $result = [];
       foreach ($field_values as $field_value) {
           if (isset($field_value['value'])) {
               $result[] = $field_value['value'];
@@ -272,7 +272,7 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
   $or->condition('field_vernum', $current_vernum, '='); // Explicitly specify the operator
   $or->condition('field_vernum', NULL, 'IS NULL');
   if ($current_doc_id) {
-      $or->condition('field_kl_doc_id', $current_doc_id, '<>'); 
+      $or->condition('field_kl_doc_id', $current_doc_id, '<>');
   }
   $query->condition($or);
 
@@ -287,11 +287,11 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
 }
 
 /**
-  *  
+  *
   *function hook_ENTITY_TYPE_insert
   *
 */
-function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {  
+function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
   switch ( $entity->getEntityTypeId()) {
     case 'node':
     // case 'paragraph':
@@ -303,20 +303,20 @@ function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'kl_document':
           //Use nid as a unique value
           $reference_id = $entity->id();
-          pins_entity_insert_unique_reference_id($entity, $reference_id);    
-          pins_entity_attach_to_compound_folder_on_postsave($entity);   
+          pins_entity_insert_unique_reference_id($entity, $reference_id);
+          pins_entity_attach_to_compound_folder_on_postsave($entity);
           break;
       }
       break;
   }
 }
 
-/** 
-  *  
+/**
+  *
   *function hook_ENTITY_presave
   *
 */
-function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) { 
+function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
   switch ( $entity->getEntityTypeId()) {
     case 'node':
     case 'paragraph':
@@ -334,7 +334,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
           }
           pins_entity_set_file_size_on_presave($entity);
           // pins_entity_check_archived_on_presave($entity);
-          
+
           break;
         case 'individual_hardcopy':
           // Use nid and paragraph Id as a unique content reference ID
@@ -345,8 +345,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
-        case 'kl_compound_document': 
-          // Need to set inheritance for compund documents - commenting it for now.         
+        case 'kl_compound_document':
+          // Need to set inheritance for compund documents - commenting it for now.
           // pins_set_inheritance($entity);
           //migrate compound docs once
           if($compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
@@ -358,23 +358,23 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
               $entity->get($fieldname)->setValue($target_ids);
             }
           }
-         
+
           //process compound documents - Metadata inheritance of reference document to compound document
           // pins_compound_document($entity);
-          
+
           //Use nid as a unique reference id
           if(!$entity->isNew()){
             $reference_id = $entity->id();
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
           break;
-        
-        case 'kl_shortcut': 
+
+        case 'kl_shortcut':
         case 'kl_url':
-        case 'kl_virtual_folder': 
-        case 'kl_classification_shortcut':   
-            // Need to set inheritance for hard copy - commenting it for now.     
-            // pins_set_inheritance($entity);   
+        case 'kl_virtual_folder':
+        case 'kl_classification_shortcut':
+            // Need to set inheritance for hard copy - commenting it for now.
+            // pins_set_inheritance($entity);
           break;
 
       }
@@ -383,7 +383,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
 }
 
 /**
-  *  
+  *
   *function pins_compound_document
   * For creating and updating compound document based on referenced
   *
@@ -417,7 +417,7 @@ function pins_compound_document(&$entity, $field_name='field_documents'){
 
         $target_ids = array_unique($merged_ids);
         $results[$fieldname] = $target_ids;
-      }   
+      }
     }
 
     foreach ($results as $fieldname => $target_ids) {
@@ -427,7 +427,7 @@ function pins_compound_document(&$entity, $field_name='field_documents'){
 }
 
 /**
-  *  
+  *
   *function pins_get_target_ids
   * get field values
   *
@@ -445,7 +445,7 @@ function pins_get_target_ids($entity, $fieldname){
 
 
 /**
-  *  
+  *
   *function pins_compound_document
   * For creating and updating compound document based on referenced
   *
@@ -481,7 +481,7 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
 
         $target_ids = array_unique($merged_ids);
         $results[$host_fieldname] = $target_ids;
-      }   
+      }
     }
 
     foreach ($results as $host_fieldname => $target_ids) {
@@ -491,7 +491,7 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
 }
 
 /**
-  *  
+  *
   *function pins_get_compounded_document
   * Get document ID referencing compound document
   *
@@ -529,7 +529,7 @@ function pins_get_compound_referenced_document_id($entity){
 }
 
 /**
-  *  
+  *
   *function pins_entity_insert_unique_reference_id
   * Used for setting Entity_id as a reference id
   *
@@ -541,7 +541,7 @@ function pins_entity_insert_unique_reference_id($entity, $content_reference_id){
     $entity_id = $entity->id();
 
     if(empty($reference_id) && $entity_id && $content_reference_id){
-      $db_table =    $entity->getEntityTypeId().'__field_content_reference';                           
+      $db_table =    $entity->getEntityTypeId().'__field_content_reference';
       $result = \Drupal::database()->insert($db_table)
       ->fields(['bundle', 'deleted', 'entity_id', 'revision_id', 'langcode', 'delta', 'field_content_reference_value'])
       ->values([
@@ -560,7 +560,7 @@ function pins_entity_insert_unique_reference_id($entity, $content_reference_id){
 }
 
 /**
-  *  
+  *
   *function pins_entity_set_unique_reference_id_on_presave
   * Used for setting Entity_id as a content reference id
   *
@@ -612,7 +612,7 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
         $view->display_handler->setOption('empty', $empty_config);
       }
     }
-   
+
   }
 }
 
@@ -643,7 +643,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
     return;
   }
 
-  // Ensure we have the term ID from the contextual filter. 
+  // Ensure we have the term ID from the contextual filter.
   $term_id = $view->args[0] ?? NULL;
   if (!$term_id) {
     return;
@@ -656,14 +656,14 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
 
   $vocabulary_id = $term->bundle();
   $include_vid = ['kl_publications', 'kl_topics'];
-  
+
   if (in_array($vocabulary_id, $include_vid)) {
 
     // --- PART 1: Reading List Logic ---
     $reading_list = $term->get('field_reading_list')->getValue();
     if (!empty($reading_list)) {
       $id_list = array_column($reading_list, 'target_id');
-      
+
       foreach ($query->where as &$condition_group) {
         foreach ($condition_group['conditions'] as &$condition) {
           // Identify the contextual filter condition to override it.
@@ -691,7 +691,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
       // 2. Extract ID from the Exposed Filter autocomplete string: "Label (123)".
       $exposed_input = $view->getExposedInput();
       $target_key = 'field_kl_classification_target_id';
-      
+
       if (!empty($exposed_input[$target_key])) {
         if (preg_match('/\((\d+)\)$/', $exposed_input[$target_key], $matches)) {
           $id_classifications[] = $matches[1];
@@ -713,7 +713,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
         ];
 
         $join = \Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
-        
+
         // Use the alias to ensure the Where clause targets the correct table instance.
         $alias = $query->addRelationship('node__field_kl_classification', $join, 'node_field_data');
         $query->addWhere(1, "$alias.field_kl_classification_target_id", $id_classifications, 'IN');
@@ -733,7 +733,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //       $id_list = [];
   //       if (is_array($custom_field_value)) {
   //         foreach ($custom_field_value as $item) {
-  //           $id_list[] = $item['target_id']; 
+  //           $id_list[] = $item['target_id'];
   //         }
   //       }
 
@@ -746,7 +746,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //                 'value' => $id_list,
   //                 'operator' => 'IN',
   //               ];
-  //               break; 
+  //               break;
   //             }
   //           }
   //         }
@@ -759,7 +759,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //         $id_classifications = [];
   //         if (is_array($field_classifications)) {
   //           foreach ($field_classifications as $item) {
-  //             $id_classifications[] = $item['target_id']; 
+  //             $id_classifications[] = $item['target_id'];
   //           }
   //         }
   //       }
@@ -778,7 +778,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //     }
   //   }
   // }
-  // Added for KL Publication 
+  // Added for KL Publication
   // ToDo need to remove once folder logic is implemented.
   // if ($view->id() === 'content_list_page') {
   //   $term_id = $view->args[0];
@@ -788,7 +788,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //       $id_list = [];
   //       if (is_array($custom_field_value)) {
   //         foreach ($custom_field_value as $item) {
-  //           $id_list[] = $item['target_id']; 
+  //           $id_list[] = $item['target_id'];
   //         }
   //       }
 
@@ -801,19 +801,19 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   //                         'value' => $id_list,
   //                         'operator' => 'IN',
   //                     ];
-  //                   break; 
+  //                   break;
   //                 }
   //              }
   //           }
   //       }
-        
+
   //       $vocabulary_id = $term->bundle();
   //       if ($vocabulary_id == 'kl_topics') {
   //         if ($field_classifications = $term->get('field_kl_classification')->getValue()) {
   //           $id_classifications = [];
   //           if (is_array($field_classifications)) {
   //             foreach ($field_classifications as $item) {
-  //               $id_classifications[] = $item['target_id']; 
+  //               $id_classifications[] = $item['target_id'];
   //             }
   //           }
   //         }
@@ -837,7 +837,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
 
   if (($view->storage->get('id') == 'horizon') ) {
     if (($view->getDisplay()->display['id'] == 'versions') ) {
-      
+
       $node = \Drupal::routeMatch()->getParameter('node');
       if ($node instanceof \Drupal\node\NodeInterface) {
         //Get the current node object.
@@ -857,7 +857,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
               'value' => $doc_id,
               'operator' => 'LIKE'
               ];
-            }       
+            }
           }
         }
       }
@@ -874,12 +874,12 @@ function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_
   if($cache = \Drupal::cache()->get($cid)) {
       $data = $cache->data;
   }
-  else {      
+  else {
     $data = pins_get_version_doc_id($nid);
      \Drupal::cache()
        ->set($cid, $data);
   }
-  
+
   return  $data;
 }
 
@@ -901,7 +901,7 @@ function pins_get_cached_doc_version_id($doc_id, $cid = 'pins_get_revision_nid_b
   if($cache = \Drupal::cache()->get($cid)) {
       $data = $cache->data;
   }
-  else {      
+  else {
     $data = pins_get_doc_version_id($doc_id);
      \Drupal::cache()
        ->set($cid, $data);
@@ -915,7 +915,7 @@ function pins_get_doc_version_id($doc_id, $nid=0){
   $nids = $nodeQuery->accessCheck(false)
     ->condition('type', 'kl_document')
     ->condition('field_kl_doc_id', $doc_id);
-    
+
     if(!empty($nid)){
       $nodeQuery->condition('entity_id', $nid, '<>');
     }
@@ -941,7 +941,7 @@ function pins_preprocess_views_view_table(&$variables) {
 }
 
 /**
-  *  
+  *
   *function pins_entity_set_file_size_on_presave
   * Used for setting file size for uploaded file.
   *
@@ -991,7 +991,7 @@ function pins_entity_attach_to_compound_folder_on_postsave(&$entity) {
 
 
 /**
-  *  
+  *
   * function pins_entity_check_archived_on_presave
   * Used for reset/setting archived date, note based on archived flag value.
   *
@@ -1176,7 +1176,7 @@ function pins_search_api_query_alter(QueryInterface $query) {
     return;
   }
 
- 
+
   // Check if the query originated from a specific View and display.
   $query_options = $query->getOptions();
   if (!isset($query_options['search_api_view'])) {
@@ -1201,10 +1201,10 @@ function pins_search_api_query_alter(QueryInterface $query) {
       default:
         if (is_numeric($options['fuzziness'])) {
           $fuzziness = max(0, (int)$options['fuzziness'] - 1);
-        } 
+        }
         break;
     }
-  } 
+  }
   $server = $query->getIndex()->getServerInstance();
   $backend_config = $server->getBackendConfig();
   $backend_config['fuzziness'] = $fuzziness;
@@ -1216,15 +1216,15 @@ function pins_search_api_query_alter(QueryInterface $query) {
  */
 function pins_field_widget_single_element_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   $target_widgets = ['datetime_default', 'datetime_timestamp'];
-  
+
   if (in_array($context['widget']->getPluginId(), $target_widgets)) {
-    
+
     // Check if 'value' exists to avoid errors
     if (isset($element['value'])) {
-      
+
       $start_year = PinsConstants::START_YEAR;
       $end_year = (int) date('Y') + 10;
-      
+
       // 1. Set the Drupal-specific range (affects the select list if used)
       $element['value']['#date_year_range'] = "$start_year:$end_year";
 
@@ -1256,11 +1256,11 @@ function pins_node_update(NodeInterface $node) {
   $file_system = \Drupal::service('file_system');
   $file_repository = \Drupal::service('file.repository');
   $logger = \Drupal::logger('pins_revisions');
-  
-  $current_fid = ($node->hasField('field_kl_doc_file') && !$node->get('field_kl_doc_file')->isEmpty()) 
+
+  $current_fid = ($node->hasField('field_kl_doc_file') && !$node->get('field_kl_doc_file')->isEmpty())
     ? $node->get('field_kl_doc_file')->target_id : NULL;
 
-  $old_fid = ($node->original->hasField('field_kl_doc_file') && !$node->original->get('field_kl_doc_file')->isEmpty()) 
+  $old_fid = ($node->original->hasField('field_kl_doc_file') && !$node->original->get('field_kl_doc_file')->isEmpty())
     ? $node->original->get('field_kl_doc_file')->target_id : NULL;
 
   // 3. Only act if the file link has changed (upload, removal, or revert).
@@ -1270,7 +1270,7 @@ function pins_node_update(NodeInterface $node) {
     if ($old_fid) {
       $old_file = File::load($old_fid);
       if ($old_file) {
-        $old_uri = $old_file->getFileUri();        
+        $old_uri = $old_file->getFileUri();
         // Use the constant to check if it's already archived.
         if (strpos($old_uri, PinsConstants::PINS_REVISION_PATH) === FALSE) {
           $new_archive_uri = str_replace('public://', PinsConstants::PINS_REVISION_PATH, $old_uri);
@@ -1302,7 +1302,7 @@ function pins_node_update(NodeInterface $node) {
       $current_file = File::load($current_fid);
       if ($current_file) {
         $current_uri = $current_file->getFileUri();
-        
+
         // Use the constant to check if the file needs to be restored.
         if (strpos($current_uri, PinsConstants::PINS_REVISION_PATH) !== FALSE) {
           $restored_uri = str_replace(PinsConstants::PINS_REVISION_PATH, 'public://', $current_uri);
@@ -1311,14 +1311,35 @@ function pins_node_update(NodeInterface $node) {
             $directory = $file_system->dirname($restored_uri);
             $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
             $file_repository->move($current_file, $restored_uri);
-            
+
             \Drupal::messenger()->addStatus(t("Document restored: The file is now active at the public URL."));
-          } 
+          }
           catch (\Exception $e) {
             $logger->error('Failed to restore file @uri: @message', ['@uri' => $current_uri, '@message' => $e->getMessage()]);
           }
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * Removes Google Analytics module tracking if user has rejected tracking
+ */
+function pins_page_attachments_alter(array &$attachments) {
+  $consent = $_COOKIE['cookie_type'] ?? null;
+
+  if ($consent !== 'accept') {
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => "window['ga-disable-G-NZBJDLYTMD'] = true;",
+        '#weight' => -1000,
+      ],
+      'ga_disable_flag',
+    ];
   }
 }
