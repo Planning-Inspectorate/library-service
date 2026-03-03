@@ -49,7 +49,7 @@ function add_blank_target_to_pdf_link() {
 
   if (jQuery(".view-document").is(":visible")) {
     $href = jQuery(".view-document span.file ").find('a');
-    
+
     // $link_text = $txt;
     $href.prop('target', '_blank');
     $href.prop('rel', 'noreferrer noopener');
@@ -61,9 +61,21 @@ function add_blank_target_to_pdf_link() {
 
 function bef_datepicker_format_change() {
   jQuery('.bef-datepicker').each(function () {
-    jQuery(this).datepicker({ dateFormat: 'dd-mm-yy' }); 
+    jQuery(this).datepicker({ dateFormat: 'dd-mm-yy' });
   });
 }
 
 bef_datepicker_format_change();
 add_blank_target_to_pdf_link();
+
+function handleCookieChoice(value) {
+  setCookie('cookie_type', value, 90);
+
+  if (value === 'accept') {
+    jQuery('#cookie-accepted').removeAttr('hidden');
+    jQuery('#cookie-rejected').attr('hidden', true);
+  } else {
+    jQuery('#cookie-rejected').removeAttr('hidden');
+    jQuery('#cookie-accepted').attr('hidden', true);
+  }
+}
