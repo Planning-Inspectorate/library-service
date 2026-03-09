@@ -27,7 +27,7 @@
         "drupal/block_class": "^3.0",
         "drupal/bookmarks": "1.0.2",
         "drupal/bootstrap5": "^4.0",
-        "drupal/captcha": "2.0.5",
+        "drupal/captcha": "^2.0",
         "drupal/chosen": "^4.0",
         "drupal/clientside_validation": "^4.1",
         "drupal/coder": "^8.3",
@@ -36,11 +36,11 @@
         "drupal/config_filter": "^2.6",
         "drupal/config_ignore": "^3.1",
         "drupal/config_split": "^2.0",
-        "drupal/cookies": "1.2.8",
-        "drupal/core": "10.5.1",
-        "drupal/core-composer-scaffold": "10.5.1",
-        "drupal/core-project-message": "10.5.1",
-        "drupal/core-recommended": "10.5.1",
+        "drupal/cookies": "^1.2",
+        "drupal/core": "10.6.4",
+        "drupal/core-composer-scaffold": "10.6.4",
+        "drupal/core-project-message": "10.6.4",
+        "drupal/core-recommended": "10.6.4",
         "drupal/cshs": "^4.0",
         "drupal/csv_importer": "1.16",
         "drupal/ctools": "4.0.4",
@@ -55,7 +55,7 @@
         "drupal/entity_print": "2.13",
         "drupal/events_log_track": "^3.1",
         "drupal/extlink": "^2.0",
-        "drupal/facets": "3.0.0-beta1",
+        "drupal/facets": "^3.0",
         "drupal/feeds": "^3.0@beta",
         "drupal/feeds_para_mapper": "^1.1",
         "drupal/feeds_tamper": "2.0-beta3",
@@ -90,7 +90,8 @@
         "drupal/samlauth": "^3.9",
         "drupal/scan_code": "1.0-alpha8",
         "drupal/schema_metatag": "^3.0",
-        "drupal/search_api": "1.31",
+        "drupal/search_api": "^1.40",
+        "drupal/search_api_aais": "^1.0@RC",
         "drupal/search_api_attachments": "9.0.2",
         "drupal/search_api_saved_searches": "^1.0@beta",
         "drupal/search_api_solr": "^4.3",
@@ -205,7 +206,10 @@
             },
             "drupal/core" : {
                 "access check error fix" : "https://www.drupal.org/files/issues/2023-12-08/core-patch.patch"
-            }         
+            },
+            "drupal/elasticsearch_connector":{
+                "elasticsearch_connector-fix": "https://www.drupal.org/files/issues/2024-06-18/elasticsearch_connector-fix_sleep_method_compatibility-3455006-7.patch"
+            }            
         },
         "enable-patching": true
     }
