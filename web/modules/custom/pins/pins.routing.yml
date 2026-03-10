@@ -6,7 +6,7 @@ pins.settings:
   requirements:
     _permission: 'administer site configuration'
 
-govuk_cookies.cookie_page:
+pins.cookie_page:
   path: '/cookies'
   defaults:
     _controller: '\Drupal\pins\Controller\PinsCookiePageController::content'

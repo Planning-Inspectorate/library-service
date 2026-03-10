@@ -1329,14 +1329,17 @@ function pins_node_update(NodeInterface $node) {
  * Removes Google Analytics module tracking if user has rejected tracking
  */
 function pins_page_attachments_alter(array &$attachments) {
+
+  $ga_config = \Drupal::config('google_analytics.settings');
+  $tracking_id = $ga_config->get('account');
   $consent = $_COOKIE['cookie_type'] ?? null;
 
-  if ($consent !== 'accept') {
+  if ($consent !== 'accept' && !empty($tracking_id)) {
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
         '#tag' => 'script',
-        '#value' => "window['ga-disable-G-NZBJDLYTMD'] = true;",
+        '#value' => "window['ga-disable-{$tracking_id}'] = true;",
         '#weight' => -1000,
       ],
       'ga_disable_flag',

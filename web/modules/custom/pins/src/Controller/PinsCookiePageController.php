@@ -12,7 +12,7 @@ class PinsCookiePageController extends ControllerBase {
     $build['intro1'] = [
       '#type' => 'html_tag',
       '#tag' => 'p',
-      '#value' => $this->t('Cookies are small files saved on your phone, tablet or computer when you visit a website.'),
+      '#value' => $this->t('Cookies are small files saved on your phone, tablet or computer when you visit a website. We use cookies to store information about how you use the application service, such as the pages you visit.'),
     ];
 
     $build['heading'] = [
