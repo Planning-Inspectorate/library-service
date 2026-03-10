@@ -79,3 +79,14 @@ function handleCookieChoice(value) {
     jQuery('#cookie-accepted').attr('hidden', true);
   }
 }
+
+jQuery(function ($) {
+  const cookieExists = document.cookie
+    .split('; ')
+    .some(row => row.startsWith('cookie_type='));
+
+  if (cookieExists) {
+    $('.govuk-cookie-banner').remove();
+    console.log('Cookie banner removed because cookie_type exists');
+  }
+});
