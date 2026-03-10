@@ -5,3 +5,11 @@ pins.settings:
     _title: 'PINS Document Revision Settings'
   requirements:
     _permission: 'administer site configuration'
+
+pins.cookie_page:
+  path: '/cookies'
+  defaults:
+    _controller: '\Drupal\pins\Controller\PinsCookiePageController::content'
+    _title: 'Cookies on the Library'
+  requirements:
+    _permission: 'access content'
