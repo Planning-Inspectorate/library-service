@@ -127,6 +127,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
+        "audit": {
+            "block-insecure": false
+        },
         "allow-plugins": {
             "composer/installers": true,
             "drupal/core-composer-scaffold": true,
@@ -137,7 +140,6 @@
         },
         "sort-packages": true,
         "discard-changes": true
-        
     },
     "extra": {
         "drupal-scaffold": {
@@ -208,5 +210,13 @@
             }         
         },
         "enable-patching": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"if(!is_dir('web/libraries/chosen')) mkdir('web/libraries/chosen', 0777, true); copy('vendor/jjj/chosen/docs/chosen.jquery.js', 'web/libraries/chosen/chosen.jquery.js'); copy('vendor/jjj/chosen/docs/chosen.css', 'web/libraries/chosen/chosen.css');\""
+        ],
+        "post-update-cmd": [
+            "php -r \"if(!is_dir('web/libraries/chosen')) mkdir('web/libraries/chosen', 0777, true); copy('vendor/jjj/chosen/docs/chosen.jquery.js', 'web/libraries/chosen/chosen.jquery.js'); copy('vendor/jjj/chosen/docs/chosen.css', 'web/libraries/chosen/chosen.css');\""
+        ]
     }
 }

@@ -627,9 +627,61 @@ function pins_views_pre_render(ViewExecutable $view) {
     if (empty($view->result) && empty($view->getExposedInput())) {
       $view->exposed_widgets = NULL;
     }
+
+    $tids = [];
+
+    foreach ($view->result as $row) {
+      if (!empty($row->_entity) && $row->_entity->hasField('field_kl_classification')) {
+        foreach ($row->_entity->get('field_kl_classification')->getValue() as $item) {
+          $tids[] = $item['target_id'];
+        }
+      }
+    }
+
+    $tids = array_unique($tids);
+
+    \Drupal::state()->set('pins_allowed_tids', $tids);
   }
 }
 
+/**
+ * Alters the exposed form for the taxonomy search view.
+ *
+ * Filters the classification dropdown so it only shows taxonomy terms
+ * that appear in the current view results.
+ */
+function pins_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  if (!isset($form['#id'])) {
+    return;
+  }
+
+  $html_id = $form['#id'];
+
+  if ($html_id === 'views-exposed-form-taxonomy-search-page-2') {
+    if (!isset($form['field_kl_classification_target_id'])) {
+      return;
+    }
+
+    $allowed_tids = \Drupal::state()->get('pins_allowed_tids', []);
+    $options = $form['field_kl_classification_target_id']['#options'];
+    $filtered = [];
+
+    foreach ($options as $item) {
+      if (!isset($item->option) || !is_array($item->option)) {
+        continue;
+      }
+
+      $tid = array_key_first($item->option);
+
+      if (in_array($tid, $allowed_tids)) {
+        $filtered[] = $item;
+      }
+    }
+
+    $form['field_kl_classification_target_id']['#options'] = $filtered;
+  }
+}
 
 /**
 * Implements hook_views_query_alter().
@@ -1061,7 +1113,7 @@ function pins_preprocess_views_view_field(&$variables) {
         $html = $variables['output'];
         if (strpos($html, '::') !== false) {
           // Extract nid and title from the custom_value
-          list($nid, $title) = explode('::', $html, 2);
+          [$nid, $title] = explode('::', $html, 2);
           if (is_numeric($nid) && (int)$nid > 0) {
             // Create a URL to the node
             $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);

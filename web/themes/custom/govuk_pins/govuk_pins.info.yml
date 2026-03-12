@@ -7,6 +7,7 @@ description: A fully responsive theme utilising the GOV.UK Design System Fronten
 
 libraries:
   - govuk_pins/framework
+  - govuk_pins/chosen
 
 regions:
   cookies: 'Cookies'
