@@ -1,0 +1,16 @@
+uuid: d4ea917e-5036-45e4-aa34-4e0e08009a06
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_aais
+id: pins_content_index_azure
+name: 'PINS Content Index Azure'
+description: ''
+backend: search_api_aais
+backend_config:
+  connector: standard
+  connector_config:
+    url: ''
+    api_version: ''
+    api_key: ''
