@@ -1,0 +1,10 @@
+type: module
+name: 'PINS Azure Search'
+description: 'Custom Enhancements for site search functionality with Azure'
+package: PINS
+core_version_requirement: ^9 || ^10
+tags:
+ - system
+dependencies:
+  - drupal:search_api
+  - search_api_aais:search_api_aais
