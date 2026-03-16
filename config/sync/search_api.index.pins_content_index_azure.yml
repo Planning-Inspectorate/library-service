@@ -18,7 +18,7 @@ dependencies:
     - search_api_aais
 third_party_settings:
   search_api_aais:
-    index_name: azureblob-dev-index
+    index_name: ''
     skip_remote_index_actions: 0
     synonym_map: 0
     semantic_configuration: ''

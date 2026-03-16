@@ -30,3 +30,22 @@ if ($search_index_api_version) {
 if ($search_index_api_key) {
   $config[$search_api_config]['backend_config']['connector_config']['api_key'] = $search_index_api_key;
 }
+
+$search_api_index = 'search_api.index.pins_content_index_azure';
+
+// Set index name based on environment
+$env = $_ENV['APP_ENV'] ? $_ENV['APP_ENV']: getenv('APP_ENV');
+
+switch ($env) {
+  case 'prod':
+    $index_name = 'azureblob-prod-index';
+    break;
+  case 'stage':
+    $index_name = 'azureblob-stage-index';
+    break;
+  default:
+    $index_name = 'azureblob-dev-index';
+    break;
+}
+
+$config[$search_api_index]['third_party_settings']['search_api_aais']['index_name'] = $index_name;
