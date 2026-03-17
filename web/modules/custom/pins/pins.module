@@ -636,7 +636,6 @@ function pins_views_pre_render(ViewExecutable $view) {
 */
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
-  $user = \Drupal::currentUser();
   if ($view->id() === 'taxonomy_search') {
     $term_id = $view->args[0] ?? NULL;
     $term = $term_id ? \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id) : NULL;
