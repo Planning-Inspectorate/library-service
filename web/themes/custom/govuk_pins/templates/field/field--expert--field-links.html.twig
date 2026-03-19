@@ -1,0 +1,17 @@
+{# field--expert--field-links.html.twig #}
+<dt class="govuk-summary-list__key govuk-!-width-one-third field-label-inline">{{ label }}</dt>
+<ul class="govuk-list">
+  {% for item in items %}
+    <li class="list__value">
+      {% set link_url = item.content['#url'] %}
+      {% set link_title = item.content['#title'] %}
+      
+      {# Logic: If title is empty or is just the URL string #}
+      {% if link_title is empty or '://' in link_title %}
+        <a href="{{ link_url.toString() }}" class="ext">View Document</a>
+      {% else %}
+        {{ item.content }}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
