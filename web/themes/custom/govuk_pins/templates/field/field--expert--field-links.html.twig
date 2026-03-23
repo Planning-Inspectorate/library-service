@@ -8,7 +8,7 @@
       
       {# Logic: If title is empty or is just the URL string #}
       {% if link_title is empty or '://' in link_title %}
-        <a href="{{ link_url.toString() }}" class="ext">View External Link</a>
+        <a href="{{ link_url.toString() }}" class="ext">Open external link</a>
       {% else %}
         {{ item.content }}
       {% endif %}
