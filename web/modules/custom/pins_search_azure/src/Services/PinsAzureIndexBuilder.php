@@ -71,7 +71,6 @@ class PinsAzureIndexBuilder extends IndexBuilder {
                     ],
                 ],
             ];
-            \Drupal::logger('pins_search_azure')->debug('Semantic build: @build', ['@build' => print_r($build['semantic'], TRUE)]);
         }
 
         if (isset($build['vectorSearch'])) {

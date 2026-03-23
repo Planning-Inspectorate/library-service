@@ -29,7 +29,9 @@ class AzureVectorizer {
    * Main entry point to get a single vector for a string or array of strings.
    */
   public function getVector($text, $title = ''): array {
-    // If Search API provides them as an array (common in Views), flatten them.#conjunction is a special key used by Search API to indicate how multiple keys are combined (AND/OR). We should ignore it in our flattening logic.
+    // If Search API provides values as an array (common in Views), flatten them.
+    // The "#conjunction" key is used by Search API to indicate how multiple keys
+    // are combined (AND/OR), and should be ignored in our flattening logic.
     if (is_array($text)) {
       $text = $this->flattenKeys($text);
     }
