@@ -21,11 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class VectorIndexProcessor extends ProcessorPluginBase {
 
   /**
-   * @var \Drupal\search_api\Utility\FieldsHelperInterface
-   */
-  protected $fieldsHelper;
-
-  /**
    * @var \Drupal\Core\Config\ImmutableConfig
    */
   protected $azureSettings;
@@ -37,11 +32,9 @@ class VectorIndexProcessor extends ProcessorPluginBase {
     array $configuration,
     $plugin_id,
     $plugin_definition,
-    FieldsHelperInterface $fields_helper,
     ConfigFactoryInterface $config_factory
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->fieldsHelper = $fields_helper;
     $this->azureSettings = $config_factory->get('pins_search_azure.settings');
   }
 
@@ -53,7 +46,6 @@ class VectorIndexProcessor extends ProcessorPluginBase {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('search_api.fields_helper'),
       $container->get('config.factory')
     );
   }
