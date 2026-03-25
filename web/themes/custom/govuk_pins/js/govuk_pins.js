@@ -90,3 +90,7 @@ jQuery(function ($) {
     console.log('Cookie banner removed because cookie_type exists');
   }
 });
+
+jQuery(document).ajaxComplete(function () {
+  jQuery('select[name="field_kl_classification_target_id[]"]').chosen();
+});
