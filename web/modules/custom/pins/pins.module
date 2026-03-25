@@ -80,6 +80,7 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   ];
   if (in_array($form_id, $forms_with_pins_js, TRUE)) {
     $form['#attached']['library'][] = 'pins/pins_js';
+
   }
 
   switch ($form_id) {
@@ -640,31 +641,31 @@ function pins_views_pre_render(ViewExecutable $view) {
       }
     }
   }
-  $tids = array_unique($tids);
-
-  // Filter exposed options
-  if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
-    return;
-  }
-
-  $widget = &$view->exposed_widgets['field_kl_classification_target_id'];
-  $options = $widget['#options'];
-  $filtered = [];
-
-  foreach ($options as $item) {
-    if (!isset($item->option) || !is_array($item->option)) {
-      continue;
-    }
-
-    $tid = (string) array_key_first($item->option);
-
-    if (in_array($tid, $tids, true)) {
-      $filtered[] = $item;
-    }
-  }
-
-  // Replace options with filtered list.
-  $widget['#options'] = $filtered;
+//  $tids = array_unique($tids);
+//
+//  // Filter exposed options
+//  if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
+//    return;
+//  }
+//
+//  $widget = &$view->exposed_widgets['field_kl_classification_target_id'];
+//  $options = $widget['#options'];
+//  $filtered = [];
+//
+//  foreach ($options as $item) {
+//    if (!isset($item->option) || !is_array($item->option)) {
+//      continue;
+//    }
+//
+//    $tid = (string) array_key_first($item->option);
+//
+//    if (in_array($tid, $tids, true)) {
+//      $filtered[] = $item;
+//    }
+//  }
+//
+//  // Replace options with filtered list.
+//  $widget['#options'] = $filtered;
 }
 
 /**
@@ -1252,3 +1253,4 @@ function pins_page_attachments_alter(array &$attachments) {
     ];
   }
 }
+

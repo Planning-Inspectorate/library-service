@@ -91,6 +91,26 @@ jQuery(function ($) {
   }
 });
 
-jQuery(document).ajaxComplete(function () {
-  jQuery('select[name="field_kl_classification_target_id[]"]').chosen();
-});
+(function ($, Drupal) {
+
+  // Private helper: initialise Chosen on the target select(s)
+  function initChosen() {
+    $('select[name="field_kl_classification_target_id[]"]')
+      .filter(function () {
+        return !$(this).data('chosen');
+      })
+      .chosen();
+  }
+
+  // Run on document ready
+  $(document).ready(function () {
+    initChosen();
+  });
+
+  // Run after any AJAX completion (e.g., Views exposed filters)
+  $(document).ajaxComplete(function () {
+    initChosen();
+  });
+
+})(jQuery, Drupal);
+
