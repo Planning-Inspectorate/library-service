@@ -1,0 +1,20 @@
+services:
+  pins_search_azure.index_builder_decorator:
+    class: Drupal\pins_search_azure\Services\PinsAzureIndexBuilder
+    decorates: search_api_aais.index_builder 
+    arguments: 
+      - '@pins_search_azure.index_builder_decorator.inner'
+      - '@config.factory'
+      - '@logger.factory'
+  pins_search_azure.vectorizer:
+    class: Drupal\pins_search_azure\Services\AzureVectorizer
+    arguments: ['@http_client', '@config.factory', '@logger.factory']
+
+  pins_search_azure.query_param_builder_decorator:
+    class: Drupal\pins_search_azure\Services\PinsAzureQueryParamBuilder
+    decorates: search_api_aais.query_param_builder 
+    arguments: 
+      - '@pins_search_azure.query_param_builder_decorator.inner'
+      - '@pins_search_azure.vectorizer'
+      - '@logger.factory'
+      - '@config.factory'

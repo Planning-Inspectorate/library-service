@@ -49,3 +49,26 @@ switch ($env) {
 }
 
 $config[$search_api_index]['third_party_settings']['search_api_aais']['index_name'] = $index_name;
+
+
+$config['pins_search_azure.settings'] = [
+  'api_url'                => getenv('OPENAI_API_URL'),
+  'api_key'                => getenv('OPENAI_API_KEY'),
+  'api_model'              => getenv('OPENAI_API_MODEL') ?: 'text-embedding-ada-002',
+  'resource_url'           => getenv('OPENAI_RESOURCE_URL') ?: 'https://pins-openai-library-poc.openai.azure.com',
+  'deployment_id'          => getenv('OPENAI_DEPLOYMENT_ID') ?: 'text-embedding-ada-002',
+  'embedding_api_key'      => getenv('OPENAI_EMBEDDING_API_KEY'),
+  'metric_name'            => getenv('OPENAI_METRIC'),
+  'm'                      => getenv('OPENAI_M'),
+  'ef_construction'        => getenv('OPENAI_EFCONSTRUCTION'),
+  'ef_search'              => getenv('OPENAI_EFSEARCH'),
+  'algorithm_name'         => getenv('OPENAI_ALGORITHAM'),
+  'vectorizer_name'        => getenv('OPENAI_VECTORIZER'),
+  'profile_name'           => getenv('OPENAI_PROFILE'),
+  'semantic_config_name'   => getenv('OPENAI_SEMANTIC_CONFIG'),
+  'semantic_title_field'   => getenv('OPENAI_SEMANTIC_TITLE_FIELD'),
+  'semantic_content_fields' => getenv('OPENAI_SEMANTIC_CONTENT_FIELDS'),
+  'semantic_keyword_fields' => getenv('OPENAI_SEMANTIC_KEYWORD_FIELDS'),
+  'field_to_vectorise' => getenv('OPENAI_FIELD_TO_VECTORISE'),
+  'field_to_sanitize' => getenv('OPENAI_FIELD_TO_SANITIZE')
+];
