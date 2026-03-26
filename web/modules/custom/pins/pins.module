@@ -27,6 +27,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\pins\PinsConstants;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\views\Views;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
@@ -618,6 +619,49 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 }
 
 /**
+ * Load all rows from a view, with contextual and exposed filters applied.
+ *
+ * @param string $view_id
+ * @param string $display_id
+ * @param array $args
+ *   Contextual filter arguments.
+ * @param array $exposed
+ *   Exposed filter input.
+ *
+ * @return array
+ *   All rows from the unpaginated view.
+ */
+function pins_get_all_view_rows($view_id, $display_id = 'default', array $args = [], array $exposed = []) {
+  $view = Views::getView($view_id);
+  if (!$view) {
+    return [];
+  }
+
+  // Set display.
+  $view->setDisplay($display_id);
+
+  // Apply contextual filters.
+  if (!empty($args)) {
+    $view->setArguments($args);
+  }
+
+  // Apply exposed filters.
+  if (!empty($exposed)) {
+    $view->setExposedInput($exposed);
+  }
+
+  // Disable pagination.
+  $view->setItemsPerPage(0);
+
+  // Execute.
+  $view->execute();
+
+  return $view->result;
+}
+
+
+
+/**
  * Implements hook_views_pre_render().
  */
 function pins_views_pre_render(ViewExecutable $view) {
@@ -634,38 +678,46 @@ function pins_views_pre_render(ViewExecutable $view) {
 
   // Collect TIDs from results
   $tids = [];
-  foreach ($view->result as $row) {
+
+  $all_rows = pins_get_all_view_rows(
+    'taxonomy_search',
+    'page_2',
+    $view->args,              // contextual filters
+    $view->getExposedInput()  // exposed filters
+  );
+
+  foreach ($all_rows as $row) {
     if (!empty($row->_entity) && $row->_entity->hasField('field_kl_classification')) {
       foreach ($row->_entity->get('field_kl_classification')->getValue() as $item) {
         $tids[] = $item['target_id'];
       }
     }
   }
-//  $tids = array_unique($tids);
-//
-//  // Filter exposed options
-//  if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
-//    return;
-//  }
-//
-//  $widget = &$view->exposed_widgets['field_kl_classification_target_id'];
-//  $options = $widget['#options'];
-//  $filtered = [];
-//
-//  foreach ($options as $item) {
-//    if (!isset($item->option) || !is_array($item->option)) {
-//      continue;
-//    }
-//
-//    $tid = (string) array_key_first($item->option);
-//
-//    if (in_array($tid, $tids, true)) {
-//      $filtered[] = $item;
-//    }
-//  }
-//
-//  // Replace options with filtered list.
-//  $widget['#options'] = $filtered;
+  $tids = array_unique($tids);
+
+  // Filter exposed options
+  if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
+    return;
+  }
+
+  $widget = &$view->exposed_widgets['field_kl_classification_target_id'];
+  $options = $widget['#options'];
+  $filtered = [];
+
+  foreach ($options as $item) {
+    if (!isset($item->option) || !is_array($item->option)) {
+      continue;
+    }
+
+    $tid = (string) array_key_first($item->option);
+
+    if (in_array($tid, $tids, true)) {
+      $filtered[] = $item;
+    }
+  }
+
+  // Replace options with filtered list.
+  $widget['#options'] = $filtered;
 }
 
 /**
