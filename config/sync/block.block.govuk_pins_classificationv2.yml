@@ -1,0 +1,29 @@
+uuid: e299dcf9-e609-461e-87fe-e3192a92a1fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.classification_v2
+  module:
+    - facets
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_classificationv2
+theme: govuk_pins
+region: sidebar_first
+weight: -13
+provider: null
+plugin: 'facet_block:classification_v2'
+settings:
+  id: 'facet_block:classification_v2'
+  label: Classification
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_classificationv2
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/lib-search-v2\r\n/lib-search-v2/*"
