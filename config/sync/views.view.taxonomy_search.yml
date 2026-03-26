@@ -708,14 +708,14 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 200
+          items_per_page: 1
           total_pages: 0
           id: 0
           tags:
             next: ''
             previous: ''
-            first: ''
-            last: ''
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -1374,7 +1374,7 @@ display:
           expose:
             operator_id: field_kl_classification_target_id_op
             label: Classification
-            description: 'Start typing to find a classification...'
+            description: 'Filter current list by classification...'
             use_operator: false
             operator: field_kl_classification_target_id_op
             operator_limit_selection: false
@@ -1382,7 +1382,7 @@ display:
             identifier: field_kl_classification_target_id
             required: false
             remember: false
-            multiple: false
+            multiple: true
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
@@ -1390,6 +1390,7 @@ display:
               administrator: '0'
               pads: '0'
               library_admin: '0'
+              library_super_admin: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1405,8 +1406,8 @@ display:
             group_items: {  }
           reduce_duplicates: false
           vid: kl_classification
-          type: textfield
-          hierarchy: false
+          type: select
+          hierarchy: true
           limit: true
           error_message: true
           save_lineage: false
@@ -1525,7 +1526,7 @@ display:
         filters: false
         filter_groups: false
       display_description: ''
-      exposed_block: true
+      exposed_block: false
       display_extenders: {  }
       path: taxonomy/term/%
     cache_metadata:
