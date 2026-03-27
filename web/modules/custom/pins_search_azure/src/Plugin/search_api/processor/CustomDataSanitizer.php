@@ -56,8 +56,6 @@ class CustomDataSanitizer extends ProcessorPluginBase {
     // 1. Move config reading OUTSIDE the loop for better performance
     $sanitize_string = $this->azureSettings->get('field_to_sanitize') ?? '';
     $data_fields = array_filter(array_map('trim', explode(',', $sanitize_string)));
-    
-
     if (empty($data_fields)) {
       return;
     }
@@ -80,34 +78,49 @@ class CustomDataSanitizer extends ProcessorPluginBase {
     }
 
     $values = $field->getValues();
+    $type = $field->getType();
     $clean = [];
+    
+    // If values is already an empty array, decide if we need a placeholder
+    if (empty($values)) {
+      if ($type === 'date') {
+        // Azure integer fields often fail on empty arrays; 
+        // setting to [0] or leaving empty depends on your Azure schema 'isNullable'
+        $field->setValues([0]); 
+      }
+      return;
+    }
 
     foreach ($values as $value) {
-      // Handle array structures (like those from some Search API backends)
+      // 1. Extract raw text from Search API TextValue objects (handles "Act 1978...")
+      if (is_object($value) && method_exists($value, 'getText')) {
+        // Cast to string to trigger __toString() which is more reliable than getText()
+        $value = (string) $value;
+      }
+
+      // 2. Handle nested array structures
       if (is_array($value) && isset($value['value'])) {
         $value = $value['value'];
       }
 
-      // Filter out invalid/empty values
+      // 3. Normalize "Empty" indicators
       if ($value === NULL || $value === FALSE || $value === '' || $value === 'False') {
         continue;
       }
 
+      // 4. Conversion Logic
       if (is_numeric($value)) {
-        $clean[] = (int) $value;
-      } else {
-        $ts = strtotime($value);
-        if ($ts !== FALSE && $ts > 0) {
-          $clean[] = (int) $ts;
-        }
-      }
+          $clean[] = (int) $value;
+      } 
     }
-
-    if (empty($clean)) {
-      // Better way to remove a field value in Search API
-      $field->setValues([]); 
-    } else {
-      $field->setValues($clean);
+    
+    // Final Safeguard for Azure Types
+    if (!empty($clean)) {
+        $field->setValues($clean);
+        \Drupal::logger('pins_search_azure')->debug('Sanitized field @field with values: @values', [
+          '@field' => $field_id,
+          '@values' => json_encode($clean),
+        ]);
     }
   }
 }

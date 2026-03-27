@@ -1,0 +1,29 @@
+uuid: 9ac9fbaa-d196-4031-b6ef-ea1d8de79c39
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.content_type_v2
+  module:
+    - facets
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_contenttypev2
+theme: govuk_pins
+region: sidebar_first
+weight: -17
+provider: null
+plugin: 'facet_block:content_type_v2'
+settings:
+  id: 'facet_block:content_type_v2'
+  label: 'Content type'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_contenttypev2
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/lib-search-v2\r\n/lib-search-v2/*"
