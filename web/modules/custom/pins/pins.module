@@ -733,6 +733,44 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
       }
     }
   }
+
+  // Only apply to the correct view + display.
+  if ($view->id() !== 'manage_contents' || $view->current_display !== 'manage_contents') {
+    return;
+  }
+
+
+  // TODO: add the filter to the view
+  // Check exposed filter toggle.
+//  $input = $view->getExposedInput();
+//  if (empty($input['latest_only'])) {
+//    return;
+//  }
+
+  // Inject a subquery that returns only the latest version NIDs.
+  $connection = \Drupal::database();
+
+  $sub = $connection->select('node__field_kl_doc_id', 'd');
+  $sub->join('node__field_vernum', 'v', 'v.entity_id = d.entity_id');
+
+  // Subquery to compute max version per doc ID.
+  $latest = $connection->select('node__field_kl_doc_id', 'd2');
+  $latest->join('node__field_vernum', 'v2', 'v2.entity_id = d2.entity_id');
+  $latest->addField('d2', 'field_kl_doc_id_value');
+  $latest->addExpression('MAX(v2.field_vernum_value)', 'max_ver');
+  $latest->groupBy('d2.field_kl_doc_id_value');
+
+  // Join latest version info.
+  $sub->join($latest, 'l',
+    'l.field_kl_doc_id_value = d.field_kl_doc_id_value AND l.max_ver = v.field_vernum_value'
+  );
+
+  $sub->addField('v', 'entity_id');
+
+  // Add WHERE clause to the View query.
+  $query->addWhere(0, 'node_field_data.nid', $sub, 'IN');
+
+
 }
 
 function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_doc_id'){

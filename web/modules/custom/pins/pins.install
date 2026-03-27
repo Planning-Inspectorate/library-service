@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pins module.
+ */
+
+/**
+ * Add indexes to improve latest-version query performance.
+ */
+function pins_update_8004() {
+  $schema = \Drupal::database()->schema();
+
+  if (!$schema->indexExists('node__field_kl_doc_id', 'idx_doc_id')) {
+    $schema->addIndex('node__field_kl_doc_id', 'idx_doc_id', ['field_kl_doc_id_value']);
+  }
+
+  if (!$schema->indexExists('node__field_kl_doc_id', 'idx_entity')) {
+    $schema->addIndex('node__field_kl_doc_id', 'idx_entity', ['entity_id']);
+  }
+
+  if (!$schema->indexExists('node__field_vernum', 'idx_vernum')) {
+    $schema->addIndex('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
+  }
+
+  if (!$schema->indexExists('node__field_vernum', 'idx_vernum_entity')) {
+    $schema->addIndex('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
+  }
+}
