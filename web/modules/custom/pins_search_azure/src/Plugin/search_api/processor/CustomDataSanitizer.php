@@ -55,8 +55,7 @@ class CustomDataSanitizer extends ProcessorPluginBase {
   public function preprocessIndexItems(array $items) {
     // 1. Move config reading OUTSIDE the loop for better performance
     $sanitize_string = $this->azureSettings->get('field_to_sanitize') ?? '';
-    $data_fields = array_filter(array_map('trim', explode(',', $sanitize_string)));    
-
+    $data_fields = array_filter(array_map('trim', explode(',', $sanitize_string)));
     if (empty($data_fields)) {
       return;
     }
