@@ -51,27 +51,26 @@ switch ($env) {
 
 $config[$search_api_index]['third_party_settings']['search_api_aais']['index_name'] = $index_name;
 
-
 $config['pins_search_azure.settings'] = [
-  'api_url'                => $_ENV['OPENAI_API_URL'] ? $_ENV['OPENAI_API_URL'] : getenv('OPENAI_API_URL'),
-  'api_key'                => $_ENV['OPENAI_API_KEY'] ? $_ENV['OPENAI_API_KEY'] : getenv('OPENAI_API_KEY'),
-  'api_model'              => $_ENV['OPENAI_API_MODEL'] ? $_ENV['OPENAI_API_MODEL'] : getenv('OPENAI_API_MODEL') ?: 'text-embedding-ada-002',
-  'resource_url'           => $_ENV['OPENAI_RESOURCE_URL'] ? $_ENV['OPENAI_RESOURCE_URL'] : getenv('OPENAI_RESOURCE_URL') ?: 'https://pins-openai-library-poc.openai.azure.com',
-  'deployment_id'          => $_ENV['OPENAI_DEPLOYMENT_ID'] ? $_ENV['OPENAI_DEPLOYMENT_ID'] : getenv('OPENAI_DEPLOYMENT_ID') ?: 'text-embedding-ada-002',
-  'embedding_api_key'      => $_ENV['OPENAI_EMBEDDING_API_KEY'] ? $_ENV['OPENAI_EMBEDDING_API_KEY'] : getenv('OPENAI_EMBEDDING_API_KEY'),
-  'metric_name'            => $_ENV['OPENAI_METRIC'] ? $_ENV['OPENAI_METRIC'] : getenv('OPENAI_METRIC'),
-  'm'                      => $_ENV['OPENAI_M'] ? $_ENV['OPENAI_M'] : getenv('OPENAI_M'),
-  'ef_construction'        => $_ENV['OPENAI_EFCONSTRUCTION'] ? $_ENV['OPENAI_EFCONSTRUCTION'] : getenv('OPENAI_EFCONSTRUCTION'),
-  'ef_search'              => $_ENV['OPENAI_EFSEARCH'] ? $_ENV['OPENAI_EFSEARCH'] : getenv('OPENAI_EFSEARCH'),
-  'algorithm_name'         => $_ENV['OPENAI_ALGORITHAM'] ? $_ENV['OPENAI_ALGORITHAM'] : getenv('OPENAI_ALGORITHAM'),
-  'vectorizer_name'        => $_ENV['OPENAI_VECTORIZER'] ? $_ENV['OPENAI_VECTORIZER'] : getenv('OPENAI_VECTORIZER'),
-  'profile_name'           => $_ENV['OPENAI_PROFILE'] ? $_ENV['OPENAI_PROFILE'] : getenv('OPENAI_PROFILE'),
-  'semantic_config_name'   => $_ENV['OPENAI_SEMANTIC_CONFIG'] ? $_ENV['OPENAI_SEMANTIC_CONFIG'] : getenv('OPENAI_SEMANTIC_CONFIG'),
-  'semantic_title_field'   => $_ENV['OPENAI_SEMANTIC_TITLE_FIELD'] ? $_ENV['OPENAI_SEMANTIC_TITLE_FIELD'] : getenv('OPENAI_SEMANTIC_TITLE_FIELD'),
-  'semantic_content_fields' => $_ENV['OPENAI_SEMANTIC_CONTENT_FIELDS'] ? $_ENV['OPENAI_SEMANTIC_CONTENT_FIELDS'] : getenv('OPENAI_SEMANTIC_CONTENT_FIELDS'),
-  'semantic_keyword_fields' => $_ENV['OPENAI_SEMANTIC_KEYWORD_FIELDS'] ? $_ENV['OPENAI_SEMANTIC_KEYWORD_FIELDS'] : getenv('OPENAI_SEMANTIC_KEYWORD_FIELDS'),
-  'field_to_vectorise' => $_ENV['OPENAI_FIELD_TO_VECTORISE'] ? $_ENV['OPENAI_FIELD_TO_VECTORISE'] : getenv('OPENAI_FIELD_TO_VECTORISE'),
-  'field_to_sanitize' => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ? $_ENV['OPENAI_FIELD_TO_SANITIZE'] : getenv('OPENAI_FIELD_TO_SANITIZE')
+  'api_url'                 => $_ENV['OPENAI_API_URL'] ?? getenv('OPENAI_API_URL'),
+  'api_key'                 => $_ENV['OPENAI_API_KEY'] ?? getenv('OPENAI_API_KEY'),
+  'api_model'               => $_ENV['OPENAI_API_MODEL'] ?? getenv('OPENAI_API_MODEL') ?: 'text-embedding-ada-002',
+  'resource_url'            => $_ENV['OPENAI_RESOURCE_URL'] ?? getenv('OPENAI_RESOURCE_URL') ?: 'https://pins-openai-library-poc.openai.azure.com',
+  'deployment_id'           => $_ENV['OPENAI_DEPLOYMENT_ID'] ?? getenv('OPENAI_DEPLOYMENT_ID') ?: 'text-embedding-ada-002',
+  'embedding_api_key'       => $_ENV['OPENAI_EMBEDDING_API_KEY'] ?? getenv('OPENAI_EMBEDDING_API_KEY'),
+  'metric_name'             => $_ENV['OPENAI_METRIC'] ?? getenv('OPENAI_METRIC'),
+  'm'                       => $_ENV['OPENAI_M'] ?? getenv('OPENAI_M'),
+  'ef_construction'         => $_ENV['OPENAI_EFCONSTRUCTION'] ?? getenv('OPENAI_EFCONSTRUCTION'),
+  'ef_search'               => $_ENV['OPENAI_EFSEARCH'] ?? getenv('OPENAI_EFSEARCH'),
+  'algorithm_name'          => $_ENV['OPENAI_ALGORITHAM'] ?? getenv('OPENAI_ALGORITHAM'),
+  'vectorizer_name'         => $_ENV['OPENAI_VECTORIZER'] ?? getenv('OPENAI_VECTORIZER'),
+  'profile_name'            => $_ENV['OPENAI_PROFILE'] ?? getenv('OPENAI_PROFILE'),
+  'semantic_config_name'    => $_ENV['OPENAI_SEMANTIC_CONFIG'] ?? getenv('OPENAI_SEMANTIC_CONFIG'),
+  'semantic_title_field'    => $_ENV['OPENAI_SEMANTIC_TITLE_FIELD'] ?? getenv('OPENAI_SEMANTIC_TITLE_FIELD'),
+  'semantic_content_fields' => $_ENV['OPENAI_SEMANTIC_CONTENT_FIELDS'] ?? getenv('OPENAI_SEMANTIC_CONTENT_FIELDS'),
+  'semantic_keyword_fields' => $_ENV['OPENAI_SEMANTIC_KEYWORD_FIELDS'] ?? getenv('OPENAI_SEMANTIC_KEYWORD_FIELDS'),
+  'field_to_vectorise'      => $_ENV['OPENAI_FIELD_TO_VECTORISE'] ?? getenv('OPENAI_FIELD_TO_VECTORISE'),
+  'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE')
 ];
 echo "Environment:----\n"; // Debugging line to check the environment variable
 echo "Environment: " . getenv('APP_ENV') . "\n"; // Debugging line to check the environment variable
