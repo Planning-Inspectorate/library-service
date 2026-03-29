@@ -36,6 +36,7 @@ $search_api_index = 'search_api.index.pins_content_index_azure';
 // Set index name based on environment
 $env = $_ENV['APP_ENV'] ? $_ENV['APP_ENV']: getenv('APP_ENV');
 
+
 switch ($env) {
   case 'prod':
     $index_name = 'azureblob-prod-index';
@@ -72,3 +73,8 @@ $config['pins_search_azure.settings'] = [
   'field_to_vectorise' => getenv('OPENAI_FIELD_TO_VECTORISE'),
   'field_to_sanitize' => getenv('OPENAI_FIELD_TO_SANITIZE')
 ];
+
+echo "Environment: " . getenv('APP_ENV') . "\n"; // Debugging line to check the environment variable
+echo "Environment URL: " .  $_ENV['APP_ENV'] . "\n"; // Debugging line to check the search index URL
+print_r($config['pins_search_azure.settings']); // Debugging line to check the settings array
+echo $env;exit;
