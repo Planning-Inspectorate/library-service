@@ -80,3 +80,4 @@ print_r($config[$search_api_config]['backend_config']['connector_config']);
 print_r($config[$search_api_index]['third_party_settings']['search_api_aais']);
 print_r($config['pins_search_azure.settings']);
 echo "</pre>";
+exit;
