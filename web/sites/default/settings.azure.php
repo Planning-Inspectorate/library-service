@@ -73,8 +73,10 @@ $config['pins_search_azure.settings'] = [
   'field_to_vectorise' => getenv('OPENAI_FIELD_TO_VECTORISE'),
   'field_to_sanitize' => getenv('OPENAI_FIELD_TO_SANITIZE')
 ];
-
+echo "Environment:----\n"; // Debugging line to check the environment variable
 echo "Environment: " . getenv('APP_ENV') . "\n"; // Debugging line to check the environment variable
 echo "Environment URL: " .  $_ENV['APP_ENV'] . "\n"; // Debugging line to check the search index URL
+echo "<pre>";
 print_r($config['pins_search_azure.settings']); // Debugging line to check the settings array
+echo "</pre>";
 echo $env;exit;
