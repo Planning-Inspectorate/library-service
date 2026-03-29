@@ -72,12 +72,3 @@ $config['pins_search_azure.settings'] = [
   'field_to_vectorise'      => $_ENV['OPENAI_FIELD_TO_VECTORISE'] ?? getenv('OPENAI_FIELD_TO_VECTORISE'),
   'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE')
 ];
-
-
-echo "Azure settings have been applied based on environment variables.";
-echo "<pre>";
-print_r($config[$search_api_config]['backend_config']['connector_config']);
-print_r($config[$search_api_index]['third_party_settings']['search_api_aais']);
-print_r($config['pins_search_azure.settings']);
-echo "</pre>";
-exit;
