@@ -1009,7 +1009,9 @@ display:
                   placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
               type:
                 plugin_id: default
@@ -1017,7 +1019,9 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_kl_authors:
                 plugin_id: default
@@ -1025,7 +1029,9 @@ display:
                   placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_kl_reading_lists:
                 plugin_id: default
@@ -1033,7 +1039,9 @@ display:
                   placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_kl_classification:
                 plugin_id: default
@@ -1041,7 +1049,9 @@ display:
                   placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_kl_series:
                 plugin_id: default
@@ -1049,19 +1059,23 @@ display:
                   placeholder_text: ''
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_date:
-                plugin_id: default
+                plugin_id: bef_datepicker
                 advanced:
                   placeholder_text: ''
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
               field_date_1:
-                plugin_id: default
+                plugin_id: bef_datepicker
                 advanced:
                   placeholder_text: ''
                   collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: true
       access:
         type: none
@@ -1509,11 +1523,10 @@ display:
         options:
           grouping: {  }
           row_class: ''
-          default_row_class: true
-          uses_fields: false
+          default_row_class: false
           type: ul
           wrapper_class: item-list
-          class: ''
+          class: 'govuk-list govuk-list--spaced'
       row:
         type: fields
       query:
