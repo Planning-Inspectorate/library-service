@@ -97,7 +97,10 @@ class VectorIndexProcessor extends ProcessorPluginBase {
       if (empty($values)) {
         continue;
       }
-
+      \Drupal::logger('pins_search_azure')->debug('processVectorMappings @document_title with @values)', [
+          '@document_title' => $document_title,
+          '@values' => print_r($values, TRUE)
+      ]);
       // Convert source data to string
       $text = is_array($values) ? implode(' ', $values) : $values;
 
