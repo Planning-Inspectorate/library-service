@@ -81,6 +81,10 @@ class VectorIndexProcessor extends ProcessorPluginBase {
    * Handles individual field vectorization based on mappings.
    */
   protected function processVectorMappings(ItemInterface $item, array $mappings) {
+    \Drupal::logger('pins_search_azure')->debug('Intialise Process Vector Mappings for item ID @id with mappings: @mappings', [
+      '@id' => $item->getId(),
+      '@mappings' => print_r($mappings, TRUE),
+    ]);
     $vectorizer = \Drupal::service('pins_search_azure.vectorizer');
     $document_title = $item->getField('title') ? ($item->getField('title')->getValues()[0] ?? '') : '';
     $cnt = 0;
