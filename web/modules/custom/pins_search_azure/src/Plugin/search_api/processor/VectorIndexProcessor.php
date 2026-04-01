@@ -83,7 +83,7 @@ class VectorIndexProcessor extends ProcessorPluginBase {
   protected function processVectorMappings(ItemInterface $item, array $mappings) {
     $vectorizer = \Drupal::service('pins_search_azure.vectorizer');
     $document_title = $item->getField('title') ? ($item->getField('title')->getValues()[0] ?? '') : '';
-
+    $cnt = 0;
     foreach ($mappings as $source_id => $target_id) {
       $source_field = $item->getField($source_id);
       $target_field = $item->getField($target_id);
@@ -103,10 +103,15 @@ class VectorIndexProcessor extends ProcessorPluginBase {
 
       // Get the vector (Mean Pooling handled by service)
       $vector = $vectorizer->getVector($text, $document_title);
-
+      $cnt++;
       if (!empty($vector)) {
         // Clear existing and set the new vector array
         $target_field->setValues($vector);
+        \Drupal::logger('pins_search_azure')->debug('Vectorized text from @document_title for item ID @id (@count vectors)', [
+          '@document_title' => $document_title,
+          '@id' => $item->getId(),
+          '@count' => $cnt,
+        ]);
       }
     }
   }
