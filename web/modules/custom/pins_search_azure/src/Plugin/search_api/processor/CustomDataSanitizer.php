@@ -116,10 +116,6 @@ class CustomDataSanitizer extends ProcessorPluginBase {
     
     // Final Safeguard for Azure Types
     if (!empty($clean)) {
-        \Drupal::logger('pins_search_azure')->debug('Sanitized field @field_id with values: @values', [
-              '@field_id' => $field_id,
-              '@values' => print_r($clean, TRUE),
-        ]);
       $field->setValues($clean);
     }
   }
