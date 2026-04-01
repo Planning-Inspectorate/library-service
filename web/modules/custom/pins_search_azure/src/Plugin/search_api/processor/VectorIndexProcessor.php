@@ -14,8 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * label = @Translation("Vector Indexing Processor"),
  * description = @Translation("Calls a REST API to vectorize text fields before indexing."),
  * stages = {
- * "preprocess_index" = 101
- * }
+ *  "preprocess_index" = 101
+ *  }
  * )
  */
 class VectorIndexProcessor extends ProcessorPluginBase {
@@ -90,14 +90,22 @@ class VectorIndexProcessor extends ProcessorPluginBase {
 
       // Verify both fields exist in the index configuration
       if (!$source_field || !$target_field) {
+        \Drupal::logger('pins_search_azure')->debug('Skipping mapping for @source_id to @target_id - field not found in index configuration.', [
+          '@source_id' => $source_id,
+          '@target_id' => $target_id,
+        ]);
         continue;
       }
 
       $values = $source_field->getValues();
       if (empty($values)) {
+        \Drupal::logger('pins_search_azure')->debug('Empty values for mapping from @source_id to @target_id.', [
+          '@source_id' => $source_id,
+          '@target_id' => $target_id,
+        ]);
         continue;
       }
-      \Drupal::logger('pins_search_azure')->debug('processVectorMappings @document_title with @values)', [
+       \Drupal::logger('pins_search_azure')->debug('processVectorMappings document_title - @document_title with @values)', [
           '@document_title' => $document_title,
           '@values' => print_r($values, TRUE)
       ]);
