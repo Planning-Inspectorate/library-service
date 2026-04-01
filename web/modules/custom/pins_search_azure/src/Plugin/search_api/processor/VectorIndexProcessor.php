@@ -94,7 +94,6 @@ class VectorIndexProcessor extends ProcessorPluginBase {
       }
 
       $values = $source_field->getValues();
-      \Drupal::logger('pins_vectorizer')->debug('Processing field @source_id with values: @values', ['@source_id' => $source_id, '@values' => print_r($values, TRUE)]);
       if (empty($values)) {
         continue;
       }
