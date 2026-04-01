@@ -739,13 +739,11 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
     return;
   }
 
-
-  // TODO: add the filter to the view
   // Check exposed filter toggle.
-//  $input = $view->getExposedInput();
-//  if (empty($input['latest_only'])) {
-//    return;
-//  }
+  $input = $view->getExposedInput();
+  if (empty($input['dummy_checkbox'])) {
+    return;
+  }
 
   // Inject a subquery that returns only the latest version NIDs.
   $connection = \Drupal::database();
@@ -1253,4 +1251,22 @@ function pins_page_attachments_alter(array &$attachments) {
       'ga_disable_flag',
     ];
   }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function pins_views_data() {
+  $data = [];
+
+  // Attach to the node base table.
+  $data['node_field_data']['dummy_checkbox'] = [
+    'title' => t('Dummy checkbox filter'),
+    'help' => t('A custom exposed checkbox that does not filter by itself.'),
+    'filter' => [
+      'id' => 'dummy_checkbox', // This matches @ViewsFilter("dummy_checkbox")
+    ],
+  ];
+
+  return $data;
 }
