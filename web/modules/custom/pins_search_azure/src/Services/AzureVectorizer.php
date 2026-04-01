@@ -44,7 +44,6 @@ class AzureVectorizer {
     $title = $this->sanitizeUtf8($title);
 
     $context_prefix = !empty($title) ? "Title: " . $title . ". Content: " : "";
-    \Drupal::logger('pins_vectorizer')->debug('Vectorizing text with context_prefix: @context_prefix', ['@context_prefix' => $context_prefix]);
     // Configuration
     $maxChunkChars = 1000;
     $overlapChars = 200;

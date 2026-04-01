@@ -90,25 +90,13 @@ class VectorIndexProcessor extends ProcessorPluginBase {
 
       // Verify both fields exist in the index configuration
       if (!$source_field || !$target_field) {
-        \Drupal::logger('pins_search_azure')->debug('Skipping mapping for @source_id to @target_id - field not found in index configuration.', [
-          '@source_id' => $source_id,
-          '@target_id' => $target_id,
-        ]);
         continue;
       }
 
       $values = $source_field->getValues();
       if (empty($values)) {
-        \Drupal::logger('pins_search_azure')->debug('Empty values for mapping from @source_id to @target_id.', [
-          '@source_id' => $source_id,
-          '@target_id' => $target_id,
-        ]);
         continue;
       }
-       \Drupal::logger('pins_search_azure')->debug('processVectorMappings document_title - @document_title with @values)', [
-          '@document_title' => $document_title,
-          '@values' => print_r($values, TRUE)
-      ]);
       // Convert source data to string
       $text = is_array($values) ? implode(' ', $values) : $values;
 
@@ -118,11 +106,6 @@ class VectorIndexProcessor extends ProcessorPluginBase {
       if (!empty($vector)) {
         // Clear existing and set the new vector array
         $target_field->setValues($vector);
-        \Drupal::logger('pins_search_azure')->debug('Vectorized text from @document_title for item ID @id (@count vectors)', [
-          '@document_title' => $document_title,
-          '@id' => $item->getId(),
-          '@count' => $cnt,
-        ]);
       }
     }
   }
