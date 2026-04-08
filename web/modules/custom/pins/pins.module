@@ -516,17 +516,31 @@ function pins_add_parent_terms(EntityInterface $entity) {
 
   foreach ($tids as $tid) {
     $current_tid = $tid;
+    $visited_tids = [$current_tid => TRUE];
 
     // Go up the hierarchy.
     while ($parents = $storage->loadParents($current_tid)) {
+      $advanced = FALSE;
+
       foreach ($parents as $parent) {
         $parent_tid = $parent->id();
 
-        if (!in_array($parent_tid, $all_tids)) {
+        if (isset($visited_tids[$parent_tid])) {
+          continue;
+        }
+
+        $visited_tids[$parent_tid] = TRUE;
+
+        if (!in_array($parent_tid, $all_tids, TRUE)) {
           $all_tids[] = $parent_tid;
         }
 
         $current_tid = $parent_tid;
+        $advanced = TRUE;
+      }
+
+      if (!$advanced) {
+        break;
       }
     }
   }
