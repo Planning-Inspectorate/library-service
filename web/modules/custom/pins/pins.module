@@ -519,42 +519,58 @@ function pins_add_parent_terms(EntityInterface $entity) {
     $visited_tids = [$current_tid => TRUE];
 
     // Go up the hierarchy.
-    while ($parents = $storage->loadParents($current_tid)) {
-      $advanced = FALSE;
+  $tids = array_values(array_filter(array_unique($tids)));
 
-      foreach ($parents as $parent) {
-        $parent_tid = $parent->id();
+  if (empty($tids)) {
+    return;
+  }
 
-        if (isset($visited_tids[$parent_tid])) {
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $all_tids = array_fill_keys($tids, TRUE);
+  $visited = [];
+  $pending_tids = $tids;
+
+  while (!empty($pending_tids)) {
+    $batch_tids = [];
+
+    foreach ($pending_tids as $tid) {
+      if (!isset($visited[$tid])) {
+        $batch_tids[] = $tid;
+        $visited[$tid] = TRUE;
+      }
+    }
+
+    if (empty($batch_tids)) {
+      break;
+    }
+
+    $pending_tids = [];
+    $terms = $storage->loadMultiple($batch_tids);
+
+    foreach ($terms as $term) {
+      foreach ($term->get('parent')->getValue() as $parent_item) {
+        $parent_tid = (int) $parent_item['target_id'];
+
+        if (empty($parent_tid)) {
           continue;
         }
 
-        $visited_tids[$parent_tid] = TRUE;
-
-        if (!in_array($parent_tid, $all_tids, TRUE)) {
-          $all_tids[] = $parent_tid;
+        if (!isset($all_tids[$parent_tid])) {
+          $all_tids[$parent_tid] = TRUE;
         }
 
-        $current_tid = $parent_tid;
-        $advanced = TRUE;
-      }
-
-      if (!$advanced) {
-        break;
+        if (!isset($visited[$parent_tid])) {
+          $pending_tids[] = $parent_tid;
+        }
       }
     }
   }
 
-  // Remove duplicates and set the field.
-  $all_tids = array_unique($all_tids);
-
   // Remove the top-level term (ID 15952).
-  $all_tids = array_filter($all_tids, function ($tid) {
-    return $tid != 15952;
-  });
+  unset($all_tids[15952]);
 
   $new_values = [];
-  foreach ($all_tids as $tid) {
+  foreach (array_keys($all_tids) as $tid) {
     $new_values[] = ['target_id' => $tid];
   }
 
