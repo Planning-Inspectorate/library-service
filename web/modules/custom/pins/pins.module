@@ -503,22 +503,8 @@ function pins_add_parent_terms(EntityInterface $entity) {
     return;
   }
 
-  $field = $entity->get('field_kl_classification');
-  $tids = array_column($field->getValue(), 'target_id');
-
-  if (empty($tids)) {
-    return;
-  }
-
-  $all_tids = $tids;
-
-  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
-
-  foreach ($tids as $tid) {
-    $current_tid = $tid;
-    $visited_tids = [$current_tid => TRUE];
-
-    // Go up the hierarchy.
+  // Extract TIDs from the field.
+  $tids = array_column($entity->get('field_kl_classification')->getValue(), 'target_id');
   $tids = array_values(array_filter(array_unique($tids)));
 
   if (empty($tids)) {
@@ -526,13 +512,17 @@ function pins_add_parent_terms(EntityInterface $entity) {
   }
 
   $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+  // Use sets for fast lookup.
   $all_tids = array_fill_keys($tids, TRUE);
   $visited = [];
   $pending_tids = $tids;
 
+  // Traverse upward through all parents.
   while (!empty($pending_tids)) {
     $batch_tids = [];
 
+    // Only process unvisited terms.
     foreach ($pending_tids as $tid) {
       if (!isset($visited[$tid])) {
         $batch_tids[] = $tid;
@@ -569,6 +559,7 @@ function pins_add_parent_terms(EntityInterface $entity) {
   // Remove the top-level term (ID 15952).
   unset($all_tids[15952]);
 
+  // Rebuild field values.
   $new_values = [];
   foreach (array_keys($all_tids) as $tid) {
     $new_values[] = ['target_id' => $tid];
@@ -584,20 +575,7 @@ function pins_add_parent_terms(EntityInterface $entity) {
   * Get document ID referencing compound document
   *
 */
-
 function pins_get_compound_referenced_document_id($entity){
-  // $target_ids = [];
-  // $query = \Drupal::database()->select('node__field_kl_doc_compound_folder', 'd');
-
-  // $query->fields('d', ['entity_id']);
-  // $query->condition('d.field_kl_doc_compound_folder_target_id', $entity->id());
-  // $query->distinct();
-  // $results = $query->execute()->fetchAll();
-
-  // foreach ($results as $key => $result) {
-  //   $target_ids[] = $result->entity_id;
-  // }
-  // return  $target_ids;
   $target_ids = [];
   $query = \Drupal::database()->select('node__field_kl_doc_compound_folder', 'd');
   $query->join('node__field_kl_doc_id', 't', 'd.entity_id = t.entity_id');
