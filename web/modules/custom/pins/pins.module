@@ -335,7 +335,9 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
           pins_entity_set_file_size_on_presave($entity);
           // pins_entity_check_archived_on_presave($entity);
 
-          break;
+        pins_add_parent_terms($entity);
+
+        break;
         case 'individual_hardcopy':
           // Use nid and paragraph Id as a unique content reference ID
           if(!$entity->isNew()){
@@ -367,6 +369,9 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
             $reference_id = $entity->id();
             pins_entity_set_unique_reference_id_on_presave($entity, $reference_id);
           }
+
+          pins_add_parent_terms($entity);
+
           break;
 
         case 'kl_shortcut':
@@ -489,6 +494,59 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
     }
   }
 }
+
+/**
+ * Add parent taxonomy terms to field_kl_classification.
+ */
+function pins_add_parent_terms(EntityInterface $entity) {
+  if (!$entity->hasField('field_kl_classification')) {
+    return;
+  }
+
+  $field = $entity->get('field_kl_classification');
+  $tids = array_column($field->getValue(), 'target_id');
+
+  if (empty($tids)) {
+    return;
+  }
+
+  $all_tids = $tids;
+
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+  foreach ($tids as $tid) {
+    $current_tid = $tid;
+
+    // Go up the hierarchy.
+    while ($parents = $storage->loadParents($current_tid)) {
+      foreach ($parents as $parent) {
+        $parent_tid = $parent->id();
+
+        if (!in_array($parent_tid, $all_tids)) {
+          $all_tids[] = $parent_tid;
+        }
+
+        $current_tid = $parent_tid;
+      }
+    }
+  }
+
+  // Remove duplicates and set the field.
+  $all_tids = array_unique($all_tids);
+
+  // Remove the top-level term (ID 15952).
+  $all_tids = array_filter($all_tids, function ($tid) {
+    return $tid != 15952;
+  });
+
+  $new_values = [];
+  foreach ($all_tids as $tid) {
+    $new_values[] = ['target_id' => $tid];
+  }
+
+  $entity->set('field_kl_classification', $new_values);
+}
+
 
 /**
   *
