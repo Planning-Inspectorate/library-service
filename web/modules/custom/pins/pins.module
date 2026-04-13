@@ -557,7 +557,7 @@ function pins_add_parent_terms(EntityInterface $entity) {
   }
 
   // Remove the top-level term (ID 15952).
-  unset($all_tids[15952]);
+  unset($all_tids[PinsConstants::CLASSIFICATIONS_TID]);
 
   // Rebuild field values.
   $new_values = [];
