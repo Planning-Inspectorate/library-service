@@ -499,12 +499,15 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
  * Add parent taxonomy terms to field_kl_classification.
  */
 function pins_add_parent_terms(EntityInterface $entity) {
-  if (!$entity->hasField('field_kl_classification')) {
+  $field_kl_classification = 'field_kl_classification';
+
+
+  if (!$entity->hasField($field_kl_classification)) {
     return;
   }
 
   // Extract TIDs from the field.
-  $tids = array_column($entity->get('field_kl_classification')->getValue(), 'target_id');
+  $tids = array_column($entity->get($field_kl_classification)->getValue(), 'target_id');
   $tids = array_values(array_filter(array_unique($tids)));
 
   if (empty($tids)) {
@@ -565,7 +568,7 @@ function pins_add_parent_terms(EntityInterface $entity) {
     $new_values[] = ['target_id' => $tid];
   }
 
-  $entity->set('field_kl_classification', $new_values);
+  $entity->set($field_kl_classification, $new_values);
 }
 
 
