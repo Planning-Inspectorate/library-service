@@ -1,0 +1,29 @@
+uuid: 05d1f8df-762c-4322-946b-7ed034ef2d71
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.publication_date_v2
+  module:
+    - facets
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_publicationdatev2
+theme: govuk_pins
+region: sidebar_first
+weight: -21
+provider: null
+plugin: 'facet_block:publication_date_v2'
+settings:
+  id: 'facet_block:publication_date_v2'
+  label: 'Publication Date'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_publicationdateazure
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/lib-search-v2\r\n/lib-search-v2/*"

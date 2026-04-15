@@ -1,0 +1,4 @@
+administer pins azure search:
+  title: 'Administer PINS Azure Search settings'
+  description: 'Allows users to change the search mode (Keyword vs Hybrid).'
+  restrict access: true

@@ -1,0 +1,29 @@
+uuid: 8a5a1c92-c3d7-46ef-9fc9-df9d17de18ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.authors_v2
+  module:
+    - facets
+    - system
+  theme:
+    - govuk_pins
+id: govuk_pins_authorsv2
+theme: govuk_pins
+region: sidebar_first
+weight: -18
+provider: null
+plugin: 'facet_block:authors_v2'
+settings:
+  id: 'facet_block:authors_v2'
+  label: Authors
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: govuk_pins_authorsv2
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/lib-search-v2\r\n/lib-search-v2/*"
