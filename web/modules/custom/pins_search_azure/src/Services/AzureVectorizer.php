@@ -40,6 +40,9 @@ class AzureVectorizer {
       return [];
     }
 
+    $text = $this->sanitizeUtf8($text);
+    $title = $this->sanitizeUtf8($title);
+
     $context_prefix = !empty($title) ? "Title: " . $title . ". Content: " : "";
     // Configuration
     $maxChunkChars = 1000;
@@ -73,6 +76,7 @@ class AzureVectorizer {
 
     while ($cursor < $len) {
       $chunkText = substr($text, $cursor, $size);
+      $chunkText = $this->sanitizeUtf8($chunkText);
       
       // Word safety: don't cut words in half
       if ($cursor + $size < $len) {
@@ -160,5 +164,17 @@ class AzureVectorizer {
       }
     }
     return trim($flat);
+  }
+
+  protected function sanitizeUtf8(string $text): string {
+    // Convert to UTF-8, ignoring invalid sequences.
+    $clean = mb_convert_encoding($text, 'UTF-8', 'UTF-8');
+
+    // Remove any remaining invalid UTF-8 bytes.
+    $clean = iconv('UTF-8', 'UTF-8//IGNORE', $clean);
+
+    // Normalize whitespace and control characters.
+    $clean = preg_replace('/[\x00-\x1F\x7F]/u', ' ', $clean);
+    return trim($clean);
   }
 }

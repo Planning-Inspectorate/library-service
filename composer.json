@@ -23,7 +23,7 @@
         "drupal/auto_entitylabel": "3.0",
         "drupal/az_blob_fs": "^2.3",
         "drupal/barcodes": "^2.1",
-        "drupal/better_exposed_filters": "^6.0",
+        "drupal/better_exposed_filters": "6.0.3",
         "drupal/block_class": "^3.0",
         "drupal/bookmarks": "1.0.2",
         "drupal/bootstrap5": "^4.0",

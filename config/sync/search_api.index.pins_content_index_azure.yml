@@ -15,6 +15,8 @@ dependencies:
     - search_api.server.pins_content_index_azure
   module:
     - node
+    - pins
+    - pins_search_azure
     - search_api_aais
 third_party_settings:
   search_api_aais:
@@ -33,11 +35,201 @@ name: 'PINS Content Index Azure'
 description: ''
 read_only: false
 field_settings:
+  custom_value:
+    label: 'Custom value'
+    property_path: custom_value
+    type: aais.vector_collection
+    configuration:
+      value: ''
+      searchable: 1
+      filterable: 0
+      sortable: 0
+      facetable: 0
+      retrievable: 0
+      suggester: 0
+      dimensions: '1536'
+      vectorSearchProfile: pins-default-profile
+      analyzer: ''
+  field_alternative_title:
+    label: 'Alternative Title'
+    datasource_id: 'entity:node'
+    property_path: field_alternative_title
+    type: text
+    configuration:
+      searchable: 1
+      filterable: 0
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 1
+      dimensions: ''
+      vectorSearchProfile: ''
+    dependencies:
+      config:
+        - field.storage.node.field_alternative_title
+  field_best_bet:
+    label: 'Best Bet'
+    datasource_id: 'entity:node'
+    property_path: field_best_bet
+    type: aais.full_string_collection
+    boost: 5.0
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 1
+      dimensions: ''
+      vectorSearchProfile: ''
+    dependencies:
+      config:
+        - field.storage.node.field_best_bet
+  field_date:
+    label: 'Publication Date'
+    datasource_id: 'entity:node'
+    property_path: field_date
+    type: date
+    configuration:
+      searchable: 0
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_date
+  field_kl_archived_date:
+    label: 'Archived Date'
+    datasource_id: 'entity:node'
+    property_path: field_kl_archived_date
+    type: date
+    configuration:
+      searchable: 0
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_kl_archived_date
+  field_kl_authors:
+    label: Authors
+    datasource_id: 'entity:node'
+    property_path: field_kl_authors
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_kl_authors
+  field_kl_classification:
+    label: Classification
+    datasource_id: 'entity:node'
+    property_path: field_kl_classification
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_kl_classification
+  field_kl_reading_lists:
+    label: 'Reading Lists'
+    datasource_id: 'entity:node'
+    property_path: field_kl_reading_lists
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_kl_reading_lists
+  field_kl_series:
+    label: Series
+    datasource_id: 'entity:node'
+    property_path: field_kl_series
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 1
+      sortable: 0
+      facetable: 1
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_kl_series
+  field_links:
+    label: 'External links'
+    datasource_id: 'entity:node'
+    property_path: field_links
+    type: aais.string_collection
+    configuration:
+      searchable: 1
+      filterable: 0
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_links
+  saa_field_kl_doc_file:
+    label: 'Search api attachments: Attached file'
+    property_path: saa_field_kl_doc_file
+    type: text
+    configuration:
+      searchable: 1
+      filterable: 0
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
   title:
     label: Title
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: 3.0
     configuration:
       searchable: 1
       filterable: 0
@@ -67,6 +259,20 @@ field_settings:
     dependencies:
       module:
         - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+    configuration:
+      absolute: false
+      searchable: 1
+      filterable: 0
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
 datasource_settings:
   'entity:node':
     bundles:
@@ -82,6 +288,9 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  custom_data_sanitizer:
+    weights:
+      preprocess_index: 100
   custom_file_attachments:
     excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
     number_indexed: '0'
@@ -93,6 +302,9 @@ processor_settings:
   entity_type: {  }
   language_with_fallback: {  }
   rendered_item: {  }
+  vector_index_processor:
+    weights:
+      preprocess_index: 101
 tracker_settings:
   default:
     indexing_order: fifo
