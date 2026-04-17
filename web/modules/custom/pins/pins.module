@@ -4,7 +4,7 @@
  * @file
  * PINS module used for extending site functionalities.
  *
-*/
+ */
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
@@ -27,6 +27,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\pins\PinsConstants;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\views\Views;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
@@ -49,7 +50,7 @@ function pins_change_alternative_size(){
 
   // Update field configuration.
   $config = \Drupal::configFactory()
-  ->getEditable('field.storage.node.field_alternative_title');
+    ->getEditable('field.storage.node.field_alternative_title');
   $config->set('settings.max_length', 255);
   $config->save(TRUE);
 
@@ -67,8 +68,8 @@ function pins_load_all_folders(){
 }
 
 /**
-  * Implements hook_form_alter().
-*/
+ * Implements hook_form_alter().
+ */
 function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Attach the pins_js library to relevant forms.
   $forms_with_pins_js = [
@@ -80,6 +81,7 @@ function pins_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   ];
   if (in_array($form_id, $forms_with_pins_js, TRUE)) {
     $form['#attached']['library'][] = 'pins/pins_js';
+
   }
 
   switch ($form_id) {
@@ -193,40 +195,40 @@ function pins_cf_redirect_submit_handler(array &$form, FormStateInterface $form_
 
 function pins_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
   if (isset($form[$field_name]['widget'])) {
-      if (is_array($new_values)) {
-          $form[$field_name]['widget']['#default_value'] = $new_values;
-      } else {
-          if (isset($form[$field_name]['widget'][0]['value'])) {
-              $form[$field_name]['widget'][0]['value']['#default_value'] = $new_values;
-          }
+    if (is_array($new_values)) {
+      $form[$field_name]['widget']['#default_value'] = $new_values;
+    } else {
+      if (isset($form[$field_name]['widget'][0]['value'])) {
+        $form[$field_name]['widget'][0]['value']['#default_value'] = $new_values;
       }
+    }
   }
 }
 
 function pins_get_entity_field_value(EntityInterface $entity, $fieldname) {
   try {
-      if (!$entity->hasField($fieldname)) {
-          return null;
-      }
-
-      $field_values = $entity->get($fieldname)->getValue();
-      if (empty($field_values)) {
-          return null;
-      }
-
-      $result = [];
-      foreach ($field_values as $field_value) {
-          if (isset($field_value['value'])) {
-              $result[] = $field_value['value'];
-          } elseif (isset($field_value['target_id'])) {
-              $result[] = $field_value['target_id'];
-          }
-      }
-
-      return array_unique($result);
-  } catch (\Exception $e) {
-      \Drupal::logger('pins_folder_hs')->error('Error retrieving field values: @message', ['@message' => $e->getMessage()]);
+    if (!$entity->hasField($fieldname)) {
       return null;
+    }
+
+    $field_values = $entity->get($fieldname)->getValue();
+    if (empty($field_values)) {
+      return null;
+    }
+
+    $result = [];
+    foreach ($field_values as $field_value) {
+      if (isset($field_value['value'])) {
+        $result[] = $field_value['value'];
+      } elseif (isset($field_value['target_id'])) {
+        $result[] = $field_value['target_id'];
+      }
+    }
+
+    return array_unique($result);
+  } catch (\Exception $e) {
+    \Drupal::logger('pins_folder_hs')->error('Error retrieving field values: @message', ['@message' => $e->getMessage()]);
+    return null;
   }
 }
 /**
@@ -272,7 +274,7 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
   $or->condition('field_vernum', $current_vernum, '='); // Explicitly specify the operator
   $or->condition('field_vernum', NULL, 'IS NULL');
   if ($current_doc_id) {
-      $or->condition('field_kl_doc_id', $current_doc_id, '<>');
+    $or->condition('field_kl_doc_id', $current_doc_id, '<>');
   }
   $query->condition($or);
 
@@ -287,14 +289,14 @@ function unique_title_node_form_validate($form, FormStateInterface $form_state) 
 }
 
 /**
-  *
-  *function hook_ENTITY_TYPE_insert
-  *
-*/
+ *
+ *function hook_ENTITY_TYPE_insert
+ *
+ */
 function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
   switch ( $entity->getEntityTypeId()) {
     case 'node':
-    // case 'paragraph':
+      // case 'paragraph':
       switch ($entity->bundle()) {
         case 'article':
         case 'hard_copy':
@@ -312,10 +314,10 @@ function pins_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
 }
 
 /**
-  *
-  *function hook_ENTITY_presave
-  *
-*/
+ *
+ *function hook_ENTITY_presave
+ *
+ */
 function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
   switch ( $entity->getEntityTypeId()) {
     case 'node':
@@ -378,8 +380,8 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
         case 'kl_url':
         case 'kl_virtual_folder':
         case 'kl_classification_shortcut':
-            // Need to set inheritance for hard copy - commenting it for now.
-            // pins_set_inheritance($entity);
+          // Need to set inheritance for hard copy - commenting it for now.
+          // pins_set_inheritance($entity);
           break;
 
       }
@@ -388,11 +390,11 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
 }
 
 /**
-  *
-  *function pins_compound_document
-  * For creating and updating compound document based on referenced
-  *
-*/
+ *
+ *function pins_compound_document
+ * For creating and updating compound document based on referenced
+ *
+ */
 
 function pins_compound_document(&$entity, $field_name='field_documents'){
   if($entity->hasField($field_name)){
@@ -432,11 +434,11 @@ function pins_compound_document(&$entity, $field_name='field_documents'){
 }
 
 /**
-  *
-  *function pins_get_target_ids
-  * get field values
-  *
-*/
+ *
+ *function pins_get_target_ids
+ * get field values
+ *
+ */
 function pins_get_target_ids($entity, $fieldname){
   $target_ids = [];
   if($fieldname && $entity->hasField($fieldname)){
@@ -450,11 +452,11 @@ function pins_get_target_ids($entity, $fieldname){
 
 
 /**
-  *
-  *function pins_compound_document
-  * For creating and updating compound document based on referenced
-  *
-*/
+ *
+ *function pins_compound_document
+ * For creating and updating compound document based on referenced
+ *
+ */
 
 function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
 
@@ -496,7 +498,9 @@ function pins_set_inheritance(&$entity, $field_name='field_kl_doc_folder'){
 }
 
 /**
+ *
  * Add parent taxonomy terms to field_kl_classification.
+ *
  */
 function pins_add_parent_terms(EntityInterface $entity) {
   $field_kl_classification = 'field_kl_classification';
@@ -598,11 +602,11 @@ function pins_get_compound_referenced_document_id($entity){
 }
 
 /**
-  *
-  *function pins_entity_insert_unique_reference_id
-  * Used for setting Entity_id as a reference id
-  *
-*/
+ *
+ *function pins_entity_insert_unique_reference_id
+ * Used for setting Entity_id as a reference id
+ *
+ */
 
 function pins_entity_insert_unique_reference_id($entity, $content_reference_id){
   if($entity->hasField('field_content_reference')){
@@ -612,28 +616,28 @@ function pins_entity_insert_unique_reference_id($entity, $content_reference_id){
     if(empty($reference_id) && $entity_id && $content_reference_id){
       $db_table =    $entity->getEntityTypeId().'__field_content_reference';
       $result = \Drupal::database()->insert($db_table)
-      ->fields(['bundle', 'deleted', 'entity_id', 'revision_id', 'langcode', 'delta', 'field_content_reference_value'])
-      ->values([
-        'bundle' => $entity->bundle(),
-        'deleted' => 0,
-        'entity_id' => $entity_id,
-        'revision_id' => $entity_id,
-        'langcode' => $entity->get('langcode')->value,
-        'delta' => 0,
-        'field_content_reference_value' => $content_reference_id ,
-      ])
-      ->execute();
+        ->fields(['bundle', 'deleted', 'entity_id', 'revision_id', 'langcode', 'delta', 'field_content_reference_value'])
+        ->values([
+          'bundle' => $entity->bundle(),
+          'deleted' => 0,
+          'entity_id' => $entity_id,
+          'revision_id' => $entity_id,
+          'langcode' => $entity->get('langcode')->value,
+          'delta' => 0,
+          'field_content_reference_value' => $content_reference_id ,
+        ])
+        ->execute();
       drupal_flush_all_caches();
     }
   }
 }
 
 /**
-  *
-  *function pins_entity_set_unique_reference_id_on_presave
-  * Used for setting Entity_id as a content reference id
-  *
-*/
+ *
+ *function pins_entity_set_unique_reference_id_on_presave
+ * Used for setting Entity_id as a content reference id
+ *
+ */
 function pins_entity_set_unique_reference_id_on_presave(&$entity, $content_reference_id){
   if($entity->hasField('field_content_reference')){
     $reference_id = $entity->get('field_content_reference')->value;
@@ -686,23 +690,110 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 }
 
 /**
-* Implements hook_views_pre_render().
-*/
-function pins_views_pre_render(ViewExecutable $view) {
-  // Target your specific View and Display.
-  if ($view->id() === 'taxonomy_search' && $view->current_display === 'page_2') {
-    // If there are no results AND no exposed input has been applied yet,
-    // then hide the exposed widgets.
-    if (empty($view->result) && empty($view->getExposedInput())) {
-      $view->exposed_widgets = NULL;
-    }
+ * Load all rows from a view, with contextual and exposed filters applied.
+ *
+ * @param string $view_id
+ * @param string $display_id
+ * @param array $args
+ *   Contextual filter arguments.
+ * @param array $exposed
+ *   Exposed filter input.
+ *
+ * @return array
+ *   All rows from the unpaginated view.
+ */
+function pins_get_all_view_rows($view_id, $display_id = 'default', array $args = [], array $exposed = []) {
+  $view = Views::getView($view_id);
+  if (!$view) {
+    return [];
   }
+
+  // Set display.
+  $view->setDisplay($display_id);
+
+  // Apply contextual filters.
+  if (!empty($args)) {
+    $view->setArguments($args);
+  }
+
+  // Apply exposed filters.
+  if (!empty($exposed)) {
+    $view->setExposedInput($exposed);
+  }
+
+  // Disable pagination.
+  $view->setItemsPerPage(0);
+
+  // Execute.
+  $view->execute();
+
+  return $view->result;
 }
 
 
+
 /**
-* Implements hook_views_query_alter().
-*/
+ * Implements hook_views_pre_render().
+ */
+function pins_views_pre_render(ViewExecutable $view) {
+
+  if ($view->id() !== 'taxonomy_search' || $view->current_display !== 'page_2') {
+    return;
+  }
+
+  // Hide widgets if no results and no exposed input.
+  if (empty($view->result) && empty($view->getExposedInput())) {
+    $view->exposed_widgets = NULL;
+    return;
+  }
+
+  // Collect TIDs from results
+  $tids = [];
+
+  $all_rows = pins_get_all_view_rows(
+    'taxonomy_search',
+    'page_2',
+    $view->args,              // contextual filters
+    $view->getExposedInput()  // exposed filters
+  );
+
+  foreach ($all_rows as $row) {
+    if (!empty($row->_entity) && $row->_entity->hasField('field_kl_classification')) {
+      foreach ($row->_entity->get('field_kl_classification')->getValue() as $item) {
+        $tids[] = $item['target_id'];
+      }
+    }
+  }
+  $tids = array_unique($tids);
+
+  // Filter exposed options
+  if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
+    return;
+  }
+
+  $widget = &$view->exposed_widgets['field_kl_classification_target_id'];
+  $options = $widget['#options'];
+  $filtered = [];
+
+  foreach ($options as $item) {
+    if (!isset($item->option) || !is_array($item->option)) {
+      continue;
+    }
+
+    $tid = (string) array_key_first($item->option);
+
+    if (in_array($tid, $tids, true)) {
+      $filtered[] = $item;
+    }
+  }
+
+  // Replace options with filtered list.
+  $widget['#options'] = $filtered;
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   if ($view->id() === 'taxonomy_search') {
@@ -792,9 +883,9 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
           foreach ($condition_group['conditions'] as &$condition) {
             if ($condition['field'] == 'node__field_kl_doc_id.field_kl_doc_id_value') {
               $condition = [
-              'field' => 'node__field_kl_doc_id.field_kl_doc_id_value',
-              'value' => $doc_id,
-              'operator' => 'LIKE'
+                'field' => 'node__field_kl_doc_id.field_kl_doc_id_value',
+                'value' => $doc_id,
+                'operator' => 'LIKE'
               ];
             }
           }
@@ -811,12 +902,12 @@ function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_
   $cid = $cid;
 
   if($cache = \Drupal::cache()->get($cid)) {
-      $data = $cache->data;
+    $data = $cache->data;
   }
   else {
     $data = pins_get_version_doc_id($nid);
-     \Drupal::cache()
-       ->set($cid, $data);
+    \Drupal::cache()
+      ->set($cid, $data);
   }
 
   return  $data;
@@ -838,12 +929,12 @@ function pins_get_cached_doc_version_id($doc_id, $cid = 'pins_get_revision_nid_b
   $cid = $cid;
 
   if($cache = \Drupal::cache()->get($cid)) {
-      $data = $cache->data;
+    $data = $cache->data;
   }
   else {
     $data = pins_get_doc_version_id($doc_id);
-     \Drupal::cache()
-       ->set($cid, $data);
+    \Drupal::cache()
+      ->set($cid, $data);
   }
   return  $data;
 }
@@ -855,17 +946,17 @@ function pins_get_doc_version_id($doc_id, $nid=0){
     ->condition('type', 'kl_document')
     ->condition('field_kl_doc_id', $doc_id);
 
-    if(!empty($nid)){
-      $nodeQuery->condition('entity_id', $nid, '<>');
-    }
+  if(!empty($nid)){
+    $nodeQuery->condition('entity_id', $nid, '<>');
+  }
 
-    $nodeQuery->execute();
+  $nodeQuery->execute();
   return $nids;
 }
 
 /**
-* Implements hook_preprocess_views_view_table().
-*/
+ * Implements hook_preprocess_views_view_table().
+ */
 
 function pins_preprocess_views_view_table(&$variables) {
   $display_id = $variables['view']->getdisplay()->display['id'];
@@ -880,11 +971,11 @@ function pins_preprocess_views_view_table(&$variables) {
 }
 
 /**
-  *
-  *function pins_entity_set_file_size_on_presave
-  * Used for setting file size for uploaded file.
-  *
-*/
+ *
+ *function pins_entity_set_file_size_on_presave
+ * Used for setting file size for uploaded file.
+ *
+ */
 
 function pins_entity_set_file_size_on_presave(&$entity){
 
@@ -893,7 +984,7 @@ function pins_entity_set_file_size_on_presave(&$entity){
     if ($fileField) {
       $fileSize = $fileField->getSize();
       if ($fileSize > 0)
-          $entity->set('field_kl_doc_file_size', $fileSize);
+        $entity->set('field_kl_doc_file_size', $fileSize);
     }
   }
 }
@@ -930,11 +1021,11 @@ function pins_entity_attach_to_compound_folder_on_postsave(&$entity) {
 
 
 /**
-  *
-  * function pins_entity_check_archived_on_presave
-  * Used for reset/setting archived date, note based on archived flag value.
-  *
-*/
+ *
+ * function pins_entity_check_archived_on_presave
+ * Used for reset/setting archived date, note based on archived flag value.
+ *
+ */
 
 function pins_entity_check_archived_on_presave(&$entity){
   if ($entity->hasField('field_kl_archived') && isset($entity->field_kl_archived->value)) {
@@ -996,22 +1087,22 @@ function pins_preprocess_views_view_field(&$variables) {
   $display_id = $view->getDisplay()->display['id'];
   // Handle the file node reference ID field
   if (($view->id() === 'lib_search' || $view->id() === 'lib_search_attachment') && $display_id === 'page_1') {
-      if($field->field == 'custom_value') {
-        $html = $variables['output'];
-        if (strpos($html, '::') !== false) {
-          // Extract nid and title from the custom_value
-          list($nid, $title) = explode('::', $html, 2);
-          if (is_numeric($nid) && (int)$nid > 0) {
-            // Create a URL to the node
-            $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
-            // Create an anchor tag
-            $link = Link::fromTextAndUrl($title, $node_url)->toString();
-            // Replace the original output with the anchor tag
-            $variables['output'] = $link;
-          }
+    if($field->field == 'custom_value') {
+      $html = $variables['output'];
+      if (strpos($html, '::') !== false) {
+        // Extract nid and title from the custom_value
+        list($nid, $title) = explode('::', $html, 2);
+        if (is_numeric($nid) && (int)$nid > 0) {
+          // Create a URL to the node
+          $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
+          // Create an anchor tag
+          $link = Link::fromTextAndUrl($title, $node_url)->toString();
+          // Replace the original output with the anchor tag
+          $variables['output'] = $link;
         }
       }
-   }
+    }
+  }
 }
 
 
@@ -1020,7 +1111,7 @@ function pins_preprocess_views_view_field(&$variables) {
  * The method to create database for saving failed file while indexing
  * */
 
- function pins_update_8003(&$sandbox) {
+function pins_update_8003(&$sandbox) {
   $database = \Drupal::database();
   $schema = $database->schema();
   if (!$schema->tableExists('saa_indexing_log')) {
@@ -1285,3 +1376,4 @@ function pins_page_attachments_alter(array &$attachments) {
     ];
   }
 }
+
