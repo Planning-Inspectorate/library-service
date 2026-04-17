@@ -11,19 +11,22 @@
 function pins_update_8004() {
   $schema = \Drupal::database()->schema();
 
-  if (!$schema->indexExists('node__field_kl_doc_id', 'idx_doc_id')) {
-    $schema->addIndex('node__field_kl_doc_id', 'idx_doc_id', ['field_kl_doc_id_value']);
-  }
+  // A helper to reduce repetition.
+  $add_index = function ($table, $index_name, array $fields) use ($schema) {
+    if (!$schema->indexExists($table, $index_name)) {
+      // Build the index spec required by Drupal 9.4+ / 10+.
+      $spec = ['fields' => []];
+      foreach ($fields as $field) {
+        $spec['fields'][$field] = [];
+      }
 
-  if (!$schema->indexExists('node__field_kl_doc_id', 'idx_entity')) {
-    $schema->addIndex('node__field_kl_doc_id', 'idx_entity', ['entity_id']);
-  }
+      $schema->addIndex($table, $index_name, $fields, $spec);
+    }
+  };
 
-  if (!$schema->indexExists('node__field_vernum', 'idx_vernum')) {
-    $schema->addIndex('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
-  }
-
-  if (!$schema->indexExists('node__field_vernum', 'idx_vernum_entity')) {
-    $schema->addIndex('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
-  }
+  // Add indexes.
+  $add_index('node__field_kl_doc_id', 'idx_doc_id', ['field_kl_doc_id_value']);
+  $add_index('node__field_kl_doc_id', 'idx_entity', ['entity_id']);
+  $add_index('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
+  $add_index('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
 }

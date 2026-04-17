@@ -2306,17 +2306,17 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
-        dummy_checkbox:
-          id: dummy_checkbox
+        yes_no_filter:
+          id: yes_no_filter
           table: node_field_data
-          field: dummy_checkbox
+          field: yes_no_filter
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          plugin_id: dummy_checkbox
+          plugin_id: yes_no_filter
           operator: '='
-          value: '0'
+          value: '1'
           group: 1
           exposed: true
           expose:
@@ -2324,10 +2324,10 @@ display:
             label: 'Show only most recent versions'
             description: ''
             use_operator: false
-            operator: dummy_checkbox_op
+            operator: yes_no_filter_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: dummy_checkbox
+            identifier: most_recent_filter
             required: false
             remember: false
             multiple: false

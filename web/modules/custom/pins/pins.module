@@ -808,9 +808,10 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
     return;
   }
 
-  // Check exposed filter toggle.
+  // Check if exposed filter toggle is set and if 'no' is selected
+  // Otherwise only show most recent by default
   $input = $view->getExposedInput();
-  if (empty($input['dummy_checkbox'])) {
+  if (isset($input['most_recent_filter']) && $input['most_recent_filter'] == '0') {
     return;
   }
 
@@ -836,8 +837,6 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
 
   // Add WHERE clause to the View query.
   $query->addWhere(0, 'node_field_data.nid', $sub, 'IN');
-
-
 }
 
 function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_doc_id'){
@@ -1329,11 +1328,11 @@ function pins_views_data() {
   $data = [];
 
   // Attach to the node base table.
-  $data['node_field_data']['dummy_checkbox'] = [
-    'title' => t('Dummy checkbox filter'),
-    'help' => t('A custom exposed checkbox that does not filter by itself.'),
+  $data['node_field_data']['yes_no_filter'] = [
+    'title' => t('Yes/No filter'),
+    'help' => t('A custom exposed selectbox that does not filter by itself.'),
     'filter' => [
-      'id' => 'dummy_checkbox', // This matches @ViewsFilter("dummy_checkbox")
+      'id' => 'yes_no_filter', // This matches @ViewsFilter("yes_no_filter")
     ],
   ];
 
