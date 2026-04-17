@@ -12,7 +12,17 @@ framework:
     - core/jquery
     - core/once
     - core/drupal
-    
+
+chosen:
+  version: 1.x
+  js:
+    /libraries/chosen/chosen.jquery.js: {}
+  css:
+    theme:
+      /libraries/chosen/chosen.css: {}
+  dependencies:
+    - core/jquery
+
 webform:
   version: 1.x
   js:
