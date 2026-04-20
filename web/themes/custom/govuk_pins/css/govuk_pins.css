@@ -520,7 +520,8 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   vertical-align: baseline;
 }
 
-#views-exposed-form-taxonomy-search-page-2  .chosen-container .chosen-results li {
+#views-exposed-form-taxonomy-search-page-2  .chosen-container .chosen-results li,
+#views-exposed-form-taxonomy-search-page-2 .chosen-choices li.search-choice {
   line-height: normal;
 }
 
