@@ -1,174 +1,318 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
-use Drupal\Core\Entity\EntityInterface;
-
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\ReplaceCommand;
-// use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_form_alter().
  */
-function pins_folder_hs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-    if ($form_id == 'node_kl_document_form' || $form_id == 'node_kl_compound_document_form') {
+function pins_folder_hs_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Only alter the two node forms you mentioned.
+  if (!in_array($form_id, ['node_kl_document_form', 'node_kl_compound_document_form'], TRUE)) {
+    return;
+  }
 
-        // 1. Create a wrapper for JUST the fields we want to update.
-        // This prevents the whole form from flickering/reloading.
-        $target_field = 'field_alternative_title';
-        $target_weight = isset($form[$target_field]['#weight']) ? $form[$target_field]['#weight'] : 10;
-        $original_weight = $form[$target_field]['#weight'];
-        $group_name = $form[$target_field]['#group'] ?? 'group_categories';
-        $form['metadata_wrapper'] = [
-            '#type' => 'container',
-            '#attributes' => [
-                'id' => 'metadata-fields-wrapper',
-                'style' => 'background-color: #f9f9f9; padding: 10px; border: 1px solid #ccc;',
-            ],
-            // '#weight' => $target_weight, // Adjust based on where you want these fields to appear
-            // '#group' =>  $group_name, // Ensure it stays in the same fieldset group
-        ];
+  // Ensure input is processed even for AJAX with #limit_validation_errors.
+  $form_state->setProcessInput(TRUE);
 
-        $dynamic_fields = [
-            'field_alternative_title',
-            'field_kl_authors',
-            'field_kl_series',
-            'field_kl_classification',
-            'field_kl_reading_lists',
-            'field_volume'
-        ];
-        // Move existing fields into our AJAX wrapper
-        foreach ($dynamic_fields as $field_name) {
-            if (isset($form[$field_name])) {
-                $form['metadata_wrapper'][$field_name] = $form[$field_name];
-                unset($form[$field_name]);
-            }
-        }
+  // The fields that should be dynamically updated when folder changes.
+  $dynamic_fields = [
+    'field_alternative_title',
+    'field_kl_authors',
+    'field_kl_series',
+    'field_kl_classification',
+    'field_kl_reading_lists',
+    'field_volume',
+  ];
 
-        $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
-            'callback' => 'pins_folder_hs_ajaxcallback',
-            'event' => 'change',
-            'wrapper' => 'metadata-fields-wrapper',
-        ];
-        if ($form_state->getValue('field_kl_doc_folder')) {
-            $field_selectedValue = $form_state->getValue('field_kl_doc_folder');
-            foreach ($field_selectedValue as $field_selectedVal) {
-                if ($selectedValue = $field_selectedVal['target_id']) {
-                    $selected_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($selectedValue);
-                    if ($selected_term instanceof TermInterface) {
-                        $alternative_title = pins_folder_hs_get_field_value($selected_term, 'field_alternative_title');
-                        $term_ids = pins_folder_hs_get_parent_term_ids($selectedValue);
-                        $author_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_authors');
-                        $series_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_series');
-                        $classification_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_classification');
-                        $readinglist_details = pins_folder_hs_get_field_values($term_ids, 'field_kl_reading_lists');
-                        $volume = pins_folder_hs_get_field_value($selected_term, 'field_volume');
+  // Choose a stable "anchor" field to inherit weight/group from.
+  $target_field = 'field_alternative_title';
 
-                        $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
-                        $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
-                        $selected_classification_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_classification');
-                        $selected_readinglist_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_reading_lists');
+  // Fallbacks if target field isn't present for any reason.
+  $original_weight = isset($form[$target_field]['#weight']) ? $form[$target_field]['#weight'] : 0;
+  $group_name = $form[$target_field]['#group'] ?? 'group_categories';
 
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_alternative_title', $alternative_title);
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_authors', array_merge($author_details, $selected_authors_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_series', array_merge($series_details, $selected_series_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_classification', array_merge($classification_details, $selected_classification_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_kl_reading_lists', array_merge($readinglist_details, $selected_readinglist_list));
-                        pins_folder_hs_update_form_fields($form, $form_state, 'field_volume', $volume);
-                    }
-                } else {
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_authors');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_series');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_classification');
-                    pins_folder_hs_clear_form_fields($form, 'field_kl_reading_lists');
-                }
-            }
+  // 1) Wrapper must live INSIDE the same Field Group tab (group_categories),
+  // otherwise Field Group may move fields away during rebuild.
+  $form['metadata_wrapper'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'id' => 'metadata-fields-wrapper',
+      'style' => 'background-color: #f9f9f9; padding: 10px; border: 1px solid #ccc;',
+    ],
+    '#weight' => $original_weight,
+    '#group' => $group_name,
+  ];
 
-        }
-        // $form_state->setCached(FALSE);
-        $form_state->setRebuild(TRUE);
+  // 2) Move existing fields into the wrapper and remove their #group
+  // so Field Group doesn't re-parent them out of the wrapper.
+  foreach ($dynamic_fields as $field_name) {
+    if (isset($form[$field_name])) {
+      $form['metadata_wrapper'][$field_name] = $form[$field_name];
+
+      // Critical: stop Field Group from pulling this element back out.
+      unset($form['metadata_wrapper'][$field_name]['#group']);
+
+      unset($form[$field_name]);
     }
+  }
 
-    if ($form_id == 'node_kl_compound_document_form') {
-        $form['#attached']['library'][] = 'pins_folder_hs/pins_folder_hs_js_lib';
+  // 3) Add AJAX behaviour to folder field.
+  if (isset($form['field_kl_doc_folder']['widget'][0]['target_id'])) {
+    $form['field_kl_doc_folder']['widget'][0]['target_id']['#ajax'] = [
+      'callback' => 'pins_folder_hs_ajaxcallback',
+      'event' => 'change',
+      'wrapper' => 'metadata-fields-wrapper',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => NULL,
+      ],
+    ];
+
+    // Prevent validation errors from other fields when folder changes.
+    $form['field_kl_doc_folder']['widget'][0]['target_id']['#limit_validation_errors'] = [];
+  }
+
+  // 4) If folder has a selected value, populate derived fields.
+  // We must use user input because of #limit_validation_errors.
+  $selected_items = pins_folder_hs_get_selected_folder_from_user_input($form_state);
+
+  if (!empty($selected_items)) {
+    foreach ($selected_items as $item) {
+      $tid = $item['target_id'] ?? NULL;
+      if (!$tid) {
+        continue;
+      }
+
+      /** @var \Drupal\taxonomy\TermInterface|null $selected_term */
+      $selected_term = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($tid);
+
+      if (!$selected_term instanceof TermInterface) {
+        continue;
+      }
+
+      // Gather values from current term + parents.
+      $alternative_title = pins_folder_hs_get_field_value($selected_term, 'field_alternative_title');
+      $volume = pins_folder_hs_get_field_value($selected_term, 'field_volume');
+
+      $parent_tids = pins_folder_hs_get_parent_term_ids($tid);
+
+      $author_details = pins_folder_hs_get_field_values($parent_tids, 'field_kl_authors');
+      $series_details = pins_folder_hs_get_field_values($parent_tids, 'field_kl_series');
+      $classification_details = pins_folder_hs_get_field_values($parent_tids, 'field_kl_classification');
+      $readinglist_details = pins_folder_hs_get_field_values($parent_tids, 'field_kl_reading_lists');
+
+      $selected_authors_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_authors');
+      $selected_series_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_series');
+      $selected_classification_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_classification');
+      $selected_readinglist_list = pins_folder_hs_get_referenced_entities($selected_term, 'field_kl_reading_lists');
+
+      // Apply updates.
+      pins_folder_hs_update_form_fields($form_state, 'field_alternative_title', $alternative_title, 'string');
+      pins_folder_hs_update_form_fields($form_state, 'field_volume', $volume, 'string');
+
+      pins_folder_hs_update_form_fields(
+        $form_state,
+        'field_kl_authors',
+        array_values(array_unique(array_merge($author_details, $selected_authors_list))),
+        'options'
+      );
+
+      pins_folder_hs_update_form_fields(
+        $form_state,
+        'field_kl_series',
+        array_values(array_unique(array_merge($series_details, $selected_series_list))),
+        'options'
+      );
+
+      pins_folder_hs_update_form_fields(
+        $form_state,
+        'field_kl_classification',
+        array_values(array_unique(array_merge($classification_details, $selected_classification_list))),
+        'options'
+      );
+
+      pins_folder_hs_update_form_fields(
+        $form_state,
+        'field_kl_reading_lists',
+        array_values(array_unique(array_merge($readinglist_details, $selected_readinglist_list))),
+        'options'
+      );
     }
+  }
+  else {
+    // Folder cleared: clear derived fields.
+    pins_folder_hs_clear_form_fields($form_state, 'field_alternative_title', 'string');
+    pins_folder_hs_clear_form_fields($form_state, 'field_volume', 'string');
+    pins_folder_hs_clear_form_fields($form_state, 'field_kl_authors', 'options');
+    pins_folder_hs_clear_form_fields($form_state, 'field_kl_series', 'options');
+    pins_folder_hs_clear_form_fields($form_state, 'field_kl_classification', 'options');
+    pins_folder_hs_clear_form_fields($form_state, 'field_kl_reading_lists', 'options');
+  }
 
+  // Ensure form rebuild for AJAX.
+  $form_state->setRebuild(TRUE);
+
+  // Only attach your library for compound form (as you had originally).
+  if ($form_id === 'node_kl_compound_document_form') {
+    $form['#attached']['library'][] = 'pins_folder_hs/pins_folder_hs_js_lib';
+  }
 }
 
-function pins_folder_hs_ajaxcallback(&$form, FormStateInterface $form_state) {
-    // return $form;
-    $response = new AjaxResponse();
-    // Only replace the specific wrapper, not the whole form.
-    $response->addCommand(new ReplaceCommand('#metadata-fields-wrapper', $form['metadata_wrapper']));
-    return $response;
+/**
+ * AJAX callback: return only the wrapper render array.
+ */
+function pins_folder_hs_ajaxcallback(array &$form, FormStateInterface $form_state) {
+  // Input processing already forced in form_alter, but safe to ensure here too.
+  $form_state->setProcessInput(TRUE);
+  return $form['metadata_wrapper'];
 }
 
-function pins_folder_hs_get_parent_term_ids($term_id, &$parent_tids = []) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-    if ($term) {
-        $parents = $term->parent->referencedEntities();
-        foreach ($parents as $parent) {
-            $parent_tid = $parent->id();
-            $parent_tids[] = $parent_tid;
-            pins_folder_hs_get_parent_term_ids($parent_tid, $parent_tids);
-        }
-    }
-    return $parent_tids;
+/**
+ * Normalize selected folder from user input (CSHS-safe).
+ */
+function pins_folder_hs_get_selected_folder_from_user_input(FormStateInterface $form_state) {
+  $user_input = $form_state->getUserInput();
+  $raw = $user_input['field_kl_doc_folder'] ?? NULL;
+
+  if (empty($raw)) {
+    return [];
+  }
+
+  // Case 1: ['target_id' => 123]
+  if (isset($raw['target_id'])) {
+    return [ $raw ];
+  }
+
+  // Case 2: [0 => ['target_id' => 123], 1 => ...]
+  if (isset($raw[0]['target_id'])) {
+    return $raw;
+  }
+
+  // Unexpected format: log and ignore.
+  \Drupal::logger('pins_folder_hs')->warning('Unexpected folder input structure: @raw', [
+    '@raw' => print_r($raw, TRUE),
+  ]);
+
+  return [];
 }
 
-function pins_folder_hs_get_field_values($term_ids, $fieldname) {
-    $field_values = [];
-    foreach ($term_ids as $tid) {
-        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-        if ($term instanceof TermInterface) {
-            $entities = $term->get($fieldname)->referencedEntities();
-            foreach ($entities as $entity) {
-                $field_values[] = $entity->id();
-            }
-        }
+/**
+ * Recursively collect parent term IDs.
+ */
+function pins_folder_hs_get_parent_term_ids($term_id, array &$parent_tids = []) {
+  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+  if ($term instanceof TermInterface) {
+    $parents = $term->parent->referencedEntities();
+    foreach ($parents as $parent) {
+      $pid = $parent->id();
+      if (!in_array($pid, $parent_tids, TRUE)) {
+        $parent_tids[] = $pid;
+        pins_folder_hs_get_parent_term_ids($pid, $parent_tids);
+      }
     }
-    return array_unique($field_values);
+  }
+  return $parent_tids;
 }
 
-function pins_folder_hs_get_field_value(TermInterface $selected_term, $fieldname) {
-    if (!$selected_term->hasField($fieldname)) {
-        return NULL;
+/**
+ * Get unique referenced entity IDs for a field across multiple term IDs.
+ */
+function pins_folder_hs_get_field_values(array $term_ids, $fieldname) {
+  $field_values = [];
+  foreach ($term_ids as $tid) {
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+    if ($term instanceof TermInterface && $term->hasField($fieldname)) {
+      foreach ($term->get($fieldname)->referencedEntities() as $entity) {
+        $field_values[] = $entity->id();
+      }
     }
-    $field_values = $selected_term->get($fieldname)->getValue();
-    if (empty($field_values)) {
-        return NULL;
-    }
-    return $field_values[0]['value'] ?? NULL;
+  }
+  return array_values(array_unique($field_values));
 }
 
+/**
+ * Get a single scalar value from a term field (e.g. string fields).
+ */
+function pins_folder_hs_get_field_value(TermInterface $term, $fieldname) {
+  if (!$term->hasField($fieldname)) {
+    return NULL;
+  }
+  $values = $term->get($fieldname)->getValue();
+  if (empty($values)) {
+    return NULL;
+  }
+  return $values[0]['value'] ?? NULL;
+}
+
+/**
+ * Get referenced entity IDs from a single term field.
+ */
 function pins_folder_hs_get_referenced_entities(TermInterface $term, $fieldname) {
-    $entities_list = [];
-    $entities = $term->get($fieldname)->referencedEntities();
-    foreach ($entities as $entity) {
-        $entities_list[] =  $entity->id();
+  $ids = [];
+  if ($term->hasField($fieldname)) {
+    foreach ($term->get($fieldname)->referencedEntities() as $entity) {
+      $ids[] = $entity->id();
     }
-    return $entities_list;
+  }
+  return $ids;
 }
 
-function pins_folder_hs_update_form_fields(&$form, FormStateInterface $form_state, $field_name, $new_values) {
-    $form_state->setValue($field_name, $new_values);
+/**
+ * Update form_state + user_input so rebuilt widgets show the new values.
+ *
+ * $type:
+ *  - 'options' => widgets that expect a flat array of IDs (e.g. options_select)
+ *  - 'string'  => string_textfield expects [0][value] or ['widget'][0]['value']
+ */
+function pins_folder_hs_update_form_fields(FormStateInterface $form_state, $field_name, $new_values, $type = 'options') {
+  // Update internal values.
+  $form_state->setValue($field_name, $new_values);
 
-    $user_input = $form_state->getUserInput();
-    if (is_array($new_values)) {
-        $user_input[$field_name] = $new_values;
-    } else {
-        $user_input[$field_name][0]['value'] = $new_values;
+  // Update user input so widgets reflect it on rebuild.
+  $user_input = $form_state->getUserInput();
+
+  if ($type === 'string') {
+    $scalar = is_array($new_values) ? reset($new_values) : $new_values;
+    $scalar = $scalar ?? '';
+
+    // Handle both possible structures:
+    // 1) $user_input[$field_name][0]['value']
+    // 2) $user_input[$field_name]['widget'][0]['value']
+    if (isset($user_input[$field_name]['widget'][0])) {
+      $user_input[$field_name]['widget'][0]['value'] = $scalar;
     }
-    $form_state->setUserInput($user_input);
-    
+    else {
+      $user_input[$field_name][0]['value'] = $scalar;
+    }
+  }
+  else {
+    // options/select expects a flat array of IDs.
+    $user_input[$field_name] = is_array($new_values) ? $new_values : [];
+  }
+
+  $form_state->setUserInput($user_input);
 }
 
-function pins_folder_hs_clear_form_fields(&$form, $field_name) {
-    foreach ($form[$field_name]['widget'] as $key => $value) {
-        if (isset($value['target_id'])) {
-            $form[$field_name]['widget'][$key]['target_id']['#value'] = '';
-        }
+/**
+ * Clear field in form_state + user_input.
+ */
+function pins_folder_hs_clear_form_fields(FormStateInterface $form_state, $field_name, $type = 'options') {
+  $form_state->setValue($field_name, $type === 'string' ? NULL : []);
+
+  $user_input = $form_state->getUserInput();
+  if ($type === 'string') {
+    if (isset($user_input[$field_name]['widget'][0])) {
+      $user_input[$field_name]['widget'][0]['value'] = '';
     }
+    else {
+      $user_input[$field_name][0]['value'] = '';
+    }
+  }
+  else {
+    $user_input[$field_name] = [];
+  }
+  $form_state->setUserInput($user_input);
 }
