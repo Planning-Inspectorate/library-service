@@ -838,11 +838,19 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
           $exposed_input = $view->getExposedInput();
           $target_key = 'field_kl_classification_target_id';
 
-          if (!empty($exposed_input[$target_key])) {
-            if (preg_match('/\((\d+)\)$/', $exposed_input[$target_key], $matches)) {
+          $id_classifications = [];
+          $classification_ids = (array) ($exposed_input[$target_key] ?? []);
+
+          foreach ($classification_ids as $id) {
+            $id = trim($id);
+
+            // Match "Label (123)" pattern.
+            if (preg_match('/\((\d+)\)$/', $id, $matches)) {
               $id_classifications[] = $matches[1];
-            } elseif (is_numeric($exposed_input[$target_key])) {
-              $id_classifications[] = $exposed_input[$target_key];
+            }
+            // Or accept plain numeric IDs.
+            elseif (is_numeric($id)) {
+              $id_classifications[] = $id;
             }
           }
 
