@@ -91,26 +91,21 @@ jQuery(function ($) {
   }
 });
 
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
-  // Private helper: initialise Chosen on the target select(s)
-  function initChosen() {
-    $('select[name="field_kl_classification_target_id[]"]')
-      .filter(function () {
-        return !$(this).data('chosen');
-      })
-      .chosen();
-  }
+  Drupal.behaviors.initChosen = {
+    attach: function (context) {
 
-  // Run on document ready
-  $(document).ready(function () {
-    initChosen();
-  });
+      // Only run if Chosen is available
+      if (typeof $.fn.chosen === 'undefined') {
+        return;
+      }
 
-  // Run after any AJAX completion (e.g., Views exposed filters)
-  $(document).ajaxComplete(function () {
-    initChosen();
-  });
+      $(once('chosen-init', 'select[name="field_kl_classification_target_id[]"]', context))
+        .chosen();
+    }
+  };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);
+
 
