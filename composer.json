@@ -91,7 +91,7 @@
         "drupal/scan_code": "^1.0@beta",
         "drupal/schema_metatag": "^3.0",
         "drupal/search_api": "^1.40",
-        "drupal/search_api_aais": "^1.0@RC",
+        "drupal/search_api_aais": "1.0.0-rc1",
         "drupal/search_api_attachments": "^9.0",
         "drupal/search_api_saved_searches": "^1.0@beta",
         "drupal/search_api_solr": "^4.3",
