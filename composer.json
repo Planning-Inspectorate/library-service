@@ -206,6 +206,9 @@
             },
             "drupal/core" : {
                 "access check error fix" : "https://www.drupal.org/files/issues/2023-12-08/core-patch.patch"
+            },
+            "drupal/config_ignore" :{
+                "PHP 8.4 fix" : "https://www.drupal.org/files/issues/2026-04-08/config_ignore-php84-explicit-nullable-request-3583753.patch"
             }
         },
         "enable-patching": true

@@ -101,7 +101,7 @@ class IndexingLogService {
     return $mbSize . ' MB';
   }
   
-  public function logIndexing(int $fid, string $fileName, string $fileUri, int $fileSize, string $status, string $message = null) {
+  public function logIndexing(int $fid, string $fileName, string $fileUri, int $fileSize, string $status, ?string $message = null) {
     try {
       $this->logger->error($message);
 
