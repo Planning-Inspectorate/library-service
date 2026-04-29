@@ -671,23 +671,43 @@ function pins_preprocess_html(&$variables) {
 
 /**
  * Implements hook_views_pre_view().
+ *
+ * Overrides the Views empty‑result message for a specific taxonomy search
+ * display when the term belongs to selected vocabularies
  */
 function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
+  if ($view->id() === 'taxonomy_search' && $display_id === 'page_2') {
 
-  if ($view->id() == 'taxonomy_search' && $display_id === 'page_2') {
-    $term_id = array_key_exists(0, $args) ? $args[0] : '';
+    $term_id = $args[0] ?? '';
     $vocabularies = ["kl_publications", "kl_topics"];
-    if ($term_id != '') {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+
+    if ($term_id) {
+      $term = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($term_id);
+
       if ($term && in_array($term->bundle(), $vocabularies)) {
-        $empty_config = $view->display_handler->getOption('result');
-        $empty_config['content']['value'] = '';
+        $empty_config = $view->display_handler->getOption('empty');
+
+        foreach ($empty_config as &$handler) {
+
+          // If simple string content
+          if (isset($handler['content']) && is_string($handler['content'])) {
+            $handler['content'] = '';
+          }
+
+          // If text area
+          if (isset($handler['content']['value'])) {
+            $handler['content']['value'] = '';
+          }
+        }
+
         $view->display_handler->setOption('empty', $empty_config);
       }
     }
-
   }
 }
+
 
 /**
  * Load all rows from a view, with contextual and exposed filters applied.
@@ -837,8 +857,6 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
           // 2. Extract ID from the Exposed Filter autocomplete string: "Label (123)".
           $exposed_input = $view->getExposedInput();
           $target_key = 'field_kl_classification_target_id';
-
-          $id_classifications = [];
           $classification_ids = (array) ($exposed_input[$target_key] ?? []);
 
           foreach ($classification_ids as $id) {
@@ -1172,7 +1190,7 @@ function pins_preprocess_views_view_field(&$variables) {
       $html = $variables['output'];
       if (strpos($html, '::') !== false) {
         // Extract nid and title from the custom_value
-        list($nid, $title) = explode('::', $html, 2);
+        [$nid, $title] = explode('::', $html, 2);
         if (is_numeric($nid) && (int)$nid > 0) {
           // Create a URL to the node
           $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
