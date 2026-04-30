@@ -679,7 +679,7 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
   if ($view->id() === 'taxonomy_search' && $display_id === 'page_2') {
 
     $term_id = $args[0] ?? '';
-    $vocabularies = ["kl_publications", "kl_topics"];
+    $vocabularies = ['kl_publications', 'kl_topics'];
 
     if ($term_id) {
       $term = \Drupal::entityTypeManager()
