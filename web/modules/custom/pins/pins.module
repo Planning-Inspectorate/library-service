@@ -673,7 +673,7 @@ function pins_preprocess_html(&$variables) {
  * Implements hook_views_pre_view().
  *
  * Overrides the Views empty‑result message for a specific taxonomy search
- * display when the term belongs to selected vocabularies
+ * display when the term belongs to selected vocabularies.
  */
 function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
   if ($view->id() === 'taxonomy_search' && $display_id === 'page_2') {
@@ -686,23 +686,32 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
         ->getStorage('taxonomy_term')
         ->load($term_id);
 
-      if ($term && in_array($term->bundle(), $vocabularies)) {
+      if ($term && in_array($term->bundle(), $vocabularies, TRUE)) {
+
         $empty_config = $view->display_handler->getOption('empty');
 
-        foreach ($empty_config as &$handler) {
+        if (is_array($empty_config)) {
 
-          // If simple string content
-          if (isset($handler['content']) && is_string($handler['content'])) {
-            $handler['content'] = '';
+          foreach ($empty_config as &$handler) {
+
+            // If simple string content.
+            if (isset($handler['content']) && is_string($handler['content'])) {
+              $handler['content'] = '';
+            }
+            // If text area content array.
+            elseif (
+              isset($handler['content']) &&
+              is_array($handler['content']) &&
+              isset($handler['content']['value'])
+            ) {
+              $handler['content']['value'] = '';
+            }
           }
 
-          // If text area
-          if (isset($handler['content']['value'])) {
-            $handler['content']['value'] = '';
-          }
+          unset($handler); // Prevent reference leakage.
+
+          $view->display_handler->setOption('empty', $empty_config);
         }
-
-        $view->display_handler->setOption('empty', $empty_config);
       }
     }
   }
