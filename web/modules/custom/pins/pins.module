@@ -743,6 +743,11 @@ function pins_views_pre_render(ViewExecutable $view) {
     return;
   }
 
+  if (empty($view->result) && empty($view->getExposedInput())) {
+    $view->exposed_widgets = NULL;
+    return;
+  }
+
   // Collect classification TIDs from the actual results.
   $tids = [];
   $all_rows = pins_get_all_view_rows(
