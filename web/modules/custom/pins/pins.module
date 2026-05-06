@@ -734,6 +734,8 @@ function pins_get_all_view_rows($view_id, $display_id = 'default', array $args =
 
 /**
  * Implements hook_views_pre_render().
+ *
+ * Filters the exposed classification widget to only show terms present in the view results.
  */
 function pins_views_pre_render(ViewExecutable $view) {
 
@@ -741,20 +743,18 @@ function pins_views_pre_render(ViewExecutable $view) {
     return;
   }
 
-  // Hide widgets if no results and no exposed input.
   if (empty($view->result) && empty($view->getExposedInput())) {
     $view->exposed_widgets = NULL;
     return;
   }
 
-  // Collect TIDs from results
+  // Collect classification TIDs from the actual results.
   $tids = [];
-
   $all_rows = pins_get_all_view_rows(
     'taxonomy_search',
     'page_2',
-    $view->args,              // contextual filters
-    $view->getExposedInput()  // exposed filters
+    $view->args,
+    $view->getExposedInput()
   );
 
   foreach ($all_rows as $row) {
@@ -764,9 +764,15 @@ function pins_views_pre_render(ViewExecutable $view) {
       }
     }
   }
+
   $tids = array_unique($tids);
 
-  // Filter exposed options
+  // If no TIDs found (empty results), do not filter the widget options.
+  if (empty($tids)) {
+    return;
+  }
+
+  // Filter the exposed classification widget options.
   if (!isset($view->exposed_widgets['field_kl_classification_target_id'])) {
     return;
   }
@@ -787,7 +793,6 @@ function pins_views_pre_render(ViewExecutable $view) {
     }
   }
 
-  // Replace options with filtered list.
   $widget['#options'] = $filtered;
 }
 
@@ -821,6 +826,8 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
                 ];
               }
             }
+
+            unset($condition_group, $condition);
           }
         }
 
@@ -838,7 +845,6 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
           $exposed_input = $view->getExposedInput();
           $target_key = 'field_kl_classification_target_id';
 
-          $id_classifications = [];
           $classification_ids = (array) ($exposed_input[$target_key] ?? []);
 
           foreach ($classification_ids as $id) {
@@ -898,6 +904,8 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
             }
           }
         }
+
+        unset($condition_group, $condition);
       }
     }
   }
