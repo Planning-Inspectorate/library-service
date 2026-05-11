@@ -57,7 +57,7 @@ function pins_folder_hs_wrap_metadata_fields(array &$form) {
   $form['metadata_wrapper'] = [
     '#type' => 'container',
     '#attributes' => ['id' => 'metadata-fields-wrapper'],
-    '#weight' => $weight,
+    '#weight' => 30, // Ensure it appears after the folder field.
     '#group' => $group,
   ];
 
