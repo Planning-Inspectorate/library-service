@@ -915,10 +915,11 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
     return;
   }
 
-  // Check if exposed filter toggle is set and if 'no' is selected
-  // Otherwise only show most recent by default
+  // Check if exposed filter toggle is set or if 'no' is selected
+  // Otherwise only show most recent
   $input = $view->getExposedInput();
-  if (isset($input['most_recent_filter']) && $input['most_recent_filter'] == '0') {
+
+  if (!isset($input['most_recent_filter']) || $input['most_recent_filter'] == '0') {
     return;
   }
 
