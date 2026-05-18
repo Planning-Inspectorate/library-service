@@ -23,7 +23,7 @@ class YesNoFilter extends FilterPluginBase {
 
     // Ensure default value is set if not already.
     if (empty($this->value)) {
-      $this->value = [1]; // Default to "Yes".
+      $this->value = [0]; // Default to "No".
     }
   }
 
