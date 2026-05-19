@@ -6,3 +6,7 @@ services:
   pins.indexing_log:
     class: Drupal\pins\Services\IndexingLogService
     arguments: ['@database']
+
+  pins.latest_version_filter:
+    class: Drupal\pins\Services\LatestVersionFilter
+    arguments: [ '@database' ]
