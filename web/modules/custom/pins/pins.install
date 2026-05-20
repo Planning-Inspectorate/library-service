@@ -30,53 +30,103 @@ function pins_update_8004() {
   $add_index('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
   $add_index('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
 }
+
 /**
- * Remove the "Library" classification term from nodes.
+ * Remove 'Library' term from nodes in batches.
  */
+function pins_update_8007(&$sandbox) {
 
-function pins_update_8005() {
-  $terms = \Drupal::entityTypeManager()
-    ->getStorage('taxonomy_term')
-    ->loadByProperties([
-      'name' => 'Library',
-      'vid'  => 'kl_classification',
-    ]);
+  // Step 1: Resolve the term ID once.
+  if (!isset($sandbox['tid_to_remove'])) {
+    $terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties([
+        'name' => 'Library',
+        'vid'  => 'kl_classification',
+      ]);
 
-  $term = reset($terms);
-  $tid_to_remove = $term->id();
+    if (count($terms) !== 1) {
+      \Drupal::logger('pins_update')->error(
+        "Expected exactly one 'Library' term in kl_classification, found @count.",
+        ['@count' => count($terms)]
+      );
+      return t('Aborted: invalid term count.');
+    }
 
-  // Build query for both content types.
-  $query = \Drupal::entityQuery('node')
-    ->condition('field_kl_classification', $tid_to_remove)
-    ->accessCheck(FALSE);
+    $term = reset($terms);
+    $sandbox['tid_to_remove'] = $term->id();
+  }
 
-  $orGroup = $query->orConditionGroup()
-    ->condition('type', 'kl_document')
-    ->condition('type', 'kl_compound_document');
+  $tid = $sandbox['tid_to_remove'];
 
-  $query->condition($orGroup);
+  // Step 2: Initialize the list of node IDs only once.
+  if (!isset($sandbox['nids'])) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('field_kl_classification', $tid)
+      ->accessCheck(FALSE);
 
-  $nids = $query->execute();
+    $or = $query->orConditionGroup()
+      ->condition('type', 'kl_document')
+      ->condition('type', 'kl_compound_document');
+
+    $query->condition($or);
+
+    $sandbox['nids'] = $query->execute();
+    $sandbox['total'] = count($sandbox['nids']);
+    $sandbox['processed'] = 0;
+    $sandbox['removed_count'] = 0;
+  }
+
+  // Step 3: Process 25 nodes per batch.
+  $batch_size = 25;
+  $nids = array_splice($sandbox['nids'], 0, $batch_size);
 
   foreach ($nids as $nid) {
-    \Drupal::logger('pins_update')->notice("Processing node @nid", ['@nid' => $nid]);
 
     $node = \Drupal\node\Entity\Node::load($nid);
-    $field_items = $node->get('field_kl_classification');
-    $items = $field_items->getValue();
 
-    $found = FALSE;
+    // Guard: node may have been deleted or become inaccessible.
+    if (!$node) {
+      $sandbox['missing'][] = $nid;
+      continue;
+    }
 
-    for ($i = count($items) - 1; $i >= 0; $i--) {
-      if ($items[$i]['target_id'] == $tid_to_remove) {
-        $field_items->removeItem($i);
-        $found = TRUE;
+    $field = $node->get('field_kl_classification');
+    $items = $field->getValue();
+    $changed = FALSE;
+
+    foreach ($items as $i => $item) {
+      if ($item['target_id'] == $tid) {
+        $field->removeItem($i);
+        $changed = TRUE;
       }
     }
 
-    if ($found) {
+    if ($changed) {
       $node->save();
-      \Drupal::logger('pins_update')->notice("Removed Library from node @nid", ['@nid' => $nid]);
+      $sandbox['removed_count']++;
     }
+
+    $sandbox['processed']++;
   }
+
+  // Step 4: Report progress.
+  if ($sandbox['processed'] < $sandbox['total']) {
+    $sandbox['#finished'] = $sandbox['processed'] / $sandbox['total'];
+    return t('Removing Library term from nodes… (@done/@total)', [
+      '@done' => $sandbox['processed'],
+      '@total' => $sandbox['total'],
+    ]);
+  }
+
+  // Step 5: Final summary message.
+  \Drupal::logger('pins_update')->notice(
+    "Removed 'Library' term from @count nodes.",
+    ['@count' => $sandbox['removed_count']]
+  );
+
+  $sandbox['#finished'] = 1;
+  return t('Completed removing Library term from @count nodes.', [
+    '@count' => $sandbox['removed_count'],
+  ]);
 }
