@@ -30,3 +30,53 @@ function pins_update_8004() {
   $add_index('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
   $add_index('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
 }
+/**
+ * Remove the "Library" classification term from nodes.
+ */
+
+function pins_update_8005() {
+  $terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'name' => 'Library',
+      'vid'  => 'kl_classification',
+    ]);
+
+  $term = reset($terms);
+  $tid_to_remove = $term->id();
+
+  // Build query for both content types.
+  $query = \Drupal::entityQuery('node')
+    ->condition('field_kl_classification', $tid_to_remove)
+    ->accessCheck(FALSE);
+
+  $orGroup = $query->orConditionGroup()
+    ->condition('type', 'kl_document')
+    ->condition('type', 'kl_compound_document');
+
+  $query->condition($orGroup);
+
+  $nids = $query->execute();
+
+  foreach ($nids as $nid) {
+    \Drupal::logger('pins_update')->notice("Processing node @nid", ['@nid' => $nid]);
+
+    $node = \Drupal\node\Entity\Node::load($nid);
+    $field_items = $node->get('field_kl_classification');
+    $items = $field_items->getValue();
+
+    $found = FALSE;
+
+    for ($i = count($items) - 1; $i >= 0; $i--) {
+      if ($items[$i]['target_id'] == $tid_to_remove) {
+        $field_items->removeItem($i);
+        $found = TRUE;
+      }
+    }
+
+    if ($found) {
+      $node->save();
+      \Drupal::logger('pins_update')->notice("Removed Library from node @nid", ['@nid' => $nid]);
+    }
+  }
+}
