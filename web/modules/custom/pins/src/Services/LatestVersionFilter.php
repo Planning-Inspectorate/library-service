@@ -3,29 +3,47 @@
 namespace Drupal\pins\Services;
 
 use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\Core\Database\Connection;
 
+/**
+ * Filter Views to only include latest document versions
+ * using the field_search_exclude flag.
+ */
 class LatestVersionFilter {
+
+  /**
+   * Database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  public function __construct(Connection $connection) {
+    $this->connection = $connection;
+  }
 
   /**
    * Apply filter to normal Views (no relationship).
    */
   public function apply(QueryPluginBase $query, string $bundle = 'kl_document') {
 
-    // Ensure the field exists
-    $alias = $query->ensureTable('node__field_search_exclude', 'node_field_data');
+    $connection = $this->connection;
 
     $group = $query->setWhereGroup('OR');
 
-    // 1) Not kl_document → keep
+    // 1) Not kl_document → keep it
     $query->addWhere($group, 'node_field_data.type', $bundle, '<>');
 
-    // 2) Latest version → keep
-    $query->addWhere($group, "$alias.field_search_exclude_value", 1, '<>');
-    $query->addWhere($group, "$alias.field_search_exclude_value", NULL, 'IS NULL');
+    // 2) Exclude nodes marked as search_exclude = 1
+    $sub = $connection->select('node__field_search_exclude', 'se')
+      ->fields('se', ['entity_id'])
+      ->condition('se.field_search_exclude_value', 1);
+
+    $query->addWhere($group, 'node_field_data.nid', $sub, 'NOT IN');
   }
 
   /**
-   * Apply filter to Views using a relationship (referenced content).
+   * Apply filter to Views using a relationship (e.g. referenced nodes).
    */
   public function applyToRelationship(
     QueryPluginBase $query,
@@ -33,20 +51,22 @@ class LatestVersionFilter {
     string $bundle = 'kl_document'
   ) {
 
-    // Relationship base alias
-    $base_alias = 'node_field_data_' . $relationship;
+    $connection = $this->connection;
 
-    // Ensure the field table on relationship
-    $alias = $query->ensureTable('node__field_search_exclude', $relationship);
+    // This is the alias Views uses for the related node
+    $base_alias = 'node_field_data_' . $relationship;
 
     $group = $query->setWhereGroup('OR');
 
-    // 1) Not kl_document → keep
+    // 1) Not kl_document → keep it
     $query->addWhere($group, "$base_alias.type", $bundle, '<>');
 
-    // 2) Not excluded → keep
-    $$query->addWhere($group, "$alias.field_search_exclude_value", 1, '<>');
-    $query->addWhere($group, "$alias.field_search_exclude_value", NULL, 'IS NULL');
+    // 2) Exclude nodes where search_exclude = 1
+    $sub = $connection->select('node__field_search_exclude', 'se')
+      ->fields('se', ['entity_id'])
+      ->condition('se.field_search_exclude_value', 1);
+
+    $query->addWhere($group, "$base_alias.nid", $sub, 'NOT IN');
   }
 
 }

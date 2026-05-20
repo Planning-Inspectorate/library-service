@@ -887,8 +887,17 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
             $query->addWhere(1, "$alias.field_kl_classification_target_id", $id_classifications, 'IN');
           }
         }
+
+        // --- PART 3: Apply "latest version only" filter via service ---
+        \Drupal::service('pins.latest_version_filter')
+          ->apply($query);
       }
     }
+  }
+
+  if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
+    \Drupal::service('pins.latest_version_filter')
+      ->applyToRelationship($query, 'node__field_documents');
   }
 
   if ($view->id() === 'horizon' && $view->current_display === 'versions') {
