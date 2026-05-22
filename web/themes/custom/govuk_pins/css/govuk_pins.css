@@ -534,3 +534,11 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   background-size: 16px;
   padding-right: 40px;
 }
+
+.govuk-header__navigation .govuk-header__navigation-item .govuk-header__link {
+  font-size: 0.930rem;
+}
+
+.frontpage-tiles .govuk-link {
+  font-size: 1rem;
+}
