@@ -887,8 +887,17 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
             $query->addWhere(1, "$alias.field_kl_classification_target_id", $id_classifications, 'IN');
           }
         }
+
+        // --- PART 3: Apply "latest version only" filter via service ---
+        \Drupal::service('pins.latest_version_filter')
+          ->apply($query);
       }
     }
+  }
+
+  if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
+    \Drupal::service('pins.latest_version_filter')
+      ->applyToRelationship($query, 'node__field_documents');
   }
 
   if ($view->id() === 'horizon' && $view->current_display === 'versions') {
@@ -927,70 +936,14 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   // Otherwise only show most recent
   $input = $view->getExposedInput();
 
-  if (!isset($input['most_recent_filter']) || $input['most_recent_filter'] == '0') {
+  if (isset($input['most_recent_filter']) &&
+    $input['most_recent_filter'] == '0') {
     return;
   }
 
-  // Inject a subquery that returns only the latest version NIDs.
-  $connection = \Drupal::database();
-
-  // Base table: doc_id field.
-  $sub = $connection->select('node__field_kl_doc_id', 'd');
-  $sub->condition('d.deleted', 0);
-  $sub->condition('d.delta', 0);
-
-  // Join version field with full multilingual + delta constraints.
-  $sub->join(
-    'node__field_vernum',
-    'v',
-    'v.entity_id = d.entity_id
-   AND v.langcode = d.langcode
-   AND v.delta = d.delta
-   AND v.deleted = d.deleted'
-  );
-  $sub->condition('v.deleted', 0);
-  $sub->condition('v.delta', 0);
-
-  // Subquery to compute max version per doc ID *and language*.
-  $latest = $connection->select('node__field_kl_doc_id', 'd2');
-  $latest->condition('d2.deleted', 0);
-  $latest->condition('d2.delta', 0);
-
-  $latest->join(
-    'node__field_vernum',
-    'v2',
-    'v2.entity_id = d2.entity_id
-   AND v2.langcode = d2.langcode
-   AND v2.delta = d2.delta
-   AND v2.deleted = d2.deleted'
-  );
-  $latest->condition('v2.deleted', 0);
-  $latest->condition('v2.delta', 0);
-
-  $latest->addField('d2', 'field_kl_doc_id_value');
-  $latest->addField('d2', 'langcode');
-  $latest->addExpression('MAX(v2.field_vernum_value)', 'max_ver');
-
-  $latest->groupBy('d2.field_kl_doc_id_value');
-  $latest->groupBy('d2.langcode');
-
-  // Join latest version info back into the main subquery.
-  $sub->join(
-    $latest,
-    'l',
-    'l.field_kl_doc_id_value = d.field_kl_doc_id_value
-   AND l.langcode = d.langcode
-   AND l.max_ver = v.field_vernum_value'
-  );
-
-  // Select the entity_id (nid) of the latest version.
-  $sub->addField('v', 'entity_id');
-
-  // Only apply the latest-version restriction to versioned documents so
-  // other bundles in the manage_contents view remain visible.
-  $latest_version_group = $query->setWhereGroup('OR');
-  $query->addWhere($latest_version_group, 'node_field_data.type', 'kl_document', '<>');
-  $query->addWhere($latest_version_group, 'node_field_data.nid', $sub, 'IN');
+  // Apply latest version filter via service.
+  \Drupal::service('pins.latest_version_filter')
+    ->apply($query, 'kl_document');
 }
 
 function pins_get_cached_version_doc_ids($nid, $cid = 'pins_get_revision_nid_by_doc_id'){
