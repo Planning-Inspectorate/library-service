@@ -6,9 +6,10 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\Database\Connection;
 
 /**
- * Filter Views to only include latest document versions
- * using the field_search_exclude flag.
+ * @param string $base_alias
+ *   The Views table alias for the related node (e.g. 'node_field_data_node__field_documents').
  */
+
 class LatestVersionFilter {
 
   /**
@@ -47,14 +48,11 @@ class LatestVersionFilter {
    */
   public function applyToRelationship(
     QueryPluginBase $query,
-    string $relationship,
+    string $base_alias,
     string $bundle = 'kl_document'
   ) {
 
     $connection = $this->connection;
-
-    // This is the alias Views uses for the related node
-    $base_alias = 'node_field_data_' . $relationship;
 
     $group = $query->setWhereGroup('OR');
 

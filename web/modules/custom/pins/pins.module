@@ -897,7 +897,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
 
   if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
     \Drupal::service('pins.latest_version_filter')
-      ->applyToRelationship($query, 'node__field_documents');
+      ->applyToRelationship($query, 'node_field_data_node__field_documents');
   }
 
   if ($view->id() === 'horizon' && $view->current_display === 'versions') {

@@ -22,7 +22,7 @@ class YesNoFilter extends FilterPluginBase {
     parent::init($view, $display, $options);
 
     // Ensure default value is set if not already.
-    if (empty($this->value)) {
+    if ($this->value === NULL) {
       $this->value = [1]; // Default to "Yes".
     }
   }
@@ -47,8 +47,7 @@ class YesNoFilter extends FilterPluginBase {
         1 => $this->t('Yes'),
         0 => $this->t('No'),
       ],
-      '#default_value' => $this->value ?? [1],
-      '#required' => TRUE, // Prevents "- Any -" from being added in admin UI.
+      '#default_value' => $this->value ?? [1]
     ];
   }
 
@@ -69,12 +68,9 @@ class YesNoFilter extends FilterPluginBase {
       }
 
       // Ensure default value is set.
-      if (empty($form_state->getValue($identifier))) {
+      if (!$form_state->hasValue('your_filter')) {
         $form[$identifier]['#default_value'] = $this->value ?? [1];
       }
-
-      // Make it required so user must choose Yes or No.
-      $form[$identifier]['#required'] = TRUE;
     }
   }
 
