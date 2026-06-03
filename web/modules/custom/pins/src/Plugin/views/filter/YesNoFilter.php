@@ -68,7 +68,7 @@ class YesNoFilter extends FilterPluginBase {
       }
 
       // Ensure default value is set.
-      if (!$form_state->hasValue('your_filter')) {
+      if (!$form_state->hasValue($identifier)) {
         $form[$identifier]['#default_value'] = $this->value ?? [1];
       }
     }
