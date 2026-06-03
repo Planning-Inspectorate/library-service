@@ -679,21 +679,45 @@ function pins_preprocess_html(&$variables) {
 
 /**
  * Implements hook_views_pre_view().
+ *
+ * Overrides the Views empty‑result message for a specific taxonomy search
+ * display when the term belongs to selected vocabularies.
  */
 function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
 
-  if ($view->id() == 'taxonomy_search' && $display_id === 'page_2') {
-    $term_id = array_key_exists(0, $args) ? $args[0] : '';
-    $vocabularies = ["kl_publications", "kl_topics"];
-    if ($term_id != '') {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-      if ($term && in_array($term->bundle(), $vocabularies)) {
-        $empty_config = $view->display_handler->getOption('result');
-        $empty_config['content']['value'] = '';
-        $view->display_handler->setOption('empty', $empty_config);
+  if ($view->id() === 'taxonomy_search' && $display_id === 'page_2') {
+    $term_id = $args[0] ?? '';
+    $vocabularies = ['kl_publications', 'kl_topics'];
+
+    if ($term_id) {
+      $term = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($term_id);
+
+      if ($term && in_array($term->bundle(), $vocabularies, TRUE)) {
+        $empty_config = $view->display_handler->getOption('empty');
+        if (is_array($empty_config)) {
+          foreach ($empty_config as &$handler) {
+            // If simple string content.
+            if (isset($handler['content']) && is_string($handler['content'])) {
+              $handler['content'] = '';
+            }
+            // If text area content array.
+            elseif (
+              isset($handler['content']) &&
+              is_array($handler['content']) &&
+              isset($handler['content']['value'])
+            ) {
+              $handler['content']['value'] = '';
+            }
+          }
+
+          unset($handler); // Prevent reference leakage.
+
+          $view->display_handler->setOption('empty', $empty_config);
+        }
       }
     }
-
   }
 }
 
@@ -1142,7 +1166,7 @@ function pins_preprocess_views_view_field(&$variables) {
       $html = $variables['output'];
       if (strpos($html, '::') !== false) {
         // Extract nid and title from the custom_value
-        list($nid, $title) = explode('::', $html, 2);
+        [$nid, $title] = explode('::', $html, 2);
         if (is_numeric($nid) && (int)$nid > 0) {
           // Create a URL to the node
           $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
