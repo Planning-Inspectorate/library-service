@@ -1,0 +1,15 @@
+pins.settings:
+  path: '/admin/config/content/pins-settings'
+  defaults:
+    _form: '\Drupal\pins\Form\PinsSettingsForm'
+    _title: 'PINS Document Revision Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+pins.cookie_page:
+  path: '/cookies'
+  defaults:
+    _controller: '\Drupal\pins\Controller\PinsCookiePageController::content'
+    _title: 'Cookies on the Library'
+  requirements:
+    _permission: 'access content'

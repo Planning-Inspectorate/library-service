@@ -114,13 +114,13 @@ aside .editorschoice-menu.govuk-list ul {
 .govuk-header__navigation-item a,
 .govuk-header___logo a.govuk-header__link,
 .govuk-header___content a {
-  background-color: transparent !important; 
-  border-top: none !important; 
+  background-color: transparent !important;
+  border-top: none !important;
 }
 
-.govuk-header__navigation-item a.govuk-header__link:active:hover, 
-.govuk-header__navigation-item a.govuk-header__link:active:focus,  
-.govuk-header__navigation-item a.govuk-header__link:active, 
+.govuk-header__navigation-item a.govuk-header__link:active:hover,
+.govuk-header__navigation-item a.govuk-header__link:active:focus,
+.govuk-header__navigation-item a.govuk-header__link:active,
 .govuk-header__navigation-item a.govuk-header__link:target,
 .govuk-header__navigation-item a.govuk-header__link:hover {
   border-top: none !important;
@@ -147,7 +147,7 @@ aside .editorschoice-menu.govuk-list ul {
 }
 
 @media only screen and (min-width: 1024px){
-  
+
 .box-link__top {
     height: 120px;
   }
@@ -201,7 +201,7 @@ aside .editorschoice-menu.govuk-list ul {
 .box-link h3 a{
   font-weight: 900;;
 }
-.flag-bookmark{ 
+.flag-bookmark{
   margin: 35px 0;
   clear: both;
 }
@@ -224,7 +224,7 @@ aside .editorschoice-menu.govuk-list ul {
   content: counter(step-counter);
   margin-right: 25px;
   font-size: 110%;
-  background-color: #19615B; 
+  background-color: #19615B;
    /* rgb(180, 180, 180); */
   color: white;
   font-weight: 900;
@@ -270,8 +270,8 @@ aside .editorschoice-menu.govuk-list ul {
       column-rule: 1px dashed var(--color-border-alt);
       gap: var(--spacing-medium);
       /* margin-top: var(--spacing-small); */
-      
-      
+
+
   }
 }
 
@@ -409,17 +409,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   --auto-fill: repeat(auto-fill, minmax(400px, 1fr));
   --color-border: #1D1D1B;
   --color-border-alt: #E8E8E8;
-  --space: 2rem; 
-  --space-xs: calc(var(--space)/3); 
-  --space-sm: calc(var(--space)/2); 
-  --space-md: calc(var(--space)*2); 
-  --space-lg: calc(var(--space)*1); 
-  --color-primary: lightgray; 
-  --color-accent: whitesmoke; 
-  --color-dark: black; 
-  --color-mid: gray; 
-  --color-light: white; 
-  --color-highlight: dodgerblue; 
+  --space: 2rem;
+  --space-xs: calc(var(--space)/3);
+  --space-sm: calc(var(--space)/2);
+  --space-md: calc(var(--space)*2);
+  --space-lg: calc(var(--space)*1);
+  --color-primary: lightgray;
+  --color-accent: whitesmoke;
+  --color-dark: black;
+  --color-mid: gray;
+  --color-light: white;
+  --color-highlight: dodgerblue;
   --radius: 0.125rem;
 }
 
@@ -474,7 +474,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .govuk-header__logotype-organisation-fallback-image{
   width: 107px;
   height: 67px;
-} 
+}
 .appeal-details .govuk-summary-list__key,
 .appeal-details .govuk-summary-list__value,
 .appeal-details .govuk-summary-list__actions {
@@ -501,14 +501,44 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* --- Match Type Radio Button Styles --- */
 fieldset[data-drupal-selector="edit-fuzziness"] .form-radios {
-  display: flex; 
-  gap: 20px; 
+  display: flex;
+  gap: 20px;
   padding-bottom: 10px;
 }
 fieldset[data-drupal-selector="edit-fuzziness"] .govuk-radios__item {
-  display: flex; 
-  margin-right: 0; 
+  display: flex;
+  margin-right: 0;
 }
 fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   font-size: 1.5rem;
+}
+
+/* --- Match Chosen select form to frontend form styles -- */
+#views-exposed-form-taxonomy-search-page-2 .chosen-container {
+  padding: 0px;
+  border: none;
+  vertical-align: baseline;
+}
+
+#views-exposed-form-taxonomy-search-page-2  .chosen-container .chosen-results li,
+#views-exposed-form-taxonomy-search-page-2 .chosen-choices li.search-choice {
+  line-height: normal;
+}
+
+#views-exposed-form-taxonomy-search-page-2  .chosen-choices {
+  border: 2px solid #0b0c0c;
+  border-radius: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%23666' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.govuk-header__navigation .govuk-header__navigation-item .govuk-header__link {
+  font-size: 0.930rem;
+}
+
+.frontpage-tiles .govuk-link {
+  font-size: 1rem;
 }

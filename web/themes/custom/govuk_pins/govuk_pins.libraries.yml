@@ -12,7 +12,7 @@ framework:
     - core/jquery
     - core/once
     - core/drupal
-    
+
 webform:
   version: 1.x
   js:

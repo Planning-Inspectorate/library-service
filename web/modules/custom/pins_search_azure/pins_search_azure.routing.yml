@@ -1,0 +1,7 @@
+pins_search_azure.settings:
+  path: '/admin/config/search/pins-search-azure'
+  defaults:
+    _form: '\Drupal\pins_search_azure\Form\PinsAzureSearchSettingsForm'
+    _title: 'PINS Azure Search Settings'
+  requirements:
+    _permission: 'administer search_api'

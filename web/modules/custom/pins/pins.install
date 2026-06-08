@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the pins module.
+ */
+
+/**
+ * Add indexes to improve latest-version query performance.
+ */
+function pins_update_8004() {
+  $schema = \Drupal::database()->schema();
+
+  // A helper to reduce repetition.
+  $add_index = function ($table, $index_name, array $fields) use ($schema) {
+    if (!$schema->indexExists($table, $index_name)) {
+      // Build the index spec required by Drupal 9.4+ / 10+.
+      $spec = ['fields' => []];
+      foreach ($fields as $field) {
+        $spec['fields'][$field] = [];
+      }
+
+      $schema->addIndex($table, $index_name, $fields, $spec);
+    }
+  };
+
+  // Add indexes.
+  $add_index('node__field_kl_doc_id', 'idx_doc_id', ['field_kl_doc_id_value']);
+  $add_index('node__field_kl_doc_id', 'idx_entity', ['entity_id']);
+  $add_index('node__field_vernum', 'idx_vernum', ['field_vernum_value']);
+  $add_index('node__field_vernum', 'idx_vernum_entity', ['entity_id', 'field_vernum_value']);
+}

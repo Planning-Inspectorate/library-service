@@ -278,7 +278,7 @@ display:
               action_id: 'entity:publish_action:node'
               preconfiguration:
                 add_confirmation: true
-        force_selection_info: false
+          force_selection_info: false
         title:
           id: title
           table: node_field_data
@@ -2306,6 +2306,50 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        yes_no_filter:
+          id: yes_no_filter
+          table: node_field_data
+          field: yes_no_filter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: yes_no_filter
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Show only most recent versions'
+            description: ''
+            use_operator: false
+            operator: yes_no_filter_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: most_recent_filter
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              pads: '0'
+              library_admin: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:

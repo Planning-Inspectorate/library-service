@@ -1,6 +1,6 @@
 uuid: 471b3e5f-2cf1-4dca-aca0-8e268c867be2
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.children_term_list
