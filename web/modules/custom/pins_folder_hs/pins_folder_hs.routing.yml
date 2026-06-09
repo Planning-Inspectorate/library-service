@@ -4,3 +4,4 @@ pins_folder_hs.alt_title:
     _controller: '\Drupal\pins_folder_hs\Controller\AltTitleController::getAltTitle'
   requirements:
     _permission: 'access content'
+  

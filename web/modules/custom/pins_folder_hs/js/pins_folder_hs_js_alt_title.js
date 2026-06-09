@@ -3,12 +3,12 @@
   Drupal.behaviors.folderAltTitle = {
     attach: function (context) {
 
-      once('folder-alt-title', context).forEach(() => {
+        once('folder-alt-title', 'body', context).forEach(() => {
 
         document.addEventListener('change', function (e) {
 
           // ✅ Only react to CSHS levels
-          if (!e.target.id.includes('edit-field-kl-doc-folder-0-target-id')) {
+          if (!e.target || !e.target.id || !e.target.id.includes('edit-field-kl-doc-folder-0-target-id')) {
             return;
           }
 
@@ -25,7 +25,7 @@
 
           if (!finalValue) return;
 
-          fetch(`/pins-folder-alt-title/${finalValue}`)
+          fetch(Drupal.url(`pins-folder-alt-title/${finalValue}`))
             .then(res => res.json())
             .then(data => {
 
