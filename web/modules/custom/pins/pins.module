@@ -28,6 +28,7 @@ use Drupal\search_api\Query\QueryInterface;
 use Drupal\pins\PinsConstants;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\views\Views;
+use Drupal\Component\Utility\Html;
 
 /**
  * Increase the length of "field_alternative_title" to 255 characters.
@@ -1156,29 +1157,32 @@ function pins_tokens($type, $tokens, array $data, array $options, BubbleableMeta
   return $replacements;
 }
 
+
 function pins_preprocess_views_view_field(&$variables) {
   $view = $variables['view'];
   $field = $variables['field'];
   $display_id = $view->getDisplay()->display['id'];
-  // Handle the file node reference ID field
+
   if (($view->id() === 'lib_search' || $view->id() === 'lib_search_attachment') && $display_id === 'page_1') {
-    if($field->field == 'custom_value') {
+    if ($field->field == 'custom_value') {
       $html = $variables['output'];
+
       if (strpos($html, '::') !== false) {
-        // Extract nid and title from the custom_value
         [$nid, $title] = explode('::', $html, 2);
-        if (is_numeric($nid) && (int)$nid > 0) {
-          // Create a URL to the node
+
+        if (is_numeric($nid) && (int) $nid > 0) {
+          $title = Html::decodeEntities($title);
+
+          // Build URL
           $node_url = Url::fromRoute('entity.node.canonical', ['node' => $nid]);
-          // Create an anchor tag
           $link = Link::fromTextAndUrl($title, $node_url)->toString();
-          // Replace the original output with the anchor tag
           $variables['output'] = $link;
         }
       }
     }
   }
 }
+
 
 
 /**
