@@ -67,6 +67,7 @@ module:
   jquery_ui_datepicker: 0
   jquery_ui_slider: 0
   jquery_ui_touch_punch: 0
+  js_cookie: 0
   key: 0
   language: 0
   layout_discovery: 0
@@ -90,6 +91,7 @@ module:
   path_alias: 0
   phpass: 0
   pins: 0
+  pins_content_access: 0
   pins_folder_hs: 0
   pins_kl_import: 0
   pins_search_azure: 0

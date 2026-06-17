@@ -1,0 +1,19 @@
+uuid: a8b9c0d1-e2f3-4g5h-i6j7-k8l9m0n1o2p3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_restrict_to_admin_only
+field_name: field_restrict_to_admin_only
+entity_type: node
+type: boolean
+settings: {}
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {}
+persist_with_no_fields: false
+custom_storage: false
+

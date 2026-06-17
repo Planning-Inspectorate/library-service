@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall hooks for the Content Access module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * The field storage and field config for field_restrict_to_admin_only
+ * are managed via config files and will be imported during drush cim.
+ */
+function pins_content_access_install(): void {
+  \Drupal::messenger()->addStatus('Content Access module installed. Run drush cim to import field configurations.');
+}

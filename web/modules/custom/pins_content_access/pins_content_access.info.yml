@@ -1,0 +1,8 @@
+name: 'Pins Content Access'
+type: module
+description: 'Restrict access to content based on role'
+package: PINS
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node
+  - drupal:views
