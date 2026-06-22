@@ -28,12 +28,12 @@ function pins_content_access_node_access(NodeInterface $node, string $op, Accoun
     return AccessResult::neutral();
   }
 
-  $is_admin = $account->hasRole('administrator') || $account->hasPermission('bypass node access');
-  if ($is_admin) {
-    return AccessResult::allowed()->cachePerPermissions();
-  }
+  $is_admin = $account->hasPermission('bypass node access');
+  $access = $is_admin ? AccessResult::allowed() : AccessResult::forbidden();
 
-  return AccessResult::forbidden()->cachePerPermissions();
+  return $access
+    ->cachePerPermissions()
+    ->addCacheableDependency($node);
 }
 
 /**
@@ -50,7 +50,7 @@ function pins_content_access_views_query_alter(ViewExecutable $view, QueryPlugin
   }
 
   $account = \Drupal::currentUser();
-  if ($account->hasRole('administrator') || $account->hasPermission('bypass node access')) {
+  if ($account->hasPermission('bypass node access')) {
     return;
   }
 

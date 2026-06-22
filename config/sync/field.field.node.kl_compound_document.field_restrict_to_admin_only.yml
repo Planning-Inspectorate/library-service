@@ -1,4 +1,4 @@
-uuid: c2d3e4f5-g6h7-5i8j-k9l0-m1n2o3p4q5r6
+uuid: 758e67d0-f8ff-4423-bd01-13c111639780
 langcode: en
 status: true
 dependencies:
@@ -12,9 +12,8 @@ bundle: kl_compound_document
 label: 'Restrict to Admin only'
 description: ''
 required: false
-translatable: false
-default_value:
-  - value: 0
+translatable: true
+default_value: {  }
 default_value_callback: ''
 settings:
   on_label: 'Yes'
