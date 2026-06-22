@@ -12,8 +12,7 @@ bundle: kl_compound_document
 label: 'Restrict to Admin only'
 description: ''
 required: false
-translatable: true
-default_value: {  }
+translatable: false
 default_value_callback: ''
 settings:
   on_label: 'Yes'
