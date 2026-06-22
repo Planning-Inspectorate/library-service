@@ -54,19 +54,22 @@ function pins_content_access_views_query_alter(ViewExecutable $view, QueryPlugin
     return;
   }
 
-  $node_table_alias = $query->ensureTable('node_field_data');
+  $node_table_alias = $query->ensureTable($base_table);
   if (empty($node_table_alias)) {
     return;
   }
 
-  $query->addWhereExpression(
-    0,
-    "($node_table_alias.type NOT IN ('kl_document', 'kl_compound_document') OR NOT EXISTS (
+  $field_table = $base_table === 'node_field_revision'
+    ? 'node_revision__field_restrict_to_admin_only'
+    : 'node__field_restrict_to_admin_only';
+  $bundle_column = $base_table === 'node_field_revision' ? 'bundle' : 'type';
+
+  $expression = "($node_table_alias.$bundle_column NOT IN ('kl_document', 'kl_compound_document') OR NOT EXISTS (
       SELECT 1
-      FROM {node__field_restrict_to_admin_only} restricted
+      FROM {" . $field_table . "} restricted
       WHERE restricted.entity_id = $node_table_alias.nid
         AND restricted.deleted = 0
         AND restricted.field_restrict_to_admin_only_value = 1
-    ))"
-  );
+    ))";
+  $query->addWhereExpression(0, $expression);
 }
