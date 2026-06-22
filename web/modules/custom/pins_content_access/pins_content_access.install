@@ -1,0 +1,76 @@
+<?php
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * @file
+ * Install, update and uninstall hooks for the Content Access module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pins_content_access_install(): void {
+  _pins_content_access_ensure_admin_only_field();
+}
+
+/**
+ * Ensures the admin-only field storage, instances, and widget exist.
+ */
+function _pins_content_access_ensure_admin_only_field(): void {
+  $field_name = 'field_restrict_to_admin_only';
+  $bundles = ['kl_document', 'kl_compound_document'];
+
+  $storage = FieldStorageConfig::loadByName('node', $field_name);
+  if (!$storage) {
+    $storage = FieldStorageConfig::create([
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'type' => 'boolean',
+      'cardinality' => 1,
+      'translatable' => FALSE,
+    ]);
+    $storage->save();
+  }
+
+  foreach ($bundles as $bundle) {
+    $field = FieldConfig::loadByName('node', $bundle, $field_name);
+    if (!$field) {
+      $field = FieldConfig::create([
+        'field_name' => $field_name,
+        'entity_type' => 'node',
+        'bundle' => $bundle,
+        'label' => 'Restrict to Admin only',
+        'required' => FALSE,
+        'settings' => [
+          'on_label' => 'Yes',
+          'off_label' => 'No',
+        ],
+      ]);
+      $field->save();
+    }
+
+    $form_display_id = "node.$bundle.default";
+    $form_display = EntityFormDisplay::load($form_display_id);
+    if (!$form_display) {
+      $form_display = EntityFormDisplay::create([
+        'targetEntityType' => 'node',
+        'bundle' => $bundle,
+        'mode' => 'default',
+        'status' => TRUE,
+      ]);
+    }
+
+    $form_display->setComponent($field_name, [
+      'type' => 'boolean_checkbox',
+      'weight' => 90,
+      'region' => 'content',
+      'settings' => [
+        'display_label' => TRUE,
+      ],
+    ]);
+    $form_display->save();
+  }
+}

@@ -44,6 +44,7 @@ dependencies:
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_physical_description
+    - field.field.node.kl_document.field_restrict_to_admin_only
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_vernum
@@ -432,6 +433,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_restrict_to_admin_only:
+    type: boolean_checkbox
+    weight: 90
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_search_exclude:
     type: boolean_checkbox

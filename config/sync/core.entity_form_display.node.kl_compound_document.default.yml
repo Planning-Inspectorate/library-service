@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_doc_version
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
+    - field.field.node.kl_compound_document.field_restrict_to_admin_only
     - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
@@ -268,6 +269,13 @@ content:
     weight: 33
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_restrict_to_admin_only:
+    type: boolean_checkbox
+    weight: 90
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_security_classification:
     type: options_select

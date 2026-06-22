@@ -90,6 +90,7 @@ module:
   path_alias: 0
   phpass: 0
   pins: 0
+  pins_content_access: 0
   pins_folder_hs: 0
   pins_kl_import: 0
   pins_search_azure: 0
