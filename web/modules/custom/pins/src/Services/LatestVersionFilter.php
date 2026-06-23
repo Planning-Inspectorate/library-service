@@ -29,7 +29,7 @@ class LatestVersionFilter {
 
     $connection = $this->connection;
 
-    $group = $query->setWhereGroup('OR');
+    $group = $query->setWhereGroup('OR', 0);
 
     // 1) Not kl_document → keep it
     $query->addWhere($group, 'node_field_data.type', $bundle, '<>');
@@ -56,7 +56,7 @@ class LatestVersionFilter {
     // This is the alias Views uses for the related node
     $base_alias = 'node_field_data_' . $relationship;
 
-    $group = $query->setWhereGroup('OR');
+    $group = $query->setWhereGroup('OR', 0);
 
     // 1) Not kl_document → keep it
     $query->addWhere($group, "$base_alias.type", $bundle, '<>');
