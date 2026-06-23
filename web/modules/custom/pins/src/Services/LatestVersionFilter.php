@@ -29,9 +29,9 @@ class LatestVersionFilter {
 
     $connection = $this->connection;
 
-    // Create a new OR group to keep this logic scoped to these two conditions
-    // Calling setWhereGroup without a second parameter creates an isolated group
-    $group = $query->setWhereGroup('OR');
+    // Use an explicit, named OR group instead of letting Views auto-generate
+    // the group ID.
+    $group = $query->setWhereGroup('OR', 'pins_latest_version');
 
     // 1) Not kl_document → keep it
     $query->addWhere($group, 'node_field_data.type', $bundle, '<>');
@@ -57,10 +57,7 @@ class LatestVersionFilter {
 
     // This is the alias Views uses for the related node
     $base_alias = 'node_field_data_' . $relationship;
-
-    // Create a new OR group to keep this logic scoped to these two conditions
-    // Calling setWhereGroup without a second parameter creates an isolated group
-    $group = $query->setWhereGroup('OR');
+    $group = $query->setWhereGroup('OR', 'pins_latest_version_' . $relationship);
 
     // 1) Not kl_document → keep it
     $query->addWhere($group, "$base_alias.type", $bundle, '<>');
