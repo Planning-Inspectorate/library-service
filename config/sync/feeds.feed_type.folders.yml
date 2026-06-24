@@ -18,6 +18,7 @@ id: folders
 description: ''
 help: ''
 import_period: 3600
+import_period_per_feed: false
 fetcher: upload
 fetcher_configuration:
   allowed_extensions: 'txt csv tsv xml opml'
