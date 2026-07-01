@@ -1503,7 +1503,7 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
   }
 
   $term_id = (int) ($view->args[0] ?? 0);
-  return $term_id === 25343;
+  return $term_id == PinsConstants::COURT_JUDGEMENTS_TID;
 }
 
 /**
