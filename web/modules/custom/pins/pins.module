@@ -776,6 +776,17 @@ function pins_views_pre_render(ViewExecutable $view) {
     return;
   }
 
+  if (pins_is_court_judgments_taxonomy_view($view)) {
+    $alpha = (string) ($view->getExposedInput()['alpha'] ?? '');
+    $alpha = strtoupper(substr(trim($alpha), 0, 1));
+    if (empty($view->result) && preg_match('/^[A-Z]$/', $alpha)) {
+      $view->empty = [[
+        '#markup' => t('No results found for @letter.', ['@letter' => $alpha]),
+      ]];
+      return;
+    }
+  }
+
   if (empty($view->result) && empty($view->getExposedInput())) {
     $view->exposed_widgets = NULL;
     return;
@@ -834,6 +845,15 @@ function pins_views_pre_render(ViewExecutable $view) {
  */
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
+  if (pins_is_court_judgments_taxonomy_view($view)) {
+    $alpha = (string) ($view->exposed_raw_input['alpha'] ?? '');
+    $alpha = strtoupper(substr(trim($alpha), 0, 1));
+    if (preg_match('/^[A-Z]$/', $alpha)) {
+      $prefix = \Drupal::database()->escapeLike($alpha) . '%';
+      $query->addWhere(0, 'node_field_data.title', $prefix, 'LIKE');
+    }
+  }
+
   if ($view->id() === 'taxonomy_search') {
     $term_id = $view->args[0] ?? NULL;
     $term = $term_id ? \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id) : NULL;
@@ -1472,4 +1492,91 @@ function pins_views_data() {
   ];
 
   return $data;
+}
+
+/**
+ * Checks whether the view is taxonomy_search for Court Judgments.
+ */
+function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
+  if ($view->id() !== 'taxonomy_search' || $view->current_display !== 'page_2') {
+    return FALSE;
+  }
+
+  $term_id = (int) ($view->args[0] ?? 0);
+  return $term_id === 25343;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the exposed views form.
+ */
+function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $view = $form_state->get('view');
+  if (!$view instanceof ViewExecutable || !pins_is_court_judgments_taxonomy_view($view)) {
+    return;
+  }
+
+  // Read alpha from GET or POST (the latter covers Views AJAX submissions).
+  $request = \Drupal::request();
+  $raw_alpha = $request->query->get('alpha') ?? $request->request->get('alpha') ?? '';
+  $current_alpha = strtoupper(substr(trim((string) $raw_alpha), 0, 1));
+  if (!preg_match('/^[A-Z]$/', $current_alpha)) {
+    $current_alpha = '';
+  }
+
+  $form['alpha'] = [
+    '#type' => 'hidden',
+    '#default_value' => $current_alpha,
+    '#attributes' => [
+      'class' => ['pins-alpha-input'],
+    ],
+  ];
+
+  $letters = array_merge(['' => 'All'], array_combine(range('A', 'Z'), range('A', 'Z')));
+  $items_html = '';
+  foreach ($letters as $value => $label) {
+    $is_active = ($value === '' && $current_alpha === '') || ($value !== '' && $value === $current_alpha);
+    $li_classes = 'govuk-pagination__item pager__item';
+    if ($is_active) {
+      $li_classes .= ' govuk-pagination__item--current';
+    }
+    $link_classes = 'govuk-link govuk-pagination__link pins-alpha-button';
+    if ($is_active) {
+      $link_classes .= ' govuk-pagination__link--current';
+    }
+    $extra_attrs = ' aria-pressed="' . ($is_active ? 'true' : 'false') . '"';
+    if ($is_active) {
+      $extra_attrs .= ' aria-current="page"';
+    }
+    $items_html .= '<li class="' . $li_classes . '">';
+    $items_html .= '<a href="#" class="' . $link_classes . '" data-alpha-value="' . Html::escape($value) . '"' . $extra_attrs . '>' . Html::escape($label) . '</a>';
+    $items_html .= '</li>';
+  }
+
+  $form['alpha_pager'] = [
+    '#type' => 'container',
+    '#weight' => 1000,
+    '#attributes' => [
+      'class' => ['pins-alpha-pager'],
+    ],
+    'list' => [
+      '#markup' => '<ul class="govuk-pagination__list pager__items">' . $items_html . '</ul>',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_pre_build().
+ */
+function pins_views_pre_build(ViewExecutable $view) {
+  if (!pins_is_court_judgments_taxonomy_view($view)) {
+    return;
+  }
+
+  // Replace numeric paging with A-Z filtering.
+  $view->display_handler->setOption('pager', [
+    'type' => 'none',
+    'options' => [
+      'offset' => 0,
+    ],
+  ]);
 }

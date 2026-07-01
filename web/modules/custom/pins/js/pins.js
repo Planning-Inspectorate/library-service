@@ -4,11 +4,60 @@
 
       function befDateFilterFormatChange(context) {
         $(context).find('.bef-datepicker').each(function () {
-          $(this).datepicker({ dateFormat: 'dd-mm-yy' }); 
+          $(this).datepicker({ dateFormat: 'dd-mm-yy' });
         });
       }
-    
+
       befDateFilterFormatChange(context);
+
+      function setupAlphaPager(context) {
+        $(context).find('.pins-alpha-pager').each(function () {
+          var $pager = $(this);
+          if ($pager.data('pinsAlphaBound')) {
+            return;
+          }
+          $pager.data('pinsAlphaBound', true);
+
+          $pager.find('.pins-alpha-button').on('click', function (event) {
+            event.preventDefault();
+
+            var $button = $(this);
+            var alphaRaw = $button.data('alphaValue');
+            var alphaValue = (alphaRaw !== undefined && alphaRaw !== null) ? String(alphaRaw) : '';
+            var $form = $button.closest('form');
+            var $alphaInput = $form.find('input.pins-alpha-input');
+            var formElement = $form.get(0);
+
+            $alphaInput.val(alphaValue);
+
+            // Clear all active states.
+            $pager.find('.pins-alpha-button')
+              .removeClass('is-active govuk-pagination__link--current')
+              .attr('aria-pressed', 'false')
+              .removeAttr('aria-current');
+            $pager.find('.govuk-pagination__item')
+              .removeClass('govuk-pagination__item--current');
+
+            // Set active state on clicked item.
+            $button
+              .addClass('is-active govuk-pagination__link--current')
+              .attr('aria-pressed', 'true')
+              .attr('aria-current', 'page');
+            $button.closest('.govuk-pagination__item')
+              .addClass('govuk-pagination__item--current');
+
+            // Submit the exposed form so Views AJAX refresh keeps other filters.
+            if (formElement && typeof formElement.requestSubmit === 'function') {
+              formElement.requestSubmit();
+            }
+            else if (formElement) {
+              formElement.submit();
+            }
+          });
+        });
+      }
+
+      setupAlphaPager(context);
 
       function hardcopy_autocomplete_onchange() {
 
@@ -37,13 +86,13 @@
         if(pdf_fm.is(':visible') || hardcopy_fm.is(':visible') || article_fm.is(':visible')){
           jQuery('#edit-field-content-reference-0-value').attr('disabled', true);
         }
-         
+
 
         if (jQuery('.node-issued-hard-copy-form').is(':visible') ) {
           jQuery('.field--name-field-content-reference').hide();
           jQuery('.field--name-title').hide();
-  
-          
+
+
           jQuery('#edit-field-hard-copy-0-target-id').trigger("change");
 
           jQuery('input#edit-field-hard-copy-0-target-id').bind({
@@ -83,9 +132,9 @@
 
 
       // if ($('.node-issued_hard_copy-edit-form').is(':visible')) {
-      //   // jQuery('.node-issued_hard_copy-edit-form .field--name-title').hide(); 
+      //   // jQuery('.node-issued_hard_copy-edit-form .field--name-title').hide();
         jQuery('.node-issued_hard_copy-edit-form #edit-field-content-reference-0-value').attr('disabled', true);
-        jQuery('.node-issued_hard_copy-edit-form #edit-title-0-value').attr('disabled', true);    
+        jQuery('.node-issued_hard_copy-edit-form #edit-title-0-value').attr('disabled', true);
       // }
 
       // if (jQuery('.node-issued-hard-copy-form').is(':visible')) {
@@ -144,9 +193,9 @@
 
     function filterChange() {
       $(context).find(`#edit_tid_kl_topics_chosen`).each(function () {
-        hideAllItems(); 
+        hideAllItems();
       });
-    
+
       $('#edit-vid').change(function() {
           const selectedValue = $(this).val();
           console.log(selectedValue,'ss')
@@ -157,7 +206,7 @@
           }
       });
     }
-    
+
     filterChange();
 
     }
