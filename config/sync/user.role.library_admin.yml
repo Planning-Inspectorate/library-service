@@ -40,7 +40,6 @@ dependencies:
     - media
     - node
     - quick_node_clone
-    - search_api
     - shortcut
     - system
     - taxonomy
@@ -65,7 +64,6 @@ permissions:
   - 'administer menu'
   - 'administer nodes'
   - 'administer permissions'
-  - 'administer search_api'
   - 'administer users'
   - 'attachments with views_send'
   - 'bypass node access'
