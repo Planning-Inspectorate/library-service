@@ -18,7 +18,7 @@
           }
           $pager.data('pinsAlphaBound', true);
 
-          $pager.find('.pins-alpha-button').on('click', function (event) {
+      $pager.find('.pins-alpha-button').on('click', function (event) {
             event.preventDefault();
 
             var $button = $(this);
@@ -26,14 +26,12 @@
             var alphaValue = (alphaRaw !== undefined && alphaRaw !== null) ? String(alphaRaw) : '';
             var $form = $button.closest('form');
             var $alphaInput = $form.find('input.pins-alpha-input');
-            var formElement = $form.get(0);
 
             $alphaInput.val(alphaValue);
 
             // Clear all active states.
             $pager.find('.pins-alpha-button')
               .removeClass('is-active govuk-pagination__link--current')
-              .attr('aria-pressed', 'false')
               .removeAttr('aria-current');
             $pager.find('.govuk-pagination__item')
               .removeClass('govuk-pagination__item--current');
@@ -41,18 +39,24 @@
             // Set active state on clicked item.
             $button
               .addClass('is-active govuk-pagination__link--current')
-              .attr('aria-pressed', 'true')
               .attr('aria-current', 'page');
             $button.closest('.govuk-pagination__item')
               .addClass('govuk-pagination__item--current');
 
-            // Submit the exposed form so Views AJAX refresh keeps other filters.
-            if (formElement && typeof formElement.requestSubmit === 'function') {
-              formElement.requestSubmit();
-            }
-            else if (formElement) {
-              formElement.submit();
-            }
+            // Defer click to break out of the current jQuery event-dispatch
+            // stack. This prevents the String.replace recursion overflow that
+            // occurs when triggering a synthetic click from inside another
+            // click handler, and ensures Drupal AJAX (bound to 'click' on the
+            // submit button) is properly invoked.
+            setTimeout(function () {
+              var submitBtn = $form
+                .find('input[type="submit"], button[type="submit"]')
+                .not('[data-drupal-selector*="reset"]')
+                .get(0);
+              if (submitBtn) {
+                submitBtn.click();
+              }
+            }, 0);
           });
         });
       }

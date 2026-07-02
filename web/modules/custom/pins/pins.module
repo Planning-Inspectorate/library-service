@@ -696,20 +696,35 @@ function pins_views_pre_view(ViewExecutable $view, $display_id, $args) {
         ->load($term_id);
 
       if ($term && in_array($term->bundle(), $vocabularies, TRUE)) {
+        // Determine the correct empty-area message.
+        // For Court Judgments with an active alpha filter we show a specific
+        // "no results for X" string; for everything else we suppress the
+        // default view message entirely.
+        $empty_message = '';
+        $is_court_judgments = ((int) $term_id === (int) PinsConstants::COURT_JUDGEMENTS_TID);
+        if ($is_court_judgments) {
+          $request = \Drupal::request();
+          $raw_alpha = $request->query->get('alpha') ?? $request->request->get('alpha') ?? '';
+          $alpha_letter = strtoupper(substr(trim((string) $raw_alpha), 0, 1));
+          if (preg_match('/^[A-Z]$/', $alpha_letter)) {
+            $empty_message = (string) t('No results found for @letter.', ['@letter' => $alpha_letter]);
+          }
+        }
+
         $empty_config = $view->display_handler->getOption('empty');
         if (is_array($empty_config)) {
           foreach ($empty_config as &$handler) {
-            // If simple string content.
+            // Simple string content.
             if (isset($handler['content']) && is_string($handler['content'])) {
-              $handler['content'] = '';
+              $handler['content'] = $empty_message;
             }
-            // If text area content array.
+            // Nested text-area content array.
             elseif (
               isset($handler['content']) &&
               is_array($handler['content']) &&
               isset($handler['content']['value'])
             ) {
-              $handler['content']['value'] = '';
+              $handler['content']['value'] = $empty_message;
             }
           }
 
@@ -776,17 +791,6 @@ function pins_views_pre_render(ViewExecutable $view) {
     return;
   }
 
-  if (pins_is_court_judgments_taxonomy_view($view)) {
-    $alpha = (string) ($view->getExposedInput()['alpha'] ?? '');
-    $alpha = strtoupper(substr(trim($alpha), 0, 1));
-    if (empty($view->result) && preg_match('/^[A-Z]$/', $alpha)) {
-      $view->empty = [[
-        '#markup' => t('No results found for @letter.', ['@letter' => $alpha]),
-      ]];
-      return;
-    }
-  }
-
   if (empty($view->result) && empty($view->getExposedInput())) {
     $view->exposed_widgets = NULL;
     return;
@@ -846,7 +850,7 @@ function pins_views_pre_render(ViewExecutable $view) {
 
 function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   if (pins_is_court_judgments_taxonomy_view($view)) {
-    $alpha = (string) ($view->exposed_raw_input['alpha'] ?? '');
+    $alpha = (string) ($view->getExposedInput()['alpha'] ?? '');
     $alpha = strtoupper(substr(trim($alpha), 0, 1));
     if (preg_match('/^[A-Z]$/', $alpha)) {
       $prefix = \Drupal::database()->escapeLike($alpha) . '%';
@@ -1543,12 +1547,19 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
     if ($is_active) {
       $link_classes .= ' govuk-pagination__link--current';
     }
-    $extra_attrs = ' aria-pressed="' . ($is_active ? 'true' : 'false') . '"';
-    if ($is_active) {
-      $extra_attrs .= ' aria-current="page"';
+
+    $query = $request->query->all();
+    if ($value === '') {
+      unset($query['alpha']);
     }
+    else {
+      $query['alpha'] = $value;
+    }
+    $href = Url::fromUri('internal:' . $request->getPathInfo(), ['query' => $query])->toString();
+
     $items_html .= '<li class="' . $li_classes . '">';
-    $items_html .= '<a href="#" class="' . $link_classes . '" data-alpha-value="' . Html::escape($value) . '"' . $extra_attrs . '>' . Html::escape($label) . '</a>';
+    $extra_attrs = $is_active ? ' aria-current="page"' : '';
+    $items_html .= '<a href="' . Html::escape($href) . '" class="' . $link_classes . '" data-alpha-value="' . Html::escape($value) . '"' . $extra_attrs . '>' . Html::escape($label) . '</a>';
     $items_html .= '</li>';
   }
 
