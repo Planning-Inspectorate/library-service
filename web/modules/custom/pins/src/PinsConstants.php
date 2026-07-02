@@ -6,4 +6,5 @@ class PinsConstants {
   const PINS_REVISION_PATH = 'public://revisions/';
   const CLASSIFICATIONS_TID = '15952';
   const LIBRARY_TID = '15953';
+  const COURT_JUDGEMENTS_TID = '25343';
 }
