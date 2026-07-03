@@ -1507,7 +1507,7 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
   }
 
   $term_id = (int) ($view->args[0] ?? 0);
-  return $term_id == PinsConstants::COURT_JUDGEMENTS_TID;
+  return $term_id === (int) PinsConstants::COURT_JUDGEMENTS_TID;
 }
 
 /**
@@ -1570,7 +1570,7 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
       'class' => ['pins-alpha-pager'],
     ],
     'list' => [
-      '#markup' => '<ul class="govuk-pagination__list pager__items">' . $items_html . '</ul>',
+      '#markup' => '<nav class="govuk-pagination" role="navigation" aria-label="' . Html::escape((string) t('Alphabetical pagination')) . '"><ul class="govuk-pagination__list pager__items">' . $items_html . '</ul></nav>',
     ],
   ];
 }
