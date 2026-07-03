@@ -6,6 +6,7 @@ dependencies:
     - filter.format.basic_html
     - filter.format.full_html
     - media.type.pdf
+    - node.type.article
     - node.type.hard_copy
     - node.type.hard_copy_loan
     - node.type.kl_classification_shortcut
@@ -46,6 +47,7 @@ permissions:
   - 'access toolbar'
   - 'access user profiles'
   - 'attachments with views_send'
+  - 'bypass node access'
   - 'clone article content'
   - 'clone hard_copy content'
   - 'clone hard_copy_loan content'
