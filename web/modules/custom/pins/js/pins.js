@@ -18,7 +18,7 @@
           }
           $pager.data('pinsAlphaBound', true);
 
-      $pager.find('.pins-alpha-button').on('click', function (event) {
+          $pager.find('.pins-alpha-button').on('click', function (event) {
             event.preventDefault();
 
             var $button = $(this);
