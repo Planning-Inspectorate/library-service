@@ -6,7 +6,7 @@ $govuk-compatibility-govuktemplate: false !default;
 $govuk-compatibility-govukfrontendtoolkit: false !default;
 $govuk-use-legacy-palette: false !default;
 
-@import "govuk-frontend/govuk/all";
+@import "node_modules/govuk-frontend/dist/govuk/index";
 @import "typography";
 @import "search";
 @import "mobile-menu";
