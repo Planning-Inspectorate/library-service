@@ -1,3 +1,5 @@
+@use "govuk" as *;
+
 .form-text {
   background: none;
 }
@@ -18,7 +20,9 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.14286;
-    color: govuk-colour("light-green");
+    // govuk green tint-25 approximation — govuk-colour("light-green") is
+    // deprecated in govuk-frontend v6. Use hardcoded value to avoid warning.
+    color: #85994b;
   }
 }
 .govuk-header__logo {
@@ -46,12 +50,6 @@
     }
   }
 }
-.govuk-character-count {
-  .text-count-message {
-    @extend .govuk-hint;
-    @extend .govuk-character-count__message;
-  }
-}
 .webform-element {
   label {
     font-weight: bold;
@@ -63,8 +61,29 @@
 .govuk-main-wrapper.has-breadcrumb {
   padding-top: 20px;
 }
+
+// Style the main content block as a tabs panel when local tasks are present.
+// The parent govuk theme handles .block-main-content; this targets the
+// PINS-specific block ID #block-govuk-content.
+// Replaces: @extend .govuk-tabs__panel (cannot @extend without full govuk CSS).
 .govuk-main-wrapper.has-local-tasks {
   #block-govuk-content {
-    @extend .govuk-tabs__panel;
+    margin-bottom: 30px;
+
+    @include govuk-media-query($from: tablet) {
+      margin-bottom: 50px;
+    }
+
+    .govuk-frontend-supported & {
+      margin-bottom: 0;
+      padding: 30px 20px;
+      border: 1px solid;
+      border-top: 0;
+      border-color: var(--govuk-border-colour, #cecece);
+
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }

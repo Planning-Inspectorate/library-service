@@ -1,29 +1,23 @@
 {
-  "name": "drupal-govuk",
+  "name": "govuk-pins",
   "version": "1.0.0",
-  "description": "GOV.UK theme for Drupal",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UKGovernmentBEIS/beis-primary-authority-register.git"
-  },
-  "author": "John Burch",
+  "description": "PINS Library Service subtheme of the GOV.UK Drupal theme",
+  "author": "PINS",
   "license": "ISC",
-  "homepage": "https://github.com/UKGovernmentBEIS/beis-primary-authority-register#readme",
   "engines": {
-    "node": "^12.0.0"
+    "node": ">=22.0.0"
   },
-  "dependencies": {
-    "govuk-frontend": "^6.2.0",
-    "gulp-cli": "^2.2.0",
-    "gulp-sass": "^4.0.1",
-    "gulp-sass-variables": "^1.2.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "yargs": "^15.4.1"
-  },
+  "private": true,
   "scripts": {
-    "gulp": "gulp"
+    "build": "node --no-deprecation node_modules/.bin/gulp",
+    "watch": "node --no-deprecation node_modules/.bin/gulp watch"
   },
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-cli": "^3.0.0",
+    "gulp-sass": "^6.0.0",
+    "gulp-sass-variables": "^1.2.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.97.3"
   }
 }

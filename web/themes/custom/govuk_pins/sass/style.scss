@@ -1,15 +1,20 @@
-$govuk-global-styles: true !default;
-$govuk-assets-path: '../assets/' !default;
+// Full govuk-frontend CSS, compiled from the parent theme's node_modules.
+// Including govuk here (rather than depending on govuk/framework) makes all
+// govuk component classes available for @extend in the partials below, and
+// keeps this subtheme self-contained so it doesn't rely on Drupal loading the
+// parent theme's library separately.
+@use "govuk" with (
+  $govuk-global-styles: true,
+  $govuk-assets-path: "../assets/"
+);
 
-$govuk-compatibility-govukelements: false !default;
-$govuk-compatibility-govuktemplate: false !default;
-$govuk-compatibility-govukfrontendtoolkit: false !default;
-$govuk-use-legacy-palette: false !default;
+// Suppress deprecation noise from the legacy colour palette.
+// (also set in gulpfile.js via gulp-sass-variables)
 
-@import "node_modules/govuk-frontend/dist/govuk/index";
-@import "typography";
-@import "search";
-@import "mobile-menu";
-@import "related-items";
-@import "overrides";
-
+// Subtheme overrides — PINS-specific styles applied on top of govuk.
+@use "typography";
+@use "search";
+@use "mobile-menu";
+@use "related-items";
+@use "overrides";
+@use "tabs";

@@ -1,43 +1,43 @@
+@use "govuk" as *;
+
+// Apply govuk typography styles to native HTML elements so that content from
+// the CMS body field and other unclassed markup is styled correctly without
+// requiring editors to add govuk classes manually.
+
 h1 {
-  @include govuk-font(24);
+  @extend .govuk-heading-xl;
 }
+
 h2 {
-  @include govuk-font(19);
+  @extend .govuk-heading-l;
 }
+
 h3 {
-  @include govuk-font(16);
+  @extend .govuk-heading-m;
 }
+
 h4 {
-  @include govuk-font(14);
+  @extend .govuk-heading-s;
 }
+
 h5 {
-  @include govuk-font(14);
+  @extend .govuk-heading-s;
 }
-@include govuk-media-query($from: tablet) {
-  h1 {
-    @include govuk-font(48);
-  }
-  h2 {
-    @include govuk-font(36);
-  }
-  h3 {
-    @include govuk-font(24);
-  }
-  h4 {
-    @include govuk-font(19);
-  }
-  h5 {
-    @include govuk-font(14);
-  }
-}
+
 ul {
   @extend .govuk-list;
   @extend .govuk-list--bullet;
 }
+
 ol {
   @extend .govuk-list;
   @extend .govuk-list--number;
 }
+
 p {
-  @extend .govuk-body;
+  // Covered by $govuk-global-styles: true in style.scss —
+  // govuk applies p { @extend %govuk-body-m } which is identical to .govuk-body.
+  // Declaring @extend .govuk-body here creates a SASS module extend conflict.
 }
+
+

@@ -1,11 +1,16 @@
+@use "govuk" as *;
+
 //
-// SCSS for the tabs component
+// SCSS for the tabs component.
 //
-// Drupal tabs do not use Javascript, to avoid the default javascript behavior
-// we have replaced one of the classes.
+// Drupal local task tabs do not use the standard govuk-tabs JavaScript, so the
+// govuk-tabs__list class cannot be applied directly. This @extend maps Drupal's
+// generated class to the govuk component styles instead.
 //
-// @See https://design-system.service.gov.uk/components/tabs/
-// @See templates/navigation/menu-local-tasks.html.twig
+// @see https://design-system.service.gov.uk/components/tabs/
+// @see templates/navigation/menu-local-tasks.html.twig
+
 .drupal-tabs__list {
   @extend .govuk-tabs__list;
 }
+

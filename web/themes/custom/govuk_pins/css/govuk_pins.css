@@ -546,3 +546,7 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
 .pins-alpha-pager {
   display: inline-block;
 }
+
+.govuk-header___logo a.govuk-header__link {
+  display: inline-block;
+}

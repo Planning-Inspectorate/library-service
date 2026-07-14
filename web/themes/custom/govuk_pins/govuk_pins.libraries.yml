@@ -6,7 +6,7 @@ framework:
       css/style.css: {}
       css/govuk_pins.css: {}
   js:
-    node_modules/govuk-frontend/dist/govuk/all.bundle.js: { weight: 0 }
+#    node_modules/govuk-frontend/dist/govuk/all.bundle.js: { weight: 0 }
     js/govuk_pins.js: {}
   dependencies:
     - core/jquery
