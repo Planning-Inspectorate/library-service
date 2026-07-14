@@ -32,11 +32,25 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(`${themeDir}/css`));
 });
 
+// Copy govuk-frontend JS from the parent theme's node_modules.
+// This keeps js/govuk-frontend.min.js in sync with the installed version
+// so the inline window.GOVUKFrontend.initAll() call in html.html.twig works.
+gulp.task('assets', function () {
+  // all.bundle.js is the UMD/IIFE build that exposes window.GOVUKFrontend
+  // for the inline initAll() call in html.html.twig.
+  // govuk-frontend.min.js is an ES module and cannot be used as a plain script.
+  return gulp.src([
+    `${parentNodeModules}/govuk-frontend/dist/govuk/all.bundle.js`,
+    `${parentNodeModules}/govuk-frontend/dist/govuk/all.bundle.js.map`
+  ], { encoding: false })
+    .pipe(gulp.dest(`${themeDir}/js`));
+});
+
 // Watch for Sass changes
 gulp.task('watch', function () {
   gulp.watch(`${themeDir}/sass/**/*.scss`, gulp.series('sass'));
 });
 
 // Default and build tasks
-gulp.task('build', gulp.series('sass'));
-gulp.task('default', gulp.series('sass'));
+gulp.task('build', gulp.series('sass', 'assets'));
+gulp.task('default', gulp.series('sass', 'assets'));

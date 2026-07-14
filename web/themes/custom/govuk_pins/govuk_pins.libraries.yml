@@ -6,7 +6,10 @@ framework:
       css/style.css: {}
       css/govuk_pins.css: {}
   js:
-#    node_modules/govuk-frontend/dist/govuk/all.bundle.js: { weight: 0 }
+    # govuk-frontend must load before the inline window.GOVUKFrontend.initAll()
+    # call in html.html.twig. Kept in sync with the parent theme's installed
+    # version via the gulp 'assets' task.
+    js/all.bundle.js: { minified: true, weight: -10 }
     js/govuk_pins.js: {}
   dependencies:
     - core/jquery
