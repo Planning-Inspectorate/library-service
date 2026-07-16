@@ -3,41 +3,69 @@
 // Apply govuk typography styles to native HTML elements so that content from
 // the CMS body field and other unclassed markup is styled correctly without
 // requiring editors to add govuk classes manually.
+ //
+// @extend cannot be used here because it requires the govuk component classes
+// to be present in the compiled output. Instead we replicate the same styles
+// using govuk mixins and functions (available from settings/tools/helpers only).
+
+/// Shared base properties for all heading levels.
+@mixin heading-base {
+  display: block;
+  margin-top: 0;
+  color: $govuk-text-colour;
+}
+
+/// Shared base properties for ordered and unordered lists.
+@mixin list-base {
+  @include govuk-font($size: 19);
+  margin-top: 0;
+  @include govuk-responsive-margin(4, "bottom");
+  padding-left: govuk-spacing(4);
+  color: $govuk-text-colour;
+
+  > li {
+    margin-bottom: 0;
+
+    @include govuk-media-query($from: tablet) {
+      margin-bottom: govuk-spacing(1);
+    }
+  }
+}
 
 h1 {
-  @extend .govuk-heading-xl;
+  @include govuk-font($size: 48, $weight: bold);
+  @include heading-base;
+  @include govuk-responsive-margin(8, "bottom");
 }
 
 h2 {
-  @extend .govuk-heading-l;
+  @include govuk-font($size: 36, $weight: bold);
+  @include heading-base;
+  @include govuk-responsive-margin(6, "bottom");
 }
 
 h3 {
-  @extend .govuk-heading-m;
+  @include govuk-font($size: 24, $weight: bold);
+  @include heading-base;
+  @include govuk-responsive-margin(4, "bottom");
 }
 
-h4 {
-  @extend .govuk-heading-s;
-}
-
+h4,
 h5 {
-  @extend .govuk-heading-s;
+  @include govuk-font($size: 19, $weight: bold);
+  @include heading-base;
+  @include govuk-responsive-margin(4, "bottom");
 }
 
 ul {
-  @extend .govuk-list;
-  @extend .govuk-list--bullet;
+  @include list-base;
+  list-style-type: disc;
 }
 
 ol {
-  @extend .govuk-list;
-  @extend .govuk-list--number;
+  @include list-base;
+  list-style-type: decimal;
 }
 
-p {
-  // Covered by $govuk-global-styles: true in style.scss —
-  // govuk applies p { @extend %govuk-body-m } which is identical to .govuk-body.
-  // Declaring @extend .govuk-body here creates a SASS module extend conflict.
-}
-
-
+// Paragraphs: handled by the parent govuk theme's $govuk-global-styles setting.
+// No override needed here.

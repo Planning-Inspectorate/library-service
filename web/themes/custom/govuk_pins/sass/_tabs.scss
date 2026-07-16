@@ -4,13 +4,25 @@
 // SCSS for the tabs component.
 //
 // Drupal local task tabs do not use the standard govuk-tabs JavaScript, so the
-// govuk-tabs__list class cannot be applied directly. This @extend maps Drupal's
-// generated class to the govuk component styles instead.
+// govuk-tabs__list class cannot be applied directly. This maps Drupal's
+// generated class to the same styles as the govuk component using mixins
+// instead of @extend (which would require full govuk CSS in the output).
 //
 // @see https://design-system.service.gov.uk/components/tabs/
 // @see templates/navigation/menu-local-tasks.html.twig
 
 .drupal-tabs__list {
-  @extend .govuk-tabs__list;
-}
+  // Base list reset (matches .govuk-tabs__list mobile styles)
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @include govuk-responsive-margin(6, "bottom");
 
+  // Tablet+ styles: horizontal tab strip with bottom border
+  @include govuk-media-query($from: tablet) {
+    @include govuk-clearfix;
+    margin-bottom: 0;
+    border-bottom: 1px solid;
+    border-bottom-color: $govuk-border-colour;
+  }
+}
