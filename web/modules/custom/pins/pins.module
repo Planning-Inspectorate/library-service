@@ -1511,11 +1511,177 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
 }
 
 /**
+ * Validates an exposed date filter field.
+ *
+ * Accepts YYYY-MM-DD (BEF datepicker output) and DD-MM-YYYY / DD/MM/YYYY
+ * (manual entry matching the placeholder). Rejects anything that does not
+ * parse cleanly, including day/month overflows like "46/07/3000".
+ *
+ * @param array $element
+ *   The form element.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current form state.
+ */
+function pins_validate_date_filter(array $element, FormStateInterface $form_state) {
+  $value = trim($element['#value'] ?? '');
+  if ($value === '') {
+    return;
+  }
+
+  // Ordered list of formats to try. The strict equality check after formatting
+  // ensures day/month overflow values (e.g. 46/07) are caught.
+  $formats = ['Y-m-d', 'd-m-Y', 'd/m/Y'];
+  foreach ($formats as $format) {
+    $date = \DateTime::createFromFormat($format, $value);
+    if ($date && $date->format($format) === $value) {
+      return; // Valid.
+    }
+  }
+
+  $form_state->setError(
+    $element,
+    t('Please enter a valid date for %field (e.g. 31-12-2024).', [
+      '%field' => $element['#title'] ?? t('this field'),
+    ])
+  );
+}
+
+/**
+ * Parses a date string using the same formats as pins_validate_date_filter.
+ *
+ * @param string $value
+ *   Raw input value.
+ *
+ * @return \DateTime|null
+ *   Parsed DateTime or NULL if unparseable.
+ */
+function pins_parse_filter_date($value) {
+  $value = trim($value);
+  if ($value === '') {
+    return NULL;
+  }
+  foreach (['Y-m-d', 'd-m-Y', 'd/m/Y'] as $format) {
+    $date = \DateTime::createFromFormat($format, $value);
+    if ($date && $date->format($format) === $value) {
+      return $date;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Cross-field date range validator for the manage_contents view.
+ *
+ * Ensures Modified date from <= Modified date to.
+ */
+function pins_validate_date_range_manage_contents(array &$form, FormStateInterface $form_state) {
+  pins_validate_date_range_pair(
+    $form_state,
+    'modified_date_from',
+    'modified_date_to',
+    t('Modified date from'),
+    t('Modified date to')
+  );
+}
+
+/**
+ * Cross-field date range validator for the content view.
+ *
+ * Ensures Created date from <= Created date to.
+ */
+function pins_validate_date_range_content(array &$form, FormStateInterface $form_state) {
+  pins_validate_date_range_pair(
+    $form_state,
+    'date_from',
+    'date_to',
+    t('Date from'),
+    t('Date to')
+  );
+}
+
+/**
+ * Shared helper: validates that a from date is not after a to date.
+ *
+ * Silently skips if either value is empty or individually invalid (the
+ * element-level validator will already have flagged those).
+ *
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current form state.
+ * @param string $from_key
+ *   Exposed filter identifier for the "from" date.
+ * @param string $to_key
+ *   Exposed filter identifier for the "to" date.
+ * @param \Drupal\Core\StringTranslation\TranslatableMarkup $from_label
+ *   Human-readable label for the "from" field (used in the error message).
+ * @param \Drupal\Core\StringTranslation\TranslatableMarkup $to_label
+ *   Human-readable label for the "to" field (used in the error message).
+ */
+function pins_validate_date_range_pair(
+  FormStateInterface $form_state,
+  $from_key,
+  $to_key,
+  $from_label,
+  $to_label
+) {
+  // Skip if there are already errors — avoids confusing double-error messages.
+  if ($form_state->getErrors()) {
+    return;
+  }
+
+  $from_date = pins_parse_filter_date($form_state->getValue($from_key) ?? '');
+  $to_date   = pins_parse_filter_date($form_state->getValue($to_key) ?? '');
+
+  if ($from_date && $to_date && $from_date > $to_date) {
+    $form_state->setErrorByName(
+      $from_key,
+      t('%from must be on or before %to.', [
+        '%from' => $from_label,
+        '%to'   => $to_label,
+      ])
+    );
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for the exposed views form.
  */
 function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
   $view = $form_state->get('view');
-  if (!$view instanceof ViewExecutable || !pins_is_court_judgments_taxonomy_view($view)) {
+  if (!$view instanceof ViewExecutable) {
+    return;
+  }
+
+  // -----------------------------------------------------------------------
+  // Date validation: attach to all date filters that use plugin_id: date
+  // (which lacks built-in validation unlike plugin_id: datetime).
+  // -----------------------------------------------------------------------
+
+  // manage_contents view — Modified date from / to.
+  if ($view->id() === 'manage_contents') {
+    foreach (['modified_date_from', 'modified_date_to'] as $identifier) {
+      if (isset($form[$identifier])) {
+        $form[$identifier]['#element_validate'][] = 'pins_validate_date_filter';
+      }
+    }
+    // Cross-field: from must be before to (runs after element validation).
+    $form['#validate'][] = 'pins_validate_date_range_manage_contents';
+  }
+
+  // content view (/admin/content) — Created date from / to.
+  if ($view->id() === 'content') {
+    foreach (['date_from', 'date_to'] as $identifier) {
+      if (isset($form[$identifier])) {
+        $form[$identifier]['#element_validate'][] = 'pins_validate_date_filter';
+      }
+    }
+    // Cross-field: from must be before to (runs after element validation).
+    $form['#validate'][] = 'pins_validate_date_range_content';
+  }
+
+  // -----------------------------------------------------------------------
+  // Court Judgments A–Z alpha pager (existing logic).
+  // -----------------------------------------------------------------------
+  if (!pins_is_court_judgments_taxonomy_view($view)) {
     return;
   }
 
