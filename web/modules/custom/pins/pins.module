@@ -1522,7 +1522,7 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current form state.
  */
-function pins_validate_date_filter(array $element, FormStateInterface $form_state) {
+function pins_validate_date_filter(array &$element, FormStateInterface $form_state, array &$complete_form) {
   $value = trim($element['#value'] ?? '');
   if ($value === '') {
     return;
