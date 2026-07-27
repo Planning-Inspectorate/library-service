@@ -1,3 +1,9 @@
 pins_folder_hs_js_lib:
   js:
     js/pins_folder_hs.js: {}
+
+pins_folder_hs_js_alt_title:
+  js:
+    js/pins_folder_hs_js_alt_title.js: {}
+  dependencies:
+    - core/once

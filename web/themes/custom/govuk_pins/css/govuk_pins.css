@@ -542,3 +542,7 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
 .frontpage-tiles .govuk-link {
   font-size: 1rem;
 }
+
+.pins-alpha-pager {
+  display: inline-block;
+}

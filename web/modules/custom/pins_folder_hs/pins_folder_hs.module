@@ -11,6 +11,8 @@ function pins_folder_hs_form_alter(array &$form, FormStateInterface $form_state,
     return;
   }
 
+  $form['#attached']['library'][] = 'pins_folder_hs/pins_folder_hs_js_alt_title';
+
   // Ensure AJAX works with limited validation.
   $form_state->setProcessInput(TRUE);
 
@@ -42,7 +44,6 @@ function pins_folder_hs_form_alter(array &$form, FormStateInterface $form_state,
  */
 function pins_folder_hs_wrap_metadata_fields(array &$form) {
   $fields = [
-    'field_alternative_title',
     'field_kl_authors',
     'field_kl_series',
     'field_kl_classification',
@@ -137,9 +138,6 @@ function pins_folder_hs_apply_metadata(FormStateInterface $form_state, array $it
     $parents = pins_folder_hs_get_parent_term_ids($tid);
 
     // Simple fields.
-    pins_folder_hs_set_value($form_state, 'field_alternative_title',
-      pins_folder_hs_get_field_value($term, 'field_alternative_title'), 'string');
-
     pins_folder_hs_set_value($form_state, 'field_volume',
       pins_folder_hs_get_field_value($term, 'field_volume'), 'string');
 

@@ -66,6 +66,7 @@ permissions:
   - 'administer permissions'
   - 'administer users'
   - 'attachments with views_send'
+  - 'bypass node access'
   - 'clone article content'
   - 'clone hard_copy content'
   - 'clone hard_copy_loan content'

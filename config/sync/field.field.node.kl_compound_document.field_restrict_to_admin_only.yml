@@ -1,0 +1,21 @@
+uuid: 758e67d0-f8ff-4423-bd01-13c111639780
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_restrict_to_admin_only
+    - node.type.kl_compound_document
+id: node.kl_compound_document.field_restrict_to_admin_only
+field_name: field_restrict_to_admin_only
+entity_type: node
+bundle: kl_compound_document
+label: 'Restrict to Admin only'
+description: ''
+required: false
+translatable: false
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
+
