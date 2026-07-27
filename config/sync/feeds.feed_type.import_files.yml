@@ -72,6 +72,7 @@ id: import_files
 description: ''
 help: ''
 import_period: -1
+import_period_per_feed: false
 fetcher: upload
 fetcher_configuration:
   allowed_extensions: 'txt csv tsv xml opml'

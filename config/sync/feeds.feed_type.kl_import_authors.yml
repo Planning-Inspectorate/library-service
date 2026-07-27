@@ -53,6 +53,7 @@ id: kl_import_authors
 description: ''
 help: ''
 import_period: -1
+import_period_per_feed: false
 fetcher: upload
 fetcher_configuration:
   allowed_extensions: csv
