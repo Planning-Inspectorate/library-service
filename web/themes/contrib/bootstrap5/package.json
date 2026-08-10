@@ -11,7 +11,7 @@
     "lint:js": "eslint --no-eslintrc -c=./.eslintrc.json js/**.es6.js"
   },
   "devDependencies": {
-    "babel-core": "^4.7.16",
+    "babel-core": "^6.26.3",
     "babel-plugin-add-header-comment": "^1.0.3",
     "babel-preset-env": "^1.4.0",
     "cross-env": "^5.1.3",
