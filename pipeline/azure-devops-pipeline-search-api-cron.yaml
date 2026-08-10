@@ -1,0 +1,43 @@
+trigger: none
+pr: none
+
+pool: pins-odt-agent-pool
+
+parameters:
+  - name: environment
+    displayName: Select Environment
+    type: string
+    default: Dev
+    values:
+      - Dev
+      - Test
+      - Prod
+
+schedules:
+  - cron: "*/5 * * * *"
+    displayName: Search API cron
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  sshServiceConnection: 'Azure DevOps Knowledge-Library-${{ parameters.environment }}-SSH'
+
+stages:
+  - stage: SearchApiCron_${{ parameters.environment }}
+    displayName: Search API cron - ${{ parameters.environment }}
+    condition: and(succeeded(), or(and(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Search API cron')), eq(variables['Build.Reason'], 'Manual')))
+    jobs:
+      - job: RunSearchApiCron
+        displayName: Run Search API cron
+        steps:
+          - task: SSH@0
+            displayName: Search API cron
+            inputs:
+              sshEndpoint: '$(sshServiceConnection)'
+              runOptions: inline
+              failOnStdErr: false
+              inline: |
+                set -euo pipefail
+                sh "./pins/search_api_cron.sh" >> "./search_api_cron-cron.log" 2>&1
