@@ -1,0 +1,43 @@
+trigger: none
+pr: none
+
+pool: pins-odt-agent-pool
+
+parameters:
+  - name: environment
+    displayName: Select Environment
+    type: string
+    default: Dev
+    values:
+      - Dev
+      - Test
+      - Prod
+
+schedules:
+  - cron: "0 0 * * 0"
+    displayName: Weekly DB backup cron
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  sshServiceConnection: 'Azure DevOps Knowledge-Library-${{ parameters.environment }}-SSH'
+
+stages:
+  - stage: WeeklyDbBackup_${{ parameters.environment }}
+    displayName: Weekly DB backup - ${{ parameters.environment }}
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Weekly DB backup cron'))
+    jobs:
+      - job: RunWeeklyDbBackup
+        displayName: Run weekly DB backup
+        steps:
+          - task: SSH@0
+            displayName: Weekly DB backup
+            inputs:
+              sshEndpoint: '$(sshServiceConnection)'
+              runOptions: inline
+              failOnStdErr: false
+              inline: |
+                set -euo pipefail
+                sh "./pins/backup-cron.sh" >> "./weekly_db_backup-cron.log" 2>&1
