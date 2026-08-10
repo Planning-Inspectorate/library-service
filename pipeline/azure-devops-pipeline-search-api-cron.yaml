@@ -27,7 +27,7 @@ variables:
 stages:
   - stage: SearchApiCron_${{ parameters.environment }}
     displayName: Search API cron - ${{ parameters.environment }}
-    condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Search API cron'))
+    condition: and(succeeded(), or(and(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Search API cron')), eq(variables['Build.Reason'], 'Manual')))
     jobs:
       - job: RunSearchApiCron
         displayName: Run Search API cron

@@ -27,7 +27,7 @@ variables:
 stages:
   - stage: WeeklyDbBackup_${{ parameters.environment }}
     displayName: Weekly DB backup - ${{ parameters.environment }}
-    condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Weekly DB backup cron'))
+    condition: and(succeeded(), or(and(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.CronSchedule.DisplayName'], 'Weekly DB backup cron')), eq(variables['Build.Reason'], 'Manual')))
     jobs:
       - job: RunWeeklyDbBackup
         displayName: Run weekly DB backup
