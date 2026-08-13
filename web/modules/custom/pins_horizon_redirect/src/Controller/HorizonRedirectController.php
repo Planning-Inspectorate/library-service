@@ -19,13 +19,13 @@ final class HorizonRedirectController extends ControllerBase {
   /**
    * The entity type manager.
    */
-  private EntityTypeManagerInterface $entityTypeManager;
+  private EntityTypeManagerInterface $pinsEntityTypeManager;
 
   /**
    * Constructs the controller.
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-    $this->entityTypeManager = $entityTypeManager;
+    $this->pinsEntityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -50,7 +50,7 @@ final class HorizonRedirectController extends ControllerBase {
    */
   public function resolve(int $horizon_id, ?int $version = NULL): JsonResponse {
 
-    $query = $this->entityTypeManager
+    $query = $this->pinsEntityTypeManager
       ->getStorage('node')
       ->getQuery()
       ->accessCheck(TRUE)
@@ -77,7 +77,7 @@ final class HorizonRedirectController extends ControllerBase {
     }
 
     /** @var \Drupal\node\NodeInterface|null $node */
-    $node = $this->entityTypeManager
+    $node = $this->pinsEntityTypeManager
       ->getStorage('node')
       ->load(reset($nids));
 
