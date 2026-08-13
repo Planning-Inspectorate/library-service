@@ -1077,16 +1077,20 @@ function pins_preprocess_views_view_table(&$variables) {
  *
  */
 
-function pins_entity_set_file_size_on_presave(&$entity){
-
-  if($entity->hasField('field_kl_doc_file')){
-    $fileField = $entity->get('field_kl_doc_file')->entity;
-    if ($fileField) {
-      $fileSize = $fileField->getSize();
-      if ($fileSize > 0)
-        $entity->set('field_kl_doc_file_size', $fileSize);
-    }
+function pins_entity_set_file_size_on_presave(&$entity) {
+  if (
+    !$entity->hasField('field_kl_doc_file') ||
+    !$entity->hasField('field_kl_doc_file_size')
+  ) {
+    return;
   }
+
+  $file = $entity->get('field_kl_doc_file')->entity;
+
+  $entity->set(
+    'field_kl_doc_file_size',
+    $file ? $file->getSize() : NULL
+  );
 }
 /**
  * Implements hook_entity_update().
