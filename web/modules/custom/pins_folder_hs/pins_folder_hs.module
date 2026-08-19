@@ -249,16 +249,23 @@ function pins_folder_hs_get_referenced_entities(TermInterface $term, $field) {
  * Save sticky values.
  */
 function pins_folder_hs_save_document_sticky(array &$form, FormStateInterface $form_state) {
-  $documents = $form_state->getValue('field_documents');
-  $input = $form_state->getUserInput()['field_documents'] ?? [];
+  $documents = $form_state->getValue('field_documents') ?? [];
+  if (!is_array($documents)) {
+    return;
+  }
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $account = \Drupal::currentUser();
 
   foreach ($documents as $delta => $item) {
     if (!is_numeric($delta) || empty($item['target_id'])) {
       continue;
     }
-    $document = Node::load($item['target_id']);
-    if ($document && $document->bundle() === 'kl_document') {
-      $sticky = !empty($input[$delta]['sticky_override']);
+    $document = $storage->load($item['target_id']);
+    if (!$document || $document->bundle() !== 'kl_document' || !$document->access('update', $account)) {
+      continue;
+    }
+    $sticky = !empty($item['sticky_override']);
+    if ($document->isSticky() !== $sticky) {
       $document->setSticky($sticky);
       $document->save();
     }
