@@ -547,6 +547,27 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   display: inline-block;
 }
 
+.pins-document-row-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.pins-document-row-wrapper .form-autocomplete,
+.pins-document-row-wrapper input.form-autocomplete {
+  flex: 1;
+}
+
+.pins-document-sticky-checkbox {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.pins-document-row-wrapper .button,
+.pins-document-row-wrapper .field-add-more-submit {
+  margin-left: auto;
+}
+
 .govuk-header___logo a.govuk-header__link {
   display: inline-block;
 }

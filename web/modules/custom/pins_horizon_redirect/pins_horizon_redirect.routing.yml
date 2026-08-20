@@ -1,0 +1,21 @@
+pins_horizon_redirect.resolve:
+  path: '/api/horizon/{horizon_id}'
+  defaults:
+    _controller: '\Drupal\pins_horizon_redirect\Controller\HorizonRedirectController::resolve'
+  methods: [GET]
+  requirements:
+    _permission: 'access horizon redirect api'
+    horizon_id: '\d+'
+  options:
+    no_cache: TRUE
+
+pins_horizon_redirect.resolve_versioned:
+  path: '/api/horizon/{horizon_id}/{version}'
+  defaults:
+    _controller: '\Drupal\pins_horizon_redirect\Controller\HorizonRedirectController::resolve'
+  requirements:
+    _permission: 'access horizon redirect api'
+    horizon_id: '\d+'
+    version: '\d+'
+  options:
+    no_cache: TRUE

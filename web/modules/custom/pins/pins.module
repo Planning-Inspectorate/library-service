@@ -947,6 +947,38 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
     \Drupal::service('pins.latest_version_filter')
       ->applyToRelationship($query, 'node__field_documents');
+
+    $sticky_weight_alias = $query->addField(NULL,
+      'CASE
+        WHEN node_field_data_node__field_documents.sticky = 1
+        THEN node__field_documents.delta
+        ELSE NULL
+      END',
+      'sticky_weight'
+    );
+
+    $normal_date_alias = $query->addField(NULL,
+      'CASE
+        WHEN node_field_data_node__field_documents.sticky = 0
+        THEN node_field_data_node__field_documents__node__field_date.field_date_value
+        ELSE NULL
+      END',
+      'normal_date'
+    );
+
+    $query->orderby = [];
+
+    // 1. Sticky items first.
+    $query->addOrderBy('node_field_data_node__field_documents', 'sticky', 'DESC');
+    // 2. Within sticky group: sort by drag-drop weight (delta) ASC.
+    //    Within non-sticky group: all NULL here, so falls through to next key.
+    $query->addOrderBy(NULL, NULL, 'ASC', $sticky_weight_alias);
+    // 3. Within non-sticky group: sort by publication date DESC.
+    //    Sticky rows have NULL here (MySQL sorts NULLs last for DESC), but
+    //    they are already separated by key 1 so this does not affect them.
+    $query->addOrderBy(NULL, NULL, 'DESC', $normal_date_alias);
+    // 4. Within non-sticky rows sharing the same date: sort by delta ASC.
+    $query->addOrderBy('node__field_documents', 'delta', 'ASC');
   }
 
   if ($view->id() === 'horizon' && $view->current_display === 'versions') {
@@ -1077,16 +1109,20 @@ function pins_preprocess_views_view_table(&$variables) {
  *
  */
 
-function pins_entity_set_file_size_on_presave(&$entity){
-
-  if($entity->hasField('field_kl_doc_file')){
-    $fileField = $entity->get('field_kl_doc_file')->entity;
-    if ($fileField) {
-      $fileSize = $fileField->getSize();
-      if ($fileSize > 0)
-        $entity->set('field_kl_doc_file_size', $fileSize);
-    }
+function pins_entity_set_file_size_on_presave(&$entity) {
+  if (
+    !$entity->hasField('field_kl_doc_file') ||
+    !$entity->hasField('field_kl_doc_file_size')
+  ) {
+    return;
   }
+
+  $file = $entity->get('field_kl_doc_file')->entity;
+
+  $entity->set(
+    'field_kl_doc_file_size',
+    $file ? $file->getSize() : NULL
+  );
 }
 /**
  * Implements hook_entity_update().
