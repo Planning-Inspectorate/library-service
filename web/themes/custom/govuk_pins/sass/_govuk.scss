@@ -1,0 +1,16 @@
+////
+/// @group govuk-pins
+///
+/// Forward only the non-CSS-emitting layers of govuk-frontend so that override
+/// partials in this subtheme can use govuk variables, mixins, and functions
+/// without duplicating the full govuk CSS output (which is already provided by
+/// the parent govuk theme's library).
+////
+// Disable @font-face output — the parent govuk theme's library already
+// declares GDS Transport via its own style.css with correct relative paths.
+// Emitting them here would produce broken absolute /assets/fonts/ URLs.
+@forward "govuk-frontend/dist/govuk/settings" with (
+  $govuk-include-default-font-face: false
+);
+@forward "govuk-frontend/dist/govuk/tools";
+@forward "govuk-frontend/dist/govuk/helpers";

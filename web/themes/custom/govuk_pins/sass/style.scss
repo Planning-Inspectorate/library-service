@@ -1,15 +1,9 @@
-$govuk-global-styles: true !default;
-$govuk-assets-path: '../assets/' !default;
-
-$govuk-compatibility-govukelements: false !default;
-$govuk-compatibility-govuktemplate: false !default;
-$govuk-compatibility-govukfrontendtoolkit: false !default;
-$govuk-use-legacy-palette: false !default;
-
-@import "govuk-frontend/govuk/all";
-@import "typography";
-@import "search";
-@import "mobile-menu";
-@import "related-items";
-@import "overrides";
-
+// Subtheme overrides — PINS-specific styles applied on top of govuk.
+// The full govuk-frontend CSS is provided by the parent govuk theme's library.
+// This file must only contain PINS overrides — no govuk base CSS duplication.
+@use "typography";
+@use "search";
+@use "mobile-menu";
+@use "related-items";
+@use "overrides";
+@use "tabs";

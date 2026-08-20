@@ -1,64 +1,56 @@
 'use strict';
 
-var gulp = require('gulp'),
-  sassVariables = require('gulp-sass-variables'),
-  sass = require('gulp-sass'),
-  sourcemaps = require('gulp-sourcemaps');
+const path = require('path');
+const gulp = require('gulp');
+const sassVariables = require('gulp-sass-variables');
+const sass = require('gulp-sass')(require('sass'));
+const sourcemaps = require('gulp-sourcemaps');
 
-let argv = require('yargs').options({
-  'govuk_compatibility_govukelements': {
-    alias: 'ce',
-    describe: 'If you’re using or migrating from GOV.UK Elements build with this option',
-    type: 'boolean'
-  },
-  'govuk_compatibility_govuktemplate': {
-    alias: 'ct',
-    describe: 'If you’re using or migrating from GOV.UK Template build with this option',
-    type: 'boolean'
-  },
-  'govuk_compatibility_govukfrontend': {
-    alias: 'cf',
-    describe: 'If you’re using or migrating from the old GOV.UK Frontend Toolkit build with this option',
-    type: 'boolean'
-  },
-  'govuk_use_legacy_palette': {
-    alias: 'cl',
-    describe: 'If you’re not using any of our old frameworks, you can still configure GOV.UK Frontend to use the old colour palette.',
-    type: 'boolean'
-  }
-}).argv;
+// Drupal theme directory
+const themeDir = '.';
 
-// Drupal theme directory.
-var themeDir = '.';
+// Absolute path to the parent govuk_theme node_modules.
+// govuk-frontend SCSS is resolved from here so the subtheme does not need its
+// own govuk-frontend installation.
+const parentNodeModules = path.resolve(__dirname, '../../contrib/govuk_theme/node_modules');
 
-// Gulp tasks.
+// Compile Sass
 gulp.task('sass', function () {
-  return gulp.src(themeDir + '/sass/**/*.scss')
+  return gulp.src(`${themeDir}/sass/**/*.scss`)
     .pipe(sourcemaps.init())
     .pipe(sassVariables({
-      '$govuk-compatibility-govukelements': !!argv.ce,
-      '$govuk-compatibility-govuktemplate': !!argv.ct,
-      '$govuk-compatibility-govukfrontendtoolkit': !!argv.cf,
-      '$govuk-use-legacy-palette': !!argv.cl
+      '$govuk-suppressed-warnings': [
+        'legacy-organisation-colours'
+      ]
     }))
     .pipe(sass({
-      includePaths: [
-        'node_modules'     // 2
-      ]
+      loadPaths: [parentNodeModules],
+      quietDeps: true,
+      silenceDeprecations: ['import', 'legacy-js-api']
     }).on('error', sass.logError))
     .pipe(sourcemaps.write('../map/'))
-    .pipe(gulp.dest(themeDir + '/css'));
+    .pipe(gulp.dest(`${themeDir}/css`));
 });
 
+// Copy govuk-frontend JS from the parent theme's node_modules.
+// This keeps js/govuk-frontend.min.js in sync with the installed version
+// so the inline window.GOVUKFrontend.initAll() call in html.html.twig works.
 gulp.task('assets', function () {
-  return gulp.src(themeDir + '/node_modules/govuk-frontend/govuk/assets/**/*')
-    .pipe(gulp.dest(themeDir + '/assets'));
+  // all.bundle.js is the UMD/IIFE build that exposes window.GOVUKFrontend
+  // for the inline initAll() call in html.html.twig.
+  // govuk-frontend.min.js is an ES module and cannot be used as a plain script.
+  return gulp.src([
+    `${parentNodeModules}/govuk-frontend/dist/govuk/all.bundle.js`,
+    `${parentNodeModules}/govuk-frontend/dist/govuk/all.bundle.js.map`
+  ], { encoding: false })
+    .pipe(gulp.dest(`${themeDir}/js`));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(themeDir + '/sass/**/*.scss', gulp.series('sass'));
+// Watch for Sass changes
+gulp.task('watch', function () {
+  gulp.watch(`${themeDir}/sass/**/*.scss`, gulp.series('sass'));
 });
 
-
+// Default and build tasks
 gulp.task('build', gulp.series('sass', 'assets'));
 gulp.task('default', gulp.series('sass', 'assets'));

@@ -567,3 +567,11 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
 .pins-document-row-wrapper .field-add-more-submit {
   margin-left: auto;
 }
+
+.govuk-header___logo a.govuk-header__link {
+  display: inline-block;
+}
+
+.govuk-footer__meta .govuk-footer__inline-list {
+  margin-bottom: 15px;
+}
