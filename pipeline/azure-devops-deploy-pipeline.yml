@@ -1,0 +1,115 @@
+trigger: none
+pr: none
+
+pool: pins-odt-agent-pool
+
+parameters:
+  - name: DrushCr
+    displayName: Cache Clear
+    type: boolean
+    default: true
+
+  - name: DrushEdel
+    displayName: Uninstall Feed Modules
+    type: boolean
+    default: false
+
+  - name: DrushCim
+    displayName: Configuration Import
+    type: boolean
+    default: false
+
+  - name: ComposerUpdate
+    displayName: Module Install/removal
+    type: boolean
+    default: false
+
+  - name: DrushUpDb
+    displayName: Database Import/Update
+    type: boolean
+    default: false
+
+variables:
+  deploymentEnvironments: Dev,Test,Prod
+
+stages:
+  - ${{ each environment in split(variables.deploymentEnvironments, ',') }}:
+    - stage: Deploy_${{ environment }}
+      displayName: Deploy - ${{ environment }}
+      ${{ if eq(environment, 'Test') }}:
+        dependsOn: Deploy_Dev
+      ${{ if eq(environment, 'Prod') }}:
+        dependsOn: Deploy_Test
+      condition: succeeded()
+      jobs:
+        - deployment: Deploy${{ environment }}
+          displayName: Deploy - ${{ environment }}
+          environment: ${{ environment }}
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - task: SSH@0
+                    displayName: Cache Clear
+                    condition: and(succeeded(), eq(${{ parameters.DrushCr }}, true))
+                    inputs:
+                      sshEndpoint: Azure DevOps Knowledge-Library-${{environment}}-SSH
+                      runOptions: inline
+                      failOnStdErr: false
+                      inline: |
+                        set -euo pipefail
+                        cd pins
+                        git pull
+                        sudo docker exec -u 0 pins_php drush cr
+
+                  - task: SSH@0
+                    displayName: Uninstall Feed Modules
+                    condition: and(succeeded(), eq(${{ parameters.DrushEdel }}, true))
+                    inputs:
+                      sshEndpoint: Azure DevOps Knowledge-Library-${{environment}}-SSH
+                      runOptions: inline
+                      failOnStdErr: false
+                      inline: |
+                        set -euo pipefail
+                        cd pins
+                        git pull
+                        sudo docker exec -u 0 pins_php drush edel feeds_import_log -y
+
+                  - task: SSH@0
+                    displayName: Configuration Import
+                    condition: and(succeeded(), eq(${{ parameters.DrushCim }}, true))
+                    inputs:
+                      sshEndpoint: Azure DevOps Knowledge-Library-${{environment}}-SSH
+                      runOptions: inline
+                      failOnStdErr: false
+                      inline: |
+                        set -euo pipefail
+                        cd pins
+                        git pull
+                        sudo docker exec -u 0 pins_php drush cim -y
+
+                  - task: SSH@0
+                    displayName: Module Install/removal
+                    condition: and(succeeded(), eq(${{ parameters.ComposerUpdate }}, true))
+                    inputs:
+                      sshEndpoint: Azure DevOps Knowledge-Library-${{environment}}-SSH
+                      runOptions: inline
+                      failOnStdErr: false
+                      inline: |
+                        set -euo pipefail
+                        cd pins
+                        git pull
+                        sudo docker exec -u 0 pins_php composer update
+
+                  - task: SSH@0
+                    displayName: Database Import/Update
+                    condition: and(succeeded(), eq(${{ parameters.DrushUpDb }}, true))
+                    inputs:
+                      sshEndpoint: Azure DevOps Knowledge-Library-${{environment}}-SSH
+                      runOptions: inline
+                      failOnStdErr: false
+                      inline: |
+                        set -euo pipefail
+                        cd pins
+                        git pull
+                        sudo docker exec -u 0 pins_php drush updb -y
