@@ -1,0 +1,7 @@
+name: 'PINS Horizon Redirect'
+type: module
+description: 'Maps Horizon Object IDs (field_kl_doc_id) to Drupal node URLs via a redirect API.'
+package: PINS
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node
