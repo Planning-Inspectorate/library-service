@@ -2,7 +2,7 @@ _core:
   default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
 langcode: en
 uuid: ae26bbd9-3a44-4cd5-9314-bd9d4582a633
-name: Home
+name: 'PINS Library'
 mail: andrew.williams@planninginspectorate.gov.uk
 slogan: ''
 page:

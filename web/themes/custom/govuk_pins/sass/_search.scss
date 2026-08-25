@@ -1,3 +1,5 @@
+@use "govuk" as *;
+
 .search-header {
   width: 100%;
   float: left;
@@ -110,14 +112,14 @@
   color:$govuk-text-colour
 }
 .gem-c-search--on-white .gem-c-search__input[type="search"] {
-  border:solid 1px govuk-colour("mid-grey", $legacy: "grey-3")
+  border:solid 1px govuk-colour("black", $variant: "tint-80")
 }
 .gem-c-search--on-white .gem-c-search__submit {
   background-color:$govuk-brand-colour;
   color: govuk-colour("white")
 }
 .gem-c-search--on-white .gem-c-search__submit:hover {
-  background-color:govuk-colour("light-blue")
+  background-color:govuk-colour("blue", $variant: "tint-25")
 }
 .gem-c-search--on-white .gem-c-search__input[type="search"] {
   border-right:0

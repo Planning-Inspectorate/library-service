@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\TermInterface;
 
 /**
@@ -242,4 +243,64 @@ function pins_folder_hs_get_field_values(array $tids, $field) {
 
 function pins_folder_hs_get_referenced_entities(TermInterface $term, $field) {
   return array_map(fn($e) => $e->id(), $term->get($field)->referencedEntities());
+}
+
+/**
+ * Save sticky values.
+ */
+function pins_folder_hs_save_document_sticky(array &$form, FormStateInterface $form_state) {
+  $documents = $form_state->getValue('field_documents') ?? [];
+  if (!is_array($documents)) {
+    return;
+  }
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $account = \Drupal::currentUser();
+
+  foreach ($documents as $delta => $item) {
+    if (!is_numeric($delta) || empty($item['target_id'])) {
+      continue;
+    }
+    $document = $storage->load($item['target_id']);
+    if (!$document || $document->bundle() !== 'kl_document' || !$document->access('update', $account)) {
+      continue;
+    }
+    $sticky = !empty($item['sticky_override']);
+    if ($document->isSticky() !== $sticky) {
+      $document->setSticky($sticky);
+      $document->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_form_node_kl_compound_document_edit_form_alter().
+ */
+function pins_folder_hs_form_node_kl_compound_document_edit_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  if (empty($form['field_documents']['widget'])) {
+    return;
+  }
+
+  foreach ($form['field_documents']['widget'] as $delta => &$item) {
+    if (!is_numeric($delta)) {
+      continue;
+    }
+
+    $sticky = 0;
+
+    if (!empty($item['target_id']['#default_value'])) {
+      $document = $item['target_id']['#default_value'];
+      if ($document instanceof Node) {
+        $sticky = $document->isSticky();
+      }
+    }
+
+    $item['sticky_override'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Sticky at top of lists'),
+      '#default_value' => $sticky,
+      '#weight' => 20,
+    ];
+  }
+
+  $form['actions']['submit']['#submit'][] = 'pins_folder_hs_save_document_sticky';
 }
