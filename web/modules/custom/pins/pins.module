@@ -1560,7 +1560,7 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
  * @param array $complete_form
  *    The complete form structure.
  */
-function pins_validate_date_filter(array &$element, FormStateInterface $form_state, array &$complete_form) {
+function pins_validate_date_filter(array &$element, FormStateInterface $form_state, array &$complete_form, array $formats = PinsConstants::DATE_FILTER_FORMATS) {
   $value = trim($element['#value'] ?? '');
   if ($value === '') {
     return;
@@ -1568,7 +1568,6 @@ function pins_validate_date_filter(array &$element, FormStateInterface $form_sta
 
   // Ordered list of formats to try. The strict equality check after formatting
   // ensures day/month overflow values (e.g. 46/07) are caught.
-  $formats = ['Y-m-d', 'd-m-Y', 'd/m/Y'];
   foreach ($formats as $format) {
     $date = \DateTime::createFromFormat('!' . $format, $value);
     if ($date && $date->format($format) === $value) {
@@ -1593,12 +1592,12 @@ function pins_validate_date_filter(array &$element, FormStateInterface $form_sta
  * @return \DateTime|null
  *   Parsed DateTime or NULL if unparseable.
  */
-function pins_parse_filter_date($value) {
+function pins_parse_filter_date($value, array $formats = PinsConstants::DATE_FILTER_FORMATS) {
   $value = trim($value);
   if ($value === '') {
     return NULL;
   }
-  foreach (['Y-m-d', 'd-m-Y', 'd/m/Y'] as $format) {
+  foreach ($formats as $format) {
     $date = \DateTime::createFromFormat('!' . $format, $value);
     if ($date && $date->format($format) === $value) {
       return $date;
@@ -1608,33 +1607,35 @@ function pins_parse_filter_date($value) {
 }
 
 /**
- * Cross-field date range validator for the manage_contents view.
+ * Returns a #validate closure that checks a from/to date pair.
  *
- * Ensures Modified date from <= Modified date to.
- */
-function pins_validate_date_range_manage_contents(array &$form, FormStateInterface $form_state) {
-  pins_validate_date_range_pair(
-    $form_state,
-    'modified_date_from',
-    'modified_date_to',
-    t('Modified date from'),
-    t('Modified date to')
-  );
-}
-
-/**
- * Cross-field date range validator for the content view.
+ * Because Drupal form #validate callbacks cannot receive parameters, this
+ * factory captures the field keys and labels in a closure so a single generic
+ * function replaces any number of view/form-specific wrappers.
  *
- * Ensures Created date from <= Created date to.
+ * Usage:
+ * @code
+ *   $form['#validate'][] = pins_make_date_range_validator(
+ *     'date_from', 'date_to', t('Date from'), t('Date to')
+ *   );
+ * @endcode
+ *
+ * @param string $from_key
+ *   Exposed filter identifier for the "from" date.
+ * @param string $to_key
+ *   Exposed filter identifier for the "to" date.
+ * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $from_label
+ *   Human-readable label for the "from" field (used in error messages).
+ * @param \Drupal\Core\StringTranslation\TranslatableMarkup|string $to_label
+ *   Human-readable label for the "to" field (used in error messages).
+ *
+ * @return \Closure
+ *   A form #validate callback.
  */
-function pins_validate_date_range_content(array &$form, FormStateInterface $form_state) {
-  pins_validate_date_range_pair(
-    $form_state,
-    'date_from',
-    'date_to',
-    t('Date from'),
-    t('Date to')
-  );
+function pins_make_date_range_validator($from_key, $to_key, $from_label, $to_label): \Closure {
+  return function (array &$form, FormStateInterface $form_state) use ($from_key, $to_key, $from_label, $to_label) {
+    pins_validate_date_range_pair($form_state, $from_key, $to_key, $from_label, $to_label);
+  };
 }
 
 /**
@@ -1689,11 +1690,6 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
     return;
   }
 
-  // -----------------------------------------------------------------------
-  // Date validation: attach to all date filters that use plugin_id: date
-  // (which lacks built-in validation unlike plugin_id: datetime).
-  // -----------------------------------------------------------------------
-
   // manage_contents view — Modified date from / to.
   if ($view->id() === 'manage_contents') {
     foreach (['modified_date_from', 'modified_date_to'] as $identifier) {
@@ -1702,7 +1698,25 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
       }
     }
     // Cross-field: from must be before to (runs after element validation).
-    $form['#validate'][] = 'pins_validate_date_range_manage_contents';
+    $form['#validate'][] = pins_make_date_range_validator(
+      'modified_date_from',
+      'modified_date_to',
+      t('Modified date from'),
+      t('Modified date to')
+    );
+
+    foreach (['field_date_value', 'field_date_value_to'] as $identifier) {
+      if (isset($form[$identifier])) {
+        $form[$identifier]['#element_validate'][] = 'pins_validate_date_filter';
+      }
+    }
+    // Cross-field: publication from must be before publication to.
+    $form['#validate'][] = pins_make_date_range_validator(
+      'field_date_value',
+      'field_date_value_to',
+      t('Publication Date From'),
+      t('Publication Date To')
+    );
   }
 
   // content view (/admin/content) — Created date from / to.
@@ -1713,7 +1727,12 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
       }
     }
     // Cross-field: from must be before to (runs after element validation).
-    $form['#validate'][] = 'pins_validate_date_range_content';
+    $form['#validate'][] = pins_make_date_range_validator(
+      'date_from',
+      'date_to',
+      t('Date from'),
+      t('Date to')
+    );
   }
 
   // -----------------------------------------------------------------------
