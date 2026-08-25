@@ -556,12 +556,10 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   align-items: center;
   gap: 15px;
 }
-
 .pins-document-row-wrapper .form-autocomplete,
 .pins-document-row-wrapper input.form-autocomplete {
   flex: 1;
 }
-
 .pins-document-sticky-checkbox {
   white-space: nowrap;
   margin: 0;
