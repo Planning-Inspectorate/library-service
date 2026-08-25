@@ -1549,14 +1549,16 @@ function pins_is_court_judgments_taxonomy_view(ViewExecutable $view) {
 /**
  * Validates an exposed date filter field.
  *
- * Accepts YYYY-MM-DD (BEF datepicker output) and DD-MM-YYYY / DD/MM/YYYY
- * (manual entry matching the placeholder). Rejects anything that does not
- * parse cleanly, including day/month overflows like "46/07/3000".
+ * Accepts DD-MM-YYYY (datepicker output), YYYY-MM-DD, and DD/MM/YYYY.
+ * * Rejects anything that does not parse cleanly, including day/month overflows
+ * * like "46/07/3000"
  *
  * @param array $element
  *   The form element.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The current form state.
+ * @param array $complete_form
+ *    The complete form structure.
  */
 function pins_validate_date_filter(array &$element, FormStateInterface $form_state, array &$complete_form) {
   $value = trim($element['#value'] ?? '');
@@ -1568,7 +1570,7 @@ function pins_validate_date_filter(array &$element, FormStateInterface $form_sta
   // ensures day/month overflow values (e.g. 46/07) are caught.
   $formats = ['Y-m-d', 'd-m-Y', 'd/m/Y'];
   foreach ($formats as $format) {
-    $date = \DateTime::createFromFormat($format, $value);
+    $date = \DateTime::createFromFormat('!' . $format, $value);
     if ($date && $date->format($format) === $value) {
       return; // Valid.
     }
@@ -1597,7 +1599,7 @@ function pins_parse_filter_date($value) {
     return NULL;
   }
   foreach (['Y-m-d', 'd-m-Y', 'd/m/Y'] as $format) {
-    $date = \DateTime::createFromFormat($format, $value);
+    $date = \DateTime::createFromFormat('!' . $format, $value);
     if ($date && $date->format($format) === $value) {
       return $date;
     }
