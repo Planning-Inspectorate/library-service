@@ -547,17 +547,19 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
   display: inline-block;
 }
 
+#block-govuk-pins-mainnavigation, .govuk-header__navigation {
+  padding-left: 0;
+}
+
 .pins-document-row-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-
 .pins-document-row-wrapper .form-autocomplete,
 .pins-document-row-wrapper input.form-autocomplete {
   flex: 1;
 }
-
 .pins-document-sticky-checkbox {
   white-space: nowrap;
   margin: 0;
