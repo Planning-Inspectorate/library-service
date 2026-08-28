@@ -1,0 +1,75 @@
+trigger: none
+pr: none
+
+pool:
+  name: pins-odt-agent-pool
+
+variables:
+  deploymentEnvironments: dev,test,prod
+
+stages:
+  - ${{ each environment in split(variables.deploymentEnvironments, ',') }}:
+    - stage: Mount_${{ environment }}
+      displayName: Mount file share - ${{ environment }}
+      ${{ if eq(environment, 'test') }}:
+        dependsOn: Mount_dev
+      ${{ if eq(environment, 'prod') }}:
+        dependsOn: Mount_test
+      variables:
+        - group: ${{ format('cd_{0}', environment) }}
+      jobs:
+        - job: MountFileShare
+          displayName: Mount file share on server
+          steps:
+            - task: SSH@0
+              displayName: Mount Azure file share via SSH
+              inputs:
+                ${{ if eq(environment, 'dev') }}:
+                  sshEndpoint: 'Azure DevOps Knowledge-Library-Dev-SSH'
+                ${{ if eq(environment, 'test') }}:
+                  sshEndpoint: 'Azure DevOps Knowledge-Library-Test-SSH'
+                ${{ if eq(environment, 'prod') }}:
+                  sshEndpoint: 'Azure DevOps Knowledge-Library-Prod-SSH'
+                runOptions: inline
+                failOnStdErr: false
+                inline: |
+                  set -euo pipefail
+
+                  SMB_USERNAME="$(username)"
+                  SMB_PASSWORD="$(password)"
+                  ENVIRONMENT="${{ environment }}"
+
+                  # Fail fast when required secrets are missing.
+                  : "${SMB_USERNAME:?SMB_USERNAME is required}"
+                  : "${SMB_PASSWORD:?SMB_PASSWORD is required}"
+                  : "${ENVIRONMENT:?ENVIRONMENT is required}"
+
+                  MOUNT_PATH="/mnt/library-documents"
+                  CRED_DIR="/etc/smbcredentials"
+                  CRED_FILE="${CRED_DIR}/knowledgelibrary${ENVIRONMENT}blob.cred"
+                  FILE_HOST="knowledgelibrary${ENVIRONMENT}blob.file.core.windows.net"
+                  FILE_SHARE="library-documents"
+                  FSTAB_LINE="//${FILE_HOST}/${FILE_SHARE} ${MOUNT_PATH} cifs nofail,credentials=${CRED_FILE},dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30,gid=1000"
+
+                  sudo apt-get update -y
+                  sudo apt-get install -y cifs-utils
+
+                  sudo mkdir -p "$MOUNT_PATH"
+                  sudo mkdir -p "$CRED_DIR"
+
+                  # Write credential file with restricted permissions.
+                  sudo bash -c "printf 'username=%s\npassword=%s\n' \"${SMB_USERNAME}\" \"${SMB_PASSWORD}\" > '${CRED_FILE}'"
+                  sudo chmod 600 "$CRED_FILE"
+
+                  # Add /etc/fstab entry only once.
+                  if ! sudo grep -Fqx "$FSTAB_LINE" /etc/fstab; then
+                    echo "$FSTAB_LINE" | sudo tee -a /etc/fstab > /dev/null
+                  fi
+
+                  # Mount only if not already mounted.
+                  if ! mountpoint -q "$MOUNT_PATH"; then
+                    sudo mount -t cifs "//${FILE_HOST}/${FILE_SHARE}" "$MOUNT_PATH" \
+                      -o "credentials=${CRED_FILE},dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30,gid=1000"
+                  fi
+
+                  ls -la "$MOUNT_PATH"
