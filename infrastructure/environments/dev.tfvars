@@ -60,7 +60,7 @@ mysql_config = {
     object_id      = "9f893a2a-a609-4dc9-9967-dac0ba022ab8"
   }
   backup_retention_days = 7
-  sku_name              = "B1s"
+  sku_name              = "B_Standard_B1ms"
 }
 
 vnet_config = {
