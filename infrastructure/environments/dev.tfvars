@@ -56,8 +56,8 @@ monitoring_config = {
 
 mysql_config = {
   admin = {
-    login_username = ""
-    object_id      = ""
+    login_username = "pins-library-service-mysql-dev"
+    object_id      = "9f893a2a-a609-4dc9-9967-dac0ba022ab8"
   }
   backup_retention_days = 7
   sku_name              = "B1s"

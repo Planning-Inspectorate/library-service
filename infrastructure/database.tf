@@ -10,9 +10,9 @@ resource "azurerm_mysql_flexible_server" "primary" {
   private_dns_zone_id    = data.azurerm_private_dns_zone.mysql.id
   sku_name               = var.mysql_config.sku_name
 
-  azuread_administrator {
-    login_username = var.mysql_config.admin.login_username
-    object_id      = var.mysql_config.admin.object_id
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.primary.id]
   }
 
   lifecycle {
@@ -22,6 +22,22 @@ resource "azurerm_mysql_flexible_server" "primary" {
   depends_on = [azurerm_private_dns_zone_virtual_network_link.dns_database]
 
   tags = local.tags
+}
+
+# AAD authentication to access database server
+resource "azurerm_user_assigned_identity" "primary" {
+  name                = "${local.org}-uai-${local.resource_suffix}"
+  resource_group_name = azurerm_resource_group.primary.name
+  location            = module.primary_region.location
+}
+
+
+resource "azurerm_mysql_flexible_server_active_directory_administrator" "primary" {
+  server_id   = azurerm_mysql_flexible_server.primary.id
+  tenant_id   = data.azurerm_client_config.current.tenant_id
+  identity_id = azurerm_user_assigned_identity.primary.id
+  object_id   = var.mysql_config.admin.object_id
+  login       = var.mysql_config.admin.login_username
 }
 
 resource "azurerm_private_endpoint" "sql_primary" {
