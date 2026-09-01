@@ -39,10 +39,10 @@ resource "azurerm_application_insights_standard_web_test" "web" {
   retry_enabled = true
   enabled       = true
 
-  # request {
-  #   # applications list page
-  #   url = "https://${var.web_domains.web}/"
-  # }
+  request {
+    # applications list page
+    url = "https:// /"
+  }
   validation_rules {
     ssl_check_enabled           = true
     ssl_cert_remaining_lifetime = 30
