@@ -27,7 +27,7 @@ extends:
           - Dev
       - name: Prod
         dependsOn:
-          - Training
+          - Test
     serviceConnectionPrefix: Azure DevOps Pipelines - Library Service - Infrastructure
     storageAccountName: pinssttfstatelibrary
     resourceGroupName: pins-rg-shared-terraform-uks
