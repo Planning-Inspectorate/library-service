@@ -3,7 +3,7 @@ resource "azurerm_mysql_flexible_server" "primary" {
   name                   = "${local.org}-mysql-${local.resource_suffix}"
   resource_group_name    = azurerm_resource_group.primary.name
   location               = module.primary_region.location
-  administrator_login    = random_id.mysql_admin_username.b64_url
+  administrator_login    = random_id.mysql_admin_username.hex
   administrator_password = random_password.mysql_admin_password.result
   backup_retention_days  = var.mysql_config.backup_retention_days
   delegated_subnet_id    = azurerm_subnet.mysql.id
@@ -71,7 +71,7 @@ resource "azurerm_mysql_flexible_database" "primary" {
 
 resource "random_id" "mysql_admin_username" {
   byte_length = 6
-  prefix      = "${local.service_name}_admin_"
+  prefix      = "library_admin_"
 }
 
 resource "random_password" "mysql_admin_password" {
@@ -86,7 +86,7 @@ resource "random_password" "mysql_admin_password" {
 
 resource "random_id" "mysql_app_username" {
   byte_length = 6
-  prefix      = "${local.service_name}_app_"
+  prefix      = "library_app_"
 }
 
 resource "random_password" "mysql_app_password" {
@@ -109,7 +109,7 @@ resource "azurerm_key_vault_secret" "mysql_admin_connection_string" {
     [
       "Server=${azurerm_mysql_flexible_server.primary.fqdn}",
       "Database=${azurerm_mysql_flexible_database.primary.name}",
-      "user=${random_id.mysql_admin_username.b64_url}",
+      "user=${random_id.mysql_admin_username.hex}",
       "password=${random_password.mysql_admin_password.result}",
       "trustServerCertificate=false"
     ]
@@ -129,7 +129,7 @@ resource "azurerm_key_vault_secret" "mysql_app_connection_string" {
     [
       "Server=${azurerm_mysql_flexible_server.primary.fqdn}",
       "Database=${azurerm_mysql_flexible_database.primary.name}",
-      "user=${random_id.mysql_app_username.b64_url}",
+      "user=${random_id.mysql_app_username.hex}",
       "password=${random_password.mysql_app_password.result}",
       "trustServerCertificate=false"
     ]
