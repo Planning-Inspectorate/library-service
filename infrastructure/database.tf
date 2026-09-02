@@ -119,6 +119,20 @@ resource "azurerm_key_vault_secret" "mysql_app_connection_string" {
   tags = local.tags
 }
 
+import {
+  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/mysql-cpu-alert-library-service-dev"
+  to = azurerm_monitor_metric_alert.mysql_cpu
+}
+
+import {
+  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/mysql-memory-alert-library-service-dev"
+  to = azurerm_monitor_metric_alert.mysql_memory
+}
+
+import {
+  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/mysql-storage-alert-library-service-dev"
+  to = azurerm_monitor_metric_alert.mysql_storage
+}
 ## Metric Alerts
 resource "azurerm_monitor_metric_alert" "mysql_cpu" {
   name                = "mysql-cpu-alert-${local.resource_suffix}"
