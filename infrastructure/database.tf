@@ -44,7 +44,7 @@ resource "azurerm_private_endpoint" "sql_primary" {
   name                = "${local.org}-pe-${local.service_name}-sql-${var.environment}"
   resource_group_name = azurerm_resource_group.primary.name
   location            = module.primary_region.location
-  subnet_id           = azurerm_subnet.main.id
+  subnet_id           = azurerm_subnet.mysql.id
 
   private_dns_zone_group {
     name                 = "sqlserverprivatednszone"
