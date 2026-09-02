@@ -1,12 +1,13 @@
 resource "azurerm_mysql_flexible_server" "primary" {
   # checkov:skip=CKV_AZURE_94: "Ensure that My SQL server enables geo-redundant backups"
+  # checkov:skip=CKV2_AZURE_56: "Ensure Azure MySQL Flexible Server is configured with private endpoint"
   name                   = "${local.org}-mysql-${local.resource_suffix}"
   resource_group_name    = azurerm_resource_group.primary.name
   location               = module.primary_region.location
   administrator_login    = random_id.mysql_admin_username.hex
   administrator_password = random_password.mysql_admin_password.result
   backup_retention_days  = var.mysql_config.backup_retention_days
-  delegated_subnet_id    = azurerm_subnet.mysql.id
+  delegated_subnet_id    = azurerm_subnet.mysql.id # Private endpoint will not be required if this is set
   private_dns_zone_id    = data.azurerm_private_dns_zone.mysql.id
   sku_name               = var.mysql_config.sku_name
 
@@ -38,27 +39,6 @@ resource "azurerm_mysql_flexible_server_active_directory_administrator" "primary
   identity_id = azurerm_user_assigned_identity.primary.id
   object_id   = var.mysql_config.admin.object_id
   login       = var.mysql_config.admin.login_username
-}
-
-resource "azurerm_private_endpoint" "sql_primary" {
-  name                = "${local.org}-pe-${local.service_name}-sql-${var.environment}"
-  resource_group_name = azurerm_resource_group.primary.name
-  location            = module.primary_region.location
-  subnet_id           = azurerm_subnet.mysql.id
-
-  private_dns_zone_group {
-    name                 = "sqlserverprivatednszone"
-    private_dns_zone_ids = [data.azurerm_private_dns_zone.mysql.id]
-  }
-
-  private_service_connection {
-    name                           = "privateendpointconnection"
-    private_connection_resource_id = azurerm_mysql_flexible_server.primary.id
-    subresource_names              = ["mysqlServer"]
-    is_manual_connection           = false
-  }
-
-  tags = local.tags
 }
 
 resource "azurerm_mysql_flexible_database" "primary" {
