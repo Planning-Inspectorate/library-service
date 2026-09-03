@@ -93,6 +93,7 @@ module:
   pins_folder_hs: 0
   pins_kl_import: 0
   pins_search_azure: 0
+  pins_sso_enforcement: 0
   pins_tamper_term_hierarchy: 0
   quick_node_clone: 0
   recently_read: 0
