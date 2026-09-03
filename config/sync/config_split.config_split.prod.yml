@@ -23,4 +23,5 @@ module:
   cookies_recaptcha: 11
 theme: {  }
 complete_list: {  }
-partial_list: {  }
+partial_list:
+  - pins_sso_enforcement.settings
