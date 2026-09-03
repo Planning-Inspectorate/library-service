@@ -1,0 +1,6 @@
+services:
+  pins_sso_enforcement.subscriber:
+    class: Drupal\pins_sso_enforcement\EventSubscriber\SsoEnforcementSubscriber
+    arguments: ['@config.factory', '@current_route_match', '@messenger', '@current_user', '@externalauth.authmap']
+    tags:
+      - { name: event_subscriber }
