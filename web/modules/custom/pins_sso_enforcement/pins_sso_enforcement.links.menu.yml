@@ -1,0 +1,6 @@
+pins_sso_enforcement.settings:
+  title: 'SSO Enforcement Settings'
+  description: 'Configure SSO enforcement for local Drupal authentication.'
+  route_name: pins_sso_enforcement.settings
+  parent: 'user.admin_index'
+  weight: 10

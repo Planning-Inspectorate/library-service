@@ -1,0 +1,8 @@
+type: module
+name: 'PINS SSO Enforcement'
+description: 'Disables local Drupal authentication in favour of Entra SSO in production.'
+package: PINS
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:openid_connect
+  - drupal:externalauth

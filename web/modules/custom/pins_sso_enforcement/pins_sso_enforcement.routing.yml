@@ -1,0 +1,7 @@
+pins_sso_enforcement.settings:
+  path: '/admin/config/people/pins-sso-enforcement'
+  defaults:
+    _form: '\Drupal\pins_sso_enforcement\Form\SsoEnforcementSettingsForm'
+    _title: 'SSO Enforcement Settings'
+  requirements:
+    _permission: 'administer site configuration'

@@ -1,0 +1,4 @@
+administer sso enforcement settings:
+  title: 'Administer SSO enforcement settings'
+  description: 'Access the form to configure SSO enforcement (enforce_sso value is intended to be set via environment config, not toggled manually).'
+  restrict access: true
