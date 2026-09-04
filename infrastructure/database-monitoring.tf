@@ -12,21 +12,6 @@ resource "azurerm_monitor_diagnostic_setting" "mysql_server" {
 
 }
 
-import {
-  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/library-service MySQL CPU Alert library-service-dev"
-  to = azurerm_monitor_metric_alert.mysql_db_cpu_alert
-}
-
-import {
-  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/library-service MySQL Memory Alert library-service-dev"
-  to = azurerm_monitor_metric_alert.mysql_db_memory_alert
-}
-
-import {
-  id = "/subscriptions/962e477c-0f3b-4372-97fc-a198a58e259e/resourceGroups/pins-rg-library-service-dev/providers/Microsoft.Insights/metricAlerts/library-service MySQL IO Alert library-service-dev"
-  to = azurerm_monitor_metric_alert.mysql_db_io_alert
-}
-
 # Metric Alerts (MySQL Flexible Server)
 resource "azurerm_monitor_metric_alert" "mysql_db_cpu_alert" {
   name                = "${local.service_name} MySQL CPU Alert ${local.resource_suffix}"

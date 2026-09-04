@@ -115,11 +115,6 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "log_cap" {
   }
 }
 
-import {
-  id = "https://pins-kv-lib-service-dev.vault.azure.net/secrets/library-service-app-insights-connection-string/17d1436f67aa4769b7b996c73f0c0a23"
-  to = azurerm_key_vault_secret.app_insights_connection_string
-}
-
 resource "azurerm_key_vault_secret" "app_insights_connection_string" {
   #checkov:skip=CKV_AZURE_41: expiration not valid
 
