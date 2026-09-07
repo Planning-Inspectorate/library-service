@@ -116,11 +116,11 @@ resource "azurerm_key_vault_secret" "php_session_secret" {
 }
 
 # managed redis access
-resource "azurerm_managed_redis_access_policy_assignment" "manage" {
+resource "azurerm_managed_redis_access_policy_assignment" "php" {
   managed_redis_id = azurerm_managed_redis.cache.id
   object_id        = module.app_php.principal_id
 }
-resource "azurerm_managed_redis_access_policy_assignment" "manage_staging" {
+resource "azurerm_managed_redis_access_policy_assignment" "php_staging" {
   managed_redis_id = azurerm_managed_redis.cache.id
   object_id        = module.app_php.staging_principal_id
 }

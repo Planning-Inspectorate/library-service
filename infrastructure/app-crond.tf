@@ -33,9 +33,9 @@ module "app_crond" {
   public_network_access  = true
 
   # monitoring
-  action_group_ids                  = local.action_group_ids
-  log_analytics_workspace_id        = azurerm_log_analytics_workspace.main.id
-  monitoring_alerts_enabled         = var.alerts_enabled
+  action_group_ids           = local.action_group_ids
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  monitoring_alerts_enabled  = var.alerts_enabled
 
   app_settings = {
     APPLICATIONINSIGHTS_CONNECTION_STRING      = local.key_vault_refs["app-insights-connection-string"]
@@ -103,11 +103,11 @@ resource "azurerm_key_vault_secret" "crond_session_secret" {
 }
 
 # managed redis access
-resource "azurerm_managed_redis_access_policy_assignment" "manage" {
+resource "azurerm_managed_redis_access_policy_assignment" "crond" {
   managed_redis_id = azurerm_managed_redis.cache.id
   object_id        = module.app_crond.principal_id
 }
-resource "azurerm_managed_redis_access_policy_assignment" "manage_staging" {
+resource "azurerm_managed_redis_access_policy_assignment" "crond_staging" {
   managed_redis_id = azurerm_managed_redis.cache.id
   object_id        = module.app_crond.staging_principal_id
 }
