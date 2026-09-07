@@ -577,3 +577,11 @@ fieldset[data-drupal-selector="edit-fuzziness"] .govuk-fieldset__heading {
 .govuk-footer__meta .govuk-footer__inline-list {
   margin-bottom: 15px;
 }
+
+.pins-document-pin {
+  color: #1E6B64;
+  font-size: 16px;
+  margin-right: 4px;
+  display: inline-block;
+  transform: rotate(40deg);
+}
