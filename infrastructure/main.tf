@@ -32,16 +32,6 @@ resource "azurerm_key_vault" "main" {
   tags = local.tags
 }
 
-import {
-  id = "https://pins-kv-lib-service-dev.vault.azure.net/secrets/mysql-admin-password/9c607953d23a4157912bb8d3154d64e8"
-  to = azurerm_key_vault_secret.manual_secrets["mysql-admin-password"]
-}
-
-import {
-  id = "https://pins-kv-lib-service-dev.vault.azure.net/secrets/library-service-client-secret/54403b795fb643f28220e13a6663537b"
-  to = azurerm_key_vault_secret.manual_secrets["library-service-client-secret"]
-}
-
 # secrets to be manually populated
 resource "azurerm_key_vault_secret" "manual_secrets" {
   #checkov:skip=CKV_AZURE_41: expiration not valid

@@ -20,8 +20,10 @@ locals {
     },
     {
       "app-insights-connection-string" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.app_insights_connection_string.versionless_id})",
-      # "session-secret-web"             = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.web_session_secret.versionless_id})"
-      "sql-app-connection-string" = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.mysql_app_connection_string.versionless_id})"
+      "session-secret-php"             = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.php_session_secret.versionless_id})",
+      "session-secret-crond"           = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.crond_session_secret.versionless_id})",
+      "session-secret-tika"            = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.tika_session_secret.versionless_id})",
+      "sql-app-connection-string"      = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.mysql_app_connection_string.versionless_id})"
     }
   )
 

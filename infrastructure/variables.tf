@@ -1,6 +1,12 @@
 
 # variables should be sorted A-Z
 
+variable "alerts_enabled" {
+  description = "Whether to enable Azure Monitor alerts"
+  type        = string
+  default     = true
+}
+
 variable "apps_config" {
   description = "Config for the apps"
   type = object({
@@ -65,6 +71,12 @@ variable "environment" {
 #   })
 # }
 
+variable "health_check_eviction_time_in_min" {
+  description = "The eviction time in minutes for the health check"
+  type        = number
+  default     = 10
+}
+
 variable "monitoring_config" {
   description = "Config for monitoring"
   type = object({
@@ -110,9 +122,9 @@ variable "tooling_config" {
   })
 }
 
-# variable "web_domains" {
+# variable "domains" {
 #   description = "value for web domain"
 #   type = object({
-#     web = string
+#     php = string
 #   })
 # }

@@ -1,3 +1,5 @@
+alerts_enabled = false
+
 apps_config = {
   app_service_plan = {
     sku                      = "P0v3"
@@ -74,6 +76,6 @@ vnet_config = {
   secondary_mysql_subnet_address_space = "10.42.18.0/24"
 }
 
-# web_domains ={
-#   web = ""
+# domains ={
+#   php = ""
 # }

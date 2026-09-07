@@ -1,0 +1,17 @@
+# Mailhog image reference stage.
+# Note: this does not create a running container by itself; compose still does that.
+FROM mailhog/mailhog:latest AS mailhog_image
+
+# Build from the latest Drupal PHP image.
+FROM wodby/drupal-php:latest
+
+# Keep Mailhog SMTP wiring in the PHP image using compose service defaults.
+ENV MAILHOG_HOST=mailhog \
+    MAILHOG_SMTP_PORT=1025
+ENV SSMTP_MAILHUB=mailhog:1025 \
+    PHP_SENDMAIL_PATH="\"/usr/bin/dos2unix -u | /usr/sbin/ssmtp -t -f\""
+
+WORKDIR /var/www/html
+
+# Ensure the bind-mount target path exists in the image.
+RUN mkdir -p /var/www/html/mnt/library-documents
