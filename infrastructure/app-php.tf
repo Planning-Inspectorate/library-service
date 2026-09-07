@@ -1,6 +1,6 @@
 module "app_php" {
   #checkov:skip=CKV_TF_1: Use of commit hash are not required for our Terraform modules
-  source = "github.com/Planning-Inspectorate/infrastructure-modules.git//modules/node-app-service?ref=54afedb153f751d231618997447a3a53c7def66f"
+  source = "github.com/Planning-Inspectorate/infrastructure-modules.git//modules/node-app-service?ref=2e3e8b36f7a3e25c9b6e6d7c2370a04b9f226bef"
 
   resource_group_name = azurerm_resource_group.primary.name
   location            = module.primary_region.location
@@ -38,15 +38,14 @@ module "app_php" {
   health_check_path                 = "/health"
   health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
 
-  storage_account_mounts = [
-    {
-      name         = "library-documents"
-      account_name = azurerm_storage_account.storage.name
-      share_name   = azurerm_storage_share.library_documents.name
-      access_key   = azurerm_storage_account.storage.primary_access_key
-      mount_path   = "/var/www/html/mnt/library-documents"
-    }
-  ]
+  storage_account_mounts = {
+    name         = "library-documents"
+    account_name = azurerm_storage_account.storage.name
+    share_name   = azurerm_storage_share.library_documents.name
+    access_key   = azurerm_storage_account.storage.primary_access_key
+    mount_path   = "/var/www/html/mnt/library-documents"
+    type         = "AzureFiles"
+  }
 
   app_settings = {
     APPLICATIONINSIGHTS_CONNECTION_STRING      = local.key_vault_refs["app-insights-connection-string"]
@@ -86,7 +85,7 @@ module "app_php" {
 }
 
 ## RBAC for secrets
-resource "azurerm_role_assignment" "app_secrets_user" {
+resource "azurerm_role_assignment" "app_php_secrets_user" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = module.app_php.principal_id

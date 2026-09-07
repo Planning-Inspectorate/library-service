@@ -77,7 +77,7 @@ module "app_tika" {
 }
 
 ## RBAC for secrets
-resource "azurerm_role_assignment" "app_secrets_user" {
+resource "azurerm_role_assignment" "app_tika_secrets_user" {
   scope                = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = module.app_tika.principal_id
