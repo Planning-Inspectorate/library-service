@@ -86,7 +86,7 @@ resource "azurerm_virtual_network_peering" "tooling_to_library" {
 ## Private DNS Zones exist in the tooling subscription and are shared here
 resource "azurerm_private_dns_zone_virtual_network_link" "dns_database" {
   name                  = "${local.org}-vnetlink-db-${local.resource_suffix}"
-  resource_group_name   = azurerm_resource_group.primary.name
+  resource_group_name   = var.tooling_config.network_rg
   private_dns_zone_name = data.azurerm_private_dns_zone.mysql.name
   virtual_network_id    = azurerm_virtual_network.main.id
 
@@ -95,7 +95,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dns_database" {
 
 resource "azurerm_private_dns_zone_virtual_network_link" "app_service" {
   name                  = "${local.org}-vnetlink-app-service-${local.resource_suffix}"
-  resource_group_name   = azurerm_resource_group.primary.name
+  resource_group_name   = var.tooling_config.network_rg
   private_dns_zone_name = data.azurerm_private_dns_zone.app_service.name
   virtual_network_id    = azurerm_virtual_network.main.id
 
@@ -104,7 +104,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "app_service" {
 
 resource "azurerm_private_dns_zone_virtual_network_link" "managed_redis" {
   name                  = "${local.org}-vnetlink-managed-redis-${local.resource_suffix}"
-  resource_group_name   = azurerm_resource_group.primary.name
+  resource_group_name   = var.tooling_config.network_rg
   private_dns_zone_name = data.azurerm_private_dns_zone.managed_redis.name
   virtual_network_id    = azurerm_virtual_network.main.id
 
@@ -113,7 +113,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "managed_redis" {
 
 resource "azurerm_private_dns_zone_virtual_network_link" "keyvault" {
   name                  = "${local.org}-vnetlink-keyvault-${local.resource_suffix}"
-  resource_group_name   = azurerm_resource_group.primary.name
+  resource_group_name   = var.tooling_config.network_rg
   private_dns_zone_name = data.azurerm_private_dns_zone.keyvault.name
   virtual_network_id    = azurerm_virtual_network.main.id
 
@@ -122,7 +122,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "keyvault" {
 
 resource "azurerm_private_dns_zone_virtual_network_link" "storage" {
   name                  = "${local.org}-vnetlink-storage-${local.resource_suffix}"
-  resource_group_name   = azurerm_resource_group.primary.name
+  resource_group_name   = var.tooling_config.network_rg
   private_dns_zone_name = data.azurerm_private_dns_zone.storage.name
   virtual_network_id    = azurerm_virtual_network.main.id
   resolution_policy     = "NxDomainRedirect"
