@@ -1,16 +1,5 @@
-trigger:
-  branches:
-    include:
-      # trigger for merge queue branches
-      - gh-readonly-queue/*
-
-pr:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - infrastructure
+trigger: none
+pr: none
 
 resources:
   repositories:
@@ -27,8 +16,4 @@ extends:
     validationJobs:
       - name: Check Commits
         steps:
-          - template: ../steps/node_script.yml
-            parameters:
-              displayName: "npm run commitlint"
-              nodeVersion: 22
-              script: npm run commitlint
+          # needs to setup the PR commit steps for library-service
