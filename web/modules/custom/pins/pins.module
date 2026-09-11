@@ -945,7 +945,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   }
 
   if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
-  
+
     \Drupal::service('pins.latest_version_filter')->applyToRelationship($query, 'node__field_documents');
 
     // Preserve the sort selected in Views
@@ -1733,6 +1733,18 @@ function pins_form_views_exposed_form_alter(array &$form, FormStateInterface $fo
       t('Date to')
     );
   }
+
+  // Add inline utility classes to sort_by / sort_order on the
+  // Compound Document List view only.
+  if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
+    foreach (['sort_by', 'sort_order'] as $key) {
+      if (isset($form[$key])) {
+        $form[$key]['#wrapper_attributes']['class'][] = 'govuk-!-display-inline-block';
+        $form[$key]['#wrapper_attributes']['class'][] = 'govuk-!-margin-right-6';
+      }
+    }
+  }
+
 
   // -----------------------------------------------------------------------
   // Court Judgments A–Z alpha pager (existing logic).
