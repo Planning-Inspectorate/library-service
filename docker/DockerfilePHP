@@ -23,5 +23,3 @@ ENV GIT_SHA=$GIT_SHA
 
 EXPOSE 9000
 
-# Run PHP-FPM in foreground for container runtime.
-CMD ["php-fpm", "-F"]
