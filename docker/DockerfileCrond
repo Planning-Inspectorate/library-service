@@ -1,0 +1,10 @@
+FROM wodby/drupal-php:latest
+
+ENV CRONTAB="0 * * * * drush -r /var/www/html/web cron"
+
+WORKDIR /var/www/html
+
+RUN mkdir -p /var/www/html
+
+CMD ["sudo", "-E", "crond", "-f", "-d", "0"]
+
