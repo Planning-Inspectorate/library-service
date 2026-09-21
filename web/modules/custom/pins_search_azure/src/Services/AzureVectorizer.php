@@ -15,6 +15,13 @@ class AzureVectorizer {
   protected $config;
   protected $logger;
 
+  /**
+   * Token usage accumulated during the most recent getVector() call.
+   *
+   * @var array
+   */
+  protected $lastUsage = ['prompt_tokens' => 0, 'total_tokens' => 0];
+
   public function __construct(
     ClientInterface $http_client,
     ConfigFactoryInterface $config_factory,
@@ -29,6 +36,8 @@ class AzureVectorizer {
    * Main entry point to get a single vector for a string or array of strings.
    */
   public function getVector($text, $title = ''): array {
+    // Reset usage tracking for this call; accumulated in sendBatchRequest().
+    $this->lastUsage = ['prompt_tokens' => 0, 'total_tokens' => 0];
     // If Search API provides values as an array (common in Views), flatten them.
     // The "#conjunction" key is used by Search API to indicate how multiple keys
     // are combined (AND/OR), and should be ignored in our flattening logic.
@@ -111,11 +120,47 @@ class AzureVectorizer {
         ],
       ]);
       $data = json_decode($response->getBody()->getContents(), TRUE);
+      $this->logger->debug('Azure vectorization response data: <pre>@data</pre>', [
+        '@data' => print_r($data, TRUE),
+      ]);
       foreach ($data['data'] as $entry) {
         $vectors[] = $entry['embedding'];
       }
+      if (!empty($data['usage'])) {
+        $prompt_tokens = (int) ($data['usage']['prompt_tokens'] ?? $data['usage']['input_tokens'] ?? 0);
+        $total_tokens = (int) ($data['usage']['total_tokens'] ?? 0);
+        if ($total_tokens === 0 && $prompt_tokens > 0) {
+          $total_tokens = $prompt_tokens;
+        }
+        $this->lastUsage['prompt_tokens'] += $prompt_tokens;
+        $this->lastUsage['total_tokens'] += $total_tokens;
+      }
+      else {
+        $estimated_tokens = $this->estimatePromptTokens($batch);
+        $this->lastUsage['prompt_tokens'] += $estimated_tokens;
+        $this->lastUsage['total_tokens'] += $estimated_tokens;
+      }
     }
     return $vectors;
+  }
+
+  /**
+   * Estimates embedding prompt tokens when the provider omits usage metadata.
+   */
+  protected function estimatePromptTokens(array $chunks): int {
+    $characters = 0;
+    foreach ($chunks as $chunk) {
+      $characters += mb_strlen($chunk, 'UTF-8');
+    }
+
+    return max(1, (int) ceil($characters / 4));
+  }
+
+  /**
+   * Returns the token usage recorded during the last getVector() call.
+   */
+  public function getLastUsage(): array {
+    return $this->lastUsage;
   }
 
   /**

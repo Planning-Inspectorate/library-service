@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * @file
+ * Install, update and schema hooks for the PINS Azure Search module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function pins_search_azure_schema() {
+  $schema['pins_search_azure_token_usage'] = [
+    'description' => 'Stores Azure OpenAI token usage recorded during search index vectorization.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ],
+      'index_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The search_api index ID being processed.',
+      ],
+      'item_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The search_api item ID (datasource:entity_id:langcode).',
+      ],
+      'field_count' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Number of fields vectorized for this item.',
+      ],
+      'prompt_tokens' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Prompt tokens consumed for this item.',
+      ],
+      'total_tokens' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Total tokens consumed for this item.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Timestamp of when the usage was recorded.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'index_id_item_id' => ['index_id', 'item_id'],
+    ],
+    'indexes' => [
+      'index_id' => ['index_id'],
+      'created' => ['created'],
+    ],
+  ];
+
+  $schema['pins_search_azure_query_usage'] = [
+    'description' => 'Stores Azure OpenAI token usage recorded during live search queries (hybrid/semantic mode).',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ],
+      'index_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The search_api index ID being queried.',
+      ],
+      'query_text' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The search keywords that were vectorized.',
+      ],
+      'prompt_tokens' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Prompt tokens consumed for this query.',
+      ],
+      'total_tokens' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Total tokens consumed for this query.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Timestamp of when the query was recorded.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'index_id' => ['index_id'],
+      'created' => ['created'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Creates the pins_search_azure_token_usage table for existing installs.
+ */
+function pins_search_azure_update_10004() {
+  $schema = \Drupal::database()->schema();
+  if (!$schema->tableExists('pins_search_azure_token_usage')) {
+    $spec = pins_search_azure_schema()['pins_search_azure_token_usage'];
+    $schema->createTable('pins_search_azure_token_usage', $spec);
+  }
+}
+
+/**
+ * Adds a unique key on (index_id, item_id) so usage is tracked per node.
+ */
+function pins_search_azure_update_10005() {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  $table = 'pins_search_azure_token_usage';
+  if (!$schema->tableExists($table)) {
+    return;
+  }
+
+  // Remove older duplicate rows for the same (index_id, item_id), keeping
+  // only the most recent one, so the unique key can be added cleanly.
+  $database->query(
+    'DELETE t1 FROM {' . $table . '} t1
+     INNER JOIN {' . $table . '} t2
+     ON t1.index_id = t2.index_id AND t1.item_id = t2.item_id AND t1.id < t2.id'
+  );
+
+  if (!$schema->indexExists($table, 'index_id_item_id')) {
+    $schema->addUniqueKey($table, 'index_id_item_id', ['index_id', 'item_id']);
+  }
+}
+
+/**
+ * Creates the pins_search_azure_query_usage table for existing installs.
+ */
+function pins_search_azure_update_10006() {
+  $schema = \Drupal::database()->schema();
+  if (!$schema->tableExists('pins_search_azure_query_usage')) {
+    $spec = pins_search_azure_schema()['pins_search_azure_query_usage'];
+    $schema->createTable('pins_search_azure_query_usage', $spec);
+  }
+}
