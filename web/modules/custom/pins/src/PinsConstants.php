@@ -7,4 +7,5 @@ class PinsConstants {
   const CLASSIFICATIONS_TID = '15952';
   const LIBRARY_TID = '15953';
   const COURT_JUDGEMENTS_TID = '25343';
+  const DATE_FILTER_FORMATS = ['m/d/Y'];
 }
