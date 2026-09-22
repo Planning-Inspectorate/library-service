@@ -351,10 +351,11 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
           }
           break;
         case 'kl_compound_document':
-          // Need to set inheritance for compund documents - commenting it for now.
+          // Need to set inheritance for compound documents - commenting it for now.
           // pins_set_inheritance($entity);
           //migrate compound docs once
-          if($compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
+          // Only run migration on first creation, or when field has never been touched.
+          if($entity->isNew() && $compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
             $fieldname = 'field_documents';
             if(!$entity->get($fieldname)->target_id){
               $existing_target_ids =  pins_get_target_ids($entity, $fieldname);
@@ -945,7 +946,7 @@ function pins_views_query_alter(ViewExecutable $view, QueryPluginBase $query){
   }
 
   if ($view->id() === 'compound_document_list' && $view->current_display === 'block_1') {
-  
+
     \Drupal::service('pins.latest_version_filter')->applyToRelationship($query, 'node__field_documents');
 
     // Preserve the sort selected in Views
@@ -1129,6 +1130,7 @@ function pins_entity_set_file_size_on_presave(&$entity) {
 function pins_entity_update(\Drupal\Core\Entity\EntityInterface $entity) {
   if ($entity->getEntityTypeId() === 'node') {
     pins_entity_attach_to_compound_folder_on_postsave($entity);
+    pins_compound_document_sync_removed_documents($entity);
   }
 }
 
@@ -1150,6 +1152,58 @@ function pins_entity_attach_to_compound_folder_on_postsave(&$entity) {
           }
         }
       }
+    }
+  }
+}
+
+/**
+ * Synchronizes removed compound document references.
+ *
+ * When a 'kl_compound_document' node is saved and one or more documents have
+ * been removed from its 'field_documents' reference list, this clears the
+ * reverse 'field_kl_doc_compound_folder' reference on those 'kl_document'
+ * nodes. Without this, pins_entity_attach_to_compound_folder_on_postsave()
+ * would re-attach the removed documents on their next save (since the
+ * reverse reference still points back at the compound document), and
+ * pins_entity_presave()'s migration logic could reinstate them if
+ * 'field_documents' becomes empty.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The node entity being updated. Only 'kl_compound_document' nodes with a
+ *   previous revision (i.e. not new) are processed.
+ *
+ * @return void
+ */
+function pins_compound_document_sync_removed_documents(EntityInterface $entity) {
+  if ($entity->bundle() !== 'kl_compound_document' || $entity->isNew() || !$entity->original) {
+    return;
+  }
+
+  $old_ids = array_column($entity->original->get('field_documents')->getValue(), 'target_id');
+  $new_ids = array_column($entity->get('field_documents')->getValue(), 'target_id');
+  $removed_ids = array_diff($old_ids, $new_ids);
+
+  if (empty($removed_ids)) {
+    return;
+  }
+
+  $compound_id = $entity->id();
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+
+  foreach ($removed_ids as $nid) {
+    $doc = $storage->load($nid);
+    if (!$doc || !$doc->hasField('field_kl_doc_compound_folder')) {
+      continue;
+    }
+
+    $current_ids = array_column($doc->get('field_kl_doc_compound_folder')->getValue(), 'target_id');
+    // Only remove the reference to THIS compound document,
+    // leave any other compound document references intact.
+    $filtered_ids = array_values(array_diff($current_ids, [$compound_id]));
+
+    if ($filtered_ids !== $current_ids) {
+      $doc->set('field_kl_doc_compound_folder', $filtered_ids);
+      $doc->save();
     }
   }
 }
