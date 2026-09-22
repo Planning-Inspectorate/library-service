@@ -354,7 +354,7 @@ function pins_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
           // Need to set inheritance for compound documents - commenting it for now.
           // pins_set_inheritance($entity);
           //migrate compound docs once
-          // Only run migration on first creation, or when field has never been touched.
+          // Only run migration on first creation
           if($entity->isNew() && $compounded_target_ids = pins_get_compound_referenced_document_id($entity)){
             $fieldname = 'field_documents';
             if(!$entity->get($fieldname)->target_id){
