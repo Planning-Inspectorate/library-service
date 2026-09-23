@@ -4,3 +4,25 @@ pins_search_azure.settings_link:
   parent: system.admin_config_search
   route_name: pins_search_azure.settings
   weight: 10
+
+pins_search_azure.token_usage_reports:
+  title: 'PINS Azure Token Usage'
+  description: 'View Azure OpenAI token usage reports.'
+  parent: system.admin_reports
+  route_name: '<nolink>'
+  expanded: TRUE
+  weight: 10
+
+pins_search_azure.token_usage_report_link:
+  title: 'Indexing token usage'
+  description: 'View Azure OpenAI token usage recorded per indexed node.'
+  parent: pins_search_azure.token_usage_reports
+  route_name: pins_search_azure.token_usage_report
+  weight: 10
+
+pins_search_azure.query_token_usage_report_link:
+  title: 'Live search token usage'
+  description: 'View Azure OpenAI token usage recorded for live searches.'
+  parent: pins_search_azure.token_usage_reports
+  route_name: pins_search_azure.query_token_usage_report
+  weight: 11
