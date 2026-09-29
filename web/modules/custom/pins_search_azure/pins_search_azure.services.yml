@@ -10,6 +10,10 @@ services:
     class: Drupal\pins_search_azure\Services\AzureVectorizer
     arguments: ['@http_client', '@config.factory', '@logger.factory']
 
+  pins_search_azure.token_usage_tracker:
+    class: Drupal\pins_search_azure\Services\TokenUsageTracker
+    arguments: ['@database', '@logger.factory']
+
   pins_search_azure.query_param_builder_decorator:
     class: Drupal\pins_search_azure\Services\PinsAzureQueryParamBuilder
     decorates: search_api_aais.query_param_builder 
@@ -18,3 +22,4 @@ services:
       - '@pins_search_azure.vectorizer'
       - '@logger.factory'
       - '@config.factory'
+      - '@pins_search_azure.token_usage_tracker'
