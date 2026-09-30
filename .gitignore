@@ -7,7 +7,19 @@
 /web/profiles/contrib/
 /web/libraries/
 /web/modules/contrib.tar.gz
-/web/themes/custom
+
+# Custom theme source should be committed, but not build output/deps
+/web/themes/custom/**/node_modules/
+/web/themes/custom/**/package-lock.json
+/web/themes/custom/**/sass/.sass-cache/
+/web/themes/custom/**/.sass-cache/
+web/themes/custom/*/js/*.bundle.js
+web/themes/custom/*/js/*.bundle.js.map
+web/themes/custom/*/js/govuk-frontend.min.js
+web/themes/custom/*/js/govuk-frontend.min.js.map
+web/themes/custom/*/gulp.log
+web/themes/custom/*/node_modules/
+web/themes/custom/*/package-lock.json
 
 # Ignore sensitive information
 /web/sites/*/settings.php
@@ -33,6 +45,9 @@
 # Ignore .env files as they are personal
 /.env
 /.env.*
+# Environment files anywhere, not just root
+**/.env
+**/.env.*
 
 # Ignore dev and legacy environment
 /docker-compose.yml
@@ -52,3 +67,15 @@
 
 # Ignore azure blod directory
 /config/azure/
+
+# OS/WSL cruft
+*:Zone.Identifier
+
+/.ddev/
+
+# Prevent accidental root-level npm artifacts (no root package.json exists)
+/node_modules/
+/package-lock.json
+
+# DDEV-managed, auto-generated Drupal settings — regenerated on `ddev start`
+/web/sites/default/settings.ddev.php
