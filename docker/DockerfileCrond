@@ -5,6 +5,11 @@ ENV CRONTAB="0 * * * * drush -r /var/www/html/web cron"
 WORKDIR /var/www/html
 
 RUN mkdir -p /var/www/html
+RUN mkdir -p /home/wodby/.ssh \
+	&& touch /home/wodby/.ssh/config \
+	&& chown -R wodby:wodby /home/wodby/.ssh \
+	&& chmod 700 /home/wodby/.ssh \
+	&& chmod 600 /home/wodby/.ssh/config
 
 CMD ["sudo", "-E", "crond", "-f", "-d", "0"]
 
