@@ -1,0 +1,13 @@
+ARG TIKA_TAG=1.24.1
+FROM apache/tika:${TIKA_TAG}
+
+ENV TIKA_JAVA_OPTS="-Dfile.encoding=UTF-8"
+
+WORKDIR /tmp/tika
+
+RUN mkdir -p /tmp/tika
+
+VOLUME ["/tmp/tika"]
+
+EXPOSE 9998
+

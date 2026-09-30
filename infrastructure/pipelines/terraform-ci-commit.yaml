@@ -1,0 +1,19 @@
+trigger: none
+pr: none
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      endpoint: Planning-Inspectorate
+      name: Planning-Inspectorate/common-pipeline-templates
+      ref: refs/tags/release/3.30.0
+
+extends:
+  template: stages/wrapper_ci.yml@templates
+  parameters:
+    gitFetchDepth: 0
+    validationJobs:
+      - name: Check Commits
+        steps:
+          # needs to setup the PR commit steps for library-service
