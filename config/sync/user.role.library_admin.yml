@@ -63,8 +63,6 @@ permissions:
   - 'access user profiles'
   - 'administer menu'
   - 'administer nodes'
-  - 'administer permissions'
-  - 'administer users'
   - 'attachments with views_send'
   - 'bypass node access'
   - 'clone article content'
