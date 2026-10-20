@@ -27,9 +27,10 @@ if ($search_index_url) {
 if ($search_index_api_version) {
   $config[$search_api_config]['backend_config']['connector_config']['api_version'] = $search_index_api_version;
 }
-if ($search_index_api_key) {
-  $config[$search_api_config]['backend_config']['connector_config']['api_key'] = $search_index_api_key;
-}
+
+$is_ddev = ($_ENV['IS_DDEV_PROJECT'] ?? getenv('IS_DDEV_PROJECT')) === 'true';
+$config[$search_api_config]['backend_config']['connector'] = $is_ddev ? 'standard' : 'pins_identity';
+$config[$search_api_config]['backend_config']['connector_config']['api_key'] = $is_ddev ? $search_index_api_key : '';
 
 $search_api_index = 'search_api.index.pins_content_index_azure';
 
