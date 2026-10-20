@@ -23,3 +23,13 @@ services:
       - '@logger.factory'
       - '@config.factory'
       - '@pins_search_azure.token_usage_tracker'
+
+  pins_search_azure.search_identity_credential:
+    class: Drupal\pins_search_azure\Services\SearchIdentityCredential
+    arguments: ['@http_client']
+
+  pins_search_azure.identity_backend_client_factory:
+    parent: search_api_aais.aais_backend_client_factory
+    class: Drupal\pins_search_azure\Services\IdentityBackendClientFactory
+    calls:
+      - [setCredential, ['@pins_search_azure.search_identity_credential']]
