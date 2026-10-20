@@ -39,6 +39,7 @@ dependencies:
     - help
     - media
     - node
+    - path
     - quick_node_clone
     - shortcut
     - system
@@ -104,6 +105,7 @@ permissions:
   - 'create terms in kl_reading_lists'
   - 'create terms in kl_series'
   - 'create terms in kl_topics'
+  - 'create url aliases'
   - 'delete any hard_copy content'
   - 'delete any hard_copy_loan content'
   - 'delete any kl_compound_document content'
