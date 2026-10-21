@@ -38,7 +38,7 @@ class IdentityBackendClientFactory extends BackendClientFactory {
         $endpoint
       ) {
         $uri = $request->getUri();
-        if ($uri->getScheme() !== 'https' || $uri->getHost() !== $endpoint['host'] || $uri->getPort() !== ($endpoint['port'] ?? NULL)) {
+        if ($uri->getScheme() !== 'https' || strcasecmp($uri->getHost(), $endpoint['host']) !== 0 || ($uri->getPort() ?? 443) !== ($endpoint['port'] ?? 443)) {
           throw new \RuntimeException('Refusing to send Azure Search credentials to another endpoint.');
         }
         $request = $request
