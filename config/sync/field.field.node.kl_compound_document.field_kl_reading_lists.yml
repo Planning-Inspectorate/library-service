@@ -10,14 +10,14 @@ id: node.kl_compound_document.field_kl_reading_lists
 field_name: field_kl_reading_lists
 entity_type: node
 bundle: kl_compound_document
-label: 'Reading Lists'
+label: 'Topic List'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:filter_existing_terms'
   handler_settings:
     target_bundles:
       kl_reading_lists: kl_reading_lists
