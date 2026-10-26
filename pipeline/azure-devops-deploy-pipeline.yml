@@ -65,6 +65,7 @@ stages:
                       inline: |
                         set -euo pipefail
                         cd pins
+                        git branch
                         git pull
                         sudo docker exec -u 0 pins_php drush cr
 
