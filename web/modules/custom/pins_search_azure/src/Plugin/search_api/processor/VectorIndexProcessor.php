@@ -98,7 +98,8 @@ class VectorIndexProcessor extends ProcessorPluginBase {
    * Records content availability independently of vector generation.
    */
   protected function populateAvailableContentField(ItemInterface $item, array $mappings): void {
-    $field_id = trim($this->azureSettings->get('field_available_content_flag') ?? 'has_available_content');
+    $configured_field_id = $this->azureSettings->get('field_available_content_flag');
+    $field_id = trim($configured_field_id === FALSE || $configured_field_id === NULL ? 'has_available_content' : $configured_field_id);
     if ($field_id === '') {
       return;
     }
