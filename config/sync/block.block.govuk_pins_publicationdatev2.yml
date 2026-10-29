@@ -5,6 +5,7 @@ dependencies:
   config:
     - facets.facet.publication_date_v2
   module:
+    - block_class
     - facets
     - system
   theme:
@@ -21,9 +22,9 @@ settings:
   label_display: visible
   provider: facets
   context_mapping: {  }
-  block_id: govuk_pins_publicationdateazure
+  block_id: govuk_pins_publicationdatev2
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/lib-search-v2\r\n/lib-search-v2/*"
+    pages: "/search-library-v2\r\n/search-library-v2/*"
