@@ -73,5 +73,7 @@ $config['pins_search_azure.settings'] = [
   'semantic_content_fields' => $_ENV['OPENAI_SEMANTIC_CONTENT_FIELDS'] ?? getenv('OPENAI_SEMANTIC_CONTENT_FIELDS'),
   'semantic_keyword_fields' => $_ENV['OPENAI_SEMANTIC_KEYWORD_FIELDS'] ?? getenv('OPENAI_SEMANTIC_KEYWORD_FIELDS'),
   'field_to_vectorise'      => $_ENV['OPENAI_FIELD_TO_VECTORISE'] ?? getenv('OPENAI_FIELD_TO_VECTORISE'),
-  'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE')
+  'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE'),
+  'field_available_content_flag' => $_ENV['OPENAI_AVAILABLE_CONTENT_FLAG_FIELD'] ?? getenv('OPENAI_AVAILABLE_CONTENT_FLAG_FIELD'),
+  'available_content_rules' => $_ENV['OPENAI_AVAILABLE_CONTENT_RULES'] ?? getenv('OPENAI_AVAILABLE_CONTENT_RULES'),
 ];

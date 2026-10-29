@@ -3,6 +3,7 @@
 namespace Drupal\pins_search_azure\Plugin\search_api\processor;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\search_api\Item\ItemInterface;
 use Drupal\search_api\Processor\ProcessorPluginBase;
@@ -30,6 +31,13 @@ class VectorIndexProcessor extends ProcessorPluginBase {
    * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
   protected $logger;
+
+  /**
+   * Validated metadata availability rules for this processor instance.
+   *
+   * @var array|null
+   */
+  protected $availableContentRules;
 
   /**
    * {@inheritdoc}
@@ -63,12 +71,9 @@ class VectorIndexProcessor extends ProcessorPluginBase {
    * {@inheritdoc}
    */
   public function preprocessIndexItems(array $items) {
+    $this->getAvailableContentRules();
     // 1. Parse config mapping: "source|target,source2|target2"
     $mapping_string = $this->azureSettings->get('field_to_vectorise') ?? '';
-    if (empty($mapping_string)) {
-      return;
-    }
-
     $mappings = [];
     foreach (explode(',', $mapping_string) as $pair) {
       $parts = explode('|', $pair);
@@ -81,9 +86,145 @@ class VectorIndexProcessor extends ProcessorPluginBase {
       $index = $item->getIndex();
       // 2. Only process for the specific index
       if ($index && $index->id() === 'pins_content_index_azure') {
-        $this->processVectorMappings($item, $mappings);
+        $this->populateAvailableContentField($item, $mappings);
+        if ($mappings) {
+          $this->processVectorMappings($item, $mappings);
+        }
       }
     }
+  }
+
+  /**
+   * Records content availability independently of vector generation.
+   */
+  protected function populateAvailableContentField(ItemInterface $item, array $mappings): void {
+    $field_id = trim($this->azureSettings->get('field_available_content_flag') ?? 'has_available_content');
+    if ($field_id === '') {
+      return;
+    }
+    $this->logger->debug('Populating available content field for item @item with field ID @field.', [
+      '@item' => $item->getId(),
+      '@field' => $field_id,
+    ]);
+
+    $field = $item->getField($field_id);
+    if (!$field || $field->getType() !== 'boolean') {
+      $this->logger->error('Cannot record content availability for @item: configure @field as a boolean Search API field.', [
+        '@item' => $item->getId(),
+        '@field' => $field_id,
+      ]);
+      return;
+    }
+
+    $has_content = FALSE;
+    foreach ($mappings as $source_id => $target_id) {
+      $source = $item->getField($source_id);
+      if (!$source) {
+        $this->logger->error('Cannot check content availability for @item: source field @source is missing from the index.', [
+          '@item' => $item->getId(),
+          '@source' => $source_id,
+        ]);
+        continue;
+      }
+
+      if ($this->normalizeSourceValues($source->getValues()) !== '') {
+        $has_content = TRUE;
+      }
+    }
+
+    $entity = $item->getOriginalObject()->getValue();
+    if (!$entity instanceof FieldableEntityInterface) {
+      $this->logger->error('Cannot check content availability for @item: original object is not a fieldable entity.', [
+        '@item' => $item->getId(),
+      ]);
+      return;
+    }
+
+    $field->setValues([$has_content || $this->hasAvailableEntityContent($entity)]);
+  }
+
+  /**
+   * Loads and validates the configured OR-ed metadata rules.
+   */
+  protected function getAvailableContentRules(): array {
+    if ($this->availableContentRules !== NULL) {
+      return $this->availableContentRules;
+    }
+
+    $json = $this->azureSettings->get('available_content_rules');
+    try {
+      if (!is_string($json)) {
+        throw new \InvalidArgumentException('Rules must be a JSON string.');
+      }
+      $rules = json_decode($json, TRUE, 512, JSON_THROW_ON_ERROR);
+      if (!is_array($rules) || !array_is_list($rules) || substr(ltrim($json), 0, 1) !== '[') {
+        throw new \InvalidArgumentException('Rules must be a JSON array.');
+      }
+      foreach ($rules as $position => $rule) {
+        if (!is_array($rule)
+          || array_diff(array_keys($rule), ['content_type', 'field', 'property', 'operator', 'value'])
+          || !is_string($rule['content_type'] ?? NULL) || trim($rule['content_type']) === ''
+          || !is_string($rule['field'] ?? NULL) || !preg_match('/^[a-z][a-z0-9_]*$/D', $rule['field'])
+          || !in_array($rule['operator'] ?? NULL, ['not_empty', 'reference_label_equals'], TRUE)) {
+          throw new \InvalidArgumentException("Invalid rule at position $position.");
+        }
+        if ($rule['operator'] === 'reference_label_equals') {
+          if (!is_string($rule['value'] ?? NULL) || trim($rule['value']) === '' || array_key_exists('property', $rule)) {
+            throw new \InvalidArgumentException("Rule $position requires a non-empty label value and no property.");
+          }
+        }
+        elseif (array_key_exists('value', $rule)
+          || (array_key_exists('property', $rule) && (!is_string($rule['property']) || !preg_match('/^[a-z][a-z0-9_]*$/D', $rule['property'])))) {
+          throw new \InvalidArgumentException("Rule $position has an invalid property or unexpected value.");
+        }
+      }
+    }
+    catch (\JsonException | \InvalidArgumentException $exception) {
+      $this->logger->error('Invalid OPENAI_AVAILABLE_CONTENT_RULES: @message', [
+        '@message' => $exception->getMessage(),
+      ]);
+      throw new \InvalidArgumentException('Invalid OPENAI_AVAILABLE_CONTENT_RULES: ' . $exception->getMessage(), 0, $exception);
+    }
+
+    return $this->availableContentRules = $rules;
+  }
+
+  /**
+   * Checks metadata rules against the original entity.
+   */
+  protected function hasAvailableEntityContent(FieldableEntityInterface $entity): bool {
+    foreach ($this->getAvailableContentRules() as $rule) {
+      if (($rule['content_type'] !== '*' && $entity->bundle() !== $rule['content_type'])
+        || !$entity->hasField($rule['field'])) {
+        continue;
+      }
+
+      $field = $entity->get($rule['field']);
+      if ($rule['operator'] === 'reference_label_equals') {
+        if (!$field instanceof \Drupal\Core\Field\EntityReferenceFieldItemListInterface) {
+          $this->logger->error('Availability rule field @field must be an entity reference field.', ['@field' => $rule['field']]);
+          throw new \InvalidArgumentException('Availability rule requires an entity reference field: ' . $rule['field']);
+        }
+        foreach ($field->referencedEntities() as $reference) {
+          if (strcasecmp(trim($reference->label()), trim($rule['value'])) === 0) {
+            return TRUE;
+          }
+        }
+      }
+      elseif (!isset($rule['property'])) {
+        if (!$field->isEmpty()) {
+          return TRUE;
+        }
+      }
+      else {
+        foreach ($field as $field_item) {
+          if ($this->normalizeSourceValues($field_item->get($rule['property'])->getValue()) !== '') {
+            return TRUE;
+          }
+        }
+      }
+    }
+    return FALSE;
   }
 
   /**
