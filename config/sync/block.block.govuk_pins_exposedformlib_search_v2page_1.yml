@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.lib_search_v2
   module:
+    - block_class
     - system
     - views
   theme:
@@ -25,4 +26,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/lib-search-v2\r\n/lib-search-v2/*"
+    pages: "/search-library-v2\r\n/search-library-v2/*"
