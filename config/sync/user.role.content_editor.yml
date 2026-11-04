@@ -24,6 +24,7 @@ dependencies:
     - help
     - media
     - node
+    - path
     - quick_node_clone
     - shortcut
     - system
@@ -64,6 +65,7 @@ permissions:
   - 'create kl_compound_document content'
   - 'create kl_document content'
   - 'create pdf media'
+  - 'create url aliases'
   - 'delete own files'
   - 'edit any hard_copy content'
   - 'edit any hard_copy_loan content'

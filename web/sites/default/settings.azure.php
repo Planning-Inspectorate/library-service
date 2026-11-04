@@ -27,8 +27,11 @@ if ($search_index_url) {
 if ($search_index_api_version) {
   $config[$search_api_config]['backend_config']['connector_config']['api_version'] = $search_index_api_version;
 }
-if ($search_index_api_key) {
-  $config[$search_api_config]['backend_config']['connector_config']['api_key'] = $search_index_api_key;
+
+$is_ddev = ($_ENV['IS_DDEV_PROJECT'] ?? getenv('IS_DDEV_PROJECT')) === 'true';
+$config[$search_api_config]['backend_config']['connector'] = $is_ddev ? 'standard' : 'pins_identity';
+if (!$is_ddev || $search_index_api_key) {
+  $config[$search_api_config]['backend_config']['connector_config']['api_key'] = $is_ddev ? $search_index_api_key : '';
 }
 
 $search_api_index = 'search_api.index.pins_content_index_azure';
@@ -70,5 +73,7 @@ $config['pins_search_azure.settings'] = [
   'semantic_content_fields' => $_ENV['OPENAI_SEMANTIC_CONTENT_FIELDS'] ?? getenv('OPENAI_SEMANTIC_CONTENT_FIELDS'),
   'semantic_keyword_fields' => $_ENV['OPENAI_SEMANTIC_KEYWORD_FIELDS'] ?? getenv('OPENAI_SEMANTIC_KEYWORD_FIELDS'),
   'field_to_vectorise'      => $_ENV['OPENAI_FIELD_TO_VECTORISE'] ?? getenv('OPENAI_FIELD_TO_VECTORISE'),
-  'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE')
+  'field_to_sanitize'       => $_ENV['OPENAI_FIELD_TO_SANITIZE'] ?? getenv('OPENAI_FIELD_TO_SANITIZE'),
+  'field_available_content_flag' => $_ENV['OPENAI_AVAILABLE_CONTENT_FLAG_FIELD'] ?? getenv('OPENAI_AVAILABLE_CONTENT_FLAG_FIELD'),
+  'available_content_rules' => $_ENV['OPENAI_AVAILABLE_CONTENT_RULES'] ?? getenv('OPENAI_AVAILABLE_CONTENT_RULES'),
 ];

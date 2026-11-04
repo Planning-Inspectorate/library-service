@@ -5,3 +5,19 @@ pins_search_azure.settings:
     _title: 'PINS Azure Search Settings'
   requirements:
     _permission: 'administer search_api'
+
+pins_search_azure.token_usage_report:
+  path: '/admin/reports/pins-search-azure/token-usage'
+  defaults:
+    _controller: '\Drupal\pins_search_azure\Controller\TokenUsageReportController::buildIndexUsagePage'
+    _title: 'PINS Azure Search Indexing Token Usage'
+  requirements:
+    _permission: 'administer pins azure search'
+
+pins_search_azure.query_token_usage_report:
+  path: '/admin/reports/pins-search-azure/live-search-token-usage'
+  defaults:
+    _controller: '\Drupal\pins_search_azure\Controller\TokenUsageReportController::buildQueryUsagePage'
+    _title: 'PINS Azure Live Search Token Usage'
+  requirements:
+    _permission: 'administer pins azure search'

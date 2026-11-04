@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_alternative_title
     - field.storage.node.field_best_bet
     - field.storage.node.field_date
+    - field.storage.node.field_documents
     - field.storage.node.field_kl_archived_date
     - field.storage.node.field_kl_authors
     - field.storage.node.field_kl_classification
@@ -103,6 +104,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_date
+  field_documents:
+    label: Documents
+    datasource_id: 'entity:node'
+    property_path: field_documents
+    type: aais.integer_collection
+    configuration:
+      searchable: 0
+      filterable: 1
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 0
+      dimensions: ''
+      vectorSearchProfile: ''
+      analyzer: ''
+    dependencies:
+      config:
+        - field.storage.node.field_documents
   field_kl_archived_date:
     label: 'Archived Date'
     datasource_id: 'entity:node'
@@ -200,7 +219,7 @@ field_settings:
     type: aais.string_collection
     configuration:
       searchable: 1
-      filterable: 0
+      filterable: 1
       sortable: 0
       facetable: 0
       retrievable: 1
@@ -211,6 +230,21 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_links
+  has_available_content:
+    label: 'Has available content'
+    property_path: custom_value
+    type: boolean
+    configuration:
+      value: '0'
+      searchable: 0
+      filterable: 1
+      sortable: 0
+      facetable: 0
+      retrievable: 1
+      suggester: 0
+      analyzer: ''
+      dimensions: ''
+      vectorSearchProfile: ''
   saa_field_kl_doc_file:
     label: 'Search api attachments: Attached file'
     property_path: saa_field_kl_doc_file
