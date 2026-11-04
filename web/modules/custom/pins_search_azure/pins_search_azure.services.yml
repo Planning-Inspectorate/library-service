@@ -6,9 +6,14 @@ services:
       - '@pins_search_azure.index_builder_decorator.inner'
       - '@config.factory'
       - '@logger.factory'
+  
+  pins_search_azure.openai_identity_credential:
+    class: Drupal\pins_search_azure\Services\SearchIdentityCredential
+    arguments: ['@http_client', 'https://cognitiveservices.azure.com']
+
   pins_search_azure.vectorizer:
     class: Drupal\pins_search_azure\Services\AzureVectorizer
-    arguments: ['@http_client', '@config.factory', '@logger.factory']
+    arguments: ['@http_client', '@config.factory', '@logger.factory', '@pins_search_azure.openai_identity_credential']
 
   pins_search_azure.token_usage_tracker:
     class: Drupal\pins_search_azure\Services\TokenUsageTracker
