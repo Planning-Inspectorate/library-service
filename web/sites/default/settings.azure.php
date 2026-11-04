@@ -56,7 +56,7 @@ $config[$search_api_index]['third_party_settings']['search_api_aais']['index_nam
 
 $config['pins_search_azure.settings'] = [
   'api_url'                 => $_ENV['OPENAI_API_URL'] ?? getenv('OPENAI_API_URL'),
-  'api_key'                 => $_ENV['OPENAI_API_KEY'] ?? getenv('OPENAI_API_KEY'),
+  'api_key'                 => $is_ddev ? ($_ENV['OPENAI_API_KEY'] ?? getenv('OPENAI_API_KEY')) : '',
   'api_model'               => $_ENV['OPENAI_API_MODEL'] ?? getenv('OPENAI_API_MODEL') ?: 'text-embedding-ada-002',
   'resource_url'            => $_ENV['OPENAI_RESOURCE_URL'] ?? getenv('OPENAI_RESOURCE_URL') ?: 'https://pins-openai-library-poc.openai.azure.com',
   'deployment_id'           => $_ENV['OPENAI_DEPLOYMENT_ID'] ?? getenv('OPENAI_DEPLOYMENT_ID') ?: 'text-embedding-ada-002',

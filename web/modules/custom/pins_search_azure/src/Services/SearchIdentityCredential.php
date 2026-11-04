@@ -6,11 +6,13 @@ use GuzzleHttp\ClientInterface;
 
 class SearchIdentityCredential {
 
-  private const RESOURCE = 'https://search.azure.com';
   protected ?string $accessToken = NULL;
   protected int $expiresAt = 0;
 
-  public function __construct(protected ClientInterface $httpClient) {
+  public function __construct(
+    protected ClientInterface $httpClient,
+    protected string $resource = 'https://search.azure.com'
+  ) {
   }
 
   protected function environment(string $name): string {
@@ -53,7 +55,7 @@ class SearchIdentityCredential {
   protected function getManagedIdentityResponse(): string {
     $query = [
       'api-version' => '2018-02-01',
-      'resource' => self::RESOURCE,
+      'resource' => $this->resource,
     ];
     $client_id = $this->environment('AZURE_CLIENT_ID');
     if ($client_id !== '') {

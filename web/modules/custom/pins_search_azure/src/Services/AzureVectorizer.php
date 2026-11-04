@@ -14,6 +14,7 @@ class AzureVectorizer {
   protected $httpClient;
   protected $config;
   protected $logger;
+  protected $credential;
 
   /**
    * Token usage accumulated during the most recent getVector() call.
@@ -25,11 +26,13 @@ class AzureVectorizer {
   public function __construct(
     ClientInterface $http_client,
     ConfigFactoryInterface $config_factory,
-    LoggerChannelFactoryInterface $logger_factory
+    LoggerChannelFactoryInterface $logger_factory,
+    SearchIdentityCredential $credential
   ) {
     $this->httpClient = $http_client;
     $this->config = $config_factory->get('pins_search_azure.settings');
     $this->logger = $logger_factory->get('pins_vectorizer');
+    $this->credential = $credential;
   }
 
   /**
@@ -108,6 +111,7 @@ class AzureVectorizer {
    */
   protected function sendBatchRequest(array $chunks): array {
     $vectors = [];
+    $headers = $this->getAuthHeaders();
     // Azure/OpenAI usually limit batches to 16 or 96. We'll stay safe at 16.
     foreach (array_chunk($chunks, 16) as $batch) {
       $response = $this->httpClient->post($this->config->get('api_url'), [
@@ -115,9 +119,8 @@ class AzureVectorizer {
           'input' => $batch,
           'model' => $this->config->get('api_model') ?: 'text-embedding-ada-002',
         ],
-        'headers' => [
-          'Authorization' => 'Bearer ' . $this->config->get('api_key'),
-        ],
+        'headers' => $headers,
+        'allow_redirects' => FALSE,
       ]);
       $data = json_decode($response->getBody()->getContents(), TRUE);
       $this->logger->debug('Azure vectorization response received: @count embedding(s), usage: @usage', [
@@ -143,6 +146,23 @@ class AzureVectorizer {
       }
     }
     return $vectors;
+  }
+
+  /**
+   * Builds auth headers: API key locally (DDEV), managed identity otherwise.
+   */
+  protected function getAuthHeaders(): array {
+    $api_key = (string) $this->config->get('api_key');
+    if ($api_key !== '') {
+      return ['Authorization' => 'Bearer ' . $api_key];
+    }
+
+    $url = parse_url((string) $this->config->get('api_url'));
+    if (($url['scheme'] ?? '') !== 'https' || empty($url['host'])) {
+      throw new \InvalidArgumentException('Azure OpenAI identity authentication requires an HTTPS api_url.');
+    }
+
+    return ['Authorization' => 'Bearer ' . $this->credential->getToken()];
   }
 
   /**
