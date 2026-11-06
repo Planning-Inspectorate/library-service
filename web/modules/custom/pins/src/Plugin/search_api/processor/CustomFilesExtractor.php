@@ -265,7 +265,7 @@ class CustomFilesExtractor extends ProcessorPluginBase implements PluginFormInte
               $file_system = \Drupal::service('file_system');
 
               $normalized_uri = $file_uri;
-              if (stripos($file_uri, 'document') !== FALSE || stripos($file_uri, 'library') !== FALSE) {
+              if (stripos($file_uri, 'documents') !== FALSE || stripos($file_uri, 'Library') !== FALSE) {
                 $normalized_uri = str_replace('\\', '/', $file_uri);
               }
 
