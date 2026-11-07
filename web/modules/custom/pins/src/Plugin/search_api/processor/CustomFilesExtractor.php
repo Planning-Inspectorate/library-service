@@ -261,42 +261,6 @@ class CustomFilesExtractor extends ProcessorPluginBase implements PluginFormInte
             foreach ($files as $file) {
               // Update the file entity with the new URI which are symlinked from blob storage
               $file_uri = $file->getFileUri(); 
-              // Normalize only if 'document' or 'library' is part of the file URI
-              $file_system = \Drupal::service('file_system');
-
-              $normalized_uri = $file_uri;
-              if (stripos($file_uri, 'document') !== FALSE || stripos($file_uri, 'library') !== FALSE) {
-                $normalized_uri = str_replace('\\', '/', $file_uri);
-              }
-
-              clearstatcache();
-              $real_path = $file_system->realpath($normalized_uri);
-              $check_path = $real_path ?: $normalized_uri;
-
-              if (!file_exists($check_path) || !is_readable($check_path)) {
-                $diagnostics = [
-                  'fid' => $file->id(),
-                  'original_uri' => $file_uri,
-                  'normalized_uri' => $normalized_uri,
-                  'real_path' => $real_path ?: 'RESOLVE_FAILED',
-                  'exists' => file_exists($check_path),
-                  'readable' => is_readable($check_path),
-                  'is_file' => is_file($check_path),
-                  'is_symlink' => is_link($normalized_uri),
-                  'symlink_target' => is_link($normalized_uri) ? readlink($normalized_uri) : NULL,
-                  'parent_exists' => is_dir(dirname($check_path)),
-                  'working_directory' => getcwd(),
-                  'open_basedir' => ini_get('open_basedir'),
-                  'php_sapi' => PHP_SAPI,
-                  'process_uid' => function_exists('posix_geteuid') ? posix_geteuid() : NULL,
-                ];
-
-                $this->logger->error('File access failed: @diagnostics', [
-                  '@diagnostics' => json_encode($diagnostics, JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE),
-                ]);
-              }
-              // Continue with the rest of the processing.
-
               if (!file_exists($file_uri)) {
                 // Attempt to correct the path if it matches a specific pattern.
                 if (strpos($file_uri, 'documents\\Library') !== false) {                    
