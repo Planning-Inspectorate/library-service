@@ -4,4 +4,4 @@ pins_sso_enforcement.settings:
     _form: '\Drupal\pins_sso_enforcement\Form\SsoEnforcementSettingsForm'
     _title: 'SSO Enforcement Settings'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer sso enforcement settings'

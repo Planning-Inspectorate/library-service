@@ -23,8 +23,11 @@ class SsoEnforcementSubscriber implements EventSubscriberInterface {
    */
   const ANONYMOUS_BLOCKED_ROUTES = [
     'user.login',
+    'user.login.http',
     'user.pass',
     'user.pass.http',
+    'user.reset',
+    'user.reset.login',
   ];
 
   /**
