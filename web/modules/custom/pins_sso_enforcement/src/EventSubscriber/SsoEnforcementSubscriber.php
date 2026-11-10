@@ -36,14 +36,6 @@ class SsoEnforcementSubscriber implements EventSubscriberInterface {
     'entity.user.edit_form',
   ];
 
-  /**
-   * The external auth provider identifier used by the openid_connect client.
-   *
-   * TODO: confirm this matches the actual provider string used by
-   * openid_connect once externalauth/openid_connect are enabled locally.
-   * Historically openid_connect registers authmap entries under a provider
-   * of the form 'openid_connect.<client_id>'.
-   */
   const SSO_PROVIDER = 'openid_connect.library_open_id';
 
   public function __construct(
