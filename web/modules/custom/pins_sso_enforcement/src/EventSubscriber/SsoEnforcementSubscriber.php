@@ -28,6 +28,7 @@ class SsoEnforcementSubscriber implements EventSubscriberInterface {
     'user.pass.http',
     'user.reset',
     'user.reset.login',
+    'user.register'
   ];
 
   /**
@@ -103,7 +104,7 @@ class SsoEnforcementSubscriber implements EventSubscriberInterface {
 
   protected function redirectToSso(RequestEvent $event, string $message): void {
     $this->messenger->addWarning($message);
-    $redirect_url = Url::fromRoute('openid_connect.login')->toString();
+    $redirect_url = Url::fromRoute('openid_connect.login', ['openid_connect_client' => 'library_open_id'])->toString();
     $event->setResponse(new RedirectResponse($redirect_url));
   }
 
