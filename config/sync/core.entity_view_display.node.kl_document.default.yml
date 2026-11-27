@@ -44,12 +44,14 @@ dependencies:
     - field.field.node.kl_document.field_number_decimal
     - field.field.node.kl_document.field_other_date
     - field.field.node.kl_document.field_physical_description
+    - field.field.node.kl_document.field_restrict_to_admin_only
     - field.field.node.kl_document.field_search_exclude
     - field.field.node.kl_document.field_security_classification
     - field.field.node.kl_document.field_vernum
     - field.field.node.kl_document.field_version_id
     - field.field.node.kl_document.field_volume
     - field.field.node.kl_document.field_weight
+    - field.field.node.kl_document.field_whats_new_exclude
     - field.field.node.kl_document.field_whats_new_scheduled_date
     - node.type.kl_document
   module:
@@ -130,11 +132,14 @@ third_party_settings:
       parent_name: ''
       region: hidden
       weight: 62
-      format_type: accordion
+      format_type: tabs
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
         effect: none
     group_migration_report_items:
       children:
@@ -143,13 +148,16 @@ third_party_settings:
       parent_name: group_migration_report
       region: hidden
       weight: 20
-      format_type: accordion_item
+      format_type: tabs
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        label_as_html: false
         formatter: closed
         description: ''
+        direction: vertical
+        width_breakpoint: 640
 id: node.kl_document.default
 targetEntityType: node
 bundle: kl_document
@@ -1230,6 +1238,16 @@ content:
             suffix: ''
     weight: 27
     region: ds_content
+  field_whats_new_exclude:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 63
+    region: content
   field_whats_new_scheduled_date:
     type: datetime_default
     label: above
@@ -1283,6 +1301,7 @@ hidden:
   field_general_notes: true
   field_isbn: true
   field_number_decimal: true
+  field_restrict_to_admin_only: true
   field_volume: true
   langcode: true
   search_api_excerpt: true

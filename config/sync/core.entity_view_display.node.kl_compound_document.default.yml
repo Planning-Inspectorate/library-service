@@ -25,9 +25,11 @@ dependencies:
     - field.field.node.kl_compound_document.field_kl_doc_version
     - field.field.node.kl_compound_document.field_kl_reading_lists
     - field.field.node.kl_compound_document.field_kl_series
+    - field.field.node.kl_compound_document.field_restrict_to_admin_only
     - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
+    - field.field.node.kl_compound_document.field_whats_new_exclude
     - field.field.node.kl_compound_document.field_whats_new_scheduled_date
     - node.type.kl_compound_document
   module:
@@ -714,6 +716,16 @@ content:
             suffix: ''
     weight: 2
     region: ds_content
+  field_whats_new_exclude:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 63
+    region: content
   field_whats_new_scheduled_date:
     type: datetime_default
     label: above
@@ -761,6 +773,7 @@ hidden:
   field_content_reference: true
   field_documents: true
   field_general_notes: true
+  field_restrict_to_admin_only: true
   langcode: true
   links: true
   search_api_excerpt: true

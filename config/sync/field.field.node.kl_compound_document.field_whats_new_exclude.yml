@@ -1,0 +1,21 @@
+uuid: 0d60dd2c-c49d-43ac-8fc4-22e3dd6a1d57
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_whats_new_exclude
+    - node.type.kl_compound_document
+id: node.kl_compound_document.field_whats_new_exclude
+field_name: field_whats_new_exclude
+entity_type: node
+bundle: kl_compound_document
+label: "Exclude From What's New"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
