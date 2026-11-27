@@ -29,6 +29,7 @@ dependencies:
     - field.field.node.kl_compound_document.field_security_classification
     - field.field.node.kl_compound_document.field_volume
     - field.field.node.kl_compound_document.field_weight
+    - field.field.node.kl_compound_document.field_whats_new_exclude
     - field.field.node.kl_compound_document.field_whats_new_scheduled_date
     - node.type.kl_compound_document
   module:
@@ -290,6 +291,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_whats_new_exclude:
+    type: boolean_checkbox
+    weight: 91
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_whats_new_scheduled_date:
     type: datetime_default
